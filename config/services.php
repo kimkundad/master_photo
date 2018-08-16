@@ -34,11 +34,18 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    
 
     'facebook' => [
-    'client_id' => env('FACEBOOK_CLIENT_ID'),
-    'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-    'redirect' => env('FACEBOOK_REDIRECT_URI')
-    ],
+    'client_id'     => env('FB_ID'),
+    'client_secret' => env('FB_SECRET'),
+    'redirect'      => env('APP_URL') . '/oauth/facebook/callback',
+]
+
+    'google' => [
+    'client_id'     => env('GL_ID'),
+    'client_secret' => env('GL_SECRET'),
+    'redirect'      => env('APP_URL') . '/oauth/google/callback',
+],
 
 ];
