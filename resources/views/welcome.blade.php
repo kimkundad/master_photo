@@ -148,8 +148,8 @@ figure:hover+span {
             SIGN IN OR JOIN TO MAKE A BEAUTIFUL PHOTO GIFT.
           </p>
 
-          <a href="login.php" class="btn_1">Login</a>
-          <a href="login.php" class="btn_3">Sign up</a>
+          <a href="{{url('login')}}" class="btn_1">Login</a>
+          <a href="{{url('login')}}" class="btn_3">Sign up</a>
         </div>
 
         @else

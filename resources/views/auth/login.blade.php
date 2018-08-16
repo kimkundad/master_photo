@@ -49,11 +49,11 @@
                 <br />
 
                 <div style="margin-bottom: 16px;">
-                  <a class="btn btn-block btn-social btn-facebook btn-lg " href="redirect" style="text-align: center;">
+                  <a class="btn btn-block btn-social btn-facebook btn-lg " href="{{ route('social.oauth', 'facebook') }}" style="text-align: center;">
                       <i class="icon-facebook-1"></i> Sign in with Facebook
                     </a>
                     <br />
-                    <a class="btn btn-block btn-social btn-google-plus btn-lg" href="redirect" style="text-align: center;">
+                    <a class="btn btn-block btn-social btn-google-plus btn-lg" href="{{ route('social.oauth', 'google') }}" style="text-align: center;">
                       <i class="icon-gmail"></i> Sign in with Google
                     </a>
                 </div>

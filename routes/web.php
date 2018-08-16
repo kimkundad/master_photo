@@ -19,8 +19,10 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/redirect', 'FacebookAuthController@redirect');
-Route::get('/callback', 'FacebookAuthController@callback');
+// Social Auth
+Route::get('auth/social', 'Auth\SocialAuthController@show')->name('social.login');
+Route::get('oauth/{driver}', 'Auth\SocialAuthController@redirectToProvider')->name('social.oauth');
+Route::get('oauth/{driver}/callback', 'Auth\SocialAuthController@handleProviderCallback')->name('social.callback');
 
 Route::group(['middleware' => 'auth'], function () {
 
