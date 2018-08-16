@@ -155,7 +155,7 @@ figure:hover+span {
         @else
 
         <div class="text-center">
-          <a href="{{url('/profile')}}"><img src="{{url('assets/images/avatar/'.Auth::user()->avatar)}}" alt="Image" class="rounded-circle">
+          <a href="{{url('/profile')}}"><img src="{{ Auth::user()->avatar }}" alt="Image" class="rounded-circle">
           <h3>{{ Auth::user()->name }}</h3></a>
           <p>
             ยินดีต้อนรับเข้าสู่เว็บไซต์ Master Photo Network
