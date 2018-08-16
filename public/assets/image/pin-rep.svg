@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="72px" height="80px" viewBox="0 0 72 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Rectangle 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-32.4%" y="-20.6%" width="164.7%" height="164.7%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="8" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="6" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.12 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="pin-rep-/-normal" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(2.000000, -6.000000)">
+        <g id="Group-4" filter="url(#filter-1)" fill="#08B0ED">
+            <path d="M34,10 L34,10 C47.254834,10 58,20.745166 58,34 L58,56 C58,57.1045695 57.1045695,58 56,58 L34,58 C20.745166,58 10,47.254834 10,34 L10,34 C10,20.745166 20.745166,10 34,10 Z" id="Rectangle-6" transform="translate(34.000000, 34.000000) rotate(45.000000) translate(-34.000000, -34.000000) "></path>
+        </g>
+    </g>
+</svg>

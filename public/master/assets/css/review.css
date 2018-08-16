@@ -1,0 +1,119 @@
+.block{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    line-height: 20px;
+    color: #333;
+  }
+  .all_block{
+    display:block;
+    border-radius: 5px;
+    border: 1px solid #c8d0db;
+    float: left;
+    margin: 15px;
+    box-shadow: 0 1px 1px rgba(200,208,219,.8);
+    width: 350px;
+  }
+  .block{
+    background: #fff;
+  }
+  .all_block .image{
+    display: block;
+    position: relative;
+    border-top-left-radius: 4px;
+    overflow: hidden;
+  }
+  .block .info {
+    display: block;
+    position: relative;
+    background: #f6f6f6;
+    padding: 10px;
+    border-top: 1px solid #ebf0f7;
+    float: left;
+    box-sizing: border-box;
+    color: #505363;
+    width: 100%;
+  }
+  .block .info .detail {
+    width: 233px;
+    float: left;
+    line-height: 1.4;
+  }
+  .block .info:after, .block .info:before {
+    display: table;
+    content: "";
+    line-height: 0;
+  }
+  .block .info .detail {
+    width: 233px;
+    float: left;
+    line-height: 1.4;
+  }
+  a {
+    color: #0c77e3;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #0c77e3;
+    text-decoration: underline;
+  }
+  .check-in{
+    width: 100%;
+    display: block;
+    font-size: 12px;
+  }
+  .date-checkin{
+    font-size: 11px;
+    color: #aaaeb0;
+  }
+  .details{
+    padding: 10px;
+    border-top: 1px solid #ebf0f7;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #6f7a88;
+    width: 100%;
+    height:71px;
+  }
+  .meta{
+    border-top: 1px solid #ebf0f7;
+    float: left;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 0;
+  }
+  .block .meta .comment .comments {
+    font-weight: 700;
+    color: #aaaeb0;
+    min-width: 100px;
+    float: left;
+  }
+  .like {
+    color: #aaaeb0;
+    float: right;
+  }
+  .likes{
+    margin-right: 10px;
+  }
+  .title_comment{
+    margin-left: 10px;
+  }
+  
+  .margin-auto{
+      margin-left:auto;
+      margin-right: auto;
+  }
+  @media screen and (max-width: 640px) {
+    .margin-auto{
+      margin-left:0px;
+      margin-right: 0px;
+  }
+  .all_block{
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    box-shadow: 0 1px 1px rgba(200,208,219,.8);
+    width: 100%;
+  }
+}

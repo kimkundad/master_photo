@@ -1,0 +1,24 @@
+.submenu{
+    visibility: hidden;
+}
+@media(max-width:480px){
+    .submenu{
+        visibility: visible;
+    }
+}
+.login-social-mobile{
+    display: none!important;
+}
+@media(max-width:480px){
+    .login-social-mobile{
+        display: inline-block!important;
+    }
+}
+.lang-mobile{
+    display: none;
+}
+@media(max-width:480px){
+    .lang-mobile{
+        display: block;
+    }
+}

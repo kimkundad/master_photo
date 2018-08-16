@@ -1,0 +1,57 @@
+	body {
+		background: #fff;
+	}
+
+	.selectors {
+		margin-bottom: 0px;
+	}
+
+	.imapper-content-header {
+		font-size:16px;
+		font-weight: 700;
+		padding: 15px 10px 5px;
+		color:#222;
+	}
+
+	.imapper-content-text {
+		font-size: 14px;
+	}
+
+	.header_block {
+		height: 65px;
+		line-height: 65px;
+		background-color: #CF6527;
+		color: #fff;
+		font-weight: 800;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-o-user-select: none;
+		user-select: none;
+		cursor: default;
+	}
+
+	.desc_block {
+		padding-top: 110px;
+		padding-bottom:55px;
+	}
+
+	.desc_block span {
+		font-weight: 800;
+	}
+
+	.desc_header {
+		font-size: 26px;
+		color: #000;
+	}
+
+	.hr_separator {
+		border-top:1px solid #CF6527;
+		margin: 20px auto;	
+		width: 120px;
+	} 
+
+	.desc_content {
+		color: #A0A0A0;
+		font-size:16px;
+	} 

@@ -1,0 +1,36 @@
+.imapper-content-header {
+	font-size: 17px;
+}
+
+.imapper-content-text {
+	font-size: 14px;
+}
+
+.imagemapper-wrapper {
+	margin: 0 auto;
+}
+
+.imapper-category-button {
+	margin-right: 10px;
+}
+
+.imapper-category-hidden {
+	/*visibility:hidden;*/
+	transition:all 500ms linear;
+	opacity: 0;
+	cursor: auto;
+	z-index:-1;
+	/*transition:opacity 500ms linear;*/
+}
+
+.imapper-category-hidden .pin-style {
+	cursor: auto;
+}
+
+.imapper-pin-wrapper {
+	transition:opacity 500ms linear;
+}
+
+.imapper-pin-wrapper[data-open-position="top"] .imapper-content-tab[style*="right: 0"],.imapper-pin-wrapper[data-open-position="top"] .imapper-content-tab[style*="right:0"],.imapper-pin-wrapper[data-open-position="bottom"] .imapper-content-tab[style*="right: 0"],.imapper-pin-wrapper[data-open-position="bottom"] .imapper-content-tab[style*="right:0"], .imapper-pin-wrapper[data-open-position="left"] .imapper-content-tab[style*="bottom: 0"],.imapper-pin-wrapper[data-open-position="bottom"] .imapper-content-tab[style*="right:0"] , .imapper-pin-wrapper[data-open-position="right"] .imapper-content-tab[style*="bottom: 0"],.imapper-pin-wrapper[data-open-position="bottom"] .imapper-content-tab[style*="right:0"]   {
+	border-width: 1px !important
+}
