@@ -8,6 +8,9 @@
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
+        "intervention/image": "dev-master",
+        "laravel/socialite": "^3.0",
+        "milon/barcode": "^5.3",
         "laravel/tinker": "~1.0"
     },
     "require-dev": {

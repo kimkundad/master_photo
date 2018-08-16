@@ -19,6 +19,9 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/redirect', 'FacebookAuthController@redirect');
+Route::get('/callback', 'FacebookAuthController@callback');
+
 Route::group(['middleware' => 'auth'], function () {
 
   Route::get('/profile', 'HomeController@profile')->name('profile');
