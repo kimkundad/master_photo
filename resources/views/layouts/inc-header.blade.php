@@ -170,7 +170,7 @@
             <li class="submenu">
               <a href="javascript:void(0);" class="show-submenu">PHOTO PRINT <i class="icon-down-open-mini"></i></a>
               <ul>
-                <li><a href="{{url('/')}}">TRADITIONAL SIZES</a></li>
+                <li><a href="{{url('/photo_print')}}">TRADITIONAL SIZES</a></li>
                 <li><a href="{{url('/')}}">SNAP SIZE</a></li>
                 <li><a href="{{url('/')}}">POLAROID SIZE</a></li>
                 <li><a href="{{url('/')}}">INSTAGRAM SIZE</a></li>
