@@ -265,6 +265,7 @@ Photo print
                           <a href="#" class="photoSelect">
                           <img class="img-responsive" src="{{url('master/assets/images/social/fb.png')}}" />
                           </a>
+                          <span id="login-status">Not logged in</span> | <a href="#" id="btnLogin">Login</a> | <a href="#" id="btnLogout">Log out</a>
                           <p>
                             Facebook
                           </p>
