@@ -480,7 +480,7 @@ Dropzone.options.myDropzone= {
         FB.init({
           appId      : '1063323960509612',
           xfbml      : true,
-          version    : 'v2.6'
+          version    : 'v3.1'
         });
 
         FB.getLoginStatus(function(response) {
