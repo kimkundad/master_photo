@@ -92,11 +92,11 @@ Photo print
                  <div class="form-group ">
                     <label>SIZE</label>
                     <select id="size_photo" class="form-control" name="size_photo">
-                      <option value="1">4 x 6 in. price $7.0</option>
-                      <option value="2">4 x 5.3 in. price $12.5 </option>
-                      <option value="3">5 x 7 in. price $14.0 </option>
-                      <option value="4">8 x 8 in. price $15.0 </option>
-                      <option value="5">8 x 10 in. price $20.05 </option>
+                      <option value="1">4 x 6 in. price ฿7.0</option>
+                      <option value="2">4 x 5.3 in. price ฿12.5 </option>
+                      <option value="3">5 x 7 in. price ฿14.0 </option>
+                      <option value="4">8 x 8 in. price ฿15.0 </option>
+                      <option value="5">8 x 10 in. price ฿20.05 </option>
                     </select>
                   </div>
                   <br />
@@ -223,7 +223,7 @@ Photo print
 
 
 
-
+        
 
 
 
@@ -267,7 +267,7 @@ Photo print
                           </a>
                           <span id="login-status">Not logged in</span> | <a href="#" id="btnLogin">Login</a> | <a href="#" id="btnLogout">Log out</a>
                           <p>
-                            Facebook
+                            Facebook user_photos
                           </p>
 
                         </div>

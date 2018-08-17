@@ -23,10 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-      session()->forget('cart');
+     session()->forget('cart');
       session()->flush();
   //  $request->session()->pull('cart.data2.data.image.image', '1534488467-logo-Isuzu.png');
-  //  session()->push('cart.data2.data.image.image', '1534488467-logo-Isuzu.jpg');
+  //  session()->push('cart.data1.data.image', ['image' => '1534488467-logo-Isuzu.jpg', 'id' => 6]);
+  //  $image = Session::get('cart.'.$ids.'.data.image.'.$num.'.image');
 
   //    session()->pull('cart.data2.data.image.image', '1534489077-logo-major.png');
 
@@ -34,6 +35,32 @@ class HomeController extends Controller
 
 
         return view('welcome');
+    }
+
+    public function update_photo_print(Request $request){
+
+      $list_link = $request['list_link'];
+      $gallary = $request->file('file');
+      $ids = $request['ids'];
+      $set_num_img = count(Session::get('cart.'.$ids.'.data.image'));
+
+      if (sizeof($gallary) > 0) {
+       for ($i = 0; $i < sizeof($gallary); $i++) {
+         $path = 'assets/image/all_image/';
+         $filename = time()."-".$gallary[$i]->getClientOriginalName();
+         $gallary[$i]->move($path, $filename);
+         session()->push('cart.'.$ids.'.data.image', ['image' => $filename, 'id' => $set_num_img+$i]);
+       }
+     }
+    // session()->push('cart.'.$ids.'.data.image', [$admins]);
+    //  dd(count(Session::get('cart.'.$ids.'.data.image')));
+
+      return Response::json([
+            'status' => 'success'
+        ], 200);
+
+
+    //  return redirect(url('photo_edit/'.$list_link))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
     }
 
     public function profile(){
@@ -56,9 +83,19 @@ class HomeController extends Controller
     public function del_upload_image(Request $request){
 
       $num = $request['num_image'];
-      session()->forget('cart.data2.data.image.'.$num);
+      $list_link = $request['list_link'];
+      $ids = $request['ids'];
 
-      return redirect(url('photo_edit'))->with('del_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+      $image = Session::get('cart.'.$ids.'.data.image.'.$num.'.image');
+
+      $file_path = 'assets/image/all_image/'.$image;
+      unlink($file_path);
+
+      session()->forget('cart.'.$ids.'.data.image.'.$num);
+
+
+
+      return redirect(url('photo_edit/'.$list_link))->with('del_success','คุณทำการเพิ่มอสังหา สำเร็จ');
     }
 
     public function upload_image(Request $request){

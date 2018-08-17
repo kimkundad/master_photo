@@ -6,7 +6,7 @@ Photo print
 
 @section('stylesheet')
 
-
+<link rel="stylesheet" href="{{url('master/assets/css/dropzone.css')}}">
 
 @stop('stylesheet')
 @section('content')
@@ -57,7 +57,7 @@ Photo print
           <tbody {{ $ids = "data".$id }}>
 
 
-
+          <!--  {{Session::get('cart.'.$ids.'.data.image.2.image')}} -->
             @foreach(Session::get('cart.'.$ids.'.data.image') as $u)
             <tr>
               <td class="magnific-gallery">
@@ -79,8 +79,11 @@ Photo print
               <td class="options">
 
                 <form  action="{{url('del_upload_image')}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
                               <input type="hidden" name="num_image" value="{{$u['id']}}">
-                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              <input type="hidden" name="ids" value="{{$ids}}">
+                              <input type="hidden" name="list_link" value="{{Session::get('cart.'.$ids.'.data.list_link')}}">
+
 
                               <button style="border:none; background: none;" type="submit" title="ลบบทความ" class="dropdown-item text-1 "><i class=" icon-trash"></i></button>
                             </form>
@@ -103,7 +106,8 @@ Photo print
 
       <div class="col-md-4 ">
 
-
+        <a type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal">UPLOAD PHOTO</a>
+        <br />
         <div class="box_style_1">
 
           <table class="table table_summary" >
@@ -115,7 +119,18 @@ Photo print
                   Size photo
                 </td>
                 <td class="text-right">
-                  xxx
+                <!--  {{Session::get('cart.'.$ids.'.data.size_photo')}} -->
+                  @if(Session::get('cart.'.$ids.'.data.size_photo') == 1)
+                  4 x 6 in. price ฿7.0
+                  @elseif(Session::get('cart.'.$ids.'.data.size_photo') == 2)
+                  4 x 5.3 in. price ฿12.5
+                  @elseif(Session::get('cart.'.$ids.'.data.size_photo') == 3)
+                  5 x 7 in. price ฿14.0
+                  @elseif(Session::get('cart.'.$ids.'.data.size_photo') == 3)
+                  8 x 8 in. price ฿15.0
+                  @else
+                  8 x 10 in. price ฿20.05
+                  @endif
                 </td>
               </tr>
 
@@ -124,7 +139,15 @@ Photo print
                   Image type
                 </td>
                 <td class="text-right">
-                  xxx
+                  @if(Session::get('cart.'.$ids.'.data.image_radio') == 1)
+                  รูปปกติ
+                  @elseif(Session::get('cart.'.$ids.'.data.image_radio') == 2)
+                  ขอบขาว
+                  @elseif(Session::get('cart.'.$ids.'.data.image_radio') == 3)
+                  เต็มไฟล์
+                  @else
+                  เต็มขอบขาว
+                  @endif
                 </td>
               </tr>
 
@@ -136,14 +159,132 @@ Photo print
         </div>
 
         <a href="#" class="btn btn-submit btn-block" style="height:43px;">NEXT TO CART</a>
-        <br />
-        <a class="btn_full_outline " style="margin-bottom: 30px;" href="shipping.php"><i class="icon-right"></i> Continue shopping</a>
+        
 
 
 
 
 
         </div>
+
+
+
+
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 100000;">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Choose device upload</h4>
+              </div>
+
+              <div class="modal-body">
+
+                <div class="row text-center p_20">
+
+                  <div class="col-xs-4 col-sm-4 p_20">
+                    <a href="#" data-toggle="modal" data-target="#myModal-upload-pc">
+                      <img class="img-responsive" src="{{url('master/assets/images/social/icon_pc.png')}}" />
+                    </a>
+
+                    <p>
+                      My_Device
+                    </p>
+                  </div>
+                  <div class="col-xs-4 col-sm-4 p_20">
+                    <a href="#" class="photoSelect">
+                    <img class="img-responsive" src="{{url('master/assets/images/social/fb.png')}}" />
+                    </a>
+                    <span id="login-status">Not logged in</span> | <a href="#" id="btnLogin">Login</a> | <a href="#" id="btnLogout">Log out</a>
+                    <p>
+                      Facebook user_photos
+                    </p>
+
+                  </div>
+                  <div class="col-xs-4 col-sm-4 p_20">
+                    <img class="img-responsive" src="{{url('master/assets/images/social/ig.png')}}" />
+                    <p>
+                      instagram
+                    </p>
+                  </div>
+
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <style>
+        #mar-top-15{
+        margin-top:15px;
+        }
+        #next_to_cart{
+        font-size: 14px;
+        padding: 6px 12px;
+        }
+        </style>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal-upload-pc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 100001;">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Choose device upload </h4>
+              </div>
+
+              <div class="modal-body">
+
+                <div class="row text-center p_20">
+
+                  <div class="col-md-12">
+                    <div id="dropzone">
+
+                          <div class="dropzone" id="myDropzone">
+
+                          </div>
+                          <div id="mar-top-15">
+
+                            <button type="submit" id="submit-all" class="up_btn_kim btn btn-next" name="submit_photo"> upload </button>
+                            <button class="up_btn_kim btn btn-next" id="clear-dropzone">Clear</button>
+
+                            <a href="{{url('photo_edit/')}}" id="next_to_cart" class="next_to_cart hidden btn btn-next">Go to Cart</a>
+                            <br />
+                            <div class="hidden" id="next_to_cart2">
+                              <h4 class="text-succes">Upload Image Success!</h4>
+
+                            </div>
+
+                          </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+
+        <!-- end Modal -->
+
+
+
+
+
+
 
 
 
@@ -197,4 +338,75 @@ $.notify({
 
 </script>
  @endif
+
+<script src="{{url('master/assets/js/dropzone.js')}}"></script>
+
+<script>
+
+$(document).ready(function(){
+
+  Dropzone.options.myDropzone= {
+      url: '{{url('update_photo_print')}}',
+      autoProcessQueue: false,
+      uploadMultiple: true,
+      parallelUploads: 100,
+      maxFiles: 100,
+      maxFilesize: 2024,
+      dictRemoveFile: 'Remove file',
+      acceptedFiles: 'image/*,application/pdf,.psd',
+      addRemoveLinks: true,
+      init: function() {
+          dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
+
+          // for Dropzone to process the queue (instead of default form behavior):
+          document.getElementById("submit-all").addEventListener("click", function(e) {
+              // Make sure that the form isn't actually being sent.
+              e.preventDefault();
+              e.stopPropagation();
+              dzClosure.processQueue();
+            //  alert('55555++');
+          });
+
+          // Using a closure.
+          var _this = this;
+
+          document.getElementById("clear-dropzone").addEventListener("click", function(e) {
+          // Using "_this" here, because "this" doesn't point to the dropzone anymore
+          _this.removeAllFiles();
+
+          // If you want to cancel uploads as well, you
+          // could also call _this.removeAllFiles(true);
+        });
+
+          //send all the form data along with the files: id="image_radio"
+          this.on("sendingmultiple", function(data, xhr, formData) {
+            //  formData.append("size_photo", jQuery("#size_photo").val()); // value of size_photo input na kub
+              formData.set("ids", '{{$ids}}'); // value of product_id input na kub
+              formData.set("list_link", {{Session::get('cart.'.$ids.'.data.list_link')}}); // value of type_image input na kub
+            //  console.log(xhr);
+          });
+
+      },
+      success : function(response, xhr){
+
+        $("#next_to_cart2").removeClass('hidden');
+
+
+          if(response.status == 'success'){
+
+            setTimeout(function() {
+              location.reload();
+
+          }, 2500);
+
+          }
+      },
+  }
+
+});
+
+</script>
+
+
+
 @stop('scripts')
