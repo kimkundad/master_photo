@@ -54,9 +54,9 @@ Photo print
               </th>
             </tr>
           </thead>
-          <tbody >
+          <tbody {{ $ids = "data".$id }}>
 
-            {{ $ids = "data".$id }}
+
 
             @foreach(Session::get('cart.'.$ids.'.data.image') as $u)
             <tr>
