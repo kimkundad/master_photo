@@ -72,6 +72,11 @@ class HomeController extends Controller
                'image_radio' => 'required'
            ]);
 
+          $image_radio = $request['image_radio'];
+          if($image_radio == 0){
+            $image_radio = 1;
+          }
+
 
          if (sizeof($gallary) > 0) {
           for ($i = 0; $i < sizeof($gallary); $i++) {
@@ -86,18 +91,21 @@ class HomeController extends Controller
 
         }
 
-        $item = [
-          'id' => $request['product_id'],
-          'size_photo' => $request['size_photo'],
-          'image_radio' => $request['image_radio'],
-          'image' => $admins,
-          'status' => 0
-        ];
-
         $set_num_date = count(Session::get('cart'));
         $set_num_date += 1;
         $data_url = $set_num_date;
         $set_num_date = "data".$set_num_date;
+
+        $item = [
+          'id' => $request['product_id'],
+          'size_photo' => $request['size_photo'],
+          'image_radio' => $image_radio,
+          'image' => $admins,
+          'status' => 0,
+          'list_link' => $data_url
+        ];
+
+
 
         Session::put('cart.'.$set_num_date, ['data' => $item]);
 
