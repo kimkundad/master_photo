@@ -23,8 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-     session()->forget('cart');
-      session()->flush();
+  //   session()->forget('cart');
+  //    session()->flush();
   //  $request->session()->pull('cart.data2.data.image.image', '1534488467-logo-Isuzu.png');
   //  session()->push('cart.data1.data.image', ['image' => '1534488467-logo-Isuzu.jpg', 'id' => 6]);
   //  $image = Session::get('cart.'.$ids.'.data.image.'.$num.'.image');
@@ -35,6 +35,22 @@ class HomeController extends Controller
 
 
         return view('welcome');
+    }
+
+    public function add_qty2_photo(Request $request){
+
+      $qty2 = $request['qty2'];
+      $ids = $request['ids'];
+      $num_img = $request['num_img'];
+      $img_set = $request['img_set'];
+
+      $data = ['image' => $img_set, 'id' => $num_img, 'num' => $qty2];
+      session()->put('cart.'.$ids.'.data.image.'.$num_img.'', $data);
+
+      return Response::json([
+            'status' => 1001
+        ], 200);
+
     }
 
     public function update_photo_print(Request $request){
@@ -49,7 +65,7 @@ class HomeController extends Controller
          $path = 'assets/image/all_image/';
          $filename = time()."-".$gallary[$i]->getClientOriginalName();
          $gallary[$i]->move($path, $filename);
-         session()->push('cart.'.$ids.'.data.image', ['image' => $filename, 'id' => $set_num_img+$i]);
+         session()->push('cart.'.$ids.'.data.image', ['image' => $filename, 'id' => $set_num_img+$i, 'num' => 1]);
        }
      }
     // session()->push('cart.'.$ids.'.data.image', [$admins]);
@@ -67,6 +83,10 @@ class HomeController extends Controller
       return view('profile');
     }
 
+    public function cart(){
+      return view('cart');
+    }
+
     public function photo_print(){
       return view('photo_print');
     }
@@ -76,6 +96,9 @@ class HomeController extends Controller
       if($set_num_date == 0){
         return redirect('/');
       }
+      $ids = "data".$id;
+    //  session()->push('cart.data1.data.image', ['image' => '1534488467-logo-Isuzu.jpg', 'id' => 6]);
+      session()->put('cart.'.$ids.'.data.0', ['status' => 1]);
       $data['id'] = $id;
       return view('photo_edit', $data);
     }
@@ -122,7 +145,8 @@ class HomeController extends Controller
             $gallary[$i]->move($path, $filename);
             $admins[] = [
                 'image' => $filename,
-                'id' => $i
+                'id' => $i,
+                'num' => 1
             ];
           }
 
@@ -138,7 +162,7 @@ class HomeController extends Controller
           'size_photo' => $request['size_photo'],
           'image_radio' => $image_radio,
           'image' => $admins,
-          'status' => 0,
+          ['status' => 0],
           'list_link' => $data_url
         ];
 

@@ -22,9 +22,13 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('photo_edit/{id}', 'HomeController@photo_edit')->name('photo_edit');
 Route::post('/del_upload_image', 'HomeController@del_upload_image')->name('del_upload_image');
 
+Route::post('/add_qty2_photo', 'HomeController@add_qty2_photo')->name('add_qty2_photo');
+
 Route::post('/update_photo_print', 'HomeController@update_photo_print')->name('update_photo_print');
 
 Route::get('/photo_print', 'HomeController@photo_print')->name('photo_print');
+
+Route::get('/cart', 'HomeController@cart')->name('cart');
 
 Route::post('/upload_image', 'HomeController@upload_image')->name('upload_image');
 Route::post('/images_delete', 'HomeController@images_delete')->name('images_delete');

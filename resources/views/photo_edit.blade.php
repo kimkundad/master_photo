@@ -57,6 +57,8 @@ Photo print
           <tbody {{ $ids = "data".$id }}>
 
 
+
+
           <!--  {{Session::get('cart.'.$ids.'.data.image.2.image')}} -->
             @foreach(Session::get('cart.'.$ids.'.data.image') as $u)
             <tr>
@@ -68,9 +70,14 @@ Photo print
                 </a>
               </td>
               <td>
-                <div class="numbers-row">
-                  <input type="text" value="1" class="qty2 form-control" name="quantity">
-                <div class="inc button_inc">+</div><div class="dec button_inc">-</div></div>
+
+                <form id="cutproduct" class="typePay2 " novalidate="novalidate" action="" method="post"  role="form">
+
+                  <input type="text" value="{{$u['num']}}" style="width: 50px;" class="qty2 form-control" name="quantity">
+                  <input type="hidden" class="ids" name="ids" value="{{$ids}}">
+                  <input type="hidden" class="num_img" name="num_img" value="{{$u['id']}}">
+                  <input type="hidden" class="img_set" name="img_set" value="{{$u['image']}}">
+                </form>
               </td>
               <td>
                 150 / 1 pcs.
@@ -158,8 +165,8 @@ Photo print
 
         </div>
 
-        <a href="#" class="btn btn-submit btn-block" style="height:43px;">NEXT TO CART</a>
-        
+        <a href="{{url('cart')}}" class="btn btn-submit btn-block" style="height:43px;">NEXT TO CART</a>
+
 
 
 
@@ -404,6 +411,141 @@ $(document).ready(function(){
   }
 
 });
+
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('form input').change(function() {
+    console.log('Textarea Change');
+
+
+        //  var username = $('form#cutproduct input[name=id]').val();
+
+
+        var $form = $(this).closest("form#cutproduct");
+        var formData =  $form.serializeArray();
+        var qty2 =  $form.find(".qty2").val();
+        var ids =  $form.find(".ids").val();
+        var num_img =  $form.find(".num_img").val();
+        var img_set =  $form.find(".img_set").val();
+
+
+
+          if(qty2){
+            $.ajax({
+              type: "POST",
+              url: "{{url('add_qty2_photo')}}",
+              headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+              data: {
+                qty2 : qty2,
+                ids : ids,
+                num_img : num_img,
+                img_set : img_set
+              },
+              dataType: "json",
+           success: function(json){
+               if(json.status == 1001) {
+
+
+                 $.notify({
+                  // options
+                  icon: 'icon_set_1_icon-76',
+                  title: "<h4>เพิ่มจำนวนรูป สำเร็จ</h4> ",
+                  message: "ระบบจะคำนวณ ราคา จากจำนวนรูป . "
+                 },{
+                  // settings
+                  type: 'info',
+                  delay: 5000,
+                  timer: 3000,
+                  z_index: 9999,
+                  showProgressbar: false,
+                  placement: {
+                    from: "bottom",
+                    align: "right"
+                  },
+                  animate: {
+                    enter: 'animated bounceInUp',
+                    exit: 'animated bounceOutDown'
+                  },
+                 });
+
+
+
+
+                } else {
+
+
+                  $.notify({
+                    // options
+                    icon: '',
+                    title: "<h4>เพิ่มรายการที่ชอบ ไม่สำเร็จ</h4> ",
+                    message: "ท่านต้องทำการ Login เพื่อเข้าสู่ระบบก่อนเพิ่มรายการที่ชอบ . "
+                  },{
+                    // settings
+                    type: 'danger',
+                    delay: 5000,
+                    timer: 3000,
+                    z_index: 9999,
+                    showProgressbar: false,
+                    placement: {
+                      from: "bottom",
+                      align: "right"
+                    },
+                    animate: {
+                      enter: 'animated bounceInUp',
+                      exit: 'animated bounceOutDown'
+                    },
+                  });
+
+
+
+
+                }
+              },
+              failure: function(errMsg) {
+                alert(errMsg.Msg);
+              }
+            });
+          }else{
+
+
+
+
+            $.notify({
+              // options
+              icon: '',
+              title: "<h4>เพิ่มรายการที่ชอบ ไม่สำเร็จ</h4> ",
+              message: "ท่านต้องทำการ Login เพื่อเข้าสู่ระบบก่อนเพิ่มรายการที่ชอบ . "
+            },{
+              // settings
+              type: 'danger',
+              delay: 5000,
+              timer: 3000,
+              z_index: 9999,
+              showProgressbar: false,
+              placement: {
+                from: "bottom",
+                align: "right"
+              },
+              animate: {
+                enter: 'animated bounceInUp',
+                exit: 'animated bounceOutDown'
+              },
+            });
+
+
+
+
+
+          }
+        });
+
+
+
+});
+
 
 </script>
 
