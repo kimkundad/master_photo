@@ -5,7 +5,8 @@ MASTER PHOTO NETWORK: ร้านมาสเตอร์ อัด ขยา�
 @stop
 
 @section('stylesheet')
-
+<link rel="stylesheet" type="text/css" href="{{url('master/assets/slick/slick-theme.css')}}"/>
+<link rel="stylesheet" type="text/css" href="{{url('master/assets/slick/slick.css')}}"/>
 <style>
 figure {
 	margin: 0;

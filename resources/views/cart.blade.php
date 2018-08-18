@@ -23,6 +23,9 @@ Photo print
   .table {
   margin-bottom: 0px;
   }
+  .f1-step .f1-step-icon{
+    padding-top: 12px;
+  }
   </style>
 
   <div class="container margin_60">
@@ -54,7 +57,7 @@ Photo print
       <div class="col-md-8 ">
 
         <table class="table table-striped cart-list add_bottom_30">
-          <thead>
+          <thead style="    font-size: 14px;">
             <tr>
               <th>
                 Item
@@ -73,35 +76,47 @@ Photo print
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody <?php
+          $sum_img = 0;
+          $total_pay = 0;
+          ?>>
 
 
+@foreach(Session::get('cart') as $u)
+    <?php $total_img = 0; ?>
+    @foreach(Session::get('cart.data'.$u['data']['list_link'].'.data.image') as $j)
+    <?php
 
+    $total_img += $j['num'];
+    $sum_img += $j['num'];
+    ?>
+    @endforeach
 
-             <tr>
+             <tr <?php $total_pay += ($total_img * 120); ?> >
                <td>
+                 <a href="{{url('photo_edit/'.$u['data']['list_link'])}}" target="_blank">
                  <div class="thumb_cart">
-                   <img src="assets/image/product/" alt="image">
+                   <img src="{{url('master/assets/images/USM-11220_PDP_prints_collage_sizing_1140x1140_20160912.jpg')}}" alt="image">
                  </div>
-                 <span class="item_cart">125</span>
+                 <span class="item_cart">TRADITIONAL SIZES</span>
+                 </a>
                </td>
                <td>
-
+                 {{$total_img}} / Pcs.
                </td>
                <td>
                  0%
                </td>
                <td>
-                 <strong>฿120</strong>
+                 <strong>฿{{$total_img * 120}}</strong>
                </td>
                <td class="options">
                  <a href="#"><i class=" icon-trash"></i></a>
-
                </td>
              </tr>
 
 
-
+@endforeach
 
 
 
@@ -136,7 +151,7 @@ Photo print
                   Total
                 </td>
                 <td class="text-right">
-                  120
+                  {{$sum_img}}
                 </td>
               </tr>
               <tr>
@@ -153,7 +168,7 @@ Photo print
                   Summary
                 </td>
                 <td class="text-right">
-                  ฿120
+                  ฿{{$total_pay}}
                 </td>
               </tr>
             </tbody>
@@ -161,9 +176,9 @@ Photo print
 
         </div>
 
-        <a href="shipping.php" class="btn btn-submit btn-block" style="height:43px;">NEXT</a>
+        <a href="#" class="btn btn-submit btn-block" style="height:43px;">NEXT</a>
         <br />
-        <a class="btn_full_outline " style="margin-bottom: 30px;" href="shipping.php"><i class="icon-right"></i> Continue shopping</a>
+        <a class="btn_full_outline " style="margin-bottom: 30px;" href="#"><i class="icon-right"></i> Continue shopping</a>
 
 
 

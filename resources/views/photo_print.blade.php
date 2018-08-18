@@ -223,7 +223,7 @@ Photo print
 
 
 
-              {{dd(Session::get('cart'))}}
+
 
 
 
