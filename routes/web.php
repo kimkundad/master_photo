@@ -49,4 +49,5 @@ Route::group(['middleware' => 'admin'], function() {
   Route::resource('admin/user', 'StudentController');
   Route::resource('admin/category', 'CategoryController');
   Route::resource('admin/sub_category', 'Sub_categoryController');
+  Route::resource('admin/product', 'ProductController');
 });

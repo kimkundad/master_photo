@@ -48,8 +48,8 @@
 
                 <div class="col-md-12 " style="padding-left: 1px;">
 
-                  <a class="btn btn-primary " href="{{url('admin/category/create')}}" >
-                      <i class="fa fa-plus"></i> เพิ่มหมวดหมู่ใหม่</a>
+                  <a class="btn btn-primary " href="{{url('admin/product/create')}}" >
+                      <i class="fa fa-plus"></i> เพิ่มสินค้าใหม่</a>
                 </div>
                 <br><br>
 
@@ -59,42 +59,51 @@
                 <table class="table table-responsive-lg table-striped table-sm mb-0" id="datatable-default">
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>ชื่อหมวดหมู่</th>
-                      <th>หมวดหมู่หย่อย</th>
 
-                      <th>จำนวนสินค้า</th>
+                      <th>ชื่อสินค้า</th>
+                      <th>หมวดหมู่</th>
+
+                      <th>ราคา</th>
+                      <th>สถานะ</th>
                       <th>จัดการ</th>
                     </tr>
                   </thead>
                   <tbody>
              @if($objs)
                 @foreach($objs as $u)
-                    <tr>
-                      <td>{{$s}}</td>
-                      <td>{{$u->name_cat}}</td>
-                      <td>{{$u->options}}</td>
+                    <tr id="{{$u->id_q}}">
 
-                      <td>{{$u->options_pro}}</td>
+                      <td>{{$u->pro_name}}</td>
+                      <td>{{$u->sub_name}}</td>
+                      <td>{{$u->pro_price}}</td>
+
+                      <td>
+                        <div class="switch switch-sm switch-success">
+                          <input type="checkbox" name="switch" data-plugin-ios-switch
+                          @if($u->pro_status == 1)
+                          checked="checked"
+                          @endif
+                          />
+                        </div>
+                      </td>
                       <td>
 
                         <div class="btn-group flex-wrap">
   												<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
   												<div class="dropdown-menu" role="menu">
+  													<a class="dropdown-item text-1" href="{{url('admin/product/'.$u->id_p)}}">ดูข้อมูล</a>
+  													<a class="dropdown-item text-1" href="{{url('admin/product/'.$u->id_p.'/edit')}}">แก้ไข</a>
 
-  													<a class="dropdown-item text-1" href="{{url('admin/category/'.$u->id_c.'/edit')}}">แก้ไข</a>
-  												<!--	<a class="dropdown-item text-1 text-danger" href="">ลบ</a> -->
-                          <form  action="{{url('admin/category/'.$u->id_c)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
+                          <!--  <form  action="{{url('admin/cars/'.$u->id_q)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
                               <input type="hidden" name="_method" value="DELETE">
                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                               <button type="submit" title="ลบบทความ" class="dropdown-item text-1 text-danger"><i class="fa fa-times "></i> ลบ</button>
-                          </form>
-
+                            </form> -->
   												</div>
   											</div>
 
                       </td>
-                    </tr {{$s++}}>
+                    </tr>
                  @endforeach
               @endif
 
@@ -114,6 +123,37 @@
 @section('scripts')
 <script src="{{asset('/assets/javascripts/tables/examples.datatables.default.js')}}"></script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+  $("input:checkbox").change(function() {
+    var user_id = $(this).closest('tr').attr('id');
+
+    $.ajax({
+            type:'POST',
+            url:'{{url('api/post_status')}}',
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            data: { "user_id" : user_id },
+            success: function(data){
+              if(data.data.success){
+
+
+                var stack_topleft = {"dir1": "down", "dir2": "right", "push": "top"};
+                      var notice = new PNotify({
+                            title: 'ทำรายการสำเร็จ',
+                            text: 'คุณเปลี่ยนการแสดงผล สำเร็จเรียบร้อยแล้วค่ะ',
+                            type: 'success',
+                            addclass: 'stack-topright'
+                          });
+
+
+
+              }
+            }
+        });
+    });
+});
+</script>
+
 @if ($message = Session::get('add_success'))
 <script type="text/javascript">
 
@@ -128,7 +168,7 @@
 @endif
 
 
-@if ($message = Session::get('delete'))
+@if ($message = Session::get('del_product'))
 <script type="text/javascript">
 
 

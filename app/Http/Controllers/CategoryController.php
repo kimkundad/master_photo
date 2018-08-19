@@ -30,15 +30,33 @@ class CategoryController extends Controller
             $s = 1;
             foreach ($cat as $obj) {
                 $optionsRes = [];
+
+                $obj_pro = DB::table('sub_categories')->select(
+                  'sub_categories.*'
+                  )
+                  ->where('sub_categories.sub_category', $obj->id)
+                  ->first();
+
+                  if($obj_pro != null){
+                    $obj_pro_count = DB::table('products')->select(
+                      'products.*'
+                      )
+                      ->where('products.pro_category', $obj_pro->id)
+                      ->count();
+                  }else{
+                    $obj_pro_count = 0;
+                  }
+
                 $options = DB::table('sub_categories')->select(
                   'sub_categories.*'
                   )
                   ->where('sub_categories.sub_category', $obj->id)
                   ->count();
 
-                     $optionsRes['count'] = $options;
+                $optionsRes['count'] = $options;
 
                 $obj->options = $options;
+                $obj->options_pro = $obj_pro_count;
               }
               //dd($cat);
               $s = 1;

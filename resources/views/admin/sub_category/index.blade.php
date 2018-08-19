@@ -48,8 +48,8 @@
 
                 <div class="col-md-12 " style="padding-left: 1px;">
 
-                  <a class="btn btn-primary " href="{{url('admin/category/create')}}" >
-                      <i class="fa fa-plus"></i> เพิ่มหมวดหมู่ย่อยใหม่</a>
+                  <a class="btn btn-primary " href="{{url('admin/sub_category/create')}}" >
+                      <i class="fa fa-plus"></i> เพิ่มหมวดหมู่ย่อย</a>
                 </div>
                 <br><br>
 
@@ -60,36 +60,39 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>ชื่อหมวดหมู่</th>
-                      <th>จำนวน รถเช่า</th>
-
-                      <th>วันที่สร้าง</th>
+                      <th>หมวดหมู่ย่อย</th>
+                      <th>หมวดหมู่หลัก</th>
+                      <th>จำนวน สินค้า</th>
                       <th>จัดการ</th>
                     </tr>
                   </thead>
                   <tbody>
-             @if($objs)
+              @if($objs)
                 @foreach($objs as $u)
                     <tr>
-                      <td>{{$u->id}}</td>
+                      <td>{{$s}}</td>
+                      <td>{{$u->sub_name}}</td>
                       <td>{{$u->name_cat}}</td>
                       <td>{{$u->options}}</td>
-
-                      <td>{{$u->created_at}}</td>
                       <td>
 
                         <div class="btn-group flex-wrap">
   												<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
   												<div class="dropdown-menu" role="menu">
 
-  													<a class="dropdown-item text-1" href="{{url('admin/category/'.$u->id.'/edit')}}">แก้ไข</a>
+  												<a class="dropdown-item text-1" href="{{url('admin/sub_category/'.$u->id_sub.'/edit')}}">แก้ไข</a>
   												<!--	<a class="dropdown-item text-1 text-danger" href="">ลบ</a> -->
+                          <form  action="{{url('admin/sub_category/'.$u->id_sub)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
+                              <input type="hidden" name="_method" value="DELETE">
+                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              <button type="submit" title="ลบบทความ" class="dropdown-item text-1 text-danger"><i class="fa fa-times "></i> ลบ</button>
+                          </form>
 
   												</div>
   											</div>
 
                       </td>
-                    </tr>
+                    </tr {{$s++}}>
                  @endforeach
               @endif
 

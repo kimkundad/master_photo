@@ -51,40 +51,13 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										</a>
 									</li>
 
-                  <li {{ (Request::is('admin/branch*') ? 'class=nav-expanded' : '') }} >
-										<a href="{{url('admin/branch/')}}"  >
+                  <li {{ (Request::is('admin/product*') ? 'class=nav-expanded' : '') }} >
+										<a href="{{url('admin/product/')}}"  >
 											<i class="fa fa-cube" aria-hidden="true"></i>
-											<span>สาขาร้าน</span>
+											<span>Product</span>
 										</a>
 									</li>
 
-                  <li {{ (Request::is('admin/sizecars*') ? 'class=nav-expanded' : '') }} >
-										<a href="{{url('admin/sizecars/')}}"  >
-											<i class="fa fa-gavel" aria-hidden="true"></i>
-											<span>size รถเช่า</span>
-										</a>
-									</li>
-
-                  <li {{ (Request::is('admin/cars*') ? 'class=nav-expanded' : '') }} >
-										<a href="{{url('admin/cars/')}}"  >
-											<i class="fa fa-car" aria-hidden="true"></i>
-											<span>รถยนต์เช่า</span>
-										</a>
-									</li>
-
-                  <li {{ (Request::is('admin/order*') ? 'class=nav-expanded' : '') }} >
-										<a href="{{url('admin/order/')}}"  >
-											<i class="fa fa-external-link" aria-hidden="true"></i>
-											<span>การสั่งจอง</span>
-										</a>
-									</li>
-
-                  <li {{ (Request::is('admin/review*') ? 'class=nav-expanded' : '') }} >
-										<a href="{{url('admin/review/')}}"  >
-											<i class="fa fa-bell-o" aria-hidden="true"></i>
-											<span>จัดการ review</span>
-										</a>
-									</li>
 
 
                   <li {{ (Request::is('admin/contact_admin*') ? 'class=nav-expanded' : '') }} >
