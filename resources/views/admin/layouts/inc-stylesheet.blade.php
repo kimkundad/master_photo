@@ -48,7 +48,7 @@
         <script src="{{asset('./assets/vendor/modernizr/modernizr.js')}}"></script>
         <link rel="stylesheet" href="{{asset('./assets/vendor/bootstrap-fileupload/bootstrap-fileupload.min.css')}}">
         <!-- Dropzone -->
-      
+
         <style type="text/css">
         .select2-container .select2-choice {
                 display: block;
@@ -65,7 +65,7 @@
 .dropdown-item {
     display: block;
     width: 100%;
-    padding: 0.25rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     clear: both;
     font-weight: 400;
     color: #212529;

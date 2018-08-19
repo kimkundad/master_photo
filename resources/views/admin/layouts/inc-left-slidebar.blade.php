@@ -28,7 +28,7 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 								<ul class="nav nav-main">
 
 
-									
+
 
                   <li {{ (Request::is('admin/user*') ? 'class=nav-expanded' : '') }} >
 										<a href="{{url('admin/user/')}}"  >
@@ -44,9 +44,16 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										</a>
 									</li>
 
+                  <li {{ (Request::is('admin/sub_category*') ? 'class=nav-expanded' : '') }} >
+										<a href="{{url('admin/sub_category/')}}"  >
+											<i class="fa fa-cubes" aria-hidden="true"></i>
+											<span>หมวดหมู่ย่อย</span>
+										</a>
+									</li>
+
                   <li {{ (Request::is('admin/branch*') ? 'class=nav-expanded' : '') }} >
 										<a href="{{url('admin/branch/')}}"  >
-											<i class="fa fa-cubes" aria-hidden="true"></i>
+											<i class="fa fa-cube" aria-hidden="true"></i>
 											<span>สาขาร้าน</span>
 										</a>
 									</li>
