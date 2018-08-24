@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Socialite;
+use Session;
 use Auth;
 
 
@@ -33,8 +34,13 @@ class LoginController extends Controller
           return redirect('admin/user');
             //dd($request->user()->is_admin);
         }
-          return $this->authenticated($request, $this->guard()->user())
-                    ?: redirect()->intended($this->redirectPath());
+
+          if(Session::has('status_user') == 1){
+            return redirect(url('shipping'));
+          }else{
+            return $this->authenticated($request, $this->guard()->user())
+                      ?: redirect()->intended($this->redirectPath());
+          }
 
       /*  return $this->authenticated($request, $this->guard()->user())
                 ?: redirect()->intended($this->redirectPath()); */

@@ -170,11 +170,11 @@
             <li class="submenu">
               <a href="javascript:void(0);" class="show-submenu">PHOTO PRINT <i class="icon-down-open-mini"></i></a>
               <ul>
-                <li><a href="{{url('/photo_print')}}">TRADITIONAL SIZES</a></li>
-                <li><a href="{{url('/')}}">SNAP SIZE</a></li>
-                <li><a href="{{url('/')}}">POLAROID SIZE</a></li>
-                <li><a href="{{url('/')}}">INSTAGRAM SIZE</a></li>
-                <li><a href="{{url('/')}}">COLLAGE PRINTS</a></li>
+                <li><a href="{{url('photo_print/1')}}">TRADITIONAL SIZES</a></li>
+                <li><a href="{{url('photo_print/2')}}">SNAP SIZE</a></li>
+                <li><a href="{{url('photo_print/3')}}">POLAROID SIZE</a></li>
+                <li><a href="{{url('photo_print/4')}}">INSTAGRAM SIZE</a></li>
+                <li><a href="{{url('photo_print/5')}}">COLLAGE PRINTS</a></li>
 
               </ul>
             </li>
@@ -183,65 +183,65 @@
             <li class="submenu">
               <a href="javascript:void(0);" class="show-submenu">DIGITAL OFFSET PRINTS <i class="icon-down-open-mini"></i></a>
               <ul>
-                <li><a href="{{url('/')}}">2 SIDED PRINT</a></li>
-                <li><a href="{{url('/')}}">POSTCARD</a></li>
-                <li><a href="{{url('/')}}">NAME CARD</a></li>
-                <li><a href="{{url('/')}}">LABEL STICKER</a></li>
-                <li><a href="{{url('/')}}">BROCHURE</a></li>
-                <li><a href="{{url('/')}}">LEAFLET</a></li>
+                <li><a href="{{url('category/7')}}">2 SIDED PRINT</a></li>
+                <li><a href="{{url('category/8')}}">POSTCARD</a></li>
+                <li><a href="{{url('category/9')}}">NAME CARD</a></li>
+                <li><a href="{{url('category/10')}}">LABEL STICKER</a></li>
+                <li><a href="{{url('category/11')}}">BROCHURE</a></li>
+                <li><a href="{{url('category/12')}}">LEAFLET</a></li>
               </ul>
             </li>
 
             <li class="submenu">
               <a href="javascript:void(0);" class="show-submenu">PHOTOBOOK <i class="icon-down-open-mini"></i></a>
               <ul>
-                <li><a href="#">SQUARE BOOK</a></li>
-                <li><a href="#">PORTRAIT BOOK</a></li>
-                <li><a href="#">LANDSCAPE BOOK</a></li>
+                <li><a href="{{url('category/13')}}">SQUARE BOOK</a></li>
+                <li><a href="{{url('category/14')}}">PORTRAIT BOOK</a></li>
+                <li><a href="{{url('category/15')}}">LANDSCAPE BOOK</a></li>
               </ul>
             </li>
 
             <li class="submenu">
               <a href="javascript:void(0);" class="show-submenu">CALENDAR <i class="icon-down-open-mini"></i></a>
               <ul>
-                <li><a href="#">PORTRAIT </a></li>
-                <li><a href="#">LANDSCAPE </a></li>
-                <li><a href="#">HANG-UP </a></li>
+                <li><a href="{{url('category/16')}}">PORTRAIT </a></li>
+                <li><a href="{{url('category/17')}}">LANDSCAPE </a></li>
+                <li><a href="{{url('category/18')}}">HANG-UP </a></li>
               </ul>
             </li>
 
             <li class="submenu">
               <a href="javascript:void(0);" class="show-submenu">CARDS <i class="icon-down-open-mini"></i></a>
               <ul>
-                <li><a href="#">WEDDING CARDS</a></li>
-                <li><a href="#">INVITATION CARDS</a></li>
-                <li><a href="#">BIRTHDAY CARDS</a></li>
-                <li><a href="#">ANNIVERSARY CARDS</a></li>
+                <li><a href="{{url('category/19')}}">WEDDING CARDS</a></li>
+                <li><a href="{{url('category/20')}}">INVITATION CARDS</a></li>
+                <li><a href="{{url('category/21')}}">BIRTHDAY CARDS</a></li>
+                <li><a href="{{url('category/22')}}">ANNIVERSARY CARDS</a></li>
               </ul>
             </li>
 
             <li class="submenu">
               <a href="javascript:void(0);" class="show-submenu">FRAMES <i class="icon-down-open-mini"></i></a>
               <ul>
-                <li><a href="#">CANVAS </a></li>
-                <li><a href="#">BORDERLESS FRAME</a></li>
-                <li><a href="#">MODERN FRAME</a></li>
-                <li><a href="#">GOLDENv FRAME</a></li>
+                <li><a href="{{url('category/23')}}">CANVAS </a></li>
+                <li><a href="{{url('category/24')}}">BORDERLESS FRAME</a></li>
+                <li><a href="{{url('category/25')}}">MODERN FRAME</a></li>
+                <li><a href="{{url('category/26')}}">GOLDENv FRAME</a></li>
               </ul>
             </li>
 
             <li class="submenu">
               <a href="javascript:void(0);" class="show-submenu">GIFTS <i class="icon-down-open-mini"></i></a>
               <ul>
-                <li><a href="#">T-SHIRT </a></li>
-                <li><a href="#">MUG </a></li>
-                <li><a href="#">JIGSAW </a></li>
-                <li><a href="#">MAGNET </a></li>
+                <li><a href="{{url('category/27')}}">T-SHIRT </a></li>
+                <li><a href="{{url('category/28')}}">MUG </a></li>
+                <li><a href="{{url('category/29')}}">JIGSAW </a></li>
+                <li><a href="{{url('category/30')}}">MAGNET </a></li>
 
-                <li><a href="#">STICKER </a></li>
-                <li><a href="#">PILLOW CASE </a></li>
-                <li><a href="#">SCARF </a></li>
-                <li><a href="#">BAG </a></li>
+                <li><a href="{{url('category/31')}}">STICKER </a></li>
+                <li><a href="{{url('category/32')}}">PILLOW CASE </a></li>
+                <li><a href="{{url('category/33')}}">SCARF </a></li>
+                <li><a href="{{url('category/34')}}">BAG </a></li>
               </ul>
             </li>
 

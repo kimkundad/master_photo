@@ -79,8 +79,41 @@ Photo print
                   <input type="hidden" class="img_set" name="img_set" value="{{$u['image']}}">
                 </form>
               </td>
-              <td>
-                150 / 1 pcs.
+              <td >
+
+                @if(Session::get('cart.'.$ids.'.data.size_photo') != 0)
+
+                @if($option_product)
+                @foreach($option_product as $item)
+
+
+
+                  @foreach($item->options_detail as $item_2)
+                  <div class=" @if($item_2->id == Session::get('cart.'.$ids.'.data.size_photo'))
+                    <?php
+                    $total_pay = $item_2->item_price;
+                     ?>
+                  @else
+                  hidden
+                  @endif ">
+                      {{$item_2->item_price}} / 1 pcs.
+                  </div>
+                  @endforeach
+
+
+
+
+
+                @endforeach
+                @endif
+
+
+                @else
+
+                {{$objs->pro_price}} / 1 pcs.
+
+                @endif
+
               </td>
 
               <td class="options">
@@ -121,40 +154,98 @@ Photo print
             <tbody>
 
 
+
+              <?php
+              $total_pay = 0;
+               ?>
+
+
+              @if($option_product)
+              @foreach($option_product as $item)
+              <tr>
+                @foreach($item->options_detail as $item_2)
+                <td class="@if($item_2->id == Session::get('cart.'.$ids.'.data.size_photo'))
+                @else
+                hidden
+                @endif">
+
+                    {{$item_2->item_name}}
+
+                </td>
+                @endforeach
+
+                @foreach($item->options_detail as $item_2)
+                <td class=" @if($item_2->id == Session::get('cart.'.$ids.'.data.size_photo'))
+                  <?php
+                  $total_pay = $item_2->item_price;
+                   ?>
+                @else
+                hidden
+                @endif text-right">
+
+
+
+                    ฿ {{$item_2->item_price}} x {{Session::get('cart.'.$ids.'.data.1.sum_image')}}
+
+
+
+                </td>
+                @endforeach
+              </tr>
               <tr>
                 <td>
-                  Size photo
+
+
+
+                  @foreach($item->options_detail as $item_2)
+                  <div
+                  @if($item_2->id == Session::get('cart.'.$ids.'.data.image_radio'))
+                  class=""
+                  @else
+                  class="hidden"
+                  @endif
+                  >
+                  Type Image
+                  </div>
+                  @endforeach
+
+
                 </td>
                 <td class="text-right">
-                <!--  {{Session::get('cart.'.$ids.'.data.size_photo')}} -->
-                  @if(Session::get('cart.'.$ids.'.data.size_photo') == 1)
-                  4 x 6 in. price ฿7.0
-                  @elseif(Session::get('cart.'.$ids.'.data.size_photo') == 2)
-                  4 x 5.3 in. price ฿12.5
-                  @elseif(Session::get('cart.'.$ids.'.data.size_photo') == 3)
-                  5 x 7 in. price ฿14.0
-                  @elseif(Session::get('cart.'.$ids.'.data.size_photo') == 3)
-                  8 x 8 in. price ฿15.0
+
+                  @foreach($item->options_detail as $item_2)
+                  <div
+                  @if($item_2->id == Session::get('cart.'.$ids.'.data.image_radio'))
+                  class=""
                   @else
-                  8 x 10 in. price ฿20.05
+                  class="hidden"
                   @endif
+                  >
+                  {{$item_2->item_name}}
+                  </div>
+                  @endforeach
+
                 </td>
               </tr>
+              @endforeach
+              @endif
+
+
 
               <tr>
                 <td>
-                  Image type
+                  Total
                 </td>
                 <td class="text-right">
-                  @if(Session::get('cart.'.$ids.'.data.image_radio') == 1)
-                  รูปปกติ
-                  @elseif(Session::get('cart.'.$ids.'.data.image_radio') == 2)
-                  ขอบขาว
-                  @elseif(Session::get('cart.'.$ids.'.data.image_radio') == 3)
-                  เต็มไฟล์
-                  @else
-                  เต็มขอบขาว
-                  @endif
+                  <?php
+                    $sum_img = 2;
+                //  echo Session::get('cart.'.$ids.'.data.1.sum_image');
+                //  echo Session::get('cart.'.$ids.'.data.size_photo'); {{dd(Session::get('cart'))}}
+                  ?>
+
+                ฿ {{Session::get('cart.'.$ids.'.data.2.sum_price')}}
+
+
                 </td>
               </tr>
 
@@ -404,7 +495,7 @@ $(document).ready(function(){
             setTimeout(function() {
               location.reload();
 
-          }, 2500);
+          }, 1800);
 
           }
       },
@@ -470,6 +561,12 @@ $(document).ready(function(){
                     exit: 'animated bounceOutDown'
                   },
                  });
+
+
+                 setTimeout(function() {
+                   location.reload();
+
+               }, 1800);
 
 
 

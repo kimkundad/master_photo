@@ -71,7 +71,7 @@
                   <tbody>
              @if($objs)
                 @foreach($objs as $u)
-                    <tr id="{{$u->id_q}}">
+                    <tr id="{{$u->id_p}}">
 
                       <td>{{$u->pro_name}}</td>
                       <td>{{$u->sub_name}}</td>
@@ -91,14 +91,10 @@
                         <div class="btn-group flex-wrap">
   												<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
   												<div class="dropdown-menu" role="menu">
-  													<a class="dropdown-item text-1" href="{{url('admin/product/'.$u->id_p)}}">ดูข้อมูล</a>
+  													<a class="dropdown-item text-1" href="#">ดูข้อมูล</a>
   													<a class="dropdown-item text-1" href="{{url('admin/product/'.$u->id_p.'/edit')}}">แก้ไข</a>
 
-                          <!--  <form  action="{{url('admin/cars/'.$u->id_q)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
-                              <input type="hidden" name="_method" value="DELETE">
-                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                              <button type="submit" title="ลบบทความ" class="dropdown-item text-1 text-danger"><i class="fa fa-times "></i> ลบ</button>
-                            </form> -->
+
   												</div>
   											</div>
 
@@ -130,7 +126,7 @@ $(document).ready(function(){
 
     $.ajax({
             type:'POST',
-            url:'{{url('api/post_status')}}',
+            url:'{{url('api/api_post_status')}}',
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
             data: { "user_id" : user_id },
             success: function(data){

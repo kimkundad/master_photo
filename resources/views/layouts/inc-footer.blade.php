@@ -7,12 +7,12 @@
 
 
 				<ul class="" id="top_links" style="float: none; text-align: center;">
-﻿          <li><a href="{{url('/')}}">ABOUT US</a></li>
-          <li><a href="{{url('/')}}">PRODUCT PRICE</a></li>
-          <li><a href="{{url('/')}}">DELIVERY OPTIONS</a></li>
-          <li><a href="{{url('/')}}">PAYMENT OPTIONS</a></li>
-          <li><a href="{{url('/')}}">TERM OF SERVICES</a></li>
-          <li><a href="{{url('/')}}">CONTACT US</a></li>
+﻿          <li><a href="{{url('/about')}}">ABOUT US</a></li>
+          <li><a href="{{url('/product_price')}}">PRODUCT PRICE</a></li>
+          <li><a href="{{url('/options_derivatives')}}">DELIVERY OPTIONS</a></li>
+          <li><a href="{{url('/payment_option')}}">PAYMENT OPTIONS</a></li>
+          <li><a href="{{url('/terms_conditions')}}">TERM OF SERVICES</a></li>
+          <li><a href="{{url('/contact_master')}}">CONTACT US</a></li>
         </ul>
       </div>
     </div>

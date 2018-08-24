@@ -156,7 +156,12 @@ figure:hover+span {
         @else
 
         <div class="text-center">
-          <a href="{{url('/profile')}}"><img src="{{ Auth::user()->avatar }}" alt="Image" class="rounded-circle">
+					@if(Auth::user()->provider == 'email')
+					<a href="{{url('/profile')}}"><img src="{{url('assets/images/avatar/'.Auth::user()->avatar)}}" alt="Image" class="rounded-circle">
+					@else
+					<a href="{{url('/profile')}}"><img src="{{ Auth::user()->avatar }}" alt="Image" class="rounded-circle">
+					@endif
+
           <h3>{{ Auth::user()->name }}</h3></a>
           <p>
             ยินดีต้อนรับเข้าสู่เว็บไซต์ Master Photo Network
@@ -188,6 +193,7 @@ figure:hover+span {
     </div>
 
     <div class="row">
+
       <div class="col-md-6 col-sm-6 text-center">
         <div class="hover01">
             <a href="#">
@@ -215,7 +221,8 @@ figure:hover+span {
         <p>70% off 5x7 Stationery Flat Cards.</p>
       </div>
 
-
+			@if($arrivals)
+           @foreach($arrivals as $u)
 
       <div class="col-md-4 col-sm-6 text-center">
 
@@ -232,35 +239,10 @@ figure:hover+span {
         </p>
       </div>
 
-      <div class="col-md-4 col-sm-6 text-center">
+			@endforeach
+     @endif
 
-        <div class="hover01">
-          <a href="#">
-            <figure>
-              <img src="{{url('master/assets/images/HPhotobooks.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
 
-      <div class="col-md-4 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="#">
-            <figure>
-              <img src="{{url('master/assets/images/Hframes.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
 
 
     </div>
@@ -280,6 +262,8 @@ figure:hover+span {
 
     <div class="row">
 
+			@if($hot)
+           @foreach($hot as $u)
 
       <div class="col-md-3 col-sm-6 text-center">
 
@@ -296,111 +280,8 @@ figure:hover+span {
         </p>
       </div>
 
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="#">
-            <figure>
-              <img src="{{url('master/assets/images/HPhotobooks.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="#">
-            <figure>
-              <img src="{{url('master/assets/images/Hframes.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="#">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="#">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="#">
-            <figure>
-              <img src="{{url('master/assets/images/HPhotobooks.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="#">
-            <figure>
-              <img src="{{url('master/assets/images/Hframes.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="#">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
+			@endforeach
+		 @endif
 
 
     </div>
@@ -425,6 +306,8 @@ figure:hover+span {
     <div class="row">
 
 
+			@if($hot_new)
+           @foreach($hot_new as $u)
       <div class="col-md-4 col-sm-6 text-center">
 
         <div class="hover01">
@@ -439,36 +322,10 @@ figure:hover+span {
           70% off 5x7 Stationery Flat Cards.
         </p>
       </div>
+			@endforeach
+		 @endif
 
-      <div class="col-md-4 col-sm-6 text-center">
 
-        <div class="hover01">
-          <a href="#">
-            <figure>
-              <img src="{{url('master/assets/images/HPhotobooks.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-4 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="#">
-            <figure>
-              <img src="{{url('master/assets/images/Hframes.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
 
 
 

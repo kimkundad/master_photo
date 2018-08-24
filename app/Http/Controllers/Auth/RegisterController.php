@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -62,6 +63,13 @@ class RegisterController extends Controller
      */
      protected function create(array $data)
      {
+
+       if(Session::has('status_user') == 1){
+         $this->redirectTo = '/shipping';
+        }else{
+          $this->redirectTo = '/';
+        }
+
          $ran = array("1483537975.png","1483556517.png","1483556686.png");
          return User::create([
          'name' => $data['name'],

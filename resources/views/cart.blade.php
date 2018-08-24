@@ -76,45 +76,46 @@ Photo print
               </th>
             </tr>
           </thead>
-          <tbody <?php
-          $sum_img = 0;
-          $total_pay = 0;
-          ?>>
+          <tbody >
+
+            <?php
+              $total_pay = 0;
+              $total_img = 0;
+              $s = 0;
+             ?>
+
+    @foreach(Session::get('cart') as $u)
 
 
-@foreach(Session::get('cart') as $u)
-    <?php $total_img = 0; ?>
-    @foreach(Session::get('cart.data'.$u['data']['list_link'].'.data.image') as $j)
-    <?php
 
-    $total_img += $j['num'];
-    $sum_img += $j['num'];
-    ?>
-    @endforeach
-
-             <tr <?php $total_pay += ($total_img * 120); ?> >
+             <tr>
                <td>
                  <a href="{{url('photo_edit/'.$u['data']['list_link'])}}" target="_blank">
                  <div class="thumb_cart">
-                   <img src="{{url('master/assets/images/USM-11220_PDP_prints_collage_sizing_1140x1140_20160912.jpg')}}" alt="image">
+                   <img src="{{url('assets/image/product/'.$set_img[$s])}}" alt="image">
                  </div>
                  <span class="item_cart">TRADITIONAL SIZES</span>
                  </a>
                </td>
                <td>
-                 {{$total_img}} / Pcs.
+                 {{$u['data'][1]['sum_image']}} / Pcs.
                </td>
                <td>
                  0%
                </td>
                <td>
-                 <strong>฿{{$total_img * 120}}</strong>
+                 <strong>฿{{$u['data'][2]['sum_price']}}</strong>
                </td>
                <td class="options">
                  <a href="#"><i class=" icon-trash"></i></a>
                </td>
              </tr>
 
+             <?php
+              $total_pay += $u['data'][2]['sum_price'];
+              $total_img += $u['data'][1]['sum_image'];
+              $s++;
+              ?>
 
 @endforeach
 
@@ -151,7 +152,7 @@ Photo print
                   Total
                 </td>
                 <td class="text-right">
-                  {{$sum_img}}
+                  {{$total_img}}
                 </td>
               </tr>
               <tr>
@@ -168,7 +169,7 @@ Photo print
                   Summary
                 </td>
                 <td class="text-right">
-                  ฿{{$total_pay}}
+                  ฿ {{$total_pay}}
                 </td>
               </tr>
             </tbody>
@@ -176,9 +177,9 @@ Photo print
 
         </div>
 
-        <a href="#" class="btn btn-submit btn-block" style="height:43px;">NEXT</a>
+        <a href="{{url('shipping')}}" class="btn btn-submit btn-block" style="height:43px;">NEXT</a>
         <br />
-        <a class="btn_full_outline " style="margin-bottom: 30px;" href="#"><i class="icon-right"></i> Continue shopping</a>
+        <a class="btn_full_outline " style="margin-bottom: 30px;" href="{{url('/')}}"><i class="icon-right"></i> Continue shopping</a>
 
 
 

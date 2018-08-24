@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\User;
 use Exception;
+use Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -59,7 +60,12 @@ class SocialAuthController extends Controller
 
     protected function sendSuccessResponse()
     {
-        return redirect()->intended('/');
+      if(Session::has('status_user') == 1){
+       return redirect()->to('/shipping');
+    }else{
+      return redirect()->intended('/');
+    }
+
     }
     protected function sendFailedResponse($msg = null)
     {
@@ -97,6 +103,8 @@ class SocialAuthController extends Controller
 
         // login the user
         Auth::login($user, true);
+
+
 
         return $this->sendSuccessResponse();
     }

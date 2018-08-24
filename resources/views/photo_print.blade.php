@@ -35,39 +35,24 @@ Photo print
         <div class="slider-pro" id="my-slider" style="margin-top: 0px !important;">
           <div class="sp-slides">
 
-            <div class="sp-slide">
-              <img class="sp-image" src="{{url('master/assets/images/bnk48/ac7a07dda4cc55010519e1983bfaa84f.jpg')}}" data-src="{{url('master/assets/images/bnk48/ac7a07dda4cc55010519e1983bfaa84f.jpg')}}" data-src="{{url('master/assets/images/bnk48/ac7a07dda4cc55010519e1983bfaa84f.jpg')}}"/>
-            </div>
+            @if($img_all)
+            @foreach($img_all as $img_u)
 
             <div class="sp-slide">
-                <img class="sp-image" src="{{url('master/assets/images/bnk48/b1c501d0027efe27ca3eb2bbce1b308e.jpg')}}" data-src="{{url('master/assets/images/bnk48/b1c501d0027efe27ca3eb2bbce1b308e.jpg')}}" data-retina="{{url('master/assets/images/bnk48/b1c501d0027efe27ca3eb2bbce1b308e.jpg')}}"/>
+              <img class="sp-image" src="{{url('assets/image/gallery/'.$img_u->image)}}" data-src="{{url('assets/image/gallery/'.$img_u->image)}}" data-src="{{url('assets/image/gallery/'.$img_u->image)}}"/>
             </div>
 
-            <div class="sp-slide">
-              <img class="sp-image" src="{{url('master/assets/images/bnk48/ba11a6d6bb915d3ec72116f4b9b4eeb4.jpg')}}" data-src="{{url('master/assets/images/bnk48/ba11a6d6bb915d3ec72116f4b9b4eeb4.jpg')}}" data-retina="{{url('master/assets/images/bnk48/ba11a6d6bb915d3ec72116f4b9b4eeb4.jpg')}}"/>
-            </div>
-
-            <div class="sp-slide">
-              <img class="sp-image" src="{{url('master/assets/images/bnk48/cfce0b522ac116081d1c98288f4c15f9.jpg')}}" data-src="{{url('master/assets/images/bnk48/cfce0b522ac116081d1c98288f4c15f9.jpg')}}" data-retina="{{url('master/assets/images/bnk48/cfce0b522ac116081d1c98288f4c15f9.jpg')}}"/>
-            </div>
-
-            <div class="sp-slide">
-              <img class="sp-image" src="{{url('master/assets/images/bnk48/d88444d6206b4305377486120d9c0774.jpg')}}" data-src="{{url('master/assets/images/bnk48/d88444d6206b4305377486120d9c0774.jpg')}}" data-retina="{{url('master/assets/images/bnk48/d88444d6206b4305377486120d9c0774.jpg')}}"/>
-            </div>
-
-            <div class="sp-slide">
-              <img class="sp-image" src="{{url('master/assets/images/bnk48/da176da12cd7329faa530d969a66cccf.jpg')}}" data-src="{{url('master/assets/images/bnk48/da176da12cd7329faa530d969a66cccf.jpg')}}" data-retina="{{url('master/assets/images/bnk48/da176da12cd7329faa530d969a66cccf.jpg')}}"/>
-            </div>
+            @endforeach
+            @endif
 
           </div>
 
           <div class="sp-thumbnails">
-            <img class="sp-thumbnail" src="{{url('master/assets/images/bnk48/ac7a07dda4cc55010519e1983bfaa84f.jpg')}}" data-src="{{url('master/assets/images/bnk48/ac7a07dda4cc55010519e1983bfaa84f.jpg')}}" data-retina="{{url('master/assets/images/bnk48/ac7a07dda4cc55010519e1983bfaa84f.jpg')}}"/>
-            <img class="sp-thumbnail" src="{{url('master/assets/images/bnk48/b1c501d0027efe27ca3eb2bbce1b308e.jpg')}}" data-src="{{url('master/assets/images/bnk48/b1c501d0027efe27ca3eb2bbce1b308e.jpg')}}" data-retina="{{url('master/assets/images/bnk48/b1c501d0027efe27ca3eb2bbce1b308e.jpg')}}"/>
-            <img class="sp-thumbnail" src="{{url('master/assets/images/bnk48/ba11a6d6bb915d3ec72116f4b9b4eeb4.jpg')}}" data-src="{{url('master/assets/images/bnk48/ba11a6d6bb915d3ec72116f4b9b4eeb4.jpg')}}" data-retina="{{url('master/assets/images/bnk48/ba11a6d6bb915d3ec72116f4b9b4eeb4.jpg')}}"/>
-            <img class="sp-thumbnail" src="{{url('master/assets/images/bnk48/cfce0b522ac116081d1c98288f4c15f9.jpg')}}" data-src="{{url('master/assets/images/bnk48/cfce0b522ac116081d1c98288f4c15f9.jpg')}}" data-retina="{{url('master/assets/images/bnk48/cfce0b522ac116081d1c98288f4c15f9.jpg')}}"/>
-            <img class="sp-thumbnail" src="{{url('master/assets/images/bnk48/d88444d6206b4305377486120d9c0774.jpg')}}" data-src="{{url('master/assets/images/bnk48/d88444d6206b4305377486120d9c0774.jpg')}}" data-retina="{{url('master/assets/images/bnk48/d88444d6206b4305377486120d9c0774.jpg')}}"/>
-            <img class="sp-thumbnail" src="{{url('master/assets/images/bnk48/da176da12cd7329faa530d969a66cccf.jpg')}}" data-src="{{url('master/assets/images/bnk48/da176da12cd7329faa530d969a66cccf.jpg')}}" data-retina="{{url('master/assets/images/bnk48/da176da12cd7329faa530d969a66cccf.jpg')}}"/>
+            @if($img_all)
+            @foreach($img_all as $img_u)
+            <img class="sp-thumbnail" src="{{url('assets/image/gallery/'.$img_u->image)}}" data-src="{{url('assets/image/gallery/'.$img_u->image)}}" data-retina="{{url('assets/image/gallery/'.$img_u->image)}}"/>
+            @endforeach
+            @endif
           </div>
         </div>
         <br />
@@ -79,32 +64,58 @@ Photo print
 
       <div class="col-md-6 col-sm-6 ">
         <div class="single-ofset">
-          <h3>TRADITIONAL SIZES</h3>
-          <p>ลาลาบ๊อค (lalabox) คือ กล่องภาพความทรงจำ ที่อยู่ในรูปแบบรูปถ่าย “โพลารอยด์” 25 – 50 ใบ บรรจุในกล่องพรี่เมี่ยมสวยงาม เหมาะสำหรับให้เป็นของขวัญ
-            สามารถทำออนไลน์ได้ เพียงเลือกแบบของเรา อัปโหลดรูปภาพจากคอมพิวเตอร์ด้วยตัวคุณ ใช้เวลาเพียงไม่กี่นาที เมื่อคุณพอใจก็สามารถยืนยันสั่งซื้อได้ </p>
+          <h3>{{$objs->pro_name}}</h3>
+          <p>{{$objs->pro_title}}</p>
              <hr />
 
+             @if($option_product)
+             @foreach($option_product as $item)
+
+                 @if($item->id == 2 && $item->options == 1)
+                 <div class="row">
+                   <div class="col-md-6 col-sm-12 ">
+                     <div class="form-group ">
+                        <label>SIZE</label>
+                        <select id="size_photo" class="form-control" name="size_photo">
+                          @foreach($item->options_detail as $item_2)
+                          <option value="{{$item_2->id}}" data-price="{{$item_2->item_price}}">{{$item_2->item_name}} price ฿{{$item_2->item_price}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <br />
+                   </div>
+                 </div>
+                 @endif
+
+                 @if($item->id == 1 && $item->options == 1)
+
+                 <div class="row">
+                   <div class="col-md-12 col-sm-12 " style="padding-right: 5px; ">
 
 
-             <div class="row">
+                     <div class="masonry form-group col-md-12 col-sm-12 " style="padding-right: 0px; padding-left: 0px;">
 
-               <div class="col-md-6 col-sm-12 ">
-                 <div class="form-group ">
-                    <label>SIZE</label>
-                    <select id="size_photo" class="form-control" name="size_photo">
-                      <option value="1">4 x 6 in. price ฿7.0</option>
-                      <option value="2">4 x 5.3 in. price ฿12.5 </option>
-                      <option value="3">5 x 7 in. price ฿14.0 </option>
-                      <option value="4">8 x 8 in. price ฿15.0 </option>
-                      <option value="5">8 x 10 in. price ฿20.05 </option>
-                    </select>
-                  </div>
-                  <br />
+                       @foreach($item->options_detail as $item_2)
+                        <label class="item text-center image-radio" id="radio_get">
+                          <img src="{{url('assets/image/option/'.$item_2->item_image)}}" width="80" />
+                          <input type="radio" id="image_radio" name="image_radio" value="{{$item_2->id}}" />
+                          <i class="icon-check-1 hidden"></i>
+                          <br />
+                          {{$item_2->item_name}}
+                        </label>
+                       @endforeach
+
+                     </div>
+                 </div>
                </div>
 
+                 @endif
+
+             @endforeach
+             @endif
 
 
-               </div>
+
 
 
                <style>
@@ -155,52 +166,7 @@ Photo print
 
 
 
-               <div class="row">
-                 <div class="col-md-12 col-sm-12 " style="padding-right: 5px; ">
 
-
-                   <div class="masonry form-group col-md-12 col-sm-12 " style="padding-right: 0px; padding-left: 0px;">
-
-                      <label class="item text-center image-radio" id="radio_get">
-                        <img src="{{url('master/assets/img/Proto_print_type1.jpg?v3')}}" width="80" />
-                        <input type="radio" id="image_radio" name="image_radio" value="1" />
-                        <i class="icon-check-1 hidden"></i>
-                        <br />
-                        รูปปกติ
-                      </label>
-
-                      <label class="item text-center image-radio" id="radio_get">
-                        <img src="{{url('master/assets/img/Proto_print_type2.jpg?v2')}}" width="80" />
-                        <input type="radio" id="image_radio" name="image_radio" value="2" />
-                        <i class="icon-check-1 hidden"></i>
-                        <br />
-                        ขอบขาว
-                      </label>
-
-
-                      <label class="item text-center image-radio" id="radio_get">
-                        <img src="{{url('master/assets/img/Proto_print_type3.jpg?v2')}}" width="80" />
-                        <input type="radio" id="image_radio" name="image_radio" value="3" />
-                        <i class="icon-check-1 hidden"></i>
-                        <br />
-                        เต็มไฟล์
-                      </label>
-
-
-                      <label class="item text-center image-radio" id="radio_get">
-                        <img src="{{url('master/assets/img/Proto_print_type4.jpg?v2')}}" width="80" />
-                        <input type="radio" id="image_radio" name="image_radio" value="4" />
-                        <i class="icon-check-1 hidden"></i>
-                        <br />
-                        เต็มขอบขาว
-                      </label>
-
-                   </div>
-
-
-               </div>
-
-             </div>
 
 
 
@@ -215,7 +181,7 @@ Photo print
                   <tr class="total">
 
                     <td >
-                    Total Price  <span>฿150</span>
+                    Total Price  ฿<span id="show-price">{{$objs->pro_price}}</span>
                     </td>
                   </tr>
                 </tbody>
@@ -231,9 +197,7 @@ Photo print
              <h4>Product Details</h4>
 
              <ul class="list_ok" style="padding-left:10px;">
-                  รูปโพลารอยด์ของเราพิมพ์ลงบนกระดาษ Luster เนื้อพิเศษ ซึ่งทำให้ได้ภาพที่สีสันสวยงามมีมิติ และรูปภาพของเราเก็บรักษาได้นานกว่า 200 ปี
-                  เราใช้กระดาษเครื่องพิมพ์เครื่องที่ทันสมัยเพื่อให้ได้งานพิมพ์ที่สวยงาม
-                  เราใช้กระดาษเครื่องพิมพ์เครื่องที่ทันสมัยเพื่อให้ได้งานพิมพ์ที่สวยงาม
+                  {{$objs->pro_name_detail}}
                 </ul>
 
               <a type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal">UPLOAD PHOTO</a>
@@ -251,7 +215,8 @@ Photo print
                     <div class="modal-body">
 
                       <div class="row text-center p_20">
-
+                        <div class="col-xs-2 col-sm-2 p_20">
+                        </div>
                         <div class="col-xs-4 col-sm-4 p_20">
                           <a href="#" data-toggle="modal" data-target="#myModal-upload-pc">
                             <img class="img-responsive" src="{{url('master/assets/images/social/icon_pc.png')}}" />
@@ -265,18 +230,15 @@ Photo print
                           <a href="#" class="photoSelect">
                           <img class="img-responsive" src="{{url('master/assets/images/social/fb.png')}}" />
                           </a>
-                          <span id="login-status">Not logged in</span> | <a href="#" id="btnLogin">Login</a> | <a href="#" id="btnLogout">Log out</a>
+                        <!--  <span id="login-status">Not logged in</span> | <a href="#" id="btnLogin">Login</a> | <a href="#" id="btnLogout">Log out</a> -->
                           <p>
                             Facebook user_photos
                           </p>
 
                         </div>
-                        <div class="col-xs-4 col-sm-4 p_20">
-                          <img class="img-responsive" src="{{url('master/assets/images/social/ig.png')}}" />
-                          <p>
-                            instagram
-                          </p>
+                        <div class="col-xs-2 col-sm-2 p_20">
                         </div>
+
 
                       </div>
 
@@ -399,6 +361,14 @@ $(document).ready(function(){
       }
   });
 
+  $("#size_photo").change(function(e){
+
+      var price  = $(this).find(':selected').attr('data-price')
+      console.log(price);
+      document.getElementById("show-price").innerHTML = ""+price;
+
+    });
+
   // sync the input state
   $(".image-radio").on("click", function(e){
       $(".image-radio").removeClass('image-radio-checked');
@@ -410,8 +380,10 @@ $(document).ready(function(){
       console.log(get_value_radio);
       $radio.checked = true;
       e.preventDefault();
+
   });
 });
+
 
 
 Dropzone.options.myDropzone= {
@@ -452,8 +424,18 @@ Dropzone.options.myDropzone= {
 
         //send all the form data along with the files: id="image_radio"
         this.on("sendingmultiple", function(data, xhr, formData) {
-            formData.append("size_photo", jQuery("#size_photo").val()); // value of size_photo input na kub
-            formData.set("product_id", 10); // value of product_id input na kub
+
+          var set_size = jQuery("#size_photo").val();
+          if(set_size == null){
+            set_size = 0;
+          }
+          if(get_value_radio == null){
+            get_value_radio = 0;
+          }
+          console.log(set_size);
+
+            formData.append("size_photo", set_size); // value of size_photo input na kub
+            formData.set("product_id", {{$objs->id_q}}); // value of product_id input na kub
             formData.set("image_radio", get_value_radio); // value of type_image input na kub
           //  console.log(xhr);
         });
@@ -465,8 +447,8 @@ Dropzone.options.myDropzone= {
 
         console.log(xhr.date_set);
         if(response.status == 'success'){
-          $("a.next_to_cart").attr("href", "photo_edit/"+xhr.date_set)
-          $("a.next_to_cart2").attr("href", "photo_edit/"+xhr.date_set)
+          $("a.next_to_cart").attr("href", "../photo_edit/"+xhr.date_set)
+          $("a.next_to_cart2").attr("href", "../photo_edit/"+xhr.date_set)
         //  $('.up_btn_kim').addClass('hidden');
           $("#next_to_cart").removeClass('hidden');
           $("#next_to_cart2").removeClass('hidden');
