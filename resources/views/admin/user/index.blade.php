@@ -69,7 +69,7 @@
                         @if($u->provider == 'email')
                         <img src="{{url('assets/images/avatar/'.$u->avatar)}}" alt="{{$u->name}}" style="height:32px;" class="img-circle">
                         @else
-                        <img src="//{{$u->avatar}}" alt="{{$u->name}}" style="height:32px;" class="img-circle">
+                        <img src="{{$u->avatar}}" alt="{{$u->name}}" style="height:32px;" class="img-circle">
                         @endif
 
                         {{$u->name}}</td>
