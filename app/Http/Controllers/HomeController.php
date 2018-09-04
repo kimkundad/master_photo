@@ -254,7 +254,7 @@ class HomeController extends Controller
           $data_toview['data'] = $package;
           $data_toview['datatime'] = date("d-m-Y H:i:s");
 
-            $email_sender   = 'masterphotonetworkonline@gmail.com';
+            $email_sender   = 'noreply@MasterPhotoNetwork.com';
             $email_pass     = 'Master206';
 
         /*    $email_sender   = 'info@acmeinvestor.com';
@@ -268,7 +268,7 @@ class HomeController extends Controller
 
                         //https://accounts.google.com/DisplayUnlockCaptcha
                         // Setup your gmail mailer
-                        $transport = new \Swift_SmtpTransport('smtp.gmail.com', 465, 'SSL');
+                        $transport = new \Swift_SmtpTransport('mail.masterphotonetwork.com', 587, 'SSL');
                         $transport->setUsername($email_sender);
                         $transport->setPassword($email_pass);
 
