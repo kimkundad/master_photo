@@ -8,6 +8,12 @@ Photo print
 
 <link rel="stylesheet" href="{{url('master/assets/css/dropzone.css')}}">
 
+<style>
+.dropzone.dz-started .dz-message {
+     display: block !important;
+}
+</style>
+
 @stop('stylesheet')
 @section('content')
 
@@ -181,7 +187,7 @@ Photo print
                   <tr class="total">
 
                     <td >
-                    Total Price  ฿<span id="show-price">{{$objs->pro_price}}</span>
+                    Total Price  ฿<span id="show-price" style="color: #777777;">{{$objs->pro_price}}</span>
                     </td>
                   </tr>
                 </tbody>

@@ -34,6 +34,8 @@ Route::get('terms_conditions', 'HomeController@terms_conditions')->name('terms_c
 Route::get('photo_edit/{id}', 'HomeController@photo_edit')->name('photo_edit');
 Route::post('/del_upload_image', 'HomeController@del_upload_image')->name('del_upload_image');
 
+Route::post('/del_cart', 'HomeController@del_cart')->name('del_cart');
+
 Route::post('/add_qty2_photo', 'HomeController@add_qty2_photo')->name('add_qty2_photo');
 
 Route::post('/update_photo_print', 'HomeController@update_photo_print')->name('update_photo_print');
@@ -80,6 +82,7 @@ Route::group(['middleware' => 'admin'], function() {
   Route::post('property_image_del', 'ProductController@property_image_del');
   Route::post('api/api_post_status', 'ProductController@api_post_status');
   Route::resource('admin/photo', 'PhotoController');
-
+  Route::resource('admin/order', 'OrderController');
+  Route::post('api/api_order_status', 'OrderController@api_order_status');
 
 });

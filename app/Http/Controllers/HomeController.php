@@ -32,7 +32,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-    // session()->forget('cart');
+  //   session()->forget('cart');
     // session()->flush();
   //  $request->session()->pull('cart.data2.data.image.image', '1534488467-logo-Isuzu.png');
   //  session()->push('cart.data1.data.image', ['image' => '1534488467-logo-Isuzu.jpg', 'id' => 6]);
@@ -155,6 +155,14 @@ class HomeController extends Controller
     }
 
 
+    public function del_cart(Request $request){
+
+      $ids = $request['ids'];
+      session()->forget('cart.'.$ids);
+      return redirect('/cart');
+    }
+
+
 
     public function add_order(Request $request){
 
@@ -254,7 +262,7 @@ class HomeController extends Controller
           $data_toview['data'] = $package;
           $data_toview['datatime'] = date("d-m-Y H:i:s");
 
-            $email_sender   = 'noreply@MasterPhotoNetwork.com';
+            $email_sender   = 'masterphotonetworkonline@gmail.com';
             $email_pass     = 'Master206';
 
         /*    $email_sender   = 'info@acmeinvestor.com';
@@ -268,7 +276,7 @@ class HomeController extends Controller
 
                         //https://accounts.google.com/DisplayUnlockCaptcha
                         // Setup your gmail mailer
-                        $transport = new \Swift_SmtpTransport('mail.masterphotonetwork.com', 587, 'SSL');
+                        $transport = new \Swift_SmtpTransport('smtp.gmail.com', 465, 'SSL');
                         $transport->setUsername($email_sender);
                         $transport->setPassword($email_pass);
 
@@ -433,11 +441,7 @@ class HomeController extends Controller
     public function cart(){
 
       $set_num_date = count(Session::get('cart'));
-      if($set_num_date == 0){
-        return redirect('/');
-      }else{
-        Session::put('status_user', 1);
-      }
+
 
       $set_img = array();
 
@@ -658,6 +662,8 @@ class HomeController extends Controller
           'id' => $request['product_id'],
           'size_photo' => $request['size_photo'],
           'image_radio' => $request['image_radio'],
+          'image_pro' => $cat->pro_image,
+          'pro_name' => $cat->pro_name,
           'image' => $admins,
           ['status' => 0],
           ['sum_image' => $sum_img],

@@ -107,7 +107,11 @@ Photo print
                  <strong>฿{{$u['data'][2]['sum_price']}}</strong>
                </td>
                <td class="options">
-                 <a href="#"><i class=" icon-trash"></i></a>
+                 <form id="myform-{{$u['data']['id']}}" name="myform-{{$u['data']['id']}}" action="{{ url('del_cart/') }}" method="POST"  style="    margin-bottom: 0em;">
+                   {{ csrf_field() }}
+                   <input type="hidden" value="data{{$u['data']['id']}}" name="ids">
+                 <a href="#" onclick="document.getElementById('myform-{{$u['data']['id']}}').submit(); return false;"><i class=" icon-trash"></i></a>
+                 </form>
                </td>
              </tr>
 

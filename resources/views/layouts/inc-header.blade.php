@@ -77,8 +77,8 @@
                     <ul class="dropdown-menu" id="cart_items" >
 
                       <?php
-                        if(!isset($_SESSION["cart"])){
 
+                          if(!Session::get('cart')){
                         ?>
 
                         <p style="padding:20px;">
@@ -91,15 +91,15 @@
                           $total = 0;
 
                           $i = 1 ;
-                          $cart=$_SESSION['cart'];
-                          foreach($cart as $id=>$item){
-                            $total+=$item['price']
+
+                          foreach(Session::get('cart') as $item){
+                            $total+=$item['data'][2]['sum_price'];
                        ?>
 
                         <li style="padding-left:10px;">
-                            <div class="image"><img src="assets/image/product/<?=$item['image']?>" alt="image"></div>
+                            <div class="image"><img src="{{url('assets/image/product/'.$item['data']['image_pro'])}}" alt="image"></div>
                             <strong>
-                            <a href="#"><?=$i?>. <?=$item['name']?></a>฿<?=$item['price']?>.00 </strong>
+                            <a href="#"><?=$i?>. {{$item['data']['pro_name']}}</a>฿<?=$item['data'][2]['sum_price']?>.00 </strong>
                         </li>
 
                         <?php
@@ -109,11 +109,12 @@
 
                         <li>
                             <div>Total: <span>฿<?=$total?>.00</span></div>
-                            <a href="cart.php" style="float: left;" class="button_drop">Go to cart</a>
-                            <a href="shipping.php" class="button_drop outline">Check out</a>
+                            <a href="{{url('cart')}}" style="float: left;" class="button_drop">Go to cart</a>
+                            <a href="{{url('shipping')}}" class="button_drop outline">Check out</a>
                         </li>
                         <?php
                           }
+
                          ?>
                     </ul>
                 </div><!-- End dropdown-cart-->
