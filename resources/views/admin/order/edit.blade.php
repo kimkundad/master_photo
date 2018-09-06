@@ -37,12 +37,6 @@
 
 
           <div class="row">
-          							<div class="col-md-2 col-lg-2">
-
-
-
-
-          							</div>
 
 
 
@@ -50,7 +44,8 @@
 
 
 
-                        <div class="col-md-8 col-lg-8">
+
+                        <div class="col-md-10 col-md-offset-1" style="margin-bottom:120px;">
 
           							<div class="tabs">
 
@@ -132,7 +127,74 @@
           									</div>
           								</div>
           							</div>
+
+
+
+
+
+
+
+
+                        @if($order_detail)
+                        @foreach($order_detail as $u)
+                        <div class="col-md-6">
+                          <section class="card">
+
+                              <div class="panel-body">
+                              <h4 class="mb-xlg">{{$u->product_name}}</h4>
+
+                              <div class="table-responsive">
+            										<table class="table table-striped mb-none">
+
+            											<tbody>
+            												<tr>
+            													<td>จำนวนรูป</td>
+            													<td>{{$u->sum_image}}</td>
+            												</tr>
+
+                                    <tr>
+            													<td>ราคา</td>
+            													<td>{{$u->sum_price}}</td>
+            												</tr>
+                                    <tr>
+            													<td>size_photo</td>
+            													<td>
+                                        @if($u->order_option)
+                                        {{$u->order_option->item_name}}
+                                        @endif
+                                      </td>
+            												</tr>
+                                    <tr>
+            													<td>type photo print</td>
+            													<td>@if($u->order_option2)
+                                        {{$u->order_option2->item_name}}
+                                        @endif
+                                      </td>
+            												</tr>
+                                    @foreach($u->image_option as $j)
+                                    <tr>
+            													<td><img src="{{url('assets/image/all_image/'.$j->order_image)}}" class="img-responsive" style="height:100px;"/></td>
+            													<td>{{$j->order_image_sum}} pcs.</td>
+            												</tr>
+                                    @endforeach
+
+            											</tbody>
+            										</table>
+            									</div>
+
+                              </div>
+
+
+                          </section>
+                        </div>
+                        @endforeach
+                        @endif
+
+
           						</div>
+
+
+
 
 
 

@@ -97,16 +97,48 @@ class OrderController extends Controller
       $obj = order::find($id);
 
       $order_detail = DB::table('order_details')->select(
-            'order_details.*'
+            'order_details.*',
+            'order_details.id as id_de'
             )
             ->where('order_id', $id)
             ->get();
+
+            foreach($order_detail as $u){
+
+              $order_option = DB::table('option_items')->select(
+                    'option_items.*',
+                    'option_items.id as id_op'
+                    )
+                    ->where('id', $u->size_photo)
+                    ->first();
+
+                    $u->order_option = $order_option;
+
+
+                    $order_option2 = DB::table('option_items')->select(
+                          'option_items.*',
+                          'option_items.id as id_op'
+                          )
+                          ->where('id', $u->image_radio)
+                          ->first();
+                          $u->order_option2 = $order_option2;
+
+              $order_image = DB::table('order_images')->select(
+                    'order_images.*',
+                    'order_images.id as id_img'
+                    )
+                    ->where('order_id_detail', $u->id)
+                    ->get();
+                  $u->image_option = $order_image;
+                //  dd($order_option);
+            }
+          //  dd($order_detail);
 
       $data['datahead'] = "ข้อมูล Order";
 
       $data['objs'] = $obj;
       $data['order_detail'] = $order_detail;
-      dd($order_detail);
+    //  dd($order_detail);
       return view('admin.order.edit', $data);
     }
 
