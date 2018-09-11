@@ -149,7 +149,7 @@
         <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
         <div id="logo" style="margin-top: 5px; margin-bottom: 5px;">
 
-          <a href="index.php"><img src="{{url('master/assets/image/logo-website.png')}}" height="64" style="height: 40px; display:block" class="logo_normal img-responsive"></a>
+          <a href="{{url('/')}}"><img src="{{url('master/assets/image/logo-website.png')}}" height="64" style="height: 40px; display:block" class="logo_normal img-responsive"></a>
 
           <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;"> SIGN IN /<br /> JOIN </a>
 

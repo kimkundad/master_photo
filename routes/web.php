@@ -30,6 +30,7 @@ Route::get('contact_master', 'HomeController@contact_master')->name('contact_mas
 Route::get('payment_option', 'HomeController@payment_option')->name('payment_option');
 Route::get('terms_conditions', 'HomeController@terms_conditions')->name('terms_conditions');
 
+Route::get('product_1', 'HomeController@product_1');
 
 Route::get('photo_edit/{id}', 'HomeController@photo_edit')->name('photo_edit');
 Route::post('/del_upload_image', 'HomeController@del_upload_image')->name('del_upload_image');

@@ -196,7 +196,7 @@ figure:hover+span {
 
       <div class="col-md-6 col-sm-6 text-center">
         <div class="hover01">
-            <a href="#">
+            <a href="{{url('product_1')}}">
               <figure>
                 <img src="{{url('master/assets/images/nn1.jpg')}}" alt="Pic" class="img-responsive">
               </figure>
@@ -211,7 +211,7 @@ figure:hover+span {
 
       <div class="col-md-6 col-sm-6 text-center">
         <div class="hover01">
-          <a href="#">
+          <a href="{{url('product_1')}}">
             <figure>
               <img src="{{url('master/assets/images/nn2.jpg')}}" alt="Pic" class="img-responsive">
             </figure>
@@ -221,7 +221,53 @@ figure:hover+span {
         <p>70% off 5x7 Stationery Flat Cards.</p>
       </div>
 
-			@if($arrivals)
+
+			<div class="col-md-4 col-sm-6 text-center">
+
+        <div class="hover01">
+          <a href="{{url('product_1')}}">
+            <figure>
+              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
+            </figure>
+          </a>
+        </div>
+        <h4>FLAT CARDS</h4>
+        <p>
+          70% off 5x7 Stationery Flat Cards.
+        </p>
+      </div>
+
+      <div class="col-md-4 col-sm-6 text-center">
+
+        <div class="hover01">
+          <a href="{{url('product_1')}}">
+            <figure>
+              <img src="{{url('master/assets/images/HPhotobooks.jpg')}}" alt="Pic" class="img-responsive">
+            </figure>
+          </a>
+        </div>
+        <h4>FLAT CARDS</h4>
+        <p>
+          70% off 5x7 Stationery Flat Cards.
+        </p>
+      </div>
+
+      <div class="col-md-4 col-sm-6 text-center">
+
+        <div class="hover01">
+          <a href="{{url('product_1')}}">
+            <figure>
+              <img src="{{url('master/assets/images/Hframes.jpg')}}" alt="Pic" class="img-responsive">
+            </figure>
+          </a>
+        </div>
+        <h4>FLAT CARDS</h4>
+        <p>
+          70% off 5x7 Stationery Flat Cards.
+        </p>
+      </div>
+
+	<!--		@if($arrivals)
            @foreach($arrivals as $u)
 
       <div class="col-md-4 col-sm-6 text-center">
@@ -240,7 +286,7 @@ figure:hover+span {
       </div>
 
 			@endforeach
-     @endif
+     @endif -->
 
 
 
@@ -249,7 +295,7 @@ figure:hover+span {
 
 
     <p class="text-center add_bottom_30 margin_60">
-      <a href="#" class="btn_1">All Product   </a>
+      <a href="{{url('category/13')}}" class="btn_1">All Product   </a>
     </p>
 
 
@@ -262,7 +308,7 @@ figure:hover+span {
 
     <div class="row">
 
-			@if($hot)
+		<!--	@if($hot)
            @foreach($hot as $u)
 
       <div class="col-md-3 col-sm-6 text-center">
@@ -281,7 +327,69 @@ figure:hover+span {
       </div>
 
 			@endforeach
-		 @endif
+		 @endif -->
+
+
+
+		 <div class="col-md-3 col-sm-6 text-center">
+
+        <div class="hover01">
+          <a href="{{url('product_1')}}">
+            <figure>
+              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
+            </figure>
+          </a>
+        </div>
+        <h4>FLAT CARDS</h4>
+        <p>
+          70% off 5x7 Stationery Flat Cards.
+        </p>
+      </div>
+
+      <div class="col-md-3 col-sm-6 text-center">
+
+        <div class="hover01">
+          <a href="{{url('product_1')}}">
+            <figure>
+              <img src="{{url('master/assets/images/HPhotobooks.jpg')}}" alt="Pic" class="img-responsive">
+            </figure>
+          </a>
+        </div>
+        <h4>FLAT CARDS</h4>
+        <p>
+          70% off 5x7 Stationery Flat Cards.
+        </p>
+      </div>
+
+      <div class="col-md-3 col-sm-6 text-center">
+
+        <div class="hover01">
+          <a href="{{url('product_1')}}">
+            <figure>
+              <img src="{{url('master/assets/images/Hframes.jpg')}}" alt="Pic" class="img-responsive">
+            </figure>
+          </a>
+        </div>
+        <h4>FLAT CARDS</h4>
+        <p>
+          70% off 5x7 Stationery Flat Cards.
+        </p>
+      </div>
+
+      <div class="col-md-3 col-sm-6 text-center">
+
+        <div class="hover01">
+          <a href="{{url('product_1')}}">
+            <figure>
+              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
+            </figure>
+          </a>
+        </div>
+        <h4>FLAT CARDS</h4>
+        <p>
+          70% off 5x7 Stationery Flat Cards.
+        </p>
+      </div>
 
 
     </div>
@@ -290,7 +398,7 @@ figure:hover+span {
 
 
     <p class="text-center add_bottom_30 margin_60">
-      <a href="#" class="btn_1">All Product  </a>
+      <a href="{{url('category/13')}}" class="btn_1">All Product  </a>
     </p>
 
 
@@ -306,7 +414,7 @@ figure:hover+span {
     <div class="row">
 
 
-			@if($hot_new)
+	<!--		@if($hot_new)
            @foreach($hot_new as $u)
       <div class="col-md-4 col-sm-6 text-center">
 
@@ -323,7 +431,68 @@ figure:hover+span {
         </p>
       </div>
 			@endforeach
-		 @endif
+		 @endif -->
+
+
+		 <div class="col-md-3 col-sm-6 text-center">
+
+        <div class="hover01">
+          <a href="{{url('product_1')}}">
+            <figure>
+              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
+            </figure>
+          </a>
+        </div>
+        <h4>FLAT CARDS</h4>
+        <p>
+          70% off 5x7 Stationery Flat Cards.
+        </p>
+      </div>
+
+      <div class="col-md-3 col-sm-6 text-center">
+
+        <div class="hover01">
+          <a href="{{url('product_1')}}">
+            <figure>
+              <img src="{{url('master/assets/images/HPhotobooks.jpg')}}" alt="Pic" class="img-responsive">
+            </figure>
+          </a>
+        </div>
+        <h4>FLAT CARDS</h4>
+        <p>
+          70% off 5x7 Stationery Flat Cards.
+        </p>
+      </div>
+
+      <div class="col-md-3 col-sm-6 text-center">
+
+        <div class="hover01">
+          <a href="{{url('product_1')}}">
+            <figure>
+              <img src="{{url('master/assets/images/Hframes.jpg')}}" alt="Pic" class="img-responsive">
+            </figure>
+          </a>
+        </div>
+        <h4>FLAT CARDS</h4>
+        <p>
+          70% off 5x7 Stationery Flat Cards.
+        </p>
+      </div>
+
+      <div class="col-md-3 col-sm-6 text-center">
+
+        <div class="hover01">
+          <a href="{{url('product_1')}}">
+            <figure>
+              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
+            </figure>
+          </a>
+        </div>
+        <h4>FLAT CARDS</h4>
+        <p>
+          70% off 5x7 Stationery Flat Cards.
+        </p>
+      </div>
 
 
 
@@ -336,7 +505,7 @@ figure:hover+span {
 
 
     <p class="text-center add_bottom_30 margin_60">
-      <a href="#" class="btn_1">All Product  </a>
+      <a href="{{url('category/13')}}" class="btn_1">All Product  </a>
     </p>
 
 

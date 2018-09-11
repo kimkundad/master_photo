@@ -92,6 +92,8 @@ class HomeController extends Controller
       return view('kerry_express');
     }
 
+
+
     public function ems_thai(){
       return view('ems_thai');
     }
@@ -106,6 +108,10 @@ class HomeController extends Controller
     }
     public function terms_conditions(){
       return view('terms_conditions');
+    }
+
+    public function product_1(){
+      return view('product_1');
     }
 
     public function category($id){
