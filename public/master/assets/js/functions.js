@@ -135,8 +135,8 @@ var toggles = document.querySelectorAll(".cmn-toggle-switch");
 	});
 
 	/* Input incrementer*/
-    $(".numbers-row").append('<div class="inc button_inc">+</div><div class="dec button_inc">-</div>');
-    $(".button_inc").on("click", function () {
+  //  $(".numbers-row").append('<div class="inc button_inc">+</div><div class="dec button_inc">-</div>');
+  /*  $(".button_inc").on("click", function () {
 
         var $button = $(this);
         var oldValue = $button.parent().find("input").val();
@@ -152,5 +152,5 @@ var toggles = document.querySelectorAll(".cmn-toggle-switch");
             }
         }
         $button.parent().find("input").val(newVal);
-    });
+    }); */
 });

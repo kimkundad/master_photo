@@ -287,8 +287,8 @@ Photo print
                                 </div>
                                 <div id="mar-top-15">
 
-                                  <button type="submit" id="submit-all" class="up_btn_kim btn btn-next" name="submit_photo"> upload </button>
-                                  <button class="up_btn_kim btn btn-next" id="clear-dropzone">Clear</button>
+                                  <button type="submit" id="submit-all" class="up_btn_kim btn btn-next" name="submit_photo"> Confirm </button>
+                                  <button class="up_btn_kim btn btn-next" id="clear-dropzone">Clear All</button>
 
                                   <a href="{{url('photo_edit/')}}" id="next_to_cart" class="next_to_cart hidden btn btn-next">Go to Cart</a>
                                   <br />
@@ -344,7 +344,7 @@ Photo print
   });
 </script>
 
-<script src="{{url('master/assets/js/dropzone.js')}}"></script>
+<script src="{{url('master/assets/js/dropzone.js')}}?v1"></script>
 
 <script>
 var get_value_radio = 0;
@@ -458,6 +458,11 @@ Dropzone.options.myDropzone= {
         //  $('.up_btn_kim').addClass('hidden');
           $("#next_to_cart").removeClass('hidden');
           $("#next_to_cart2").removeClass('hidden');
+
+
+          setTimeout(function() {
+            window.location.href = "{{url('photo_edit')}}/"+xhr.date_set;
+        }, 1800);
             //alert('55555++');
         }
     },

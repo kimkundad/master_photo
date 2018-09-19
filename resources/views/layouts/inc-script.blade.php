@@ -1,6 +1,6 @@
 <script src="{{url('master/assets/js/jquery-1.11.2.min.js')}}"></script>
 <script src="{{url('master/assets/js/common_scripts_min.js')}}"></script>
-<script src="{{url('master/assets/js/functions.js')}}"></script>
+<script src="{{url('master/assets/js/functions.js')}}?v2"></script>
 <script src="{{url('master/assets/js/jquery.magnific-popup.js')}}"></script>
 <!-- Specific scripts -->
 <script src="{{url('master/assets/js/icheck.js')}}"></script>
@@ -18,6 +18,9 @@
       showSelectedHTML: true
     });
   });
+
+  $(".numbers-row").append('<div class="inc button_inc">+</div><div class="dec button_inc">-</div>');
+
 </script>
 
 <script src="{{url('master/assets/js/jquery.sliderPro.min.js')}}"></script>

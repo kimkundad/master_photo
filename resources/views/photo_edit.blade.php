@@ -72,8 +72,10 @@ Photo print
               <td>
 
                 <form id="cutproduct" class="typePay2 " novalidate="novalidate" action="" method="post"  role="form">
+                  <div class="numbers-row">
+                    <input type="text" value="{{$u['num']}}" id="quantity_{{$u['id']}}" class="qty2 form-control" name="quantity">
+                  </div>
 
-                  <input type="text" value="{{$u['num']}}" style="width: 50px;" class="qty2 form-control" name="quantity">
                   <input type="hidden" class="ids" name="ids" value="{{$ids}}">
                   <input type="hidden" class="num_img" name="num_img" value="{{$u['id']}}">
                   <input type="hidden" class="img_set" name="img_set" value="{{$u['image']}}">
@@ -146,8 +148,7 @@ Photo print
 
       <div class="col-md-4 ">
 
-        <a type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal">UPLOAD PHOTO</a>
-        <br />
+
         <div class="box_style_1">
 
           <table class="table table_summary" >
@@ -255,6 +256,8 @@ Photo print
           </table>
 
         </div>
+        <a type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal">UPLOAD PHOTO</a>
+        <br />
 
         <a href="{{url('cart')}}" class="btn btn-submit btn-block" style="height:43px;">NEXT TO CART</a>
 
@@ -284,7 +287,8 @@ Photo print
               <div class="modal-body">
 
                 <div class="row text-center p_20">
-
+                  <div class="col-xs-2 col-sm-2 p_20">
+                  </div>
                   <div class="col-xs-4 col-sm-4 p_20">
                     <a href="#" data-toggle="modal" data-target="#myModal-upload-pc">
                       <img class="img-responsive" src="{{url('master/assets/images/social/icon_pc.png')}}" />
@@ -298,18 +302,15 @@ Photo print
                     <a href="#" class="photoSelect">
                     <img class="img-responsive" src="{{url('master/assets/images/social/fb.png')}}" />
                     </a>
-                    <span id="login-status">Not logged in</span> | <a href="#" id="btnLogin">Login</a> | <a href="#" id="btnLogout">Log out</a>
+                  <!--  <span id="login-status">Not logged in</span> | <a href="#" id="btnLogin">Login</a> | <a href="#" id="btnLogout">Log out</a> -->
                     <p>
                       Facebook user_photos
                     </p>
 
                   </div>
-                  <div class="col-xs-4 col-sm-4 p_20">
-                    <img class="img-responsive" src="{{url('master/assets/images/social/ig.png')}}" />
-                    <p>
-                      instagram
-                    </p>
+                  <div class="col-xs-2 col-sm-2 p_20">
                   </div>
+
 
                 </div>
 
@@ -329,6 +330,16 @@ Photo print
         font-size: 14px;
         padding: 6px 12px;
         }
+        .dropzone {
+    background: white;
+    border-radius: 5px;
+    border: 2px dashed rgb(0, 135, 247);
+    border-image: none;
+    max-width: 500px;
+    min-height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
         </style>
 
         <!-- Modal -->
@@ -352,8 +363,8 @@ Photo print
                           </div>
                           <div id="mar-top-15">
 
-                            <button type="submit" id="submit-all" class="up_btn_kim btn btn-next" name="submit_photo"> upload </button>
-                            <button class="up_btn_kim btn btn-next" id="clear-dropzone">Clear</button>
+                            <button type="submit" id="submit-all" class="up_btn_kim btn btn-next" name="submit_photo"> Confirm </button>
+                            <button class="up_btn_kim btn btn-next" id="clear-dropzone">Clear All</button>
 
                             <a href="{{url('photo_edit/')}}" id="next_to_cart" class="next_to_cart hidden btn btn-next">Go to Cart</a>
                             <br />
@@ -408,7 +419,17 @@ Photo print
 @if ($message = Session::get('del_success'))
 <script>
 
+
+
+
 $(function() {
+
+
+
+
+
+
+
 setTimeout(function() {
 $.notify({
  // options
@@ -437,7 +458,7 @@ $.notify({
 </script>
  @endif
 
-<script src="{{url('master/assets/js/dropzone.js')}}"></script>
+<script src="{{url('master/assets/js/dropzone.js')}}?v1"></script>
 
 <script>
 
@@ -508,6 +529,163 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 $(document).ready(function(){
+
+
+
+
+  $(".button_inc").on("click", function () {
+  console.log('Textarea Change');
+
+
+      //  var username = $('form#cutproduct input[name=id]').val();
+
+      var $button = $(this);
+      var oldValue = $button.parent().find("input").val();
+
+
+      if ($button.text() == "+") {
+          var newVal = parseFloat(oldValue) + 1;
+
+          console.log(newVal);
+      } else {
+          // Don't allow decrementing below zero
+          if (oldValue > 1) {
+              var newVal = parseFloat(oldValue) - 1;
+          } else {
+              newVal = 1;
+          }
+      }
+       $button.parent().find("input").val(newVal);
+
+      var $form = $(this).closest("form#cutproduct");
+      var formData =  $form.serializeArray();
+    //  var qty2 =  $form.find(".qty2").val();
+      var ids =  $form.find(".ids").val();
+      var num_img =  $form.find(".num_img").val();
+      var img_set =  $form.find(".img_set").val();
+
+
+
+        if(newVal){
+          $.ajax({
+            type: "POST",
+            url: "{{url('add_qty2_photo')}}",
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            data: {
+              qty2 : newVal,
+              ids : ids,
+              num_img : num_img,
+              img_set : img_set
+            },
+            dataType: "json",
+         success: function(json){
+             if(json.status == 1001) {
+
+
+               $.notify({
+                // options
+                icon: 'icon_set_1_icon-76',
+                title: "<h4>เพิ่มจำนวนรูป สำเร็จ</h4> ",
+                message: "ระบบจะคำนวณ ราคา จากจำนวนรูป . "
+               },{
+                // settings
+                type: 'info',
+                delay: 5000,
+                timer: 3000,
+                z_index: 9999,
+                showProgressbar: false,
+                placement: {
+                  from: "bottom",
+                  align: "right"
+                },
+                animate: {
+                  enter: 'animated bounceInUp',
+                  exit: 'animated bounceOutDown'
+                },
+               });
+
+
+               setTimeout(function() {
+                // location.reload();
+
+             }, 1800);
+
+
+
+
+              } else {
+
+
+                $.notify({
+                  // options
+                  icon: '',
+                  title: "<h4>เพิ่มรายการที่ชอบ ไม่สำเร็จ</h4> ",
+                  message: "ท่านต้องทำการ Login เพื่อเข้าสู่ระบบก่อนเพิ่มรายการที่ชอบ . "
+                },{
+                  // settings
+                  type: 'danger',
+                  delay: 5000,
+                  timer: 3000,
+                  z_index: 9999,
+                  showProgressbar: false,
+                  placement: {
+                    from: "bottom",
+                    align: "right"
+                  },
+                  animate: {
+                    enter: 'animated bounceInUp',
+                    exit: 'animated bounceOutDown'
+                  },
+                });
+
+
+
+
+              }
+            },
+            failure: function(errMsg) {
+              alert(errMsg.Msg);
+            }
+          });
+        }else{
+
+
+
+
+          $.notify({
+            // options
+            icon: '',
+            title: "<h4>เพิ่มรายการที่ชอบ ไม่สำเร็จ</h4> ",
+            message: "ท่านต้องทำการ Login เพื่อเข้าสู่ระบบก่อนเพิ่มรายการที่ชอบ . "
+          },{
+            // settings
+            type: 'danger',
+            delay: 5000,
+            timer: 3000,
+            z_index: 9999,
+            showProgressbar: false,
+            placement: {
+              from: "bottom",
+              align: "right"
+            },
+            animate: {
+              enter: 'animated bounceInUp',
+              exit: 'animated bounceOutDown'
+            },
+          });
+
+
+
+
+
+        }
+      });
+
+
+
+
+
+
     $('form input').change(function() {
     console.log('Textarea Change');
 
