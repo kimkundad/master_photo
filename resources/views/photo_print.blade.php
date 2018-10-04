@@ -165,7 +165,7 @@ Photo print
                .dropzone {
                     background: white;
                     border-radius: 5px;
-                    border: 2px dashed rgb(0, 135, 247);
+                    border: 2px dashed rgb(87, 87, 87);
                     border-image: none;
                     max-width: 500px;
                     min-height: 100px;
@@ -174,6 +174,9 @@ Photo print
                 }
                 .dz-message{
                   padding-top: 20px;
+                }
+                .dropzone .dz-preview .dz-remove {
+                    color: #333;
                 }
                </style>
 

@@ -22,6 +22,22 @@ Photo print
   .table {
   margin-bottom: 0px;
   }
+  .dropzone {
+       background: white;
+       border-radius: 5px;
+       border: 2px dashed rgb(87, 87, 87);
+       border-image: none;
+       max-width: 500px;
+       min-height: 100px;
+       margin-left: auto;
+       margin-right: auto;
+   }
+   .dz-message{
+     padding-top: 20px;
+   }
+   .dropzone .dz-preview .dz-remove {
+       color: #333;
+   }
   </style>
 
   <div class="container margin_60">
