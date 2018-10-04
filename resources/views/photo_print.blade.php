@@ -111,7 +111,7 @@ Photo print
 
                        @foreach($item->options_detail as $item_2)
                         <label class="item text-center image-radio" id="radio_get">
-                          <img src="{{url('assets/image/option/'.$item_2->item_image)}}" width="80" style="box-shadow: 0 0 5px 0 rgba(0,0,0,.8);" />
+                          <img src="{{url('assets/image/option/'.$item_2->item_image)}}" width="95" style="box-shadow: 0 0 5px 0 rgba(0,0,0,.8);" />
                           <input type="radio" id="image_radio" name="image_radio" value="{{$item_2->id}}" />
                           <i class="icon-check-1 hidden"></i>
                           <br />
