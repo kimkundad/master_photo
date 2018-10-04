@@ -97,7 +97,15 @@ Photo print
 
                  <div class="row">
                    <div class="col-md-12 col-sm-12 " style="padding-right: 5px; ">
+                     <div class="tooltip_styled tooltip-effect-4">
+                       <div class="tooltip-content">
+       									ลาลาบ๊อค (lalabox) คือ กล่องภาพความทรงจำ ที่อยู่ในรูปแบบรูปถ่าย “โพลารอยด์” 25 – 50 ใบ บรรจุในกล่องพรี่เมี่ยมสวยงาม
 
+       								</div>
+
+                       <p style="margin-bottom:5px;"><b><i class="sl sl-icon-question"></i> สัดส่วนการอัดรูป</b></p>
+
+                     </div>
 
                      <div class="masonry form-group col-md-12 col-sm-12 " style="padding-right: 0px; padding-left: 0px;">
 
