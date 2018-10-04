@@ -73,7 +73,7 @@
 
             <li style=" margin-bottom:-7px;">
                 <div class="dropdown dropdown-cart">
-                    <a href="#" class="dropdown-toggle" style="font-size:20px; color:#666" data-toggle="dropdown"><i class=" icon-basket-1"></i></a>
+                    <a href="#" class="dropdown-toggle" style="font-size:20px; color:#666" data-toggle="dropdown"><i class="fa fa-cart-plus"></i></a>
                     <ul class="dropdown-menu" id="cart_items" >
 
                       <?php

@@ -2,7 +2,7 @@
 <link href="{{url('master/assets/css/base.css')}}" rel="stylesheet">
 <link href="{{url('master/assets/css/style.css')}}" rel="stylesheet">
 <link href="{{url('master/assets/css/menu.css')}}" rel="stylesheet">
-
+<link rel="stylesheet" href="{{url('master/assets/css/icons.css')}}" >
 <link href="{{url('master/assets/css/skins/square/grey.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{url('master/assets/css/slider-pro.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{url('master/assets/slick/slick-theme.css')}}"/>
@@ -37,4 +37,19 @@
   ul#top_links li {
     font-size: 13px;
   }
+  a.btn_full_outline_golf {
+    color: #333;
+    background: 0 0;
+    border: 2px solid #333;
+    padding: 10px 20px;
+    transition: all .3s;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+a.btn_full_outline_golf:hover {
+
+    color: #fff;
+    background:#333
+}
 </style>

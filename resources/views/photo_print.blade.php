@@ -81,7 +81,7 @@ Photo print
                  <div class="row">
                    <div class="col-md-6 col-sm-12 ">
                      <div class="form-group ">
-                        <label>SIZE</label>
+                        <label>Choose size</label>
                         <select id="size_photo" class="form-control" name="size_photo">
                           @foreach($item->options_detail as $item_2)
                           <option value="{{$item_2->id}}" data-price="{{$item_2->item_price}}">{{$item_2->item_name}} price ฿{{$item_2->item_price}}</option>
@@ -187,7 +187,7 @@ Photo print
                   <tr class="total">
 
                     <td >
-                    Total Price  ฿<span id="show-price" style="color: #777777;">{{$objs->pro_price}}</span>
+                    ฿ <span id="show-price" style="color: #777777;">{{number_format((float)$objs->pro_price, 2, '.', '')}}</span>
                     </td>
                   </tr>
                 </tbody>
@@ -206,7 +206,7 @@ Photo print
                   {{$objs->pro_name_detail}}
                 </ul>
 
-              <a type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal">UPLOAD PHOTO</a>
+              <a type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
 
 
               <!-- Modal -->
@@ -295,7 +295,7 @@ Photo print
                                   <div class="hidden" id="next_to_cart2">
                                     <h4 class="text-succes">Upload Image Success!</h4>
                                     <p>
-                                      ทำรายการต่อไป โดยไปที่ <strong><a href="{{url('photo_edit/')}}" class="next_to_cart2">Go to Cart </a></strong> เพื่อชำระสินค้าและบริการ
+                                      ทำรายการต่อไป โดยไปที่ <strong><a href="{{url('photo_edit/')}}" class="next_to_cart2">Confirm </a></strong> เพื่อชำระสินค้าและบริการ
                                     </p>
                                   </div>
 
@@ -344,7 +344,7 @@ Photo print
   });
 </script>
 
-<script src="{{url('master/assets/js/dropzone.js')}}?v1"></script>
+<script src="{{url('master/assets/js/dropzone.js')}}?v1.1"></script>
 
 <script>
 var get_value_radio = 0;
@@ -371,7 +371,7 @@ $(document).ready(function(){
 
       var price  = $(this).find(':selected').attr('data-price')
       console.log(price);
-      document.getElementById("show-price").innerHTML = ""+price;
+      document.getElementById("show-price").innerHTML = ""+parseFloat(price).toFixed( 2 );
 
     });
 

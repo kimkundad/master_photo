@@ -164,6 +164,7 @@ class HomeController extends Controller
     public function del_cart(Request $request){
 
       $ids = $request['ids'];
+    //  dd($ids);
       session()->forget('cart.'.$ids);
       return redirect('/cart');
     }

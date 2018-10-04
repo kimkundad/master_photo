@@ -84,6 +84,8 @@ Photo print
               $s = 0;
              ?>
 
+
+
     @foreach(Session::get('cart') as $u)
 
 
@@ -92,9 +94,9 @@ Photo print
                <td>
                  <a href="{{url('photo_edit/'.$u['data']['list_link'])}}" target="_blank">
                  <div class="thumb_cart">
-                   <img src="{{url('assets/image/product/'.$set_img[$s])}}" alt="image">
+                   <img src="{{url('assets/image/all_image/'.$u['data']['image'][0]['image'])}}" alt="image">
                  </div>
-                 <span class="item_cart">TRADITIONAL SIZES</span>
+                 <span class="item_cart" style="color:#333">{{$u['data']['pro_name']}}</span>
                  </a>
                </td>
                <td>
@@ -104,13 +106,13 @@ Photo print
                  0%
                </td>
                <td>
-                 <strong>฿{{$u['data'][2]['sum_price']}}</strong>
+                 <strong>฿ {{number_format((float)$u['data'][2]['sum_price'], 2, '.', '')}} </strong>
                </td>
                <td class="options">
                  <form id="myform-{{$u['data']['id']}}" name="myform-{{$u['data']['id']}}" action="{{ url('del_cart/') }}" method="POST"  style="    margin-bottom: 0em;">
                    {{ csrf_field() }}
                    <input type="hidden" value="data{{$u['data']['id']}}" name="ids">
-                 <a href="#" onclick="document.getElementById('myform-{{$u['data']['id']}}').submit(); return false;"><i class=" icon-trash"></i></a>
+                 <a href="#" style="color:#333" onclick="document.getElementById('myform-{{$u['data']['id']}}').submit(); return(confirm('Do you want Delete'));"><i class=" icon-trash"></i></a>
                  </form>
                </td>
              </tr>
@@ -134,6 +136,9 @@ Photo print
 
 
       <div class="col-md-4 ">
+        <div class="text-center" style=" text-align: -webkit-center;">
+          <img src="{{url('assets/image/cart_icon.png')}}" alt="CART" class="img-responsive text-center">
+        </div>
 
 
         <div class="box_style_1">
@@ -173,7 +178,7 @@ Photo print
                   Summary
                 </td>
                 <td class="text-right">
-                  ฿ {{$total_pay}}
+                  ฿ {{number_format((float)$total_pay, 2, '.', '')}}
                 </td>
               </tr>
             </tbody>
@@ -181,9 +186,9 @@ Photo print
 
         </div>
 
-        <a href="{{url('shipping')}}" class="btn btn-submit btn-block" style="height:43px;">NEXT</a>
+        <a href="{{url('shipping')}}" class="btn btn-submit btn-block" style="height:43px;">ORDER</a>
         <br />
-        <a class="btn_full_outline " style="margin-bottom: 30px;" href="{{url('/')}}"><i class="icon-right"></i> Continue shopping</a>
+        <a class="btn btn_full_outline_golf btn-block " style="margin-bottom: 30px;" href="{{url('/')}}"> CONTINUE SHOPPING</a>
 
 
 

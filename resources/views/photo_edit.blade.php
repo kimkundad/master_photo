@@ -127,7 +127,7 @@ Photo print
                               <input type="hidden" name="list_link" value="{{Session::get('cart.'.$ids.'.data.list_link')}}">
 
 
-                              <button style="border:none; background: none;" type="submit" title="ลบบทความ" class="dropdown-item text-1 "><i class=" icon-trash"></i></button>
+                              <button style="border:none; background: none; " type="submit" title="ลบบทความ" class="dropdown-item text-1 "><i class=" icon-trash"></i></button>
                             </form>
 
 
@@ -256,10 +256,10 @@ Photo print
           </table>
 
         </div>
-        <a type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal">UPLOAD PHOTO</a>
+        <a type="button" class="btn btn_full_outline_golf btn-block" data-toggle="modal" data-target="#myModal"><i class="fa fa-cart-plus"></i> ADD MORE PHOTO</a>
         <br />
 
-        <a href="{{url('cart')}}" class="btn btn-submit btn-block" style="height:43px;">NEXT TO CART</a>
+        <a href="{{url('cart')}}" class="btn btn-submit btn-block" style="height:43px;"><i class="fa fa-cart-plus"></i> NEXT TO CART</a>
 
 
 
@@ -458,7 +458,7 @@ $.notify({
 </script>
  @endif
 
-<script src="{{url('master/assets/js/dropzone.js')}}?v1"></script>
+<script src="{{url('master/assets/js/dropzone.js')}}?v1.1"></script>
 
 <script>
 
