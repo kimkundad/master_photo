@@ -156,6 +156,11 @@ Photo print
                  top: 0;
                  right: 0;
                }
+               .tooltip-content {
+
+    margin: 0 0 20px -50px;
+
+}
                .image-radio-checked .glyphicon {
                  display: block !important;
                }
