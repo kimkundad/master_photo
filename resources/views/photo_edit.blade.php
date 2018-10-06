@@ -38,6 +38,51 @@ Photo print
    .dropzone .dz-preview .dz-remove {
        color: #333;
    }
+   @media (max-width: 767px){
+     .table.cart-list td:nth-of-type(4):before {
+         content: "Action";
+         font-weight: 700;
+         color: #111;
+     }
+     .table.cart-list td:nth-of-type(3):before {
+    content: "Price";
+    font-weight: 700;
+    color: #111;
+}
+.thumb_cart1 {
+ border: 1px solid #ddd;
+ overflow: hidden;
+ width: 120px;
+ height: 120px;
+ margin-right: 10px;
+ float: none;
+}
+.thumb_cart1 img {
+
+ width: 80px;
+ height: 80px;
+
+
+}
+   }
+
+   .thumb_cart1 {
+    border: 1px solid #ddd;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+
+}
+
+.thumb_cart1 img {
+
+ width: 60px;
+ height: 60px;
+
+
+}
+
   </style>
 
   <div class="container margin_60">
@@ -79,10 +124,12 @@ Photo print
             @foreach(Session::get('cart.'.$ids.'.data.image') as $u)
             <tr>
               <td class="magnific-gallery">
+
                 <a href="{{url('assets/image/all_image/'.$u['image'])}}" data-effect="mfp-zoom-in">
-                <div class="thumb_cart">
-                  <img src="{{url('assets/image/all_image/'.$u['image'])}}" alt="image">
+                <div class="thumb_cart1">
+                  <img src="{{url('assets/image/all_image/'.$u['image'])}}" alt="image" style="padding: 1px; ">
                 </div>
+
                 </a>
               </td>
               <td>

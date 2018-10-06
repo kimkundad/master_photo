@@ -26,6 +26,42 @@ Photo print
   .f1-step .f1-step-icon{
     padding-top: 12px;
   }
+
+  @media (max-width: 767px){
+
+.thumb_cart1 {
+border: 1px solid #ddd;
+overflow: hidden;
+width: 120px;
+height: 120px;
+margin-right: 10px;
+float: none;
+}
+.thumb_cart1 img {
+
+width: 80px;
+height: 80px;
+
+
+}
+  }
+
+  .thumb_cart1 {
+   border: 1px solid #ddd;
+   overflow: hidden;
+   width: 60px;
+   height: 60px;
+   margin-right: 10px;
+   float: left;
+}
+
+.thumb_cart1 img {
+
+width: 60px;
+height: 60px;
+
+
+}
   </style>
 
   <div class="container margin_60">
@@ -93,10 +129,10 @@ Photo print
              <tr>
                <td>
                  <a href="{{url('photo_edit/'.$u['data']['list_link'])}}" target="_blank">
-                 <div class="thumb_cart">
+                 <div class="thumb_cart1">
                    <img src="{{url('assets/image/all_image/'.$u['data']['image'][0]['image'])}}" alt="image">
                  </div>
-                 <span class="item_cart" style="color:#333">{{$u['data']['pro_name']}}</span>
+                 <span class="item_cart" style="color:#333; font-size:13px;">{{$u['data']['pro_name']}}</span>
                  </a>
                </td>
                <td>
