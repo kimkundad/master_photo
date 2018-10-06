@@ -44,6 +44,10 @@ height: 80px;
 
 
 }
+.item_cart{
+    height: 40px;
+}
+
   }
 
   .thumb_cart1 {
