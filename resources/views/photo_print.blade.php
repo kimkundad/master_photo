@@ -158,7 +158,7 @@ Photo print
                }
                .tooltip-content {
 
-    margin: 0 0 20px -50px;
+    margin: 0 0 20px -20px;
 
 }
                .image-radio-checked .glyphicon {
