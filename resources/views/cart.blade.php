@@ -136,7 +136,21 @@ height: 60px;
                  <div class="thumb_cart1">
                    <img src="{{url('assets/image/all_image/'.$u['data']['image'][0]['image'])}}" alt="image">
                  </div>
-                 <span class="item_cart" style="color:#333; font-size:13px;">{{$u['data']['pro_name']}}</span>
+                 <span class="item_cart" style="color:#333; font-size:13px;">{{$u['data']['pro_name']}}
+
+                   @if($option_product)
+                   @foreach($option_product as $item)
+
+                    @foreach($item->options_detail as $item_2)
+
+                      @if($item_2->id == $u['data']['size_photo']))
+                      {{$item_2->item_name}}
+                      @endif
+                    @endforeach
+
+                   @endforeach
+                   @endif
+                 </span>
                  </a>
                </td>
                <td>

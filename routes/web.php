@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/profile', 'HomeController@profile')->name('profile');
   Route::get('/shipping', 'HomeController@shipping')->name('shipping');
   Route::post('/add_order', 'HomeController@add_order')->name('add_order');
-
+  Route::post('/update_profile', 'HomeController@update_profile')->name('update_profile');
 
 
 });

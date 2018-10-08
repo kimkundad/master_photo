@@ -8,6 +8,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Response;
 use Session;
 use Auth;
+use App\User;
 use App\order;
 use App\order_detail;
 use App\order_image;
@@ -340,6 +341,63 @@ class HomeController extends Controller
     }
 
 
+    public function update_profile(Request $request){
+
+      $this->validate($request, [
+           'name' => 'required',
+           'Zip' => 'required',
+           'country' => 'required',
+           'email' => 'required'
+       ]);
+
+       $image = $request->file('image');
+       $id = Auth::user()->id;
+
+       if($image == NULL){
+
+        $package = User::find($id);
+        $package->name = $request['name'];
+        $package->email = $request['email'];
+        $package->phone = $request['phone'];
+        $package->birthday = $request['hbd'];
+        $package->address = $request['address'];
+        $package->country = $request['country'];
+        $package->zipcode = $request['Zip'];
+        $package->save();
+
+       }else{
+
+      $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+
+      $img = Image::make($image->getRealPath());
+      $img->resize(400, 400, function ($constraint) {
+      $constraint->aspectRatio();
+      })->save('assets/images/avatar/'.$input['imagename']);
+
+
+      $package = User::find($id);
+      $package->name = $request['name'];
+      $package->email = $request['email'];
+      $package->phone = $request['phone'];
+      $package->birthday = $request['hbd'];
+      $package->address = $request['address'];
+      $package->country = $request['country'];
+      $package->zipcode = $request['Zip'];
+      $package->avatar = $input['imagename'];
+      $package->save();
+
+       }
+
+
+
+       return redirect(url('profile/'))->with('update_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+
+
+
+
+    }
+
+
 
 
 
@@ -438,14 +496,105 @@ class HomeController extends Controller
         ], 200);
 
 
-    //  return redirect(url('photo_edit/'.$list_link))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+    //  return redirect(url('photo_edit/'.$list_link))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ'); Auth::user()->id
     }
 
     public function profile(){
-      return view('profile');
+
+      $provinces = DB::table('provinces')
+          ->orderBy('id', 'asc')
+          ->get();
+
+      $order = DB::table('orders')
+          ->where('user_id', Auth::user()->id)
+          ->orderBy('id', 'desc')
+          ->get();
+
+          foreach ($order as $u) {
+
+
+
+            $order_detail = DB::table('order_details')->select(
+                'order_details.*'
+                )
+                ->where('order_id', $u->id)
+                ->first();
+
+                $product = DB::table('products')->select(
+                    'products.*'
+                    )
+                    ->where('id', $order_detail->product_id)
+                    ->first();
+            $u->option = $order_detail;
+            $u->product = $product;
+
+
+          }
+
+
+          $option_product = DB::table('option_products')
+              ->orderBy('id', 'desc')
+              ->get();
+
+
+          foreach ($option_product as $obj) {
+
+            $option_data_item = DB::table('option_items')->select(
+                'option_items.*'
+                )
+                ->where('item_option_id', $obj->id)
+                ->get();
+
+            $obj->options_detail = $option_data_item;
+
+          }
+
+
+          if(Auth::user()->country !== null){
+
+            $provinces_1 = DB::table('provinces')
+                ->where('id', Auth::user()->country)
+                ->first();
+
+                $data['province_user'] = $provinces_1->name_in_thai;
+
+          }else{
+
+            $data['province_user'] = "null";
+
+          }
+
+
+
+
+
+      $data['option_product'] = $option_product;
+      $data['provinces'] =  $provinces;
+      $data['order'] = $order;
+
+    //  dd($order);
+
+      return view('profile', $data);
     }
 
     public function cart(){
+
+      $option_product = DB::table('option_products')
+          ->orderBy('id', 'desc')
+          ->get();
+
+
+      foreach ($option_product as $obj) {
+
+        $option_data_item = DB::table('option_items')->select(
+            'option_items.*'
+            )
+            ->where('item_option_id', $obj->id)
+            ->get();
+
+        $obj->options_detail = $option_data_item;
+
+      }
 
       $set_num_date = count(Session::get('cart'));
 
@@ -465,7 +614,7 @@ class HomeController extends Controller
 
       //dd($set_img);
       $data['set_img'] = $set_img;
-
+      $data['option_product'] = $option_product;
       return view('cart', $data);
     }
 
