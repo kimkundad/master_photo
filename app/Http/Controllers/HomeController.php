@@ -57,6 +57,15 @@ class HomeController extends Controller
           ->get();
 
 
+          $slide = DB::table('slide_shows')->select(
+                'slide_shows.*'
+                )
+                ->where('slide_status', 1)
+                ->get();
+
+            $data['slide'] = $slide;
+
+
           $hot_new = DB::table('products')->select(
             'products.*'
             )

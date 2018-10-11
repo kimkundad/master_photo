@@ -52,4 +52,7 @@ a.btn_full_outline_golf:hover {
     color: #fff;
     background:#333
 }
+#social_footer ul li img {
+    height: 30px;
+}
 </style>

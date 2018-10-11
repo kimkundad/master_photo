@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class province extends Model
+class slide_show extends Model
 {
     //
-    protected $table = 'province';
 }

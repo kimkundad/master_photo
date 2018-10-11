@@ -163,5 +163,76 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+        $objs = DB::table('orders')
+            ->select(
+               'orders.*'
+               )
+            ->where('id', $id)
+            ->first();
+
+            $order_detail = DB::table('order_details')->select(
+                  'order_details.*'
+                  )
+                  ->where('order_id', $id)
+                  ->get();
+
+                  foreach($order_detail as $u){
+
+                    $objs_img = DB::table('order_images')
+                      ->select(
+                         'order_images.*'
+                         )
+                      ->where('order_id_detail', $u->id)
+                      ->get();
+
+
+                      foreach($objs_img as $j){
+
+                        $file_path = 'assets/image/all_image/'.$j->order_image;
+                        unlink($file_path);
+
+                      }
+
+                      DB::table('order_images')
+                      ->where('order_id_detail', $u->id)
+                      ->delete();
+
+                      //$u->option[] = $objs_img;
+
+                  }
+
+
+                  DB::table('order_details')
+                  ->where('order_id', $id)
+                  ->delete();
+
+
+                  DB::table('orders')
+                  ->where('id', $id)
+                  ->delete();
+
+                  return redirect(url('admin/order/'))->with('delete','คุณทำการลบอสังหา สำเร็จ');
+
+                //  dd($order_detail);
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

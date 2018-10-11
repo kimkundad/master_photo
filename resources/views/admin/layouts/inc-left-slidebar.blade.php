@@ -58,12 +58,12 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										</a>
 									</li>
 
-                  <li {{ (Request::is('admin/photo*') ? 'class=nav-expanded' : '') }} >
+            <!--      <li {{ (Request::is('admin/photo*') ? 'class=nav-expanded' : '') }} >
 										<a href="{{url('admin/photo/')}}"  >
 											<i class="fa fa-cube" aria-hidden="true"></i>
 											<span>Photo Print</span>
 										</a>
-									</li>
+									</li> -->
 
                   <li {{ (Request::is('admin/option_product*') ? 'class=nav-expanded' : '') }} >
 										<a href="{{url('admin/option_product/')}}"  >
@@ -76,6 +76,14 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										<a href="{{url('admin/order/')}}"  >
 											<i class="fa fa-copy" aria-hidden="true"></i>
 											<span>Order สินค้า</span>
+										</a>
+									</li>
+
+
+                  <li {{ (Request::is('admin/slide*') ? 'class=nav-expanded' : '') }} >
+										<a href="{{url('admin/slide/')}}"  >
+											<i class="fa fa-camera" aria-hidden="true"></i>
+											<span>Slide Show</span>
 										</a>
 									</li>
 

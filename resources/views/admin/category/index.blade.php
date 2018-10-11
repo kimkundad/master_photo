@@ -46,12 +46,7 @@
 
               <div class="panel-body">
 
-                <div class="col-md-12 " style="padding-left: 1px;">
 
-                  <a class="btn btn-primary " href="{{url('admin/category/create')}}" >
-                      <i class="fa fa-plus"></i> เพิ่มหมวดหมู่ใหม่</a>
-                </div>
-                <br><br>
 
 
 
@@ -83,12 +78,12 @@
   												<div class="dropdown-menu" role="menu">
 
   													<a class="dropdown-item text-1" href="{{url('admin/category/'.$u->id_c.'/edit')}}">แก้ไข</a>
-  												<!--	<a class="dropdown-item text-1 text-danger" href="">ลบ</a> -->
+  												<!--	<a class="dropdown-item text-1 text-danger" href="">ลบ</a>
                           <form  action="{{url('admin/category/'.$u->id_c)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
                               <input type="hidden" name="_method" value="DELETE">
                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                               <button type="submit" title="ลบบทความ" class="dropdown-item text-1 text-danger"><i class="fa fa-times "></i> ลบ</button>
-                          </form>
+                          </form> -->
 
   												</div>
   											</div>

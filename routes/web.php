@@ -70,6 +70,12 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'admin'], function() {
+
+  Route::post('admin/delete_user_address/', 'StudentController@delete_user_address');
+  Route::get('admin/edit_user_address/{id}', 'StudentController@edit_user_address');
+  Route::post('post_edit_address/', 'StudentController@post_edit_address');
+  Route::post('post_new_address/', 'StudentController@post_new_address');
+  Route::get('admin/new_user_address/{id}', 'StudentController@new_user_address');
   Route::resource('admin/user', 'StudentController');
   Route::resource('admin/category', 'CategoryController');
   Route::resource('admin/sub_category', 'Sub_categoryController');
@@ -85,5 +91,6 @@ Route::group(['middleware' => 'admin'], function() {
   Route::resource('admin/photo', 'PhotoController');
   Route::resource('admin/order', 'OrderController');
   Route::post('api/api_order_status', 'OrderController@api_order_status');
-
+  Route::resource('admin/slide', 'SlideController');
+  Route::post('api/api_slide_status', 'SlideController@api_slide_status');
 });

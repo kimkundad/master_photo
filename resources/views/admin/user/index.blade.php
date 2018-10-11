@@ -49,7 +49,7 @@
 
 
 
-                <table class="table table-striped" >
+                <table class="table table-bordered table-striped mb-none dataTable " id="datatable-default">
                   <thead>
                     <tr>
                       <th>#ID</th>
@@ -81,7 +81,7 @@
                         <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
 
                         <div class="dropdown-menu" role="menu">
-                          <a class="dropdown-item text-1" href="#">ดูข้อมูล</a>
+                          <a class="dropdown-item text-1" href="{{url('admin/user/'.$u->id)}}">ดูข้อมูล</a>
 
 
                         </div>

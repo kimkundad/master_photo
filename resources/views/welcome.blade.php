@@ -43,24 +43,21 @@ figure:hover+span {
 <div class="slider-pro" id="my-slider">
   <div class="sp-slides">
 
+		@if($slide)
+		@foreach($slide as $slide1)
     <div class="sp-slide">
-      <a href="{{url('/')}}">
-        <img class="sp-image" src="{{url('master/assets/image/slide/TOP454960972P1.jpg')}}" />
+      <a href="{{$slide1->btn_url}}">
+        <img class="sp-image" src="{{url('assets/image/slide/'.$slide1->image_slide)}}" />
       </a>
     </div>
-    <div class="sp-slide">
-      <a href="{{url('/')}}">
-        <img class="sp-image" src="{{url('master/assets/image/slide/kv-homepage-b2b-optimised2.jpg')}}" />
-      </a>
-    </div>
-    <div class="sp-slide">
-      <a href="{{url('/')}}">
-        <img class="sp-image" src="{{url('master/assets/image/slide/1400x570 pixel-01 of DigitalLab.jpg')}}" />
-      </a>
-    </div>
+		@endforeach
+		@endif
+
 
   </div>
 </div>
+
+
 
 
 <main>

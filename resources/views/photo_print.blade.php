@@ -200,12 +200,7 @@ Photo print
                     </td>
 
                   </tr>
-                  <tr class="total">
-
-                    <td >
-                    ฿ <span id="show-price" style="color: #777777;">{{number_format((float)$objs->pro_price, 2, '.', '')}}</span>
-                    </td>
-                  </tr>
+                  
                 </tbody>
               </table>
 
