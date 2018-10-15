@@ -67,16 +67,16 @@
 
           											<fieldset>
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">option name*</label>
+          													<label class="col-md-3 control-label" for="profileFirstName">ชื่อ option*</label>
           													<div class="col-md-8">
           														<input type="text" class="form-control" name="option_name" value="{{ $objs->option_name }}">
           														</div>
           												</div>
 
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">option title*</label>
-          													<div class="col-md-8">
-          														<input type="text" class="form-control" name="option_title" value="{{ $objs->option_title }}">
+          													<label class="col-md-3 control-label" for="profileFirstName">คำอธิบาย option*</label>
+          											      <div class="col-md-8">
+                                      <textarea class="form-control" rows="3" name="option_title" id="textareaDefault">{{ $objs->option_title }}</textarea>
           														</div>
           												</div>
 

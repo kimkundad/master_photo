@@ -194,7 +194,7 @@ class SlideController extends Controller
     public function destroy($id)
     {
         //
-        $objs = DB::table('slide_shows')
+      $objs = DB::table('slide_shows')
       ->select(
          'slide_shows.*'
          )

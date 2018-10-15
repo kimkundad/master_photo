@@ -52,8 +52,8 @@ Shipping | MASTER PHOTO NETWORK
      ?>
 @foreach(Session::get('cart') as $u)
 <?php
- $total_pay += $u['data'][2]['sum_price'];
- $total_img += $u['data'][1]['sum_image'];
+$total_pay += ($u['data'][3]['sum_price']*$u['data'][2]['sum_image']);
+$total_img += $u['data'][2]['sum_image'];
  ?>
 @endforeach
 
@@ -65,7 +65,7 @@ Shipping | MASTER PHOTO NETWORK
 
         <div class="box_style_1 visible-sm visible-xs">
 
-          <table class="table table_summary" >
+          <table class="table table_summary" style="font-size: 14px;">
             <tbody>
 
 
@@ -83,7 +83,7 @@ Shipping | MASTER PHOTO NETWORK
                   Total
                 </td>
                 <td class="text-right">
-                  {{$total_img}}
+                  {{sizeof(Session::get('cart'))}}
                 </td>
               </tr>
               <tr>
@@ -95,12 +95,12 @@ Shipping | MASTER PHOTO NETWORK
                 </td>
               </tr>
 
-              <tr class="total">
+              <tr class="total" style="font-size: 18px;">
                 <td>
                   Summary
                 </td>
-                <td class="text-right">
-                  ฿ {{$total_pay}}
+                <td class="text-right" >
+                  ฿ {{number_format((float)$total_pay, 2, '.', '')}}
                 </td>
               </tr>
             </tbody>
@@ -109,16 +109,16 @@ Shipping | MASTER PHOTO NETWORK
         </div>
 
         <div class="form_title">
-          <h3><strong>1</strong>Your Details</h3>
-          <p>
-            Mussum ipsum cacilds, vidis litro abertis.
+          <h3><strong>1</strong>ข้อมูลผู้สั่งสินค้า</h3>
+          <p style="font-size:14px; margin-top:5px;">
+            เพื่อความสะดวกและความถูกต้องในการส่งสินค้า กรุณากรอกข้อมูลที่ชัดเจน
           </p>
         </div>
         <div class="step">
           <div class="row">
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-                <label>First name</label>
+                <label>ชื่อ-นามสกุล <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" value="{{Auth::user()->name}}" name="firstname_order" value="{{ old('firstname_order')}}">
                 @if ($errors->has('firstname_order'))
                 <p class="text-danger" style="margin-top:10px;">
@@ -130,35 +130,10 @@ Shipping | MASTER PHOTO NETWORK
             </div>
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
-                <label>Last name</label>
-                <input type="text" class="form-control" name="lastname_order" value="{{ old('lastname_order')}}">
-                @if ($errors->has('lastname_order'))
-                <p class="text-danger" style="margin-top:10px;">
-                  {{ $errors->first('lastname_order') }}
-                </p>
-                @endif
-
+                <label>เบอร์โทรศัพท์ <span class="text-danger">*</span></label>
+                <input type="text" name="phone_order" value="{{ old('phone_order')}}" class="form-control">
                 <input type="hidden" class="form-control" name="order_price" value="{{$total_pay}}">
                 <input type="hidden" class="form-control" name="total" value="{{$total_img}}">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 col-sm-6">
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email_order" value="{{Auth::user()->email}}" class="form-control">
-                @if ($errors->has('email_order'))
-                <p class="text-danger" style="margin-top:10px;">
-                  {{ $errors->first('email_order') }}
-                </p>
-                @endif
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-6">
-              <div class="form-group">
-                <label>Telephone</label>
-                <input type="text" name="phone_order" value="{{ old('phone_order')}}" class="form-control">
                 @if ($errors->has('phone_order'))
                 <p class="text-danger" style="margin-top:10px;">
                   {{ $errors->first('phone_order') }}
@@ -166,26 +141,60 @@ Shipping | MASTER PHOTO NETWORK
                 @endif
               </div>
             </div>
+
           </div>
+
 
         </div>
         <!--End step -->
 
 
         <div class="form_title">
-          <h3><strong>2</strong>Billing Address</h3>
-          <p>
-            Mussum ipsum cacilds, vidis litro abertis.
+          <h3><strong>2</strong>ที่อยู่ในการจัดส่ง</h3>
+          <p style="font-size:14px; margin-top:5px;">
+            ที่อยู่ในการออกใบกำกับภาษีใช้ที่อยู่เดียวกับการจัดส่ง
           </p>
         </div>
         <div class="step">
 
           <div class="row">
+
+
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <label>Address </label>
-                <div id="autocomplete-container ">
-								<input id="autocomplete-input" type="text" class="form-control" name="address" placeholder="บ้านเลขที่, ตำบล, อำเภอ" value="{{ old('address')}}">
+
+
+
+
+
+                <label class="image-radio"  id="radio_get" style="font-size:15px;">
+
+                  <input type="checkbox" name="c1" value="1" />
+                  <ins class="iCheck-helper" onclick="myFunction()" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                  <i class="icon-check-1 hidden"></i>
+
+                  ขอใบกำกับภาษี.
+                </label >
+
+
+
+
+
+              </div>
+
+              </div>
+
+
+
+
+
+
+
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <label>ที่อยู่ </label>
+                <div >
+								<input type="text" class="form-control" name="address" placeholder="บ้านเลขที่.." value="{{ old('address')}}">
                 @if ($errors->has('address'))
                 <p class="text-danger" style="margin-top:10px;">
                   {{ $errors->first('address') }}
@@ -197,11 +206,19 @@ Shipping | MASTER PHOTO NETWORK
             </div>
 
           </div>
+
+
+
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label>province</label>
-                <input type="text" name="province" placeholder="จังหวัด" class="form-control" value="{{ old('province')}}">
+                <label>จังหวัด</label>
+
+                <select id="province" name="province" class="form-control " >
+
+                <option value="">- กรุณาเลือกจังหวัด -</option>
+
+                </select>
                 @if ($errors->has('province'))
                 <p class="text-danger" style="margin-top:10px;">
                   {{ $errors->first('province') }}
@@ -212,8 +229,40 @@ Shipping | MASTER PHOTO NETWORK
 
             <div class="col-md-6">
               <div class="form-group">
-                <label>Postal code</label>
-                <input type="text" name="zipcode" placeholder="รหัสไปรษณีย์ " class="form-control" value="{{ old('zipcode')}}">
+                <label>เขต/อำเภอ</label>
+                <select id="amphur" name="amphur" class="form-control " >
+
+                <option value="">- กรุณาเลือกอำเภอ -</option>
+
+                </select>
+                @if ($errors->has('province'))
+                <p class="text-danger" style="margin-top:10px;">
+                  {{ $errors->first('province') }}
+                </p>
+                @endif
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>แขวง/ตำบล</label>
+                <select id="district" name="district" class="form-control " >
+
+                <option value="">- กรุณาเลือกตำบล -</option>
+
+                </select>
+                @if ($errors->has('province'))
+                <p class="text-danger" style="margin-top:10px;">
+                  {{ $errors->first('province') }}
+                </p>
+                @endif
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>รหัสไปรษณีย์</label>
+                <input type="text" id="postcode" name="postcode" placeholder="รหัสไปรษณีย์ " class="form-control" value="{{ old('zipcode')}}">
                 @if ($errors->has('zipcode'))
                 <p class="text-danger" style="margin-top:10px;">
                   {{ $errors->first('zipcode') }}
@@ -222,18 +271,104 @@ Shipping | MASTER PHOTO NETWORK
               </div>
             </div>
           </div>
+
+
+
+
+
+          <div class="body1 row" id="dvPassport" style="display: none">
+            <br />
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <label>ที่อยู่ </label>
+                <div >
+								<input type="text" class="form-control" name="address" placeholder="บ้านเลขที่.." value="{{ old('address')}}">
+                @if ($errors->has('address'))
+                <p class="text-danger" style="margin-top:10px;">
+                  {{ $errors->first('address') }}
+                </p>
+                @endif
+							</div>
+
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>จังหวัด</label>
+
+                <select id="province1" name="province" class="form-control " >
+
+                <option value="">- กรุณาเลือกจังหวัด -</option>
+
+                </select>
+                @if ($errors->has('province'))
+                <p class="text-danger" style="margin-top:10px;">
+                  {{ $errors->first('province') }}
+                </p>
+                @endif
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>เขต/อำเภอ</label>
+                <select id="amphur1" name="amphur" class="form-control " >
+
+                <option value="">- กรุณาเลือกอำเภอ -</option>
+
+                </select>
+                @if ($errors->has('province'))
+                <p class="text-danger" style="margin-top:10px;">
+                  {{ $errors->first('province') }}
+                </p>
+                @endif
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>แขวง/ตำบล</label>
+                <select id="district1" name="district" class="form-control " >
+
+                <option value="">- กรุณาเลือกตำบล -</option>
+
+                </select>
+                @if ($errors->has('province'))
+                <p class="text-danger" style="margin-top:10px;">
+                  {{ $errors->first('province') }}
+                </p>
+                @endif
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>รหัสไปรษณีย์</label>
+                <input type="text" id="postcode1" name="postcode" placeholder="รหัสไปรษณีย์ " class="form-control" value="{{ old('zipcode')}}">
+                @if ($errors->has('zipcode'))
+                <p class="text-danger" style="margin-top:10px;">
+                  {{ $errors->first('zipcode') }}
+                </p>
+                @endif
+              </div>
+            </div>
+
+          </div>
           <!--End row -->
         </div>
         <!--End step -->
 
         <div id="policy">
-          <h4>Cancellation policy</h4>
+          <h4>ข้อตกลงและเงื่อนไข</h4>
           <div class="form-group">
             <label>
               <div class="icheckbox_square-grey" style="position: relative; width: 23px;">
-                <input type="checkbox" name="policy_terms" id="policy_terms" style="position: absolute; opacity: 0;">
-                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-              </div>I accept terms and conditions and general policy.</label>
+
+                <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
+                  <input type="checkbox" name="c1" value="1" style="position: absolute; opacity: 0;">
+                </ins>
+              </div>ฉันยอมรับข้อกำหนดและเงื่อนไขและนโยบายของเว็บไซต์.</label>
               @if ($errors->has('policy_terms'))
               <p class="text-danger" style="margin-top:10px;">
                 {{ $errors->first('policy_terms') }}
@@ -242,6 +377,9 @@ Shipping | MASTER PHOTO NETWORK
           </div>
           <button type="submit" class="btn btn-next">PAYMENT NOW</button>
         </div>
+
+
+
       </div>
       </form>
 
@@ -251,7 +389,7 @@ Shipping | MASTER PHOTO NETWORK
 
         <div class="box_style_1 hidden-sm hidden-xs">
 
-          <table class="table table_summary" >
+          <table class="table table_summary" style="font-size: 14px;">
             <tbody>
 
 
@@ -269,7 +407,7 @@ Shipping | MASTER PHOTO NETWORK
                   Total
                 </td>
                 <td class="text-right">
-                  {{$total_img}}
+                  {{sizeof(Session::get('cart'))}}
                 </td>
               </tr>
               <tr>
@@ -281,12 +419,12 @@ Shipping | MASTER PHOTO NETWORK
                 </td>
               </tr>
 
-              <tr class="total">
+              <tr class="total" style="font-size: 18px;">
                 <td>
                   Summary
                 </td>
-                <td class="text-right">
-                  ฿ {{$total_pay}}
+                <td class="text-right" >
+                ฿ {{number_format((float)$total_pay, 2, '.', '')}}
                 </td>
               </tr>
             </tbody>
@@ -319,6 +457,165 @@ Shipping | MASTER PHOTO NETWORK
 
 @section('scripts')
 
+
+<script>
+
+function myFunction() {
+    var x = document.getElementById("dvPassport");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+
+
+
+
+
+  ;(function( $ ){
+  	$.fn.AutoProvince = function( options ) {
+  		var Setting = $.extend( {
+  			PROVINCE:		'#province', // select div สำหรับรายชื่อจังหวัด
+  			AMPHUR:			'#amphur', // select div สำหรับรายชื่ออำเภอ
+  			DISTRICT:		'#district', // select div สำหรับรายชื่อตำบล
+  			POSTCODE:		'#postcode', // input field สำหรับรายชื่อรหัสไปรษณีย์
+  			arrangeByName:		false // กำหนดให้เรียงตามตัวอักษร
+  		}, options);
+
+  		return this.each(function() {
+  			var xml;
+  			var dataUrl = "{{url('assets/thailand.xml')}}";
+
+
+  			$(function() {
+  				initialize();
+  			});
+
+  			function initialize(){
+  				$.ajax({
+  					type: "GET",
+  					url: dataUrl,
+  					dataType: "xml",
+  					success: function(xmlDoc) {
+  						xml = $(xmlDoc);
+
+  						_loadProvince();
+  						addEventList();
+  					},
+  					error: function() {
+  						console.log("Failed to get xml");
+  					}
+  				});
+  			}
+
+  			function _loadProvince()
+  			{
+  				var list = [];
+  				xml.find('table').each(function(index){
+  					if($(this).attr("name") == Setting.PROVINCE.split("#")[1]){
+  						var PROVINCE_ID = $(this).children().eq(0).text();
+  						var PROVINCE_NAME = $(this).children().eq(2).text();
+  						if(PROVINCE_ID)list.push({id:PROVINCE_ID,name:PROVINCE_NAME});
+
+  					}
+  				});
+  				if(Setting.arrangeByName){
+  					AddToView(list.sort(SortByName),Setting.PROVINCE);
+  				}else{
+  					AddToView(list,Setting.PROVINCE);
+  				}
+  			}
+
+  			function _loadAmphur(PROVINCE_ID_SELECTED)
+  			{
+  				var list = [];
+  				var isFirst = true;
+  				$(Setting.AMPHUR).empty();
+  				xml.find('table').each(function(index){
+  					if($(this).attr("name") == Setting.AMPHUR.split("#")[1]){
+  						var AMPHUR_ID = $(this).children().eq(0).text();
+  						var AMPHUR_NAME = $(this).children().eq(2).text();
+  						var POSTCODE = $(this).children().eq(3).text();
+  						var PROVINCE_ID = $(this).children().eq(5).text();
+  						if(PROVINCE_ID_SELECTED == PROVINCE_ID && AMPHUR_ID){
+  							if(isFirst)_loadDistrict(AMPHUR_ID);
+  							isFirst = false;
+  							list.push({id:AMPHUR_ID,name:AMPHUR_NAME,postcode:POSTCODE});
+  							$(Setting.POSTCODE).val(POSTCODE);
+  						}
+  					}
+  				});
+  				if(Setting.arrangeByName){
+  					AddToView(list.sort(SortByName),Setting.AMPHUR);
+  				}else{
+  					AddToView(list,Setting.AMPHUR);
+  				}
+  			}
+
+  			function _loadDistrict(AMPHUR_ID_SELECTED)
+  			{
+  				var list = [];
+  				$(Setting.DISTRICT).empty();
+  				xml.find('table').each(function(index){
+  					if($(this).attr("name") == Setting.DISTRICT.split("#")[1]){
+  						var DISTRICT_ID = $(this).children().eq(0).text();
+  						var DISTRICT_NAME = $(this).children().eq(2).text();
+  						var AMPHUR_ID = $(this).children().eq(3).text();
+  						if(AMPHUR_ID_SELECTED == AMPHUR_ID && DISTRICT_ID){
+  							list.push({id:DISTRICT_ID,name:DISTRICT_NAME});
+  						}
+  					}
+  				});
+  				if(Setting.arrangeByName){
+  					AddToView(list.sort(SortByName),Setting.DISTRICT);
+  				}else{
+  					AddToView(list,Setting.DISTRICT);
+  				}
+  			}
+
+  			function addEventList(){
+  				$(Setting.PROVINCE).change(function(e) {
+  					var PROVINCE_ID = $(this).val();
+  					_loadAmphur(PROVINCE_ID);
+  				});
+  				$(Setting.AMPHUR).change(function(e) {
+  					var AMPHUR_ID = $(this).val();
+  					$(Setting.POSTCODE).val($(this).find('option:selected').attr("POSTCODE"));
+  					_loadDistrict(AMPHUR_ID);
+  				});
+  			}
+  			function AddToView(list,key){
+  				for (var i = 0;i<list.length;i++) {
+  					if(key != Setting.AMPHUR){
+  						$(key).append("<option value='"+list[i].id+"'>"+list[i].name+"</option>");
+  					}else{
+  						$(key).append("<option value='"+list[i].id+"' POSTCODE='"+list[i].postcode+"'>"+list[i].name+"</option>");
+  					}
+  				}
+  			}
+
+  			function SortByName(a, b){
+  			  var aName = a.name.toLowerCase();
+  			  var bName = b.name.toLowerCase();
+  			  return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+  			}
+  		});
+  	};
+  })( jQuery );
+
+  $('body').AutoProvince({
+    PROVINCE:		'#province', // select div สำหรับรายชื่อจังหวัด
+    AMPHUR:			'#amphur', // select div สำหรับรายชื่ออำเภอ
+    DISTRICT:		'#district', // select div สำหรับรายชื่อตำบล
+    POSTCODE:		'#postcode', // input field สำหรับรายชื่อรหัสไปรษณีย์
+    arrangeByName:		false // กำหนดให้เรียงตามตัวอักษร
+  });
+
+
+</script>
+
 <!-- Google Autocomplete -->
 <script>
   function initAutocomplete() {
@@ -341,7 +638,7 @@ Shipping | MASTER PHOTO NETWORK
 }
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpN7ALbslkRAqQEdaS1Bz0J-Tu7e8rzy8&libraries=places&callback=initAutocomplete"></script>
+
 
 
 @stop('scripts')

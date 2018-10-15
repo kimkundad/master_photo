@@ -254,5 +254,16 @@ class OptionProController extends Controller
     public function destroy($id)
     {
         //
+
+        DB::table('option_items')->select(
+                    'option_items.*'
+                    )
+                    ->where('item_option_id', $id)
+                    ->delete();
+
+                    $obj = option_product::find($id);
+                    $obj->delete();
+                    return redirect(url('admin/option_product/'))->with('delete','คุณทำการลบอสังหา สำเร็จ');
+
     }
 }

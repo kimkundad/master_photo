@@ -1,9 +1,12 @@
 (function() {
 
+
+
+
 	'use strict';
 
 	// basic
-	$("#form").validate({
+	$("#contactForm1").validate({
 		highlight: function( label ) {
 			$(label).closest('.form-group').removeClass('has-success').addClass('has-error');
 		},

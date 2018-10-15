@@ -63,7 +63,7 @@
                       <th>ชื่อสินค้า</th>
                       <th>หมวดหมู่</th>
 
-                      <th>ราคา</th>
+                      <th>ประเภท</th>
                       <th>สถานะ</th>
                       <th>จัดการ</th>
                     </tr>
@@ -75,7 +75,23 @@
 
                       <td>{{$u->pro_name}}</td>
                       <td>{{$u->sub_name}}</td>
-                      <td>{{$u->pro_price}}</td>
+                      <td>
+
+                        @if( $u->pro_status_show == 1)
+                        สินค้าทั่วไป
+                        @endif
+
+                        @if( $u->pro_status_show == 2)
+                        NEW ARRIVALS!
+                        @endif
+                        @if( $u->pro_status_show == 3)
+                        WHAT'S HOT
+                        @endif
+                        @if( $u->pro_status_show == 4)
+                        WHAT'S NEW
+                        @endif
+
+                      </td>
 
                       <td>
                         <div class="switch switch-sm switch-success">
@@ -91,7 +107,7 @@
                         <div class="btn-group flex-wrap">
   												<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
   												<div class="dropdown-menu" role="menu">
-  													<a class="dropdown-item text-1" href="#">ดูข้อมูล</a>
+  												<!--	<a class="dropdown-item text-1" href="#">ดูข้อมูล</a> -->
   													<a class="dropdown-item text-1" href="{{url('admin/product/'.$u->id_p.'/edit')}}">แก้ไข</a>
 
 

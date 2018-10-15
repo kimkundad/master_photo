@@ -92,14 +92,17 @@
 
                           $i = 1 ;
 
+
                           foreach(Session::get('cart') as $item){
-                            $total+=$item['data'][2]['sum_price'];
+
+                            $total+=( $item['data'][3]['sum_price'] * $item['data'][2]['sum_image']);
+                          //  $total=$item['data'][2]['sum_price'];
                        ?>
 
                         <li style="padding-left:10px;">
-                            <div class="image"><img src="{{url('assets/image/product/'.$item['data']['image_pro'])}}" alt="image"></div>
+                            <a href="{{url('photo_edit/'.$item['data']['id'])}}"><div class="image"><img src="{{url('assets/image/product/'.$item['data']['image_pro'])}}" alt="image"></div></a>
                             <strong>
-                            <a href="#"><?=$i?>. {{$item['data']['pro_name']}}</a>฿<?=$item['data'][2]['sum_price']?>.00 </strong>
+                            <a href="{{url('photo_edit/'.$item['data']['id'])}}"><?=$i?>. {{$item['data']['pro_name']}}</a>฿<?=$item['data'][3]['sum_price']?>.00 x {{$item['data'][2]['sum_image']}}</strong>
                         </li>
 
                         <?php
@@ -109,8 +112,8 @@
 
                         <li>
                             <div>Total: <span>฿<?=$total?>.00</span></div>
-                            <a href="{{url('cart')}}" style="float: left;" class="button_drop">Go to cart</a>
-                            <a href="{{url('shipping')}}" class="button_drop outline">Check out</a>
+                            <a href="{{url('cart')}}" style="float: left; margin: 0px 1px 0px 1px;" class="button_drop">Go to cart</a>
+                            <a href="{{url('shipping')}}" style=" margin: 0px 1px 0px 1px;" class="button_drop">Check out</a>
                         </li>
                         <?php
                           }

@@ -67,16 +67,17 @@
 
           											<fieldset>
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">option name*</label>
+          													<label class="col-md-3 control-label" for="profileFirstName">ชื่อ option*</label>
           													<div class="col-md-8">
           														<input type="text" class="form-control" name="option_name" value="{{ old('option_name')}}">
           														</div>
           												</div>
 
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">option title*</label>
+          													<label class="col-md-3 control-label" for="profileFirstName">คำอธิบาย option*</label>
           													<div class="col-md-8">
-          														<input type="text" class="form-control" name="option_title" value="{{ old('option_title')}}">
+
+                                      <textarea class="form-control" rows="3" name="option_title" id="textareaDefault">{{ old('option_title')}}</textarea>
           														</div>
           												</div>
 

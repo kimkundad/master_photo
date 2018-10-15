@@ -132,21 +132,16 @@ height: 60px;
 
              <tr>
                <td>
-                 <a href="{{url('photo_edit/'.$u['data']['list_link'])}}" target="_blank">
+                 <a href="{{url('photo_edit/'.$u['data']['list_link'])}}" >
                  <div class="thumb_cart1">
                    <img src="{{url('assets/image/all_image/'.$u['data']['image'][0]['image'])}}" alt="image">
                  </div>
-                 <span class="item_cart" style="color:#333; font-size:13px;">{{$u['data']['pro_name']}}
+                 <span class="item_cart" style="color:#333; margin-top: 5px; font-size:13px;">{{$u['data']['pro_name']}}
+                   <br />
+                   @if($option_set_pro)
+                   @foreach($option_set_pro as $k)
 
-                   @if($option_product)
-                   @foreach($option_product as $item)
-
-                    @foreach($item->options_detail as $item_2)
-
-                      @if($item_2->id == $u['data']['size_photo']))
-                      {{$item_2->item_name}}
-                      @endif
-                    @endforeach
+                   {{$k->item_name}}<br />
 
                    @endforeach
                    @endif
@@ -154,26 +149,26 @@ height: 60px;
                  </a>
                </td>
                <td>
-                 {{$u['data'][1]['sum_image']}} / Pcs.
+                 1 / Pcs.
                </td>
                <td>
                  0%
                </td>
                <td>
-                 <strong>฿ {{number_format((float)$u['data'][2]['sum_price'], 2, '.', '')}} </strong>
+                 <strong>฿ {{number_format((float)$u['data'][3]['sum_price'], 2, '.', '')*$u['data'][2]['sum_image']}} </strong>
                </td>
                <td class="options">
                  <form id="myform-{{$u['data']['id']}}" name="myform-{{$u['data']['id']}}" action="{{ url('del_cart/') }}" method="POST"  style="    margin-bottom: 0em;">
                    {{ csrf_field() }}
-                   <input type="hidden" value="data{{$u['data']['id']}}" name="ids">
+                   <input type="hidden" value="{{$u['data']['id']}}" name="ids">
                  <a href="#" style="color:#333" onclick="document.getElementById('myform-{{$u['data']['id']}}').submit(); return(confirm('Do you want Delete'));"><i class=" icon-trash"></i></a>
                  </form>
                </td>
              </tr>
 
              <?php
-              $total_pay += $u['data'][2]['sum_price'];
-              $total_img += $u['data'][1]['sum_image'];
+              $total_pay += ($u['data'][3]['sum_price']*$u['data'][2]['sum_image']);
+              $total_img += $u['data'][2]['sum_image'];
               $s++;
               ?>
 
@@ -197,7 +192,7 @@ height: 60px;
 
         <div class="box_style_1">
 
-          <table class="table table_summary" >
+          <table class="table table_summary" style="font-size: 14px;">
             <tbody>
 
 
@@ -215,7 +210,7 @@ height: 60px;
                   Total
                 </td>
                 <td class="text-right">
-                  {{$total_img}}
+                  {{sizeof(Session::get('cart'))}}
                 </td>
               </tr>
               <tr>
@@ -227,7 +222,7 @@ height: 60px;
                 </td>
               </tr>
 
-              <tr class="total">
+              <tr class="total" style="font-size: 18px;">
                 <td>
                   Summary
                 </td>
@@ -235,8 +230,13 @@ height: 60px;
                   ฿ {{number_format((float)$total_pay, 2, '.', '')}}
                 </td>
               </tr>
+
             </tbody>
           </table>
+          <br />
+          <p class="text-danger" style="margin: 0px 0px 0px 5px;">
+             **ราคายังไม่รวมค่าจัดส่ง
+          </p>
 
         </div>
 

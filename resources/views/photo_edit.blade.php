@@ -108,8 +108,9 @@ Photo print
               </th>
 
               <th>
-                Price
+                PRICE
               </th>
+
               <th>
                 Actions
               </th>
@@ -121,7 +122,7 @@ Photo print
 
 
           <!--  {{Session::get('cart.'.$ids.'.data.image.2.image')}} -->
-            @foreach(Session::get('cart.'.$ids.'.data.image') as $u)
+            @foreach(Session::get('cart.'.$id.'.data.image') as $u)
             <tr>
               <td class="magnific-gallery">
 
@@ -139,45 +140,19 @@ Photo print
                     <input type="text" value="{{$u['num']}}" id="quantity_{{$u['id']}}" class="qty2 form-control" name="quantity">
                   </div>
 
-                  <input type="hidden" class="ids" name="ids" value="{{$ids}}">
+                  <input type="hidden" class="ids" name="ids" value="{{$id}}">
                   <input type="hidden" class="num_img" name="num_img" value="{{$u['id']}}">
                   <input type="hidden" class="img_set" name="img_set" value="{{$u['image']}}">
                 </form>
               </td>
               <td >
 
-                @if(Session::get('cart.'.$ids.'.data.size_photo') != 0)
-
-                @if($option_product)
-                @foreach($option_product as $item)
 
 
-
-                  @foreach($item->options_detail as $item_2)
-                  <div class=" @if($item_2->id == Session::get('cart.'.$ids.'.data.size_photo'))
-                    <?php
-                    $total_pay = $item_2->item_price;
-                     ?>
-                  @else
-                  hidden
-                  @endif ">
-                      {{$item_2->item_price}} / 1 pcs.
-                  </div>
-                  @endforeach
+                ฿{{number_format((float)Session::get('cart.'.$id.'.data.3.sum_price'), 2, '.', '')}}
 
 
 
-
-
-                @endforeach
-                @endif
-
-
-                @else
-
-                {{$objs->pro_price}} / 1 pcs.
-
-                @endif
 
               </td>
 
@@ -186,8 +161,8 @@ Photo print
                 <form  action="{{url('del_upload_image')}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
                               <input type="hidden" name="num_image" value="{{$u['id']}}">
-                              <input type="hidden" name="ids" value="{{$ids}}">
-                              <input type="hidden" name="list_link" value="{{Session::get('cart.'.$ids.'.data.list_link')}}">
+                              <input type="hidden" name="ids" value="{{$id}}">
+                              <input type="hidden" name="list_link" value="{{Session::get('cart.'.$id.'.data.list_link')}}">
 
 
                               <button style="border:none; background: none; " type="submit" title="ลบบทความ" class="dropdown-item text-1 "><i class=" icon-trash"></i></button>
@@ -214,103 +189,43 @@ Photo print
 
         <div class="box_style_1">
 
-          <table class="table table_summary" >
+          <table class="table table_summary" style="font-size: 14px;">
             <tbody>
 
+              @if($option_images)
+              @foreach($option_images as $k)
 
-
-              <?php
-              $total_pay = 0;
-               ?>
-
-
-              @if($option_product)
-              @foreach($option_product as $item)
-              <tr>
-                @foreach($item->options_detail as $item_2)
-                <td class="@if($item_2->id == Session::get('cart.'.$ids.'.data.size_photo'))
-                @else
-                hidden
-                @endif">
-
-                    {{$item_2->item_name}}
-
-                </td>
-                @endforeach
-
-                @foreach($item->options_detail as $item_2)
-                <td class=" @if($item_2->id == Session::get('cart.'.$ids.'.data.size_photo'))
-                  <?php
-                  $total_pay = $item_2->item_price;
-                   ?>
-                @else
-                hidden
-                @endif text-right">
-
-
-
-                    ฿ {{$item_2->item_price}} x {{Session::get('cart.'.$ids.'.data.1.sum_image')}}
-
-
-
-                </td>
-                @endforeach
-              </tr>
               <tr>
                 <td>
-
-
-
-                  @foreach($item->options_detail as $item_2)
-                  <div
-                  @if($item_2->id == Session::get('cart.'.$ids.'.data.image_radio'))
-                  class=""
-                  @else
-                  class="hidden"
-                  @endif
-                  >
-                  Type Image
-                  </div>
-                  @endforeach
-
-
+                  {{$k->item_name}}
                 </td>
-                <td class="text-right">
+              <td class="text-right">
+                ฿{{number_format((float)$k->item_price, 2, '.', '')}}
+              </td>
 
-                  @foreach($item->options_detail as $item_2)
-                  <div
-                  @if($item_2->id == Session::get('cart.'.$ids.'.data.image_radio'))
-                  class=""
-                  @else
-                  class="hidden"
-                  @endif
-                  >
-                  {{$item_2->item_name}}
-                  </div>
-                  @endforeach
-
-                </td>
               </tr>
+
               @endforeach
               @endif
 
+              <tr>
+                <td>
+                  จำนวนรูป
+                </td>
+              <td class="text-right">
+                {{Session::get('cart.'.$id.'.data.2.sum_image')}}
+              </td>
 
+              </tr>
 
               <tr>
                 <td>
-                  Total
+                  ราคารวม
                 </td>
-                <td class="text-right">
-                  <?php
-                    $sum_img = 2;
-                //  echo Session::get('cart.'.$ids.'.data.1.sum_image');
-                //  echo Session::get('cart.'.$ids.'.data.size_photo'); {{dd(Session::get('cart'))}}
-                  ?>
+              <td class="text-right">
+                ฿{{number_format((float)Session::get('cart.'.$id.'.data.3.sum_price')*Session::get('cart.'.$id.'.data.2.sum_image'), 2, '.', '')}}
+              </td>
 
-                ฿ {{Session::get('cart.'.$ids.'.data.2.sum_price')}}
-
-
-                </td>
               </tr>
 
 
@@ -319,7 +234,7 @@ Photo print
           </table>
 
         </div>
-        <a type="button" class="btn btn_full_outline_golf btn-block" data-toggle="modal" data-target="#myModal"><i class="fa fa-cart-plus"></i> ADD MORE PHOTO</a>
+        <a type="button" class="btn btn_full_outline_golf btn-block" data-toggle="modal" data-target="#myModal"><i class='sl sl-icon-plus'></i> ADD MORE PHOTO</a>
         <br />
 
         <a href="{{url('cart')}}" class="btn btn-submit btn-block" style="height:43px;"><i class="fa fa-cart-plus"></i> NEXT TO CART</a>
@@ -367,7 +282,7 @@ Photo print
                     </a>
                   <!--  <span id="login-status">Not logged in</span> | <a href="#" id="btnLogin">Login</a> | <a href="#" id="btnLogout">Log out</a> -->
                     <p>
-                      Facebook user_photos
+                      Facebook
                     </p>
 
                   </div>
@@ -396,7 +311,7 @@ Photo print
         .dropzone {
     background: white;
     border-radius: 5px;
-    border: 2px dashed rgb(0, 135, 247);
+    border: 2px dashed rgb(86, 90, 92);
     border-image: none;
     max-width: 500px;
     min-height: 100px;
@@ -425,12 +340,11 @@ Photo print
 
                           </div>
                           <div id="mar-top-15">
-
+                            <button class='add-image up_btn_kim btn btn-next'><i class='sl sl-icon-plus'></i> Add Photos </button>
                             <button type="submit" id="submit-all" class="up_btn_kim btn btn-next" name="submit_photo"> Confirm </button>
                             <button class="up_btn_kim btn btn-next" id="clear-dropzone">Clear All</button>
 
-                            <a href="{{url('photo_edit/')}}" id="next_to_cart" class="next_to_cart hidden btn btn-next">Go to Cart</a>
-                            <br />
+
                             <div class="hidden" id="next_to_cart2">
                               <h4 class="text-succes">Upload Image Success!</h4>
 
@@ -532,11 +446,12 @@ $(document).ready(function(){
       autoProcessQueue: false,
       uploadMultiple: true,
       parallelUploads: 100,
-      maxFiles: 100,
+      maxFiles: 200,
       maxFilesize: 2024,
       dictRemoveFile: 'Remove file',
       acceptedFiles: 'image/*,application/pdf,.psd',
       addRemoveLinks: true,
+      clickable: '.add-image, .dropzone',
       init: function() {
           dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
 
@@ -563,8 +478,8 @@ $(document).ready(function(){
           //send all the form data along with the files: id="image_radio"
           this.on("sendingmultiple", function(data, xhr, formData) {
             //  formData.append("size_photo", jQuery("#size_photo").val()); // value of size_photo input na kub
-              formData.set("ids", '{{$ids}}'); // value of product_id input na kub
-              formData.set("list_link", {{Session::get('cart.'.$ids.'.data.list_link')}}); // value of type_image input na kub
+              formData.set("ids", '{{$id}}'); // value of product_id input na kub
+              formData.set("list_link", {{Session::get('cart.'.$id.'.data.list_link')}}); // value of type_image input na kub
             //  console.log(xhr);
           });
 
@@ -645,27 +560,7 @@ $(document).ready(function(){
              if(json.status == 1001) {
 
 
-               $.notify({
-                // options
-                icon: 'icon_set_1_icon-76',
-                title: "<h4>เพิ่มจำนวนรูป สำเร็จ</h4> ",
-                message: "ระบบจะคำนวณ ราคา จากจำนวนรูป . "
-               },{
-                // settings
-                type: 'info',
-                delay: 5000,
-                timer: 3000,
-                z_index: 9999,
-                showProgressbar: false,
-                placement: {
-                  from: "bottom",
-                  align: "right"
-                },
-                animate: {
-                  enter: 'animated bounceInUp',
-                  exit: 'animated bounceOutDown'
-                },
-               });
+
 
 
                setTimeout(function() {
@@ -781,27 +676,7 @@ $(document).ready(function(){
                if(json.status == 1001) {
 
 
-                 $.notify({
-                  // options
-                  icon: 'icon_set_1_icon-76',
-                  title: "<h4>เพิ่มจำนวนรูป สำเร็จ</h4> ",
-                  message: "ระบบจะคำนวณ ราคา จากจำนวนรูป . "
-                 },{
-                  // settings
-                  type: 'info',
-                  delay: 5000,
-                  timer: 3000,
-                  z_index: 9999,
-                  showProgressbar: false,
-                  placement: {
-                    from: "bottom",
-                    align: "right"
-                  },
-                  animate: {
-                    enter: 'animated bounceInUp',
-                    exit: 'animated bounceOutDown'
-                  },
-                 });
+
 
 
                  setTimeout(function() {
@@ -815,27 +690,7 @@ $(document).ready(function(){
                 } else {
 
 
-                  $.notify({
-                    // options
-                    icon: '',
-                    title: "<h4>เพิ่มรายการที่ชอบ ไม่สำเร็จ</h4> ",
-                    message: "ท่านต้องทำการ Login เพื่อเข้าสู่ระบบก่อนเพิ่มรายการที่ชอบ . "
-                  },{
-                    // settings
-                    type: 'danger',
-                    delay: 5000,
-                    timer: 3000,
-                    z_index: 9999,
-                    showProgressbar: false,
-                    placement: {
-                      from: "bottom",
-                      align: "right"
-                    },
-                    animate: {
-                      enter: 'animated bounceInUp',
-                      exit: 'animated bounceOutDown'
-                    },
-                  });
+
 
 
 
@@ -851,27 +706,6 @@ $(document).ready(function(){
 
 
 
-            $.notify({
-              // options
-              icon: '',
-              title: "<h4>เพิ่มรายการที่ชอบ ไม่สำเร็จ</h4> ",
-              message: "ท่านต้องทำการ Login เพื่อเข้าสู่ระบบก่อนเพิ่มรายการที่ชอบ . "
-            },{
-              // settings
-              type: 'danger',
-              delay: 5000,
-              timer: 3000,
-              z_index: 9999,
-              showProgressbar: false,
-              placement: {
-                from: "bottom",
-                align: "right"
-              },
-              animate: {
-                enter: 'animated bounceInUp',
-                exit: 'animated bounceOutDown'
-              },
-            });
 
 
 

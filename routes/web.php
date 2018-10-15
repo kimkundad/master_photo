@@ -48,6 +48,9 @@ Route::get('/cart', 'HomeController@cart')->name('cart');
 Route::post('/upload_image', 'HomeController@upload_image')->name('upload_image');
 Route::post('/images_delete', 'HomeController@images_delete')->name('images_delete');
 
+
+Route::post('update_product_option', 'HomeController@update_product_option');
+
 Route::get('payment/{id}', 'HomeController@payment')->name('payment');
 Route::post('paypal', 'PaymentController@payWithpaypal')->name('payWithpaypal');
 Route::get('status', 'PaymentController@getPaymentStatus');

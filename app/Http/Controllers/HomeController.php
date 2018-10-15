@@ -34,7 +34,7 @@ class HomeController extends Controller
     public function index()
     {
   //   session()->forget('cart');
-    // session()->flush();
+  //   session()->flush();
   //  $request->session()->pull('cart.data2.data.image.image', '1534488467-logo-Isuzu.png');
   //  session()->push('cart.data1.data.image', ['image' => '1534488467-logo-Isuzu.jpg', 'id' => 6]);
   //  $image = Session::get('cart.'.$ids.'.data.image.'.$num.'.image');
@@ -160,6 +160,10 @@ class HomeController extends Controller
 
 
     public function shipping(){
+
+
+
+
       $set_num_date = count(Session::get('cart'));
       if($set_num_date == 0){
         return redirect('/');
@@ -174,7 +178,20 @@ class HomeController extends Controller
     public function del_cart(Request $request){
 
       $ids = $request['ids'];
-    //  dd($ids);
+
+      $get_all_image = [];
+
+      foreach(Session::get('cart.'.$ids.'.data.image') as $u){
+
+      //  $get_all_image[] = $u['image'];
+        $file_path = 'assets/image/all_image/'.$u['image'];
+        unlink($file_path);
+
+      }
+
+
+
+    //  dd($get_all_image);
       session()->forget('cart.'.$ids);
       return redirect('/cart');
     }
@@ -182,6 +199,9 @@ class HomeController extends Controller
 
 
     public function add_order(Request $request){
+
+        $c1 =$request['c1'];
+        dd($c1);
 
         $this->validate($request, [
              'firstname_order' => 'required',
@@ -431,19 +451,20 @@ class HomeController extends Controller
 
       $v1 = Session::get('cart.'.$ids.'.data.image.'.$num_img.'.num');
       $v2 = $qty2;
-      $v3 = Session::get('cart.'.$ids.'.data.1.sum_image');
+      $v3 = Session::get('cart.'.$ids.'.data.2.sum_image');
 
         $sum_var = $v2 - $v1;
         //dd($v2 - $v1);
         $v4 = $v3 + $sum_var;
-        session()->put('cart.'.$ids.'.data.1', ['sum_image' => $v4]);
+        session()->put('cart.'.$ids.'.data.2', ['sum_image' => $v4]);
 
-        if(Session::get('cart.'.$ids.'.data.size_photo') == 0){
+      /*  if(Session::get('cart.'.$ids.'.data.size_photo') == 0){
           $total_money_ses = ($cat->pro_price * Session::get('cart.'.$ids.'.data.1.sum_image'));
         }else{
           $total_money_ses = ($item->item_price * Session::get('cart.'.$ids.'.data.1.sum_image'));
         }
-        session()->put('cart.'.$ids.'.data.2', ['sum_price' => $total_money_ses]);
+
+        session()->put('cart.'.$ids.'.data.2', ['sum_price' => $total_money_ses]); */
 
       $data = ['image' => $img_set, 'id' => $num_img, 'num' => $qty2];
       session()->put('cart.'.$ids.'.data.image.'.$num_img.'', $data);
@@ -492,13 +513,13 @@ class HomeController extends Controller
         ->where('option_items.id', Session::get('cart.'.$ids.'.data.size_photo'))
         ->first();
 
-        if(Session::get('cart.'.$ids.'.data.size_photo') == 0){
+      /*  if(Session::get('cart.'.$ids.'.data.size_photo') == 0){
           $total_money_ses = ($cat->pro_price * Session::get('cart.'.$ids.'.data.1.sum_image'));
         }else{
           $total_money_ses = ($item->item_price * Session::get('cart.'.$ids.'.data.1.sum_image'));
         }
 
-        session()->put('cart.'.$ids.'.data.2', ['sum_price' => $total_money_ses]);
+        session()->put('cart.'.$ids.'.data.2', ['sum_price' => $total_money_ses]); */
 
       return Response::json([
             'status' => 'success'
@@ -588,27 +609,16 @@ class HomeController extends Controller
 
     public function cart(){
 
-      $option_product = DB::table('option_products')
-          ->orderBy('id', 'desc')
-          ->get();
 
 
-      foreach ($option_product as $obj) {
+      //dd(Session::get('cart'));
 
-        $option_data_item = DB::table('option_items')->select(
-            'option_items.*'
-            )
-            ->where('item_option_id', $obj->id)
-            ->get();
-
-        $obj->options_detail = $option_data_item;
-
-      }
 
       $set_num_date = count(Session::get('cart'));
 
 
       $set_img = array();
+      $option_set_pro = [];
 
       foreach(Session::get('cart') as $u){
 
@@ -618,16 +628,26 @@ class HomeController extends Controller
           ->where('products.id', $u['data']['id'])
           ->first();
 
+          $option_product = DB::table('option_items')->select(
+            'option_items.*'
+            )
+            ->whereIn('id', Session::get('cart.'.$u['data']['id'].'.data.0.size_photo'))
+            ->get();
+
+        $option_set_pro = $option_product;
         $set_img[] = $cat->pro_image;
       }
 
-      //dd($set_img);
+    //  dd($option_set_pro);
       $data['set_img'] = $set_img;
-      $data['option_product'] = $option_product;
+      $data['option_set_pro'] = $option_set_pro;
       return view('cart', $data);
     }
 
     public function photo_print($id){
+
+
+  //    dd(Session::get('cart'));
 
       $img_all = DB::table('galleries')->select(
           'galleries.*'
@@ -635,32 +655,38 @@ class HomeController extends Controller
           ->where('pro_id', $id)
           ->get();
 
-          $option_product = DB::table('option_products')
-              ->orderBy('id', 'desc')
+
+          $option_product = DB::table('product_items')->select(
+              'product_items.*'
+              )
+              ->where('product_set_id', $id)
               ->get();
 
+              foreach ($option_product as $objd) {
 
-          foreach ($option_product as $obj) {
+          $options = DB::table('option_products')
+              ->where('id', $objd->option_set_id)
+              ->first();
+
+
+
 
             $option_data_item = DB::table('option_items')->select(
                 'option_items.*'
                 )
-                ->where('item_option_id', $obj->id)
+                ->where('item_option_id', $options->id)
                 ->get();
 
-            $options = DB::table('product_items')->select(
-                'product_items.*'
-                )
-                ->where('product_set_id', $id)
-                ->where('option_set_id', $obj->id)
-                ->count();
+                $options->opt = $option_data_item;
 
-            $obj->options = $options;
-            $obj->options_detail = $option_data_item;
 
-          }
 
-          //dd($option_product);
+            $objd->options_detail = $options;
+
+
+        }
+
+      //  dd($option_product);
 
           $cat = DB::table('products')->select(
             'products.*',
@@ -672,7 +698,15 @@ class HomeController extends Controller
             ->where('products.id', $id)
             ->first();
 
+            if(Session::get('cart.'.$id) != null){
+              $option_set = 1;
+            }else{
+              $option_set = 0;
+            }
+
+
             $data['objs'] = $cat;
+            $data['option_set'] = $option_set;
             $data['option_product'] = $option_product;
             $data['img_all'] = $img_all;
 
@@ -682,25 +716,16 @@ class HomeController extends Controller
 
     public function photo_edit($id){
 
+    //  dd(Session::get('cart'));
 
 
-      $option_product = DB::table('option_products')
-          ->orderBy('id', 'desc')
-          ->get();
+      $get_price = DB::table('option_items')->select(
+        'option_items.*'
+        )
+        ->whereIn('id', Session::get('cart.'.$id.'.data.0.size_photo'))
+        ->get();
 
-
-      foreach ($option_product as $obj) {
-
-        $option_data_item = DB::table('option_items')->select(
-            'option_items.*'
-            )
-            ->where('item_option_id', $obj->id)
-            ->get();
-
-        $obj->options_detail = $option_data_item;
-
-      }
-      //dd($option_product);
+    //  dd(Session::get('cart'));
 
 
       $set_num_date = count(Session::get('cart'));
@@ -712,18 +737,19 @@ class HomeController extends Controller
       $cat = DB::table('products')->select(
         'products.*'
         )
-        ->where('products.id', Session::get('cart.'.$ids.'.data.id'))
+        ->where('products.id', Session::get('cart.'.$id.'.data.id'))
         ->first();
 
       //  dd($cat);
 
 
     //  session()->push('cart.data1.data.image', ['image' => '1534488467-logo-Isuzu.jpg', 'id' => 6]);
-      session()->put('cart.'.$ids.'.data.0', ['status' => 1]);
+      session()->put('cart.'.$id.'.data.1', ['status' => 1]);
       $data['id'] = $id;
       $data['objs'] = $cat;
-      $data['set_cart'] = $ids;
-      $data['option_product'] = $option_product;
+      $data['set_cart'] = $id;
+      $data['option_images'] = $get_price;
+    //  dd($get_price);
       return view('photo_edit', $data);
     }
 
@@ -747,15 +773,17 @@ class HomeController extends Controller
           ->where('option_items.id', Session::get('cart.'.$ids.'.data.size_photo'))
           ->first();
 
-          if(Session::get('cart.'.$ids.'.data.size_photo') == 0){
+
+        /*  if(Session::get('cart.'.$ids.'.data.size_photo') == 0){
             $total_money_ses = $cat->pro_price * (Session::get('cart.'.$ids.'.data.1.sum_image') - $v1);
           }else{
             $total_money_ses = $item->item_price * (Session::get('cart.'.$ids.'.data.1.sum_image') - $v1);
-          }
+          }*/
 
-          session()->put('cart.'.$ids.'.data.2', ['sum_price' => $total_money_ses]);
-          $v3 = Session::get('cart.'.$ids.'.data.1.sum_image');
-          session()->put('cart.'.$ids.'.data.1', ['sum_image' => ($v3-$v1)]);
+
+        //  session()->put('cart.'.$ids.'.data.2', ['sum_price' => $total_money_ses]);
+          $v3 = Session::get('cart.'.$ids.'.data.2.sum_image');
+          session()->put('cart.'.$ids.'.data.2', ['sum_image' => ($v3-$v1)]);
 
 
 
@@ -771,15 +799,56 @@ class HomeController extends Controller
       return redirect(url('photo_edit/'.$list_link))->with('del_success','คุณทำการเพิ่มอสังหา สำเร็จ');
     }
 
+
+    public function update_product_option(Request $request){
+
+      $this->validate($request, [
+             'size_photo' => 'required',
+             'product_id' => 'required'
+         ]);
+
+
+      $size_photo = $request['size_photo'];
+
+
+      $cat = DB::table('products')->select(
+        'products.*'
+        )
+        ->where('products.id', $request['product_id'])
+        ->first();
+
+        $get_price = DB::table('option_items')->select(
+          'option_items.*'
+          )
+          ->whereIn('id', $size_photo)
+          ->sum('item_price');
+
+        //  session()->put('cart.'.$request['product_id'].'.data.size_photo');
+           session()->put('cart.'.$request['product_id'].'.data.0', ['size_photo' => $size_photo]);
+
+           session()->put('cart.'.$request['product_id'].'.data.3', ['sum_price' => $get_price]);
+        //  session()->push('cart.'.$request['product_id'].'.data.2', ['sum_price' => $get_price]);
+        //  dd(Session::get('cart.'.$request['product_id']));
+
+
+          return Response::json([
+              'status' => 'success'
+          ], 200);
+
+    }
+
     public function upload_image(Request $request){
 
       $gallary = $request->file('file');
-    //  dd($gallary);
+      $exp = array();
+      $size_photo = $request['size_photo'];
+      $path1 = explode(",", $size_photo);
+      $exp = array_merge($exp, $path1);
+    //  dd($exp);
 
         $this->validate($request, [
                'size_photo' => 'required',
-               'product_id' => 'required',
-               'image_radio' => 'required'
+               'product_id' => 'required'
            ]);
 
 
@@ -791,17 +860,12 @@ class HomeController extends Controller
             ->where('products.id', $request['product_id'])
             ->first();
 
-            $item = DB::table('option_items')->select(
-              'option_items.*'
-              )
-              ->where('option_items.id', $request['size_photo'])
-              ->first();
 
-          if($request['size_photo'] == 0){
-            $total_money_ses = ($cat->pro_price * $sum_img);
-          }else{
-            $total_money_ses = ($item->item_price * $sum_img);
-          }
+              $get_price = DB::table('option_items')->select(
+                'option_items.*'
+                )
+                ->whereIn('id', $exp)
+                ->sum('item_price');
 
 
          if (sizeof($gallary) > 0) {
@@ -825,23 +889,25 @@ class HomeController extends Controller
 
         $item = [
           'id' => $request['product_id'],
-          'size_photo' => $request['size_photo'],
-          'image_radio' => $request['image_radio'],
+          ['size_photo' => $exp],
           'image_pro' => $cat->pro_image,
           'pro_name' => $cat->pro_name,
           'image' => $admins,
           ['status' => 0],
           ['sum_image' => $sum_img],
-          ['sum_price' => $total_money_ses],
-          'list_link' => $data_url
+          ['sum_price' => $get_price],
+          'list_link' => $request['product_id']
         ];
 
 
+        //dd($item);
 
-        Session::put('cart.'.$set_num_date, ['data' => $item]);
+
+
+        Session::put('cart.'.$request['product_id'], ['data' => $item]);
 
         return Response::json([
-              'date_set' => $data_url,
+              'date_set' => $request['product_id'],
               'status' => 'success'
           ], 200);
 

@@ -10,7 +10,7 @@ Photo print
 
 <style>
 .dropzone.dz-started .dz-message {
-     display: block !important;
+
 }
 </style>
 
@@ -73,50 +73,58 @@ Photo print
           <h3>{{$objs->pro_name}}</h3>
           <p>{{$objs->pro_title}}</p>
              <hr />
-
+             <form id="contactForm1"  >
              @if($option_product)
+             <div style="display:none">
+               {{$s = 0}}
+             </div>
              @foreach($option_product as $item)
 
-                 @if($item->id == 2 && $item->options == 1)
+                 @if($item->options_detail->option_type == 1)
                  <div class="row">
                    <div class="col-md-6 col-sm-12 ">
                      <div class="form-group ">
-                        <label>Choose size</label>
-                        <select id="size_photo" class="form-control" name="size_photo">
-                          @foreach($item->options_detail as $item_2)
-                          <option value="{{$item_2->id}}" data-price="{{$item_2->item_price}}">{{$item_2->item_name}} price ฿{{$item_2->item_price}}</option>
+                       <div class="tooltip_styled tooltip-effect-4">
+                         <div class="tooltip-content">
+                           {{$item->options_detail->option_title}}
+                         </div>
+
+                         <p style="margin-bottom:5px;"><b><i class="sl sl-icon-question"></i> {{$item->options_detail->option_name}}</b></p>
+
+                       </div>
+                        <select id="size_photo{{$s}}" class="form-control" name="option_number[]" required>
+                          @foreach($item->options_detail->opt as $item_2)
+                          <option value="{{$item_2->id}}" >{{$item_2->item_name}} </option>
                           @endforeach
                         </select>
                       </div>
                       <br />
                    </div>
                  </div>
-                 @endif
-
-                 @if($item->id == 1 && $item->options == 1)
+                 @else
 
                  <div class="row">
                    <div class="col-md-12 col-sm-12 " style="padding-right: 5px; ">
                      <div class="tooltip_styled tooltip-effect-4">
                        <div class="tooltip-content">
-       									ลาลาบ๊อค (lalabox) คือ กล่องภาพความทรงจำ ที่อยู่ในรูปแบบรูปถ่าย “โพลารอยด์” 25 – 50 ใบ บรรจุในกล่องพรี่เมี่ยมสวยงาม
+       									{{$item->options_detail->option_title}}
 
        								</div>
 
-                       <p style="margin-bottom:5px;"><b><i class="sl sl-icon-question"></i> สัดส่วนการอัดรูป</b></p>
+                       <p style="margin-bottom:5px;"><b><i class="sl sl-icon-question"></i> {{$item->options_detail->option_name}}</b></p>
 
                      </div>
 
-                     <div class="masonry form-group col-md-12 col-sm-12 " style="padding-right: 0px; padding-left: 0px;">
+                     <div  class="masonry form-group col-md-12 col-sm-12 " style="padding-right: 0px; padding-left: 0px;">
 
-                       @foreach($item->options_detail as $item_2)
+                       @foreach($item->options_detail->opt as $item_2)
                         <label class="item text-center image-radio" id="radio_get">
                           <img src="{{url('assets/image/option/'.$item_2->item_image)}}" width="95" style="box-shadow: 0 0 5px 0 rgba(0,0,0,.8);" />
-                          <input type="radio" id="image_radio" name="image_radio" value="{{$item_2->id}}" />
+                          <input type="radio" id="size_photo{{$s}}" name="option_number{{$s}}" value="{{$item_2->id}}" required/>
                           <i class="icon-check-1 hidden"></i>
                           <br />
                           {{$item_2->item_name}}
-                        </label>
+                        </label >
                        @endforeach
 
                      </div>
@@ -125,10 +133,21 @@ Photo print
 
                  @endif
 
+
+                 <div style="display:none">
+                   {{$s++}}
+                 </div>
+
              @endforeach
              @endif
 
+             @if($option_set == 1)
+             <hr />
+             <p style="margin-bottom:15px;"><b><i class="sl sl-icon-question"></i> คุณมีสินค้านี้อยู่ในตะกร้าแล้ว คุณสามารถปรับ Option ของการอัดรูป <br />แล้วกดปุ่น <span class="text-danger"> Update Option</span> เพื่อเปลี่ยนข้อมูลได้</b></p>
+             <a id="submit_uption" class="btn btn-submit btn-block"><i class="sl sl-icon-pencil"></i> UPDATE OPTION</a>
+             @endif
 
+            </form>
 
 
 
@@ -183,6 +202,7 @@ Photo print
                 .dropzone .dz-preview .dz-remove {
                     color: #333;
                 }
+
                </style>
 
 
@@ -200,7 +220,7 @@ Photo print
                     </td>
 
                   </tr>
-                  
+
                 </tbody>
               </table>
 
@@ -218,6 +238,8 @@ Photo print
                 </ul>
 
               <a type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
+
+
 
 
               <!-- Modal -->
@@ -249,7 +271,7 @@ Photo print
                           </a>
                         <!--  <span id="login-status">Not logged in</span> | <a href="#" id="btnLogin">Login</a> | <a href="#" id="btnLogout">Log out</a> -->
                           <p>
-                            Facebook user_photos
+                            Facebook
                           </p>
 
                         </div>
@@ -297,17 +319,14 @@ Photo print
 
                                 </div>
                                 <div id="mar-top-15">
-
+                                  <button class='add-image up_btn_kim btn btn-next'><i class='sl sl-icon-plus'></i> Add Photos </button>
                                   <button type="submit" id="submit-all" class="up_btn_kim btn btn-next" name="submit_photo"> Confirm </button>
                                   <button class="up_btn_kim btn btn-next" id="clear-dropzone">Clear All</button>
 
-                                  <a href="{{url('photo_edit/')}}" id="next_to_cart" class="next_to_cart hidden btn btn-next">Go to Cart</a>
-                                  <br />
+
                                   <div class="hidden" id="next_to_cart2">
                                     <h4 class="text-succes">Upload Image Success!</h4>
-                                    <p>
-                                      ทำรายการต่อไป โดยไปที่ <strong><a href="{{url('photo_edit/')}}" class="next_to_cart2">Confirm </a></strong> เพื่อชำระสินค้าและบริการ
-                                    </p>
+
                                   </div>
 
                                 </div>
@@ -343,6 +362,9 @@ Photo print
 @section('scripts')
 
 
+
+<script src="{{url('assets/javascripts/jquery.validate.js')}}"></script>
+
 <script type="text/javascript">
   jQuery(document).ready(function($) {
     $('#my-slider').sliderPro({
@@ -355,9 +377,23 @@ Photo print
   });
 </script>
 
-<script src="{{url('master/assets/js/dropzone.js')}}?v1.1"></script>
+<script src="{{url('master/assets/js/dropzone.js')}}"></script>
 
 <script>
+
+
+var formData = $('#contactForm1').serialize();
+//var data = JSON.stringify( $('#contactForm1').serializeArray() ); option_number
+
+//var radios = document.getElementsByName('option_number{{$s-1}}');
+
+
+
+
+
+
+
+console.log({{$s}});
 var get_value_radio = 0;
 $(document).ready(function(){
 
@@ -370,7 +406,15 @@ $(document).ready(function(){
 
 //  console.log(selValue);
   // add/remove checked class
+
   $(".image-radio").each(function(){
+      $('.masonry label:first').addClass('image-radio-checked');
+      var $radio = $('.masonry label:first').find('input[type="radio"]');
+      $radio.prop("checked",!$radio.prop("checked"));
+      get_value_radio = $radio.val();
+      $radio.checked = true;
+      console.log(get_value_radio);
+
       if($(this).find('input[type="radio"]').first().attr("checked")){
           $(this).addClass('image-radio-checked');
       }else{
@@ -378,13 +422,7 @@ $(document).ready(function(){
       }
   });
 
-  $("#size_photo").change(function(e){
 
-      var price  = $(this).find(':selected').attr('data-price')
-      console.log(price);
-      document.getElementById("show-price").innerHTML = ""+parseFloat(price).toFixed( 2 );
-
-    });
 
   // sync the input state
   $(".image-radio").on("click", function(e){
@@ -403,25 +441,94 @@ $(document).ready(function(){
 
 
 
+$('#submit_uption').on('click', function () {
+
+
+
+    var set_size = [];
+    for (i = 0; i < {{$s-1}}; i++) {
+        set_size[i] = jQuery("#size_photo"+i).val();
+    }
+    set_size.push(get_value_radio);
+     // value of size_photo input na kub
+
+  //  alert(set_size);
+
+
+
+
+    $.ajax({
+            type:'POST',
+            url:'{{url('update_product_option')}}',
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            data: { "product_id" : {{$objs->id_q}}, "size_photo" : set_size},
+            success: function(data){
+              if(data.status == 'success'){
+
+
+
+              $.notify({
+               // options
+               icon: 'icon_set_1_icon-76',
+               title: "<h4>ปรับ Option สำเร็จ</h4> ",
+               message: "ท่านสามารถสามารถกลับมาปรับ Option ได้เรื่อยๆ. "
+              },{
+               // settings
+               type: 'info',
+               delay: 500,
+               timer: 2000,
+               z_index: 9999,
+               showProgressbar: false,
+               placement: {
+                 from: "bottom",
+                 align: "right"
+               },
+               animate: {
+                 enter: 'animated bounceInUp',
+                 exit: 'animated bounceOutDown'
+               },
+              });
+
+
+              }
+              setTimeout(function() {
+                window.location.href = "{{url('photo_edit/'.$objs->id_q)}}/";
+            }, 2000);
+            }
+        });
+
+
+    });
+
+
+
+
+
+
 Dropzone.options.myDropzone= {
     url: '{{url('upload_image')}}',
     autoProcessQueue: false,
     uploadMultiple: true,
     parallelUploads: 100,
-    maxFiles: 100,
+    maxFiles: 200,
     maxFilesize: 2024,
     dictRemoveFile: 'Remove file',
     acceptedFiles: 'image/*,application/pdf,.psd',
     addRemoveLinks: true,
+    clickable: '.add-image, .dropzone',
     init: function() {
         dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
 
         // for Dropzone to process the queue (instead of default form behavior):
         document.getElementById("submit-all").addEventListener("click", function(e) {
+
+
+
+          e.preventDefault();
+          e.stopPropagation();
+          dzClosure.processQueue();
             // Make sure that the form isn't actually being sent.
-            e.preventDefault();
-            e.stopPropagation();
-            dzClosure.processQueue();
+
           //  alert('55555++');
         });
 
@@ -440,21 +547,27 @@ Dropzone.options.myDropzone= {
       });
 
         //send all the form data along with the files: id="image_radio"
+
         this.on("sendingmultiple", function(data, xhr, formData) {
 
-          var set_size = jQuery("#size_photo").val();
-          if(set_size == null){
-            set_size = 0;
-          }
-          if(get_value_radio == null){
-            get_value_radio = 0;
-          }
-          console.log(set_size);
+        //  var frm = $('#contactForm1');
 
+        //  console.log(frm);
+        var set_size = [];
+        for (i = 0; i < {{$s-1}}; i++) {
+            set_size[i] = jQuery("#size_photo"+i).val();
+        }
+        set_size.push(get_value_radio);
+
+
+      //  var data = $('#contactForm1').serialize() + 'ption_number[]='+get_value_radio;
             formData.append("size_photo", set_size); // value of size_photo input na kub
             formData.set("product_id", {{$objs->id_q}}); // value of product_id input na kub
-            formData.set("image_radio", get_value_radio); // value of type_image input na kub
+        //    formData.append("size_photo", get_value_radio);
+        //    formData.set("image_radio", get_value_radio); // value of type_image input na kub
           //  console.log(xhr);
+
+
         });
 
     },
@@ -478,6 +591,9 @@ Dropzone.options.myDropzone= {
         }
     },
 }
+
+
+
 </script>
 
 <script>

@@ -2,6 +2,7 @@
 <script src="{{url('master/assets/js/common_scripts_min.js')}}"></script>
 <script src="{{url('master/assets/js/functions.js')}}?v2"></script>
 <script src="{{url('master/assets/js/jquery.magnific-popup.js')}}"></script>
+
 <!-- Specific scripts -->
 <script src="{{url('master/assets/js/icheck.js')}}"></script>
 <script>
@@ -69,4 +70,5 @@ $(document).ready(function(){
   });
 </script>
 <script src="{{url('master/assets/js/bootstrap-notify.js')}}"></script>
+
 <!-- <script src="assets/js/notify_func.js"></script> -->
