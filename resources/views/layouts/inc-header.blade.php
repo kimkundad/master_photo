@@ -100,7 +100,7 @@
                        ?>
 
                         <li style="padding-left:10px;">
-                            <a href="{{url('photo_edit/'.$item['data']['id'])}}"><div class="image"><img src="{{url('assets/image/product/'.$item['data']['image_pro'])}}" alt="image"></div></a>
+                            <a href="{{url('photo_edit/'.$item['data']['id'])}}" style="padding: 3px 5px;"><div class="image"><img src="{{url('assets/image/product/'.$item['data']['image_pro'])}}" alt="image"></div></a>
                             <strong>
                             <a href="{{url('photo_edit/'.$item['data']['id'])}}"><?=$i?>. {{$item['data']['pro_name']}}</a>฿<?=$item['data'][3]['sum_price']?>.00 x {{$item['data'][2]['sum_image']}}</strong>
                         </li>
