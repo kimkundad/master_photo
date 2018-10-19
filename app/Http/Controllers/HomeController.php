@@ -484,7 +484,7 @@ class HomeController extends Controller
                $data['subdistricts'] = $subdistricts;
 
             $data['package'] = $package;
-
+            $data['check_address'] = 3;
             return view('shipping_2', $data);
 
           }
