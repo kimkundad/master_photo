@@ -58,7 +58,7 @@ $total_img += $u['data'][2]['sum_image'];
 @endforeach
 
     <div class="row margin_30">
-      <form action="{{url('/add_address_order')}}" method="post" enctype="multipart/form-data" name="product">
+      <form action="{{url('/add_order')}}" method="post" enctype="multipart/form-data" name="product">
         {{ csrf_field() }}
       <div class="col-md-8 box_style_1  add_bottom_15">
 
@@ -108,10 +108,34 @@ $total_img += $u['data'][2]['sum_image'];
 
         </div>
 
+
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            @if ($errors->has('address_shipping_order'))
+            <p class="text-danger" style="margin-top:10px;">
+            <b><i style="font-size:16px;" class="im im-icon-Information"></i></b>  กรุณากดเลือกหรือทำการสร้างที่อยู่ในการจัดส่งด้วย
+            </p>
+            <hr />
+            @endif
+            @if ($errors->has('deliver_order'))
+            <p class="text-danger" style="margin-top:10px;">
+            <b><i style="font-size:16px;" class="im im-icon-Information"></i></b>  กรุณากดเลือกรูปแบบการจัดส่ง
+            </p>
+            <hr />
+            @endif
+          @if ($errors->has('c1'))
+          <p class="text-danger" style="margin-top:10px;">
+          <b><i style="font-size:16px;" class="im im-icon-Information"></i></b>  กรุณากดยอมรับข้อกำหนดและเงื่อนไขและนโยบายของเว็บไซต์ เพื่อทำขั้นตอนต่อไป
+          </p>
+          <hr />
+          @endif
+          </div>
+        </div>
+
         <div class="form_title">
           <h3><strong>1</strong>ที่อยู่ในการจัดส่ง/ใบกำกับภาษี</h3>
           <p style="font-size:14px; margin-top:10px;">
-            ลูกค้าสามารถเข้าไปจัดการ ที่อยู่ในการจัดส่ง และ ใบกำกับภาษี <a href="{{url('/address_book')}}">แก้ไข</a> type {{$check_address}}
+            ลูกค้าสามารถเข้าไปจัดการ ที่อยู่ในการจัดส่ง และ ใบกำกับภาษี <a href="{{url('/address_book')}}">แก้ไข</a>
           </p>
 
         </div>
@@ -127,6 +151,8 @@ $total_img += $u['data'][2]['sum_image'];
             </p>
             <p style="font-size:14px; margin-top:10px;">
               {{$package->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$package->zip_code}}
+              <input type="hidden" name="address_shipping_order" value="{{$package->id}}" />
+              <input type="hidden" name="address_type_order" value="{{$check_address}}" />
             </p>
 
             <p class="text-success" style="font-size:15px; margin-top:10px; ">
@@ -137,6 +163,9 @@ $total_img += $u['data'][2]['sum_image'];
 
 
             @if($check_address == 1)
+            <input type="hidden" name="address_shipping_order" value="{{$package->id}}" />
+            <input type="hidden" name="address_bill_order" value="{{$package_1->id}}" />
+            <input type="hidden" name="address_type_order" value="{{$check_address}}" />
             <p style="font-size:14px; margin-top:10px;">
               {{$package->name_ad}}, {{$package->phone_ad}}
             </p>
@@ -166,7 +195,7 @@ $total_img += $u['data'][2]['sum_image'];
             <div class="col-md-12 col-sm-12">
                     <div class="form-group">
                       <label class="image-radio"  id="radio_get" style="font-size:15px;">
-                        <input type="checkbox" name="c1" value="1" />
+                        <input type="checkbox" name="check_order" value="1" />
                         <ins class="iCheck-helper" onclick="myFunction()" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
                         <i class="icon-check-1 hidden"></i>ขอใบกำกับภาษี.</label >
                     </div>
@@ -234,14 +263,14 @@ $total_img += $u['data'][2]['sum_image'];
                      <div class="form-group ">
 
                        <label>เลือกรูปแบบการจัดส่ง</label>
-                        <select id="size_photo1" class="form-control" name="option_number" required="">
-                              <option >-- เลือกรูปแบบการจัดส่ง --</option>
-                              <option value="1">จัดส่งฟรี ไปรษณีย์ลงทะเบียน (ใช้บริการครบ300บาท) </option>
-                              <option value="1">EMS </option>
-                              <option value="1">Kerry Express </option>
-                              <option value="1">รับเองที่สาขา </option>
-                              <option value="1">จัดส่ง Delivery </option>
-                              <option value="1">รถบขส. รถตู้ รถไฟ </option>
+                        <select class="form-control" name="deliver_order" required="">
+                              <option value="">-- เลือกรูปแบบการจัดส่ง --</option>
+
+                              @if($delivery)
+                              @foreach($delivery as $u)
+                              <option value="{{$u->id}}">{{$u->name}}</option>
+                              @endforeach
+                              @endif
 
                         </select>
                       </div>
@@ -252,7 +281,11 @@ $total_img += $u['data'][2]['sum_image'];
                             <div class="form-group ">
 
                               <label>หมายเหตุ</label>
-                               <textarea rows="3" id="message_contact" name="message_contact" class="form-control" placeholder="*หมายเหตุ ข้อความถึงเรา" style="height:150px;"></textarea>
+                               <textarea rows="3" id="message_contact" name="message_order" class="form-control" placeholder="*หมายเหตุ ข้อความถึงเรา" style="height:150px;"></textarea>
+
+                               <input type="hidden" name="order_price" value="{{$total_pay}}" />
+                               <input type="hidden" name="discount" value="0" />
+                               <input type="hidden" name="total" value="{{sizeof(Session::get('cart'))}}" />
                              </div>
                              <br>
                           </div>
@@ -267,9 +300,7 @@ $total_img += $u['data'][2]['sum_image'];
 
 
 
-          <div class="row">
 
-          </div>
 
 
 

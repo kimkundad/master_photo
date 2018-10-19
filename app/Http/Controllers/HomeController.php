@@ -10,9 +10,11 @@ use Session;
 use Auth;
 use App\User;
 use App\order;
+use App\order_option;
 use App\order_detail;
 use App\order_image;
 use App\category;
+use App\delivery;
 use App\user_address;
 use Mail;
 use Swift_Transport;
@@ -162,8 +164,10 @@ class HomeController extends Controller
 
     public function shipping(){
 
+      $delivery = delivery::all();
+      $data['delivery'] = $delivery;
 
-
+      //dd();
 
       $set_num_date = count(Session::get('cart'));
       if($set_num_date == 0){
@@ -516,35 +520,57 @@ class HomeController extends Controller
 
 
     public function add_order(Request $request){
-
+    //    dd(Session::get('cart'));
         $c1 =$request['c1'];
-        dd($c1);
+      //   dd($c1);
 
         $this->validate($request, [
-             'firstname_order' => 'required',
-             'lastname_order' => 'required',
-             'order_price' => 'required',
+             'address_shipping_order' => 'required',
+             'address_type_order' => 'required',
+             'deliver_order' => 'required',
              'total' => 'required',
-             'email_order' => 'required',
-             'phone_order' => 'required',
-             'address' => 'required',
-             'province' => 'required',
-             'zipcode' => 'required',
-             'policy_terms' => 'required'
+             'order_price' => 'required',
+             'c1' => 'required'
          ]);
-        $name_user = $request['firstname_order'];
+
+//dd($c1);
+
+
+         $id_card_no = $request['id_card_no'];
+         $branch_code = $request['branch_code'];
+
+         $check_order = $request['check_order'];
+         if($request['check_order'] == null){
+           $check_order = 0;
+         }
+
+         if($check_order == 1){
+
+           $id = Auth::user()->id;
+
+           $user = User::find($id);
+           $user->id_card_no = $request['id_card_no'];
+           $user->branch_code = $request['branch_code'];
+           $user->save();
+
+         }
+
+
+
+
+      //  $name_user = $request['firstname_order'];
 
        $package = new order();
        $package->user_id = Auth::user()->id;
-       $package->firstname_order = $request['firstname_order'];
-       $package->lastname_order = $request['lastname_order'];
+       $package->shipping_address = $request['address_shipping_order'];
+       $package->bill_address = $request['address_bill_order'];
+       $package->type_order_check = $request['address_type_order'];
+       $package->bil_req = $check_order;
+       $package->deliver_order = $request['deliver_order'];
+       $package->note = $request['message_order'];
        $package->order_price = $request['order_price'];
        $package->total = $request['total'];
-       $package->email_order = $request['email_order'];
-       $package->phone_order = $request['phone_order'];
-       $package->address = $request['address'];
-       $package->province = $request['province'];
-       $package->zipcode = $request['zipcode'];
+       $package->discount = $request['discount'];
        $package->save();
 
        $the_id = $package->id;
@@ -564,11 +590,9 @@ class HomeController extends Controller
          $obj->order_id = $the_id;
          $obj->product_id = $cat->id;
          $obj->product_name = $cat->pro_name;
-         $obj->sum_image = $u['data'][1]['sum_image'];
-         $obj->sum_price = $u['data'][2]['sum_price'];
+         $obj->sum_image = $u['data'][2]['sum_image'];
+         $obj->sum_price = $u['data'][3]['sum_price'];
          $obj->list_link = $u['data']['list_link'];
-         $obj->size_photo = $u['data']['size_photo'];
-         $obj->image_radio = $u['data']['image_radio'];
          $obj->save();
 
          $obj_id = $obj->id;
@@ -586,8 +610,18 @@ class HomeController extends Controller
           //  echo ($j['image']);
          }
 
-       }
+         foreach($u['data'][0]['size_photo'] as $k){
 
+           $obj = new order_option();
+           $obj->order_id_detail = $obj_id;
+           $obj->option_id = $k;
+           $obj->save();
+
+          //  echo ($j['image']);
+         }
+
+
+       }
 
 
        $order_detail = DB::table('order_details')->select(
@@ -598,9 +632,9 @@ class HomeController extends Controller
 
 
 
+//noreply@masterphotonetwork.com
 
-
-
+/*
 
 
        date_default_timezone_set("Asia/Bangkok");
@@ -619,11 +653,9 @@ class HomeController extends Controller
             $email_sender   = 'masterphotonetworkonline@gmail.com';
             $email_pass     = 'Master206';
 
-        /*    $email_sender   = 'info@acmeinvestor.com';
-            $email_pass     = 'Iaminfoacmeinvestor';  */
+
             $email_to       =  $request['email_order'];
-            //echo $admins[$idx]['email'];
-            // Backup your default mailer
+
             $backup = \Mail::getSwiftMailer();
 
             try{
@@ -677,10 +709,11 @@ class HomeController extends Controller
             // send email
 
 
-
+*/
 
 
           $id = $the_id;
+          session()->forget('cart');
 
        return redirect(url('payment/'.$id));
 
