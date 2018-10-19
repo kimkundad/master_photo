@@ -13,6 +13,7 @@ use App\order;
 use App\order_detail;
 use App\order_image;
 use App\category;
+use App\user_address;
 use Mail;
 use Swift_Transport;
 use Swift_Message;
@@ -171,7 +172,185 @@ class HomeController extends Controller
         Session::put('cart_redirect', 1);
       }
 
-      return view('shipping');
+      //Auth::user()->
+
+      $user_addresses = DB::table('user_addresses')->select(
+             'user_addresses.*'
+             )
+             ->where('user_id', Auth::user()->id)
+             ->count();
+
+      if($user_addresses > 0){
+
+
+        $package_check_add_3 = DB::table('user_addresses')
+            ->where('user_id', Auth::user()->id)
+            ->where('type_address', 3)
+            ->count();
+
+            if($package_check_add_3 > 0){
+
+              $check_address = 3;
+
+              //ภ้าเจอ 3 ให้ใช้ 3ไป อันแรก ไว้ใน $package
+
+              $package = DB::table('user_addresses')
+                  ->where('user_id', Auth::user()->id)
+                  ->where('type_address', 3)
+                  ->first();
+
+            }else{
+
+
+
+              $package_check_add_0 = DB::table('user_addresses')
+                  ->where('user_id', Auth::user()->id)
+                  ->where('type_address', 0)
+                  ->count();
+
+              if($package_check_add_0 > 0){
+
+                $check_address = 1;
+
+                $package = DB::table('user_addresses')
+                    ->where('user_id', Auth::user()->id)
+                    ->where('type_address', 0)
+                    ->first();
+
+                    $package_check_1 = DB::table('user_addresses')
+                        ->where('user_id', Auth::user()->id)
+                        ->where('type_address', 1)
+                        ->count();
+
+                        if($package_check_1 == 0){
+
+                          $check_address = 3;
+
+                        }else{
+
+
+                          $package_1 = DB::table('user_addresses')
+                              ->where('user_id', Auth::user()->id)
+                              ->where('type_address', 1)
+                              ->first();
+
+                              //  dd(get address); สำหรับ type 1
+                                 $province = DB::table('province')
+                                      ->select(
+                                      'province.*'
+                                      )
+                                      ->where('PROVINCE_ID', $package->province)
+                                      ->first();
+                                  $data['province1'] = $province;
+
+
+                                  $district = DB::table('amphur')
+                                       ->select(
+                                       'amphur.*'
+                                       )
+                                       ->where('AMPHUR_ID', $package->district)
+                                       ->first();
+                                   $data['district1'] = $district;
+
+
+                                   $subdistricts = DB::table('district')
+                                        ->select(
+                                        'district.*'
+                                        )
+                                        ->where('DISTRICT_ID', $package->sub_district)
+                                        ->first();
+                                    $data['subdistricts1'] = $subdistricts;
+                              //  //  dd(get address); สำหรับ type 1
+                                $data['package_1'] = $package_1;
+                            //    dd($data['package_1']);
+                        }
+
+
+
+              }else{
+
+                $check_address = 2;
+
+                $package = DB::table('user_addresses')
+                    ->where('user_id', Auth::user()->id)
+                    ->where('type_address', 1)
+                    ->first();
+
+
+                    $package_0 = DB::table('user_addresses')
+                        ->where('user_id', Auth::user()->id)
+                        ->where('type_address', 0)
+                        ->count();
+                   if($package_0 == 0){
+                     $check_address = 3;
+                   }
+
+              }
+
+
+
+            }
+
+
+
+        //  dd($package);
+
+
+        if($package != null){
+
+
+          //  dd(get address);
+             $province = DB::table('province')
+                  ->select(
+                  'province.*'
+                  )
+                  ->where('PROVINCE_ID', $package->province)
+                  ->first();
+              $data['province'] = $province;
+
+
+              $district = DB::table('amphur')
+                   ->select(
+                   'amphur.*'
+                   )
+                   ->where('AMPHUR_ID', $package->district)
+                   ->first();
+               $data['district'] = $district;
+
+
+               $subdistricts = DB::table('district')
+                    ->select(
+                    'district.*'
+                    )
+                    ->where('DISTRICT_ID', $package->sub_district)
+                    ->first();
+                $data['subdistricts'] = $subdistricts;
+          //  //  dd(get address);
+          $data['address_id'] = $package->id;
+
+        }else{
+          $check_address = 10;
+        }
+
+
+
+
+
+
+        $data['package'] = $package;
+        $data['check_address'] = $check_address;
+
+        return view('shipping_2', $data);
+
+      }else{
+        $check_address = 0;
+        $data['check_address'] = $check_address;
+        $data['package'] = null;
+        return view('shipping_new', $data);
+      }
+
+
+
     }
 
 
@@ -195,6 +374,144 @@ class HomeController extends Controller
       session()->forget('cart.'.$ids);
       return redirect('/cart');
     }
+
+
+
+   public function add_address_order(Request $request){
+
+     $this->validate($request, [
+           'name_ad' => 'required',
+           'phone_ad' => 'required',
+           'address' => 'required',
+           'province' => 'required',
+           'amphur' => 'required',
+           'district' => 'required',
+           'postcode' => 'required'
+     ]);
+     $check_address = $request['check_address'];
+     $user_id = Auth::user()->id;
+
+
+     if($check_address == 0){
+
+
+       $user_addresses = DB::table('user_addresses')->select(
+              'user_addresses.*'
+              )
+              ->where('user_id', Auth::user()->id)
+              ->count();
+
+          if($user_addresses > 0){
+
+            $package = DB::table('user_addresses')
+                ->select(
+                'user_addresses.*'
+                )
+                ->where('user_id', Auth::user()->id)
+                ->where('type_address', 3)
+                ->first();
+
+                $province = DB::table('province')
+                     ->select(
+                     'province.*'
+                     )
+                     ->where('PROVINCE_ID', $package->province)
+                     ->first();
+                 $data['province'] = $province;
+
+
+                 $district = DB::table('amphur')
+                      ->select(
+                      'amphur.*'
+                      )
+                      ->where('AMPHUR_ID', $package->district)
+                      ->first();
+                  $data['district'] = $district;
+
+
+                  $subdistricts = DB::table('district')
+                       ->select(
+                       'district.*'
+                       )
+                       ->where('DISTRICT_ID', $package->sub_district)
+                       ->first();
+                   $data['subdistricts'] = $subdistricts;
+
+            $data['package'] = $package;
+
+            return view('shipping_2', $data);
+
+          }else{
+
+            $package = new user_address();
+            $package->name_ad = $request['name_ad'];
+            $package->user_id = Auth::user()->id;
+            $package->phone_ad = $request['phone_ad'];
+            $package->address_ad = $request['address'];
+            $package->province = $request['province'];
+            $package->district = $request['amphur'];
+
+            $package->sub_district = $request['district'];
+            $package->zip_code = $request['postcode'];
+            $package->type_address = 3;
+            $package->save();
+
+
+            $province = DB::table('province')
+                 ->select(
+                 'province.*'
+                 )
+                 ->where('PROVINCE_ID', $package->province)
+                 ->first();
+             $data['province'] = $province;
+
+
+             $district = DB::table('amphur')
+                  ->select(
+                  'amphur.*'
+                  )
+                  ->where('AMPHUR_ID', $package->district)
+                  ->first();
+              $data['district'] = $district;
+
+
+              $subdistricts = DB::table('district')
+                   ->select(
+                   'district.*'
+                   )
+                   ->where('DISTRICT_ID', $package->sub_district)
+                   ->first();
+               $data['subdistricts'] = $subdistricts;
+
+            $data['package'] = $package;
+
+            return view('shipping_2', $data);
+
+          }
+
+
+
+
+     }else{
+
+     }
+
+  /* $package = new user_address();
+     $package->name_ad = $request['name'];
+     $package->user_id = Auth::user()->id;
+     $package->phone_ad = $request['phone'];
+     $package->address_ad = $request['address'];
+     $package->province = $request['province'];
+     $package->district = $request['amphur'];
+
+     $package->sub_district = $request['district'];
+     $package->zip_code = $request['postcode'];
+     $package->type_address = $request['type_ad'];
+     $package->save(); */
+
+    //
+
+   }
 
 
 
@@ -480,6 +797,7 @@ class HomeController extends Controller
 
     }
 
+
     public function update_photo_print(Request $request){
 
       $list_link = $request['list_link'];
@@ -529,10 +847,24 @@ class HomeController extends Controller
     //  return redirect(url('photo_edit/'.$list_link))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ'); Auth::user()->id
     }
 
+
+    public function profile_edit($id){
+
+      //dd($id);
+      $user = DB::table('users')
+          ->where('id', $id)
+          ->first();
+
+      $data['objs'] = $user;
+      return view('profile_edit', $data);
+
+
+    }
+
     public function profile(){
 
-      $provinces = DB::table('provinces')
-          ->orderBy('id', 'asc')
+      $provinces = DB::table('province')
+          ->orderBy('PROVINCE_ID', 'asc')
           ->get();
 
       $order = DB::table('orders')
@@ -582,11 +914,11 @@ class HomeController extends Controller
 
           if(Auth::user()->country !== null){
 
-            $provinces_1 = DB::table('provinces')
-                ->where('id', Auth::user()->country)
+            $provinces_1 = DB::table('province')
+                ->where('PROVINCE_ID', Auth::user()->country)
                 ->first();
 
-                $data['province_user'] = $provinces_1->name_in_thai;
+                $data['province_user'] = $provinces_1->PROVINCE_NAME;
 
           }else{
 
@@ -604,7 +936,7 @@ class HomeController extends Controller
 
     //  dd($order);
 
-      return view('profile', $data);
+      return view('profile2', $data);
     }
 
     public function cart(){

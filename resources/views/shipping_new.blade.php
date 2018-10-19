@@ -119,10 +119,10 @@ $total_img += $u['data'][2]['sum_image'];
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
                 <label>ชื่อ-นามสกุล <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="name_ad" value="{{ old('firstname_order', $package->name_ad)}}">
-                @if ($errors->has('firstname_order'))
+                <input type="text" class="form-control" name="name_ad" value="{{ Auth::user()->name }}">
+                @if ($errors->has('name_ad'))
                 <p class="text-danger" style="margin-top:10px;">
-                  {{ $errors->first('firstname_order') }}
+                  {{ $errors->first('name_ad') }}
                 </p>
                 @endif
 
@@ -131,12 +131,12 @@ $total_img += $u['data'][2]['sum_image'];
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
                 <label>เบอร์โทรศัพท์ <span class="text-danger">*</span></label>
-                <input type="text" name="phone_ad" value="{{ old('phone_ad', $package->phone_ad)}}" class="form-control">
+                <input type="text" name="phone_ad" value="{{ old('phone_ad')}}" class="form-control">
                 <input type="hidden" class="form-control" name="check_address" value="{{$check_address}}">
-                <input type="hidden" class="form-control" name="address_id" value="{{$address_id}}">
-                @if ($errors->has('phone_order'))
+
+                @if ($errors->has('phone_ad'))
                 <p class="text-danger" style="margin-top:10px;">
-                  {{ $errors->first('phone_order') }}
+                  {{ $errors->first('phone_ad') }}
                 </p>
                 @endif
               </div>
@@ -194,7 +194,7 @@ $total_img += $u['data'][2]['sum_image'];
               <div class="form-group">
                 <label>ที่อยู่ </label>
                 <div >
-								<input type="text" class="form-control" name="address" placeholder="บ้านเลขที่.." value="{{ $package->address_ad }}">
+								<input type="text" class="form-control" name="address" placeholder="บ้านเลขที่.." value="{{ old('address') }}">
                 @if ($errors->has('address'))
                 <p class="text-danger" style="margin-top:10px;">
                   {{ $errors->first('address') }}
@@ -216,7 +216,7 @@ $total_img += $u['data'][2]['sum_image'];
 
                 <select id="province" name="province" class="form-control " >
 
-                <option value="{{$province->PROVINCE_ID}}">{{$province->PROVINCE_NAME}}</option>
+                <option value="">- กรุณาเลือกจังหวัด -</option>
 
                 </select>
                 @if ($errors->has('province'))
@@ -232,7 +232,7 @@ $total_img += $u['data'][2]['sum_image'];
                 <label>เขต/อำเภอ</label>
                 <select id="amphur" name="amphur" class="form-control " >
 
-                <option value="{{$district->AMPHUR_ID}}">{{$district->AMPHUR_NAME}}</option>
+                <option value="">- กรุณาเลือกอำเภอ -</option>
 
                 </select>
                 @if ($errors->has('province'))
@@ -248,7 +248,7 @@ $total_img += $u['data'][2]['sum_image'];
                 <label>แขวง/ตำบล</label>
                 <select id="district" name="district" class="form-control " >
 
-                <<option value="{{$subdistricts->DISTRICT_ID}}">{{$subdistricts->DISTRICT_NAME}}</option>
+                <option value="">- กรุณาเลือกตำบล -</option>
 
                 </select>
                 @if ($errors->has('province'))
@@ -262,10 +262,10 @@ $total_img += $u['data'][2]['sum_image'];
             <div class="col-md-6">
               <div class="form-group">
                 <label>รหัสไปรษณีย์</label>
-                <input type="text" id="postcode" name="postcode" placeholder="รหัสไปรษณีย์ " class="form-control" value="{{$package->zip_code}}">
-                @if ($errors->has('zipcode'))
+                <input type="text" id="postcode" name="postcode" placeholder="รหัสไปรษณีย์ " class="form-control" value="{{ old('postcode') }}">
+                @if ($errors->has('postcode'))
                 <p class="text-danger" style="margin-top:10px;">
-                  {{ $errors->first('zipcode') }}
+                  {{ $errors->first('postcode') }}
                 </p>
                 @endif
               </div>
@@ -393,8 +393,6 @@ function myFunction() {
       arrangeByName:		false // กำหนดให้เรียงตามตัวอักษร
     }, options);
 
-  //  console.log({{$package->province}});
-
     return this.each(function() {
       var xml;
       var dataUrl = "{{url('assets/thailand.xml')}}";
@@ -411,16 +409,9 @@ function myFunction() {
           dataType: "xml",
           success: function(xmlDoc) {
             xml = $(xmlDoc);
-            console.log(Setting.PROVINCE);
-            _loadAmphur({{$province->PROVINCE_ID}});
-            _loadDistrict({{$district->AMPHUR_ID}});
+
             _loadProvince();
-
             addEventList();
-
-            $("#amphur").val('{{$district->AMPHUR_ID}}');
-            $("#district").val('{{$subdistricts->DISTRICT_ID}}');
-            $("#postcode").val('{{$package->zip_code}}');
           },
           error: function() {
             console.log("Failed to get xml");
@@ -494,9 +485,6 @@ function myFunction() {
       }
 
       function addEventList(){
-
-        console.log(Setting.PROVINCE_ID);
-
         $(Setting.PROVINCE).change(function(e) {
           var PROVINCE_ID = $(this).val();
           _loadAmphur(PROVINCE_ID);
@@ -508,16 +496,14 @@ function myFunction() {
         });
       }
       function AddToView(list,key){
-        for (var i = 0;i<list.length;i++) { //_$district->AMPHUR_ID
+        for (var i = 0;i<list.length;i++) {
           if(key != Setting.AMPHUR){
-            $(key).append("<option @if($package->province == "+list[i].id+") selected='selected' @endif value='"+list[i].id+"'>"+list[i].name+"</option>");
+            $(key).append("<option value='"+list[i].id+"'>"+list[i].name+"</option>");
           }else{
-            $(key).append("<option  @if($district->AMPHUR_ID == "+list[i].id+") selected='selected' @endif value='"+list[i].id+"' POSTCODE='"+list[i].postcode+"'>"+list[i].name+"</option>");
+            $(key).append("<option value='"+list[i].id+"' POSTCODE='"+list[i].postcode+"'>"+list[i].name+"</option>");
           }
         }
       }
-
-
 
       function SortByName(a, b){
         var aName = a.name.toLowerCase();

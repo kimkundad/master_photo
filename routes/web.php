@@ -64,10 +64,20 @@ Route::get('oauth/{driver}/callback', 'Auth\SocialAuthController@handleProviderC
 
 Route::group(['middleware' => 'auth'], function () {
 
+
+  Route::post('/add_address_order', 'HomeController@add_address_order')->name('add_address_order');
   Route::get('/profile', 'HomeController@profile')->name('profile');
   Route::get('/shipping', 'HomeController@shipping')->name('shipping');
   Route::post('/add_order', 'HomeController@add_order')->name('add_order');
   Route::post('/update_profile', 'HomeController@update_profile')->name('update_profile');
+  Route::get('profile/{id}/edit', 'HomeController@profile_edit')->name('profile_edit');
+  Route::post('/post_edit_profile', 'UserProfileController@post_edit_profile')->name('post_edit_profile');
+  Route::get('/address_book', 'UserProfileController@address_book')->name('address_book');
+  Route::get('edit_address_book/{id}', 'UserProfileController@edit_address_book')->name('edit_address_book');
+  Route::post('/post_edit_address_book', 'UserProfileController@post_edit_address_book')->name('post_edit_address_book');
+  Route::post('/delete_address_book', 'UserProfileController@delete_address_book')->name('delete_address_book');
+  Route::get('/new_address_book', 'UserProfileController@new_address_book')->name('new_address_book');
+  Route::post('/post_new_address_book', 'UserProfileController@post_new_address_book')->name('post_new_address_book');
 
 
 });
@@ -84,6 +94,8 @@ Route::group(['middleware' => 'admin'], function() {
   Route::resource('admin/sub_category', 'Sub_categoryController');
   Route::resource('admin/product', 'ProductController');
   Route::resource('admin/option_product', 'OptionProController');
+  Route::resource('admin/delivery', 'DeliveryController');
+  Route::resource('admin/bank', 'BankController');
   Route::post('admin/option_product_item/', 'OptionProController@option_product_item');
   Route::post('admin/option_product_item_edit/{id}', 'OptionProController@option_product_item_edit');
   Route::post('admin/option_product_item_del/{id}', 'OptionProController@option_product_item_del');

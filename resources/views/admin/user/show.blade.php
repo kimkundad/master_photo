@@ -130,7 +130,7 @@
 
                         </tbody>
                       </table>
-                      <hr><a type="button" href="{{url('admin/user/'.$objs->id.'/edit')}}" class="btn btn-default">แก้ไขข้อมูลส่วนตัว</a>
+                      <hr><a type="button" href="{{url('admin/user/'.$objs->id.'/edit')}}" class="btn_1">แก้ไขข้อมูลส่วนตัว</a>
 
 
 									</div>

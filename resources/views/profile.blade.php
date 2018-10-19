@@ -557,11 +557,11 @@ user profile
       									<label>Country</label>
       									<select id="country" class="form-control" name="country">
                           @foreach($provinces as $p)
-      										<option value="{{$p->id}}" @if( Auth::user()->country == $p->id)
+      										<option value="{{$p->PROVINCE_ID}}" @if( Auth::user()->country == $p->PROVINCE_ID)
                           selected='selected'
                           @endif
 
-                          >{{$p->name_in_thai}}</option>
+                          >{{$p->PROVINCE_NAME}}</option>
                           @endforeach
       									</select>
       								</div>
