@@ -400,6 +400,10 @@ class HomeController extends Controller
      $user_id = Auth::user()->id;
 
 
+     $delivery = delivery::all();
+     $data['delivery'] = $delivery;
+
+
      if($check_address == 0){
 
 
