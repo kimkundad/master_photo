@@ -157,6 +157,7 @@ class HomeController extends Controller
              ->where('id', $id)
              ->first();
 
+
       $data['order'] = $order;
       return view('payment', $data);
     }

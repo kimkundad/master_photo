@@ -100,9 +100,24 @@ Payment | MASTER PHOTO NETWORK
         </div>
 
         <div class="form_title">
-          <h3><strong>2</strong>Payment Information</h3>
+          <h3><strong>1</strong>โอนเงินผ่านธนาคาร</h3>
           <p>
-            Mussum ipsum cacilds, vidis litro abertis.
+            สามารถชำระเงินได้โดยผ่านทางธนาคาร จากนั้นกรุณาแจ้งการชำระเงินผ่านทาง Website ในหน้า account ของท่าน
+          </p>
+        </div>
+
+
+        <div class="step">
+          <p class="text-success" style="font-size:14px;">
+            <i class="im im-icon-Money-Smiley" style="font-size:32px;"></i> หากลูกค้าเลือกที่จะ ชำระหรือโอนเงินผ่านธนาคาร ลูกค้าสามารถกด <span class="text-danger"><b>"ขั้นตอนต่อไป"</b></span> ได้เลย
+          </p>
+          <a href="{{url('order_complete/'.$order->id)}}" style="padding: 6px 12px; font-size:15px;" class="btn btn-next">ขั้นตอนต่อไป</a>
+        </div>
+
+        <div class="form_title">
+          <h3><strong>2</strong>ชำระผ่านบัตรเครดิต</h3>
+          <p>
+            ทุกธุรกรรมผ่านบัตรเครดิตและบัตรเดบิตได้รับการรับรองความปลอดภัย ด้วยเทคโนโลยี 2c2p Payment gateway api, Paypa
           </p>
         </div>
 
