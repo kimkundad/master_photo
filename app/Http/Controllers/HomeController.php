@@ -402,6 +402,8 @@ class HomeController extends Controller
 
      $delivery = delivery::all();
      $data['delivery'] = $delivery;
+     $data['check_address'] = 3;
+
 
 
      if($check_address == 0){
