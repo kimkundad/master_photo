@@ -59,7 +59,14 @@ Payment | MASTER PHOTO NETWORK
           <table class="table table_summary" >
             <tbody>
 
-
+              <tr>
+                <td>
+                  คำสั่งซื้อ
+                </td>
+                <td class="text-right">
+                  #00{{$order->id}}
+                </td>
+              </tr>
               <tr>
                 <td>
                   Point Order
@@ -108,10 +115,54 @@ Payment | MASTER PHOTO NETWORK
 
 
         <div class="step">
+          <h4>คำสั่งซื้อ <a>#00{{$order->id}}</a></h4>
+          <br />
           <p class="text-success" style="font-size:14px;">
-            <i class="im im-icon-Money-Smiley" style="font-size:32px;"></i> หากลูกค้าเลือกที่จะ ชำระหรือโอนเงินผ่านธนาคาร ลูกค้าสามารถกด <span class="text-danger"><b>"ขั้นตอนต่อไป"</b></span> ได้เลย
+            <i class="im im-icon-Money-Smiley" style="font-size:32px;"></i> หากลูกค้าเลือกที่จะ ชำระหรือโอนเงินผ่านธนาคาร ลูกค้าสามารถกด <span class="text-danger"><b>"ขั้นตอนต่อไป"</b></span> เพื่อทำรายการภายหลัง หรือ กด
+            <span class="text-danger"><b>"แจ้งชำระเงิน"</b></span> ในขั้นตอนนี้ได้เลยค่ะ
           </p>
-          <a href="{{url('order_complete/'.$order->id)}}" style="padding: 6px 12px; font-size:15px;" class="btn btn-next">ขั้นตอนต่อไป</a>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>ชื่อบัญชี</th>
+                  <th>เลขที่บัญชี</th>
+                  <th>สาขา</th>
+
+                </tr>
+              </thead>
+              <tbody>
+
+                @if($bank)
+                @foreach($bank as $b)
+                <tr>
+                  <td>
+                    <img src="{{url('assets/images/bank/'.$b->bank_img)}}" height="35">
+                  </td>
+                  <td class="p_top">
+                    {{$b->name_b}}
+                  </td>
+                  <td class="p_top">
+                    {{$b->name_no_b}}
+                  </td>
+                  <td class="p_top">
+                    {{$b->major_name_b}}
+                  </td>
+                </tr>
+                @endforeach
+                @endif
+
+
+              </tbody>
+            </table>
+            </div>
+
+
+          <br />
+          <a href="#" style="padding: 6px 12px; font-size:15px;" class="btn btn-next">ขั้นตอนต่อไป</a>
+          <a href="#" style="padding: 6px 12px; font-size:15px;" class="btn btn-next">แจ้งชำระเงิน</a>
         </div>
 
         <div class="form_title">
@@ -220,6 +271,14 @@ Payment | MASTER PHOTO NETWORK
           <table class="table table_summary" >
             <tbody>
 
+              <tr>
+                <td>
+                  คำสั่งซื้อ
+                </td>
+                <td class="text-right">
+                  #00{{$order->id}}
+                </td>
+              </tr>
 
               <tr>
                 <td>

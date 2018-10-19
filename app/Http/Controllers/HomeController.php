@@ -151,6 +151,8 @@ class HomeController extends Controller
 
     public function payment($id){
 
+      $bank = DB::table('payment_options')->get();
+
       $order = DB::table('orders')->select(
              'orders.*'
              )
@@ -158,6 +160,7 @@ class HomeController extends Controller
              ->first();
 
 
+      $data['bank'] = $bank;
       $data['order'] = $order;
       return view('payment', $data);
     }
