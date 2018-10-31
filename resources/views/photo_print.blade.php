@@ -84,14 +84,14 @@ Photo print
                  <div class="row">
                    <div class="col-md-6 col-sm-12 ">
                      <div class="form-group ">
-                       <div class="tooltip_styled tooltip-effect-4">
-                         <div class="tooltip-content">
-                           {{$item->options_detail->option_title}}
-                         </div>
 
-                         <p style="margin-bottom:5px;"><b><i class="sl sl-icon-question"></i> {{$item->options_detail->option_name}}</b></p>
 
-                       </div>
+
+                         <p style="margin-bottom:5px;"><b> {{$item->options_detail->option_name}}</b></p>
+
+
+
+
                         <select id="size_photo{{$s}}" class="form-control" name="option_number[]" required>
                           @foreach($item->options_detail->opt as $item_2)
                           <option value="{{$item_2->id}}" >{{$item_2->item_name}} </option>
@@ -105,13 +105,9 @@ Photo print
 
                  <div class="row">
                    <div class="col-md-12 col-sm-12 " style="padding-right: 5px; ">
-                     <div class="tooltip_styled tooltip-effect-4">
-                       <div class="tooltip-content">
-       									{{$item->options_detail->option_title}}
+                     <div style="margin-bottom: 5px;">
 
-       								</div>
-
-                       <p style="margin-bottom:5px;"><b><i class="sl sl-icon-question"></i> {{$item->options_detail->option_name}}</b></p>
+                       <a href="" style="margin-bottom:5px; color: #565a5c;" data-toggle="modal" data-target="#myModal_option"><b><i class="sl sl-icon-question"></i> {{$item->options_detail->option_name}}</b></a>
 
                      </div>
 
@@ -128,6 +124,30 @@ Photo print
                        @endforeach
 
                      </div>
+                 </div>
+               </div>
+
+
+
+
+               <!-- Modal -->
+               <div class="modal fade" id="myModal_option" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                 <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+
+
+                     <div class="modal-body">
+
+                       <div class="row text-center ">
+
+                         <div class="col-md-12">
+                           <img src="{{url('assets/image/product/'.$item->options_detail->option_title)}}" class="img-responsive" />
+                         </div>
+
+                       </div>
+                     </div>
+
+                   </div>
                  </div>
                </div>
 

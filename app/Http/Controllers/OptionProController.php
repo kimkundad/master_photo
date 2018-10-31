@@ -58,16 +58,37 @@ class OptionProController extends Controller
         //
         $this->validate($request, [
          'option_name' => 'required',
-         'option_title' => 'required',
          'option_type' => 'required'
         ]);
 
+        $image = $request->file('image');
+        if($image == null){
 
-        $package = new option_product();
-        $package->option_name = $request['option_name'];
-        $package->option_title = $request['option_title'];
-        $package->option_type = $request['option_type'];
-        $package->save();
+          $package = new option_product();
+          $package->option_name = $request['option_name'];
+          $package->option_type = $request['option_type'];
+          $package->save();
+
+        }else{
+
+          $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+
+          $destinationPath = asset('assets/image/product/');
+          $img = Image::make($image->getRealPath());
+          $img->resize(800, 533, function ($constraint) {
+          $constraint->aspectRatio();
+          })->save('assets/image/product/'.$input['imagename']);
+
+          $package = new option_product();
+          $package->option_name = $request['option_name'];
+          $package->option_title = $input['imagename'];
+          $package->option_type = $request['option_type'];
+          $package->save();
+
+        }
+
+
+
 
         $the_id = $package->id;
 
@@ -122,15 +143,38 @@ class OptionProController extends Controller
         //
         $this->validate($request, [
          'option_name' => 'required',
-         'option_title' => 'required',
          'option_type' => 'required'
         ]);
 
-         $package = option_product::find($id);
-         $package->option_name = $request['option_name'];
-         $package->option_title = $request['option_title'];
-         $package->option_type = $request['option_type'];
-         $package->save();
+        $image = $request->file('image');
+
+        if($image == null){
+
+          $package = option_product::find($id);
+          $package->option_name = $request['option_name'];
+          $package->option_type = $request['option_type'];
+          $package->save();
+
+        }else{
+
+          $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+
+          $destinationPath = asset('assets/image/product/');
+          $img = Image::make($image->getRealPath());
+          $img->resize(800, 533, function ($constraint) {
+          $constraint->aspectRatio();
+          })->save('assets/image/product/'.$input['imagename']);
+
+          $package = option_product::find($id);
+          $package->option_name = $request['option_name'];
+          $package->option_title = $input['imagename'];
+          $package->option_type = $request['option_type'];
+          $package->save();
+
+        }
+
+
+
 
         return redirect(url('admin/option_product/'.$id.'/edit'))->with('edit_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
     }
