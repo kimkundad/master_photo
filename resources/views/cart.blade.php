@@ -45,7 +45,18 @@ height: 80px;
 
 }
 .item_cart{
-    height: 40px;
+    height: 80px;
+}
+
+.table.cart-list td:nth-of-type(5):before {
+content: "DELETE";
+font-weight: 700;
+color: #111;
+}
+.table.cart-list td:nth-of-type(4):before {
+content: "PRICE";
+font-weight: 700;
+color: #111;
 }
 
   }
@@ -109,7 +120,7 @@ height: 60px;
                 Discount
               </th>
               <th>
-                Total
+                PRICE
               </th>
               <th>
                 Actions
@@ -149,7 +160,7 @@ height: 60px;
                  </a>
                </td>
                <td>
-                 1 / Pcs.
+                 {{$u['data'][2]['sum_image']}} Pcs.
                </td>
                <td>
                  0%

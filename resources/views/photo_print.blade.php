@@ -92,9 +92,9 @@ Photo print
 
 
 
-                        <select id="size_photo{{$s}}" class="form-control" name="option_number[]" required>
+                        <select id="size_photo{{$s}}" class="form-control" onchange="getComboA{{$s}}(this)" name="option_number[]" required>
                           @foreach($item->options_detail->opt as $item_2)
-                          <option value="{{$item_2->id}}" >{{$item_2->item_name}} </option>
+                          <option value="{{$item_2->id}}" data-value="{{$item_2->item_price}}">{{$item_2->item_name}} </option>
                           @endforeach
                         </select>
                       </div>
@@ -257,7 +257,8 @@ Photo print
                   {{$objs->pro_name_detail}}
                 </ul>
 
-              <a type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
+              <a type="button" id="photo_f" class="btn btn-submit btn-block"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
+              <a type="button" id="photo_t" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
 
 
 
@@ -401,6 +402,36 @@ Photo print
 
 <script>
 
+var e = document.getElementById("size_photo1");
+var strUser = e.options[e.selectedIndex].getAttribute('data-value');
+if(strUser == 0){
+  var x = document.getElementById("photo_t");
+  x.style.display = "none";
+}
+console.log(strUser);
+
+function getComboA1(selectObject) {
+    var e = document.getElementById("size_photo1");
+    var strUser = e.options[e.selectedIndex].getAttribute('data-value');
+
+    if(strUser == 0){
+      var x = document.getElementById("photo_t");
+      x.style.display = "none";
+      var y = document.getElementById("photo_f");
+      y.style.display = "block";
+    }else{
+      var x = document.getElementById("photo_f");
+      x.style.display = "none";
+      var y = document.getElementById("photo_t");
+      y.style.display = "block";
+    }
+
+    console.log(strUser);
+
+
+}
+
+
 
 var formData = $('#contactForm1').serialize();
 //var data = JSON.stringify( $('#contactForm1').serializeArray() ); option_number
@@ -413,7 +444,7 @@ var formData = $('#contactForm1').serialize();
 
 
 
-console.log({{$s}});
+//console.log({{$s}});
 var get_value_radio = 0;
 $(document).ready(function(){
 
@@ -530,8 +561,8 @@ Dropzone.options.myDropzone= {
     autoProcessQueue: false,
     uploadMultiple: true,
     parallelUploads: 100,
-    maxFiles: 200,
-    maxFilesize: 2024,
+    maxFiles: 1000,
+    maxFilesize: 4024,
     dictRemoveFile: 'Remove file',
     acceptedFiles: 'image/*,application/pdf,.psd',
     addRemoveLinks: true,

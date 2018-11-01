@@ -40,12 +40,12 @@ Photo print
    }
    @media (max-width: 767px){
      .table.cart-list td:nth-of-type(4):before {
-         content: "Action";
+         content: "DELETE";
          font-weight: 700;
          color: #111;
      }
      .table.cart-list td:nth-of-type(3):before {
-    content: "Price";
+    content: "SIZE";
     font-weight: 700;
     color: #111;
 }
@@ -95,7 +95,21 @@ Photo print
 
     <div class="row margin_30">
 
-      <div class="col-md-8 ">
+      <div class="col-md-8 " {{$set_size = 0}} >
+
+<div style="display:none">
+        @if($option_images)
+        @foreach($option_images as $k)
+
+          @if($set_size == 1)
+            {{ $get_name_size = $k->item_name}}
+          @endif
+
+              {{$set_size++}}
+
+        @endforeach
+        @endif
+</div>
 
         <table class="table table-striped cart-list add_bottom_30">
           <thead>
@@ -108,11 +122,11 @@ Photo print
               </th>
 
               <th>
-                PRICE
+                SIZE
               </th>
 
               <th>
-                Actions
+                DELETE
               </th>
             </tr>
           </thead>
@@ -145,11 +159,12 @@ Photo print
                   <input type="hidden" class="img_set" name="img_set" value="{{$u['image']}}">
                 </form>
               </td>
+
               <td >
 
 
 
-                ฿{{number_format((float)Session::get('cart.'.$id.'.data.3.sum_price'), 2, '.', '')}}
+                  {{$get_name_size}}
 
 
 
@@ -213,7 +228,14 @@ Photo print
                   จำนวนรูป
                 </td>
               <td class="text-right">
-                {{Session::get('cart.'.$id.'.data.2.sum_image')}}
+                <div id="number_image" style="display: none;">
+                  {{Session::get('cart.'.$id.'.data.2.sum_image')}}
+                </div>
+
+                <div id="get_number_image">
+
+                </div>
+
               </td>
 
               </tr>
@@ -223,7 +245,13 @@ Photo print
                   ราคารวม
                 </td>
               <td class="text-right">
-                ฿{{number_format((float)Session::get('cart.'.$id.'.data.3.sum_price')*Session::get('cart.'.$id.'.data.2.sum_image'), 2, '.', '')}}
+                <div id="sum_image_price" style="display: none;">
+                  {{number_format((float)Session::get('cart.'.$id.'.data.3.sum_price')*Session::get('cart.'.$id.'.data.2.sum_image'), 2, '.', '')}}
+                </div>
+                <div id="get_image_price">
+
+                </div>
+
               </td>
 
               </tr>
@@ -397,7 +425,7 @@ Photo print
 <script>
 
 
-
+/*
 
 $(function() {
 
@@ -431,7 +459,7 @@ $.notify({
 });
 }, 500);
  });
-
+ */
 </script>
  @endif
 
@@ -446,8 +474,8 @@ $(document).ready(function(){
       autoProcessQueue: false,
       uploadMultiple: true,
       parallelUploads: 100,
-      maxFiles: 200,
-      maxFilesize: 2024,
+      maxFiles: 1000,
+      maxFilesize: 4024,
       dictRemoveFile: 'Remove file',
       acceptedFiles: 'image/*,application/pdf,.psd',
       addRemoveLinks: true,
@@ -508,13 +536,23 @@ $(document).ready(function(){
 <script type="text/javascript">
 $(document).ready(function(){
 
+var sum_price_value = {{Session::get('cart.'.$id.'.data.3.sum_price')}};
 
+var number = parseInt($('#number_image').text());
+//console.log(number+1);
+$('#get_number_image').append(number);
+
+var price_image = parseInt($('#sum_image_price').text());
+//console.log(number+1);
+$('#get_image_price').append(price_image.toFixed(2));
+console.log(sum_price_value);
 
 
   $(".button_inc").on("click", function () {
-  console.log('Textarea Change');
 
 
+  $('#get_number_image').html("");
+  $('#get_image_price').html("");
       //  var username = $('form#cutproduct input[name=id]').val();
 
       var $button = $(this);
@@ -524,13 +562,19 @@ $(document).ready(function(){
       if ($button.text() == "+") {
           var newVal = parseFloat(oldValue) + 1;
 
-          console.log(newVal);
+          $('#get_number_image').append(number+=1);
+          $('#get_image_price').append( (sum_price_value*number).toFixed(2) );
+          console.log(number);
       } else {
           // Don't allow decrementing below zero
           if (oldValue > 1) {
               var newVal = parseFloat(oldValue) - 1;
+              $('#get_number_image').append(number-=1);
+              $('#get_image_price').append( (sum_price_value*number).toFixed(2) );
           } else {
               newVal = 1;
+              $('#get_number_image').append(number);
+              $('#get_image_price').append( (sum_price_value*number).toFixed(2) );
           }
       }
        $button.parent().find("input").val(newVal);
