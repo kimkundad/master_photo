@@ -719,25 +719,12 @@ console.log(sum_price_value);
            success: function(json){
                if(json.status == 1001) {
 
-
-
-
-
                  setTimeout(function() {
                    location.reload();
 
                }, 1800);
 
-
-
-
                 } else {
-
-
-
-
-
-
 
                 }
               },
@@ -746,13 +733,6 @@ console.log(sum_price_value);
               }
             });
           }else{
-
-
-
-
-
-
-
 
 
           }
