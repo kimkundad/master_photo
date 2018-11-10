@@ -127,13 +127,34 @@ Photo print
                  </div>
                </div>
 
+               <style>
+               .view-more {
+                    float: right;
+                }
+                .view-more .plus-sign {
+                    display: inline-block;
+                    width: 25px;
+                    height: 25px;
+                    margin: 0 auto;
+                    padding: 6px;
+                    border: 1px solid #666;
+                    font-size: 12px;
+                    font-weight: 100;
+                    line-height: 15px;
+                    text-align: center;
+                    border-bottom-left-radius: 50%;
+                    border-top-left-radius: 50%;
+                    border-bottom-right-radius: 50%;
+                    border-top-right-radius: 50%;
+                }
+               </style>
 
 
-
-               <!-- Modal -->
+               <!-- Modal style="color: #666;" -->
                <div class="modal fade" id="myModal_option" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                  <div class="modal-dialog" role="document">
-                   <div class="modal-content">
+                   <div class="modal-content text-right">
+                     <a type="button" class="btn btn-secondary text-right" style=" color: #666;" data-dismiss="modal"><i class="fa fa-remove"></i> Close</a>
 
 
                      <div class="modal-body">
@@ -257,7 +278,32 @@ Photo print
                   {{$objs->pro_name_detail}}
                 </ul>
 
-              <a type="button" id="photo_f" class="btn btn-submit btn-block"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
+              <a type="button" id="photo_f"  class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal_optionx_1"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
+
+              <div class="modal fade" id="myModal_optionx_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content text-right">
+                    <a type="button" class="btn btn-secondary text-right" style=" color: #666;" data-dismiss="modal"><i class="fa fa-remove"></i> Close</a>
+
+
+                    <div class="modal-body">
+
+                      <div class="row text-center ">
+
+                        <div class="col-md-12">
+                          <h4>กรุณาเลือกชนิดกระดาษ</h4>
+                          <p>
+                            ท่านต้องเลือกกระดาษ เพื่อไปยังขั้นตอนต่อไป
+                          </p>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
               <a type="button" id="photo_t" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
 
 
@@ -430,6 +476,34 @@ function getComboA1(selectObject) {
 
 
 }
+
+
+
+$('#photo_f').on('click', function () {
+/*
+  $.notify({
+   // options
+   icon: 'icon_set_1_icon-76',
+   title: "<h4>กรุณาเลือกชนิดกระดาษ</h4> ",
+   message: "ท่านต้องเลือกกระดาษ เพื่อไปยังขั้นตอนต่อไป "
+  },{
+   // settings
+   type: 'info',
+   delay: 5000,
+   timer: 3000,
+   z_index: 9999,
+   showProgressbar: false,
+   placement: {
+     from: "bottom",
+     align: "right"
+   },
+   animate: {
+     enter: 'animated bounceInUp',
+     exit: 'animated bounceOutDown'
+   },
+  });
+*/
+  });
 
 
 
