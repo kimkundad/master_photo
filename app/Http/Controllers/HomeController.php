@@ -36,8 +36,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-  //   session()->forget('cart');
-  //   session()->flush();
+     session()->forget('cart');
+     session()->flush();
   //  $request->session()->pull('cart.data2.data.image.image', '1534488467-logo-Isuzu.png');
   //  session()->push('cart.data1.data.image', ['image' => '1534488467-logo-Isuzu.jpg', 'id' => 6]);
   //  $image = Session::get('cart.'.$ids.'.data.image.'.$num.'.image');
@@ -1196,6 +1196,7 @@ class HomeController extends Controller
           'option_items.*'
           )
           ->whereIn('id', $size_photo)
+          ->where('item_status', 1)
           ->sum('item_price');
 
         //  session()->put('cart.'.$request['product_id'].'.data.size_photo');
@@ -1240,6 +1241,7 @@ class HomeController extends Controller
                 'option_items.*'
                 )
                 ->whereIn('id', $exp)
+                ->where('item_status', 1)
                 ->sum('item_price');
 
 

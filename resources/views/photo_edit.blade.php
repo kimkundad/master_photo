@@ -215,7 +215,9 @@ Photo print
                   {{$k->item_name}}
                 </td>
               <td class="text-right">
+                @if($k->item_status == 1)
                 ฿{{number_format((float)$k->item_price, 2, '.', '')}}
+                @endif
               </td>
 
               </tr>
@@ -230,6 +232,7 @@ Photo print
               <td class="text-right">
                 <div id="number_image" style="display: none;">
                   {{Session::get('cart.'.$id.'.data.2.sum_image')}}
+
                 </div>
 
                 <div id="get_number_image">
