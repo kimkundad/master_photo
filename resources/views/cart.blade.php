@@ -106,7 +106,7 @@ height: 60px;
     <div class="row margin_30">
 
       <div class="col-md-8 ">
-
+        <div class="table-responsive">
         <table class="table table-striped add_bottom_30">
           <thead style="    font-size: 14px;">
             <tr>
@@ -189,7 +189,7 @@ height: 60px;
 
           </tbody>
         </table>
-
+        </div>
 
       </div>
 
