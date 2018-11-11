@@ -111,7 +111,7 @@ Photo print
         @endif
 </div>
 
-        <table class="table table-striped cart-list add_bottom_30">
+    <!--    <table class="table table-striped cart-list add_bottom_30">
           <thead>
             <tr>
               <th>
@@ -135,7 +135,7 @@ Photo print
 
 
 
-          <!--  {{Session::get('cart.'.$ids.'.data.image.2.image')}} -->
+
             @foreach(Session::get('cart.'.$id.'.data.image') as $u)
             <tr>
               <td class="magnific-gallery">
@@ -159,16 +159,8 @@ Photo print
                   <input type="hidden" class="img_set" name="img_set" value="{{$u['image']}}">
                 </form>
               </td>
-
               <td >
-
-
-
                   {{$get_name_size}}
-
-
-
-
               </td>
 
               <td class="options">
@@ -183,8 +175,6 @@ Photo print
                               <button style="border:none; background: none; " type="submit" title="ลบบทความ" class="dropdown-item text-1 "><i class=" icon-trash"></i></button>
                             </form>
 
-
-
               </td>
             </tr>
             @endforeach
@@ -192,6 +182,53 @@ Photo print
 
 
           </tbody>
+        </table> -->
+
+
+        <table class="table table-striped cart-list add_bottom_30">
+          <thead>
+							<tr>
+								<th>
+									Item
+								</th>
+								<th>
+									Quantity
+								</th>
+								<th>
+									Discount
+								</th>
+								<th>
+									Total
+								</th>
+								<th>
+									Actions
+								</th>
+							</tr>
+						</thead>
+            <tbody >
+              <tr>
+								<td>
+									<div class="thumb_cart">
+
+									</div>
+									<span class="item_cart">Louvre Museum tickets</span>
+								</td>
+								<td>
+									<div class="numbers-row">
+										<input type="text" value="1" id="quantity_1" class="qty2 form-control" name="quantity_1">
+									<div class="inc button_inc">+</div><div class="dec button_inc">-</div></div>
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									<strong>€24,71</strong>
+								</td>
+								<td class="options">
+									<a href="#"><i class=" icon-trash"></i></a><a href="#"><i class="icon-ccw-2"></i></a>
+								</td>
+							</tr>
+            </tbody>
         </table>
 
 
