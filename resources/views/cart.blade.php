@@ -107,7 +107,7 @@ height: 60px;
 
       <div class="col-md-8 ">
 
-        <table class="table table-striped cart-list add_bottom_30">
+        <table class="table table-striped add_bottom_30">
           <thead style="    font-size: 14px;">
             <tr>
               <th>
