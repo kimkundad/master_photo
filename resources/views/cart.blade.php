@@ -142,7 +142,7 @@ height: 60px;
 
 
              <tr>
-               <td>
+               <td style="min-width: 200px;">
                  <a href="{{url('photo_edit/'.$u['data']['list_link'])}}" >
                  <div class="thumb_cart1">
                    <img src="{{url('assets/image/all_image/'.$u['data']['image'][0]['image'])}}" alt="image">
