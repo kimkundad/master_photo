@@ -1144,6 +1144,28 @@ ul#top_links li:first-child {
     color: #fff;
 }
 
+@media (max-width: 767px){
+  .table.cart-list, .table.cart-list tbody, .table.cart-list td, .table.cart-list th, .table.cart-list thead, .table.cart-list tr {
+    display: block;
+    border: 0;
+}
+.table.cart-list tr {
+    border: 1px solid #ccc;
+}
+.table.cart-list td {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    padding-left: 50%;
+}
+.table.cart-list td:nth-of-type(1):before {
+    content: "Item";
+    font-weight: 700;
+    color: #111;
+}
+}
+
+
 
 
 .dropdown-mini .dropdown-menu ul#lang_menu li a:hover{background-color:#f9f9f9;color:#e8c028!important;padding-left:15px}
