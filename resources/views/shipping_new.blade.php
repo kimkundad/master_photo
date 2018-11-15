@@ -131,11 +131,11 @@ $total_img += $u['data'][2]['sum_image'];
             <div class="col-md-6 col-sm-6">
               <div class="form-group">
                 <label>เบอร์โทรศัพท์ <span class="text-danger">*</span></label>
-                <input type="text" name="phone_ad" value="{{ old('phone_ad')}}" class="form-control">
+                <input type="text" name="phone_ad" id="phone-form" value="{{ old('phone_ad')}}" placeholder="หมายเลขโทรศัพท์ 10 หลัก" maxlength="10" class="form-control">
                 <input type="hidden" class="form-control" name="check_address" value="{{$check_address}}">
 
                 @if ($errors->has('phone_ad'))
-                <p class="text-danger" style="margin-top:10px;">
+                <p class="text-danger" id="danger_phone" style="margin-top:10px;">
                   {{ $errors->first('phone_ad') }}
                 </p>
                 @endif
@@ -192,14 +192,16 @@ $total_img += $u['data'][2]['sum_image'];
 
             <div class="col-md-12 col-sm-12">
               <div class="form-group">
-                <label>ที่อยู่ </label>
+                <label>ที่อยู่ <span class="text-danger">*</span></label>
                 <div >
-								<input type="text" class="form-control" name="address" placeholder="บ้านเลขที่.." value="{{ old('address') }}">
+								<input type="text" class="form-control" id="address-form" name="address" placeholder="บ้านเลขที่.." value="{{ old('address') }}">
+
                 @if ($errors->has('address'))
-                <p class="text-danger" style="margin-top:10px;">
+                <p class="text-danger" id="danger_address" style="margin-top:10px;">
                   {{ $errors->first('address') }}
                 </p>
                 @endif
+
 							</div>
 
               </div>
@@ -212,7 +214,7 @@ $total_img += $u['data'][2]['sum_image'];
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label>จังหวัด</label>
+                <label>จังหวัด <span class="text-danger">*</span></label>
 
                 <select id="province" name="province" class="form-control " >
 
@@ -220,7 +222,7 @@ $total_img += $u['data'][2]['sum_image'];
 
                 </select>
                 @if ($errors->has('province'))
-                <p class="text-danger" style="margin-top:10px;">
+                <p class="text-danger" id="danger_province" style="margin-top:10px;">
                   {{ $errors->first('province') }}
                 </p>
                 @endif
@@ -229,14 +231,14 @@ $total_img += $u['data'][2]['sum_image'];
 
             <div class="col-md-6">
               <div class="form-group">
-                <label>เขต/อำเภอ</label>
+                <label>เขต/อำเภอ <span class="text-danger">*</span></label>
                 <select id="amphur" name="amphur" class="form-control " >
 
                 <option value="">- กรุณาเลือกอำเภอ -</option>
 
                 </select>
                 @if ($errors->has('province'))
-                <p class="text-danger" style="margin-top:10px;">
+                <p class="text-danger" id="danger_amphur" style="margin-top:10px;">
                   {{ $errors->first('province') }}
                 </p>
                 @endif
@@ -245,14 +247,14 @@ $total_img += $u['data'][2]['sum_image'];
 
             <div class="col-md-6">
               <div class="form-group">
-                <label>แขวง/ตำบล</label>
+                <label>แขวง/ตำบล <span class="text-danger">*</span></label>
                 <select id="district" name="district" class="form-control " >
 
                 <option value="">- กรุณาเลือกตำบล -</option>
 
                 </select>
                 @if ($errors->has('province'))
-                <p class="text-danger" style="margin-top:10px;">
+                <p class="text-danger" id="danger_district" style="margin-top:10px;">
                   {{ $errors->first('province') }}
                 </p>
                 @endif
@@ -261,10 +263,10 @@ $total_img += $u['data'][2]['sum_image'];
 
             <div class="col-md-6">
               <div class="form-group">
-                <label>รหัสไปรษณีย์</label>
+                <label>รหัสไปรษณีย์ <span class="text-danger">*</span></label>
                 <input type="text" id="postcode" name="postcode" placeholder="รหัสไปรษณีย์ " class="form-control" value="{{ old('postcode') }}">
                 @if ($errors->has('postcode'))
-                <p class="text-danger" style="margin-top:10px;">
+                <p class="text-danger" id="danger_postcode" style="margin-top:10px;">
                   {{ $errors->first('postcode') }}
                 </p>
                 @endif
@@ -368,6 +370,35 @@ $total_img += $u['data'][2]['sum_image'];
 
 
 <script>
+
+console.log($('#address-form').val().length);
+
+$('#address-form').bind('input', function() {
+if ($('#address-form').val().length != 0) {
+      $('#danger_address').addClass('hidden');
+}
+});
+
+
+$('#phone-form').bind('input', function() {
+if ($('#phone-form').val().length != 0) {
+      $('#danger_phone').addClass('hidden');
+}
+});
+
+
+$('#province').bind('input', function() {
+if ($('#province').val().length != 0) {
+      $('#danger_province').addClass('hidden');
+      $('#danger_amphur').addClass('hidden');
+      $('#danger_district').addClass('hidden');
+      $('#danger_postcode').addClass('hidden');
+}
+});
+
+
+
+
 
 function myFunction() {
     var x = document.getElementById("dvPassport");

@@ -36,8 +36,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-     session()->forget('cart');
-     session()->flush();
+  //   session()->forget('cart');
+  //   session()->flush();
   //  $request->session()->pull('cart.data2.data.image.image', '1534488467-logo-Isuzu.png');
   //  session()->push('cart.data1.data.image', ['image' => '1534488467-logo-Isuzu.jpg', 'id' => 6]);
   //  $image = Session::get('cart.'.$ids.'.data.image.'.$num.'.image');
@@ -316,7 +316,6 @@ class HomeController extends Controller
                   ->first();
               $data['province'] = $province;
 
-
               $district = DB::table('amphur')
                    ->select(
                    'amphur.*'
@@ -341,9 +340,64 @@ class HomeController extends Controller
         }
 
 
+        $get_my_add_count = DB::table('user_addresses')
+            ->where('user_id', Auth::user()->id)
+            ->where('type_address', 1)
+            ->count();
+
+        if($get_my_add_count > 0){
+
+
+          $get_my_add = DB::table('user_addresses')
+              ->where('user_id', Auth::user()->id)
+              ->where('type_address', 1)
+              ->get();
+
+              foreach($get_my_add as $add){
+
+                //  dd(get address);
+                   $provincez = DB::table('province')
+                        ->select(
+                        'province.*'
+                        )
+                        ->where('PROVINCE_ID', $add->province)
+                        ->first();
+                    $add->provincez = $provincez->PROVINCE_NAME;
+
+                    $districtz = DB::table('amphur')
+                         ->select(
+                         'amphur.*'
+                         )
+                         ->where('AMPHUR_ID', $add->district)
+                         ->first();
+                     $add->districtz = $districtz->AMPHUR_NAME;
+
+
+                     $subdistrictsz = DB::table('district')
+                          ->select(
+                          'district.*'
+                          )
+                          ->where('DISTRICT_ID', $add->sub_district)
+                          ->first();
+                      $add->subdistrictsz = $subdistrictsz->DISTRICT_NAME;
+                //  //  dd(get address);
+
+              }
 
 
 
+          $data['get_my_add'] = $get_my_add;
+
+        //  dd($get_my_add);
+
+        }else{
+          $data['get_my_add'] = null;
+        }
+
+
+        $data['get_my_add_count'] = $get_my_add_count;
+
+      //  dd($get_my_add);
 
         $data['package'] = $package;
         $data['check_address'] = $check_address;
