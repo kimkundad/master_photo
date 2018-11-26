@@ -195,6 +195,7 @@ class OptionProController extends Controller
         $package = option_item::find($id);
         $package->item_name = $request['item_name'];
         $package->item_price = $request['item_price'];
+        $package->resolution = $request['resolution'];
         $package->item_option_id = $request['option_id'];
         $package->save();
 
@@ -213,6 +214,7 @@ class OptionProController extends Controller
         $package->item_name = $request['item_name'];
         $package->item_price = $request['item_price'];
         $package->item_option_id = $request['option_id'];
+        $package->resolution = $request['resolution'];
         $package->item_image = $input['imagename'];
         $package->save();
 
@@ -259,6 +261,7 @@ class OptionProController extends Controller
         $package = new option_item();
         $package->item_name = $request['item_name'];
         $package->item_price = $request['item_price'];
+        $package->resolution = $request['resolution'];
         $package->item_option_id = $request['option_id'];
         $package->save();
 
@@ -277,6 +280,7 @@ class OptionProController extends Controller
         $package->item_name = $request['item_name'];
         $package->item_price = $request['item_price'];
         $package->item_option_id = $request['option_id'];
+        $package->resolution = $request['resolution'];
         $package->item_image = $input['imagename'];
         $package->save();
 

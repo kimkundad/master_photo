@@ -265,6 +265,14 @@ Photo print
                 </tbody>
               </table>
 
+              <?php
+
+          /*    $data = getimagesize(url('assets/image/gallery/1534842042-d88444d6206b4305377486120d9c0774.jpg'));
+              echo $width = $data[0];
+              echo "<br />";
+              echo $height = $data[1]; */
+               ?>
+
 
 
 

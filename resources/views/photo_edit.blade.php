@@ -105,6 +105,7 @@ Photo print
 
           @if($set_size == 1)
             {{ $get_name_size = $k->item_name}}
+            {{ $resolution = $k->resolution}}
           @endif
 
               {{$set_size++}}
@@ -135,7 +136,9 @@ Photo print
           <tbody {{ $ids = "data".$id }}>
 
 
-
+            <?php
+            $all_img = 0;
+             ?>
 
 
             @foreach(Session::get('cart.'.$id.'.data.image') as $u)
@@ -145,24 +148,50 @@ Photo print
                 <a href="{{url('assets/image/all_image/'.$u['image'])}}" data-effect="mfp-zoom-in">
                 <div class="thumb_cart1">
                   <img src="{{url('assets/image/all_image/'.$u['image'])}}" alt="image" style="padding: 1px; ">
+
+                  <?php
+
+                  $data = getimagesize(url('assets/image/all_image/'.$u['image']));
+                  $width = $data[0];
+                  $height = $data[1];
+                  $get_resolution = $width * $height;
+
+                  if($get_resolution < $resolution){
+                    $all_img++;
+                  }
+
+                   ?>
                 </div>
 
                 </a>
               </td>
               <td>
 
-                <form id="cutproduct" class="typePay2 " novalidate="novalidate" action="" method="post"  role="form">
-                  <div class="numbers-row">
-                    <input type="text" value="{{$u['num']}}" id="quantity_{{$u['id']}}" class="qty2 form-control" name="quantity">
-                  </div>
+                @if($get_resolution >= $resolution)
+                  <form id="cutproduct" class="typePay2 " novalidate="novalidate" action="" method="post"  role="form">
+                    <div class="numbers-row">
+                      <input type="text" value="{{$u['num']}}" id="quantity_{{$u['id']}}" class="qty2 form-control" name="quantity">
+                    </div>
 
-                  <input type="hidden" class="ids" name="ids" value="{{$id}}">
-                  <input type="hidden" class="num_img" name="num_img" value="{{$u['id']}}">
-                  <input type="hidden" class="img_set" name="img_set" value="{{$u['image']}}">
-                </form>
+                    <input type="hidden" class="ids" name="ids" value="{{$id}}">
+                    <input type="hidden" class="num_img" name="num_img" value="{{$u['id']}}">
+                    <input type="hidden" class="img_set" name="img_set" value="{{$u['image']}}">
+                  </form>
+                @else
+                <span style="color: #e04f67; font-size:13px;">Resolution ของรูปต่ำกว่า<br /> {{number_format($resolution)}} พิกเซล</span>
+                @endif
+
+
+
               </td>
               <td >
-                  {{$get_name_size}}
+                  {{$get_name_size}}<br />
+
+                  @if($get_resolution >= $resolution)
+                  @else
+
+                  @endif
+
               </td>
 
               <td class="options">
@@ -226,8 +255,10 @@ Photo print
                 </td>
               <td class="text-right">
                 <div id="number_image" style="display: none;">
-                  {{Session::get('cart.'.$id.'.data.2.sum_image')}}
-
+                  {{Session::get('cart.'.$id.'.data.2.sum_image')-$all_img}}
+                  <?php
+                  Session::put('img_f', $all_img);
+                   ?>
                 </div>
 
                 <div id="get_number_image">
@@ -240,11 +271,23 @@ Photo print
 
               <tr>
                 <td>
+                  จำนวนรูปที่เสีย
+                </td>
+              <td class="text-right">
+
+                {{$all_img}}
+
+              </td>
+
+              </tr>
+
+              <tr>
+                <td>
                   ราคารวม
                 </td>
               <td class="text-right">
                 <div id="sum_image_price" style="display: none;">
-                  {{number_format((float)Session::get('cart.'.$id.'.data.3.sum_price')*Session::get('cart.'.$id.'.data.2.sum_image'), 2, '.', '')}}
+                  {{number_format((float)Session::get('cart.'.$id.'.data.3.sum_price')*(Session::get('cart.'.$id.'.data.2.sum_image')-$all_img) , 2, '.', '')}}
                 </div>
                 <div id="get_image_price">
 

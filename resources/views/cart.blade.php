@@ -160,13 +160,13 @@ height: 60px;
                  </a>
                </td>
                <td>
-                 {{$u['data'][2]['sum_image']}} Pcs.
+                 {{$u['data'][2]['sum_image']-Session::get('img_f')}} Pcs.
                </td>
                <td>
                  0%
                </td>
                <td>
-                 <strong>฿ {{number_format((float)$u['data'][3]['sum_price'], 2, '.', '')*$u['data'][2]['sum_image']}} </strong>
+                 <strong>฿ {{number_format((float)$u['data'][3]['sum_price'], 2, '.', '')*($u['data'][2]['sum_image']-Session::get('img_f'))}} </strong>
                </td>
                <td class="options">
                  <form id="myform-{{$u['data']['id']}}" name="myform-{{$u['data']['id']}}" action="{{ url('del_cart/') }}" method="POST"  style="    margin-bottom: 0em;">
@@ -178,7 +178,7 @@ height: 60px;
              </tr>
 
              <?php
-              $total_pay += ($u['data'][3]['sum_price']*$u['data'][2]['sum_image']);
+              $total_pay += ($u['data'][3]['sum_price']*($u['data'][2]['sum_image']-Session::get('img_f')));
               $total_img += $u['data'][2]['sum_image'];
               $s++;
               ?>

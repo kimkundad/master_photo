@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Response;
 use Session;
 use Auth;
 use App\User;
+use App\user_address;
 use App\order;
 use App\order_option;
 use App\order_detail;
 use App\order_image;
 use App\category;
 use App\delivery;
-use App\user_address;
 use Mail;
 use Swift_Transport;
 use Swift_Message;
@@ -600,6 +600,7 @@ class HomeController extends Controller
 //dd($c1);
 
 
+         $text_re_user = $request['text_re_user'];
          $id_card_no = $request['id_card_no'];
          $branch_code = $request['branch_code'];
 
@@ -617,6 +618,27 @@ class HomeController extends Controller
            $user->branch_code = $request['branch_code'];
            $user->save();
 
+
+         }
+
+
+         if($text_re_user == 3){
+
+           $user_id = Auth::user()->id;
+
+           $package = new user_address();
+           $package->name_ad = $request['name'];
+           $package->user_id = Auth::user()->id;
+           $package->phone_ad = $request['phone'];
+           $package->address_ad = $request['address'];
+           $package->province = $request['province'];
+           $package->district = $request['amphur'];
+
+           $package->sub_district = $request['district'];
+           $package->zip_code = $request['postcode'];
+           $package->type_address = 1;
+           $package->save();
+
          }
 
 
@@ -630,7 +652,23 @@ class HomeController extends Controller
        $package->bill_address = $request['address_bill_order'];
        $package->type_order_check = $request['address_type_order'];
        $package->bil_req = $check_order;
+       $package->text_re_user = $text_re_user;
        $package->deliver_order = $request['deliver_order'];
+       if($request['deliver_order'] == 'จัดส่งผ่านทางรถ บขส.'){
+
+         $package->shipping_t2 = $request['bus_shipping'];
+
+       }elseif($request['deliver_order'] == 'ทางร้านจัดส่ง Delivery'){
+
+         $package->shipping_t2 = $request['area_shipping'];
+
+       }elseif($request['deliver_order'] == 'รับสินค้าด้วยตัวเอง'){
+
+         $package->shipping_t2 = $request['man_shipping'];
+
+       }else{
+         $package->shipping_t2 = null;
+       }
        $package->note = $request['message_order'];
        $package->order_price = $request['order_price'];
        $package->total = $request['total'];
@@ -1270,6 +1308,9 @@ class HomeController extends Controller
     public function upload_image(Request $request){
 
       $gallary = $request->file('file');
+
+
+
       $exp = array();
       $size_photo = $request['size_photo'];
       $path1 = explode(",", $size_photo);
@@ -1304,11 +1345,14 @@ class HomeController extends Controller
             $path = 'assets/image/all_image/';
             $filename = time()."-".$gallary[$i]->getClientOriginalName();
             $gallary[$i]->move($path, $filename);
+
             $admins[] = [
                 'image' => $filename,
                 'id' => $i,
                 'num' => 1
             ];
+
+
           }
 
         }

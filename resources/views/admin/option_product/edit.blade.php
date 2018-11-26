@@ -63,7 +63,7 @@
                                           {{ method_field($method) }}
                                           {{ csrf_field() }}
 
-          											<h4 class="mb-xlg">แก้ไขหมวดหมู่ย่อย</h4>
+          											<h4 class="mb-xlg">แก้ไข option</h4>
 
           											<fieldset>
                                   <div class="form-group">
@@ -163,7 +163,7 @@
 
                                     <th>รายละเอียด</th>
                                     <th>ราคา</th>
-
+                                    <th>resolution</th>
                                     <th>รูป</th>
                                     <th>จัดการ</th>
                                   </tr>
@@ -175,7 +175,7 @@
 
                                     <td>{{$u->item_name}}</td>
                                     <td>{{$u->item_price}}</td>
-
+                                    <td>{{$u->resolution}}</td>
                                     <td>
                                     @if($u->item_image != null)
                                     <img src="{{url('assets/image/option/'.$u->item_image)}}"  height="50" />
@@ -228,6 +228,13 @@
                     													<label class="col-md-3 control-label" for="profileFirstName">item price*</label>
                     													<div class="col-md-8">
                     														<input type="text" class="form-control" name="item_price" value="{{$u->item_price}}">
+                    														</div>
+                    												</div>
+
+                                            <div class="form-group">
+                    													<label class="col-md-3 control-label" for="profileFirstName">item resolution*</label>
+                    													<div class="col-md-8">
+                    														<input type="text" class="form-control" name="resolution" value="{{ $u->resolution}}">
                     														</div>
                     												</div>
 
@@ -315,6 +322,13 @@
           													<label class="col-md-3 control-label" for="profileFirstName">item price*</label>
           													<div class="col-md-8">
           														<input type="text" class="form-control" name="item_price" value="{{ old('item_price')}}">
+          														</div>
+          												</div>
+
+                                  <div class="form-group">
+          													<label class="col-md-3 control-label" for="profileFirstName">item resolution*</label>
+          													<div class="col-md-8">
+          														<input type="text" class="form-control" name="resolution" value="{{ old('resolution')}}">
           														</div>
           												</div>
 

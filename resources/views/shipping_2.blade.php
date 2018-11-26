@@ -286,6 +286,23 @@ $total_img += $u['data'][2]['sum_image'];
 
                     <div id="new_address1" style="display:none">
 
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>ชื่อ-สกุล <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" name="name" value="{{ old('name') }}" >
+
+                        </div>
+                      </div>
+
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>เบอร์โทรศัพท์ <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" name="phone" value="{{ old('phone') }}" >
+
+                        </div>
+                      </div>
+
 
                       <div class="col-md-12 col-sm-12">
                         <div class="form-group">
@@ -428,7 +445,7 @@ $total_img += $u['data'][2]['sum_image'];
                        <label>กรุณาเลือกรถ บขส.</label>
 
 
-                        <select class="form-control" name="mide_balance">
+                        <select class="form-control" name="bus_shipping">
                         <option value="เลือกเขตพื้นที่" selected="selected">เลือกรถ บขส.</option>
                         <option value="999">999 ค่าจัดส่ง 210 บาท</option>
                         <option value="กิจการทัวร์">กิจการทัวร์  ค่าจัดส่ง  250 บาท </option>
@@ -482,7 +499,7 @@ $total_img += $u['data'][2]['sum_image'];
 
                        <label>เขตพื้นที่จัดส่งสินค้า</label>
 
-                        <select class="form-control" name="mide_delivery">
+                        <select class="form-control" name="area_shipping">
                             <option value="เลือกเขตพื้นที่" selected="selected">เลือกเขตพื้นที่</option>
                       			<option value="คลองเตย">คลองเตย</option>
                       			<option value="จตุจักร">จตุจักร</option>
@@ -526,7 +543,7 @@ $total_img += $u['data'][2]['sum_image'];
                      <div class="form-group ">
 
                        <label>เลือกรูปแบบการจัดส่ง</label>
-                        <select class="form-control" name="mide_recive">
+                        <select class="form-control" name="man_shipping">
                               <option value="เลือกสาขาที่ต้องการมารับสินค้า" selected="selected">เลือกสาขาที่ต้องการมารับสินค้า</option>
                               <option value="สาขาตรงข้ามเซ็นทรัลลาดพร้าว ">สาขาตรงข้ามเซ็นทรัลลาดพร้าว </option>
                               <option value="สาขารามอินทรา กม.4 ">สาขารามอินทรา กม.4 </option>

@@ -92,7 +92,6 @@
 
                           $i = 1 ;
 
-
                           foreach(Session::get('cart') as $item){
 
                             $total+=( $item['data'][3]['sum_price'] * $item['data'][2]['sum_image']);
