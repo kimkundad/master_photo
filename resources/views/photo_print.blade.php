@@ -182,11 +182,13 @@ Photo print
              @endforeach
              @endif
 
+             <!--
              @if($option_set == 1)
              <hr />
              <p style="margin-bottom:15px;"><b><i class="sl sl-icon-question"></i> คุณมีสินค้านี้อยู่ในตะกร้าแล้ว คุณสามารถปรับ Option ของการอัดรูป <br />แล้วกดปุ่น <span class="text-danger"> Update Option</span> เพื่อเปลี่ยนข้อมูลได้</b></p>
              <a id="submit_uption" class="btn btn-submit btn-block"><i class="sl sl-icon-pencil"></i> UPDATE OPTION</a>
              @endif
+             -->
 
             </form>
 
