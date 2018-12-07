@@ -84,6 +84,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'admin'], function() {
 
+
+
+  Route::get('admin/load_img/{id}', 'OrderController@load_img');
+
   Route::post('admin/delete_user_address/', 'StudentController@delete_user_address');
   Route::get('admin/edit_user_address/{id}', 'StudentController@edit_user_address');
   Route::post('post_edit_address/', 'StudentController@post_edit_address');

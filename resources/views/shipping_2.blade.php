@@ -706,11 +706,15 @@ $total_img += $u['data'][2]['sum_image'];
 
 function myFunction() {
     var x = document.getElementById("dvPassport");
+
     if (x.style.display === "none") {
         x.style.display = "block";
     } else {
         x.style.display = "none";
+        $("#new_address1").hide()
+        $("#new_address_bill").hide()
     }
+
 }
 
 if({{$get_my_add_count}} == 0){

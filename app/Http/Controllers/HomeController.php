@@ -1183,7 +1183,7 @@ class HomeController extends Controller
 
     public function photo_edit($id){
 
-    //  dd(Session::get('cart'));
+      //dd(Session::get('cart'));
 
 
       $get_price = DB::table('option_items')->select(
@@ -1192,7 +1192,7 @@ class HomeController extends Controller
         ->whereIn('id', Session::get('cart.'.$id.'.data.0.size_photo'))
         ->get();
 
-    //  dd(Session::get('cart'));
+      //dd($get_price);
 
 
       $set_num_date = count(Session::get('cart'));

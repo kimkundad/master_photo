@@ -46,7 +46,7 @@
               <div class="dropdown dropdown-mini">
 
               @if (Auth::guest())
-              <a href="{{url('login')}}" id="access_link" >Sing in</a>
+              <a href="{{url('login')}}" id="access_link" >Sign in</a>
               @else
 
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link" >{{ Auth::user()->name }}</a>

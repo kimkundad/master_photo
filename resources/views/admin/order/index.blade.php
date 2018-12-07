@@ -60,7 +60,7 @@
                       <th>ยอดเงิน</th>
 
                       <th>สถานะ</th>
-                      
+
                       <th>วันที่สั่ง</th>
                       <th>จัดการ</th>
                     </tr>
@@ -70,10 +70,21 @@
                 @foreach($objs as $u)
                     <tr id="{{$u->id}}">
                       <td >{{$u->id}}</td>
-                      <td>{{$u->firstname_order}} {{$u->lastname_order}}</td>
-                      <td >{{$u->phone_order}}</td>
+                      <td>{{$u->name}}</td>
+                      <td >{{$u->phone}}</td>
                       <td>{{number_format($u->order_price)}} บาท</td>
-                      <th>รอการตรวจสอบ</th>
+                      <th>
+
+                        @if($u->status == 0)
+                        รอการตรวจสอบ
+                        @elseif($u->status == 1)
+                        ชำระเงินแล้ว
+                        @elseif($u->status == 2)
+                        อยู่ระหว่างการจัดส่ง
+                        @else
+                        จัดส่งเรียบร้อย
+                        @endif
+                      </th>
 
                       <td>{{$u->created_at}}</td>
                       <td>

@@ -123,7 +123,7 @@ height: 60px;
                 PRICE
               </th>
               <th>
-                Actions
+                Delete
               </th>
             </tr>
           </thead>

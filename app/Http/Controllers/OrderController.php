@@ -10,6 +10,7 @@ use Mail;
 use Swift_Transport;
 use Swift_Message;
 use Swift_Mailer;
+use Illuminate\Http\Response;
 
 class OrderController extends Controller
 {
@@ -22,8 +23,12 @@ class OrderController extends Controller
     {
         //
         $cat = DB::table('orders')->select(
-              'orders.*'
+              'orders.*',
+              'users.id as id_pro',
+              'users.name',
+              'users.phone'
               )
+              ->leftjoin('users', 'users.id',  'orders.user_id')
               ->get();
 
               $data['objs'] = $cat;
@@ -94,16 +99,169 @@ class OrderController extends Controller
     public function edit($id)
     {
         //
-      $obj = order::find($id);
+
+        $obj = DB::table('orders')->select(
+              'orders.*',
+              'users.id as id_pro',
+              'users.name',
+              'users.email',
+              'users.phone'
+              )
+              ->leftjoin('users', 'users.id',  'orders.user_id')
+              ->where('orders.id', $id)
+              ->first();
+
+
+//check_bill
+
+              $check_bill = DB::table('user_addresses')->select(
+                    'user_addresses.*'
+                    )
+                    ->where('user_id', $obj->user_id)
+                    ->where('type_address', 1)
+                    ->count();
+
+
+                    if($check_bill > 0){
+
+                      $get_address_bill = DB::table('user_addresses')->select(
+                            'user_addresses.*'
+                            )
+                            ->where('user_id', $obj->user_id)
+                            ->where('type_address', 1)
+                            ->first();
+
+
+                            $province_bill = DB::table('province')
+                                 ->select(
+                                 'province.*'
+                                 )
+                                 ->where('PROVINCE_ID', $get_address_bill->province)
+                                 ->first();
+                             $data['province_bill'] = $province_bill;
+
+                             $district_bill = DB::table('amphur')
+                                  ->select(
+                                  'amphur.*'
+                                  )
+                                  ->where('AMPHUR_ID', $get_address_bill->district)
+                                  ->first();
+                              $data['district_bill'] = $district_bill;
+
+
+                              $subdistricts_bill = DB::table('district')
+                                   ->select(
+                                   'district.*'
+                                   )
+                                   ->where('DISTRICT_ID', $get_address_bill->sub_district)
+                                   ->first();
+                               $data['subdistricts_bill'] = $subdistricts_bill;
+
+
+
+                    }else{
+                      $get_address_bill = null;
+                    }
+
+                    $data['get_address_bill'] = $get_address_bill;
+// end check_bill
+
+              $check_address = DB::table('user_addresses')->select(
+                    'user_addresses.*'
+                    )
+                    ->where('id', $obj->shipping_address)
+                    ->count();
+
+
+              $get_address = DB::table('user_addresses')->select(
+                    'user_addresses.*'
+                    )
+                    ->where('id', $obj->shipping_address)
+                    ->first();
+
+
+                    if($check_address > 0){
+
+
+                      $province = DB::table('province')
+                           ->select(
+                           'province.*'
+                           )
+                           ->where('PROVINCE_ID', $get_address->province)
+                           ->first();
+                       $data['province'] = $province;
+
+                       $district = DB::table('amphur')
+                            ->select(
+                            'amphur.*'
+                            )
+                            ->where('AMPHUR_ID', $get_address->district)
+                            ->first();
+                        $data['district'] = $district;
+
+
+                        $subdistricts = DB::table('district')
+                             ->select(
+                             'district.*'
+                             )
+                             ->where('DISTRICT_ID', $get_address->sub_district)
+                             ->first();
+                         $data['subdistricts'] = $subdistricts;
+
+                    }
+
+
+
+
+
+
+
+
 
       $order_detail = DB::table('order_details')->select(
             'order_details.*',
-            'order_details.id as id_de'
+            'order_details.id as id_de',
+            'products.*'
             )
-            ->where('order_id', $id)
+            ->leftjoin('products', 'products.id',  'order_details.product_id')
+            ->where('order_details.order_id', $id)
             ->get();
 
-            foreach($order_detail as $u){
+            $get_option = [];
+
+            foreach($order_detail as $j){
+
+              $order_option = DB::table('order_options')->select(
+                    'order_options.*',
+                    'order_options.id as id_op',
+                    'option_items.*'
+                    )
+                    ->leftjoin('option_items', 'option_items.id',  'order_options.option_id')
+                    ->where('order_options.order_id_detail', $j->id_de)
+                    ->get();
+
+
+                    $order_images = DB::table('order_images')->select(
+                          'order_images.*',
+                          'order_images.id as id_img'
+                          )
+                          ->where('order_id_detail', $j->id_de)
+                          ->get();
+
+
+
+
+
+                  //  $get_option = $order_option;
+                    $j->order_option = $order_option;
+                    $j->order_images = $order_images;
+
+            }
+
+
+        //    dd($order_detail);
+
+          /*  foreach($order_detail as $u){
 
               $order_option = DB::table('option_items')->select(
                     'option_items.*',
@@ -130,12 +288,12 @@ class OrderController extends Controller
                     ->where('order_id_detail', $u->id)
                     ->get();
                   $u->image_option = $order_image;
-                //  dd($order_option);
-            }
+                //  dd($order_optio
+            }*/
           //  dd($order_detail);
 
       $data['datahead'] = "ข้อมูล Order";
-
+      $data['get_address'] = $get_address;
       $data['objs'] = $obj;
       $data['order_detail'] = $order_detail;
     //  dd($order_detail);
@@ -152,6 +310,23 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+
+    public function load_img($id){
+
+
+      $order_images = DB::table('order_images')->select(
+            'order_images.*'
+            )
+            ->where('id', $id)
+            ->first();
+
+    //  $filepath = public_path('assets/image/all_image/').$order_images->order_image;
+    //  return Response::download($filepath);
+
+      return response()->download(public_path('assets/image/all_image/').$order_images->order_image);
+
     }
 
     /**

@@ -103,7 +103,7 @@ Photo print
         @if($option_images)
         @foreach($option_images as $k)
 
-          @if($set_size == 1)
+          @if($set_size == 0)
             {{ $get_name_size = $k->item_name}}
             {{ $resolution = $k->resolution}}
           @endif
@@ -163,23 +163,23 @@ Photo print
                    ?>
                 </div>
 
+
                 </a>
               </td>
               <td>
 
-                @if($get_resolution >= $resolution)
-                  <form id="cutproduct" class="typePay2 " novalidate="novalidate" action="" method="post"  role="form">
-                    <div class="numbers-row">
-                      <input type="text" value="{{$u['num']}}" id="quantity_{{$u['id']}}" class="qty2 form-control" name="quantity">
-                    </div>
 
-                    <input type="hidden" class="ids" name="ids" value="{{$id}}">
-                    <input type="hidden" class="num_img" name="num_img" value="{{$u['id']}}">
-                    <input type="hidden" class="img_set" name="img_set" value="{{$u['image']}}">
-                  </form>
-                @else
-                <span style="color: #e04f67; font-size:13px;">Resolution ของรูปต่ำกว่า<br /> {{number_format($resolution)}} พิกเซล</span>
-                @endif
+                <form id="cutproduct" class="typePay2 " novalidate="novalidate" action="" method="post"  role="form">
+                  <div class="numbers-row">
+                    <input type="text" value="{{$u['num']}}" id="quantity_{{$u['id']}}" class="qty2 form-control" name="quantity">
+                  </div>
+
+                  <input type="hidden" class="ids" name="ids" value="{{$id}}">
+                  <input type="hidden" class="num_img" name="num_img" value="{{$u['id']}}">
+                  <input type="hidden" class="img_set" name="img_set" value="{{$u['image']}}">
+                </form>
+
+
 
 
 
@@ -188,8 +188,9 @@ Photo print
                   {{$get_name_size}}<br />
 
                   @if($get_resolution >= $resolution)
-                  @else
 
+                  @else
+                  <span style="color: #e04f67; font-size:13px;">Resolution ของรูปต่ำกว่า<br /> {{number_format($resolution)}} พิกเซล</span>
                   @endif
 
               </td>
@@ -255,7 +256,7 @@ Photo print
                 </td>
               <td class="text-right">
                 <div id="number_image" style="display: none;">
-                  {{Session::get('cart.'.$id.'.data.2.sum_image')-$all_img}}
+                  {{Session::get('cart.'.$id.'.data.2.sum_image')}}
                   <?php
                   Session::put('img_f', $all_img);
                    ?>
@@ -269,17 +270,7 @@ Photo print
 
               </tr>
 
-              <tr>
-                <td>
-                  จำนวนรูปที่เสีย
-                </td>
-              <td class="text-right">
 
-                {{$all_img}}
-
-              </td>
-
-              </tr>
 
               <tr>
                 <td>
@@ -287,7 +278,7 @@ Photo print
                 </td>
               <td class="text-right">
                 <div id="sum_image_price" style="display: none;">
-                  {{number_format((float)Session::get('cart.'.$id.'.data.3.sum_price')*(Session::get('cart.'.$id.'.data.2.sum_image')-$all_img) , 2, '.', '')}}
+                  {{number_format((float)Session::get('cart.'.$id.'.data.3.sum_price')*(Session::get('cart.'.$id.'.data.2.sum_image')) , 2, '.', '')}}
                 </div>
                 <div id="get_image_price">
 
@@ -503,6 +494,44 @@ $.notify({
  */
 </script>
  @endif
+
+
+
+
+ <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document" style="margin-top: 180px;">
+     <div class="modal-content text-center">
+
+
+       <div class="modal-body">
+         <br />
+         <br />
+         <h3 class="modal-title" >มีรูปที่ความละเอียดต่ำ จำนวน</h3>
+
+         <h4 class="modal-title" >{{$all_img}} รูป</h4>
+         <h4 class="modal-title" >หากไม่ต้องการ กรุณาลบออกก่อนสั่งงาน</h4>
+         <br />
+       </div>
+       <div class="modal-footer">
+
+    <div class="col-md-412 text-center">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+
+  </div>
+  </div>
+
+     </div>
+   </div>
+ </div>
+
+
+ <script type="text/javascript">
+    $(window).on('load',function(){
+        $('#myModal1').modal('show');
+    });
+</script>
+
+
 
 <script src="{{url('master/assets/js/dropzone.js')}}?v1.1"></script>
 
