@@ -35,9 +35,9 @@ user profile
 							</li>
 							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
 							</li>
-              <li><a href="#"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
 							</li>
-              <li><a href="#"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> My Credit </a>
+              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
 							</li>
 
 						</ul>
@@ -61,7 +61,7 @@ user profile
 
 
                         <tr>
-                          <td>ชื่อ-สกุล</td><td>{{Auth::user()->name}}</td>
+                          <td>ชื่อ-นามสกุล</td><td>{{Auth::user()->name}}</td>
                         </tr>
                         <tr>
                           <td>อีเมล์</td><td>{{Auth::user()->email}}</td>
@@ -149,6 +149,32 @@ user profile
 <script src="{{url('master/assets/js/tabs.js')}}"></script>
 <script>
     new CBPFWTabs(document.getElementById('tabs'));
+  </script>
+
+  <script>
+  @if ($message = Session::get('edit_success'))
+  $.notify({
+   // options
+   icon: 'icon_set_1_icon-76',
+   title: "<h4>อัพเดท สำเร็จ</h4> ",
+   message: "ข้อมูลที่ถูกต้องทำให้การติดต่อได้ไม่ผิดพลาด. "
+  },{
+   // settings
+   type: 'info',
+   delay: 5000,
+   timer: 3000,
+   z_index: 9999,
+   showProgressbar: false,
+   placement: {
+     from: "bottom",
+     align: "right"
+   },
+   animate: {
+     enter: 'animated bounceInUp',
+     exit: 'animated bounceOutDown'
+   },
+  });
+  @endif
   </script>
 
 </body>

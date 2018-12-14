@@ -526,9 +526,12 @@ $.notify({
 
 
  <script type="text/javascript">
+    @if($all_img > 0)
     $(window).on('load',function(){
         $('#myModal1').modal('show');
     });
+    @endif
+
 </script>
 
 

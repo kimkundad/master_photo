@@ -35,9 +35,9 @@ user profile
 							</li>
 							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
 							</li>
-              <li><a href="#"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
 							</li>
-              <li><a href="#"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> My Credit </a>
+              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
 							</li>
 
 						</ul>
@@ -65,7 +65,7 @@ user profile
 											{{ csrf_field() }}
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">ชื่อ-สกุล</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">ชื่อ-นามสกุล</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="name" value="{{ $objs->name }}" >
                           <input type="hidden" class="form-control" name="user_id" value="{{ $objs->id }}" >
@@ -163,31 +163,7 @@ user profile
 </body>
 
 
-<script>
-@if ($message = Session::get('edit_success'))
-$.notify({
- // options
- icon: 'icon_set_1_icon-76',
- title: "<h4>อัพเดท สำเร็จ</h4> ",
- message: "ข้อมูลที่ถูกต้องทำให้การติดต่อได้ไม่ผิดพลาด. "
-},{
- // settings
- type: 'info',
- delay: 5000,
- timer: 3000,
- z_index: 9999,
- showProgressbar: false,
- placement: {
-   from: "bottom",
-   align: "right"
- },
- animate: {
-   enter: 'animated bounceInUp',
-   exit: 'animated bounceOutDown'
- },
-});
-@endif
-</script>
+
 
 
 

@@ -35,9 +35,9 @@ user profile
 							</li>
 							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
 							</li>
-              <li><a href="#"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
 							</li>
-              <li><a href="#"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> My Credit </a>
+              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
 							</li>
 
 						</ul>
@@ -73,7 +73,7 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">ชื่อ-สกุล</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">ชื่อ-นามสกุล</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="name" value="{{ old('name') }}" required="">
                         </div>
@@ -154,7 +154,7 @@ user profile
 
                           <option value="0">ที่อยู่ในการจัดส่ง</option>
                           <option value="1" >ที่อยู่ในการออกใบเสร็จ</option>
-                          <option value="2" >ว่าง</option>
+
                           <option value="3" selected>ที่อยู่ในการจัดส่ง ร่วมกับที่อยู่ในการออกใบเสร็จ</option>
                           </select>
 

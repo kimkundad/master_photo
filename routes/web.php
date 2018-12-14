@@ -55,6 +55,11 @@ Route::get('payment/{id}', 'HomeController@payment')->name('payment');
 Route::post('paypal', 'PaymentController@payWithpaypal')->name('payWithpaypal');
 Route::get('status', 'PaymentController@getPaymentStatus');
 
+Route::get('payment_notify', 'UserProfileController@payment_notify');
+Route::post('post_payment_notify', 'UserProfileController@post_payment_notify');
+Route::get('payment_notify_success', 'UserProfileController@payment_notify_success');
+
+
 Route::get('category/{id}', 'HomeController@category');
 
 // Social Auth
@@ -78,6 +83,9 @@ Route::group(['middleware' => 'auth'], function () {
   Route::post('/delete_address_book', 'UserProfileController@delete_address_book')->name('delete_address_book');
   Route::get('/new_address_book', 'UserProfileController@new_address_book')->name('new_address_book');
   Route::post('/post_new_address_book', 'UserProfileController@post_new_address_book')->name('post_new_address_book');
+
+  Route::get('/my_order', 'UserProfileController@my_order')->name('my_order');
+  Route::get('my_order_detail/{id}', 'UserProfileController@my_order_detail')->name('my_order_detail');
 
 
 });

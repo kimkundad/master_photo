@@ -13,6 +13,7 @@ use App\order;
 use App\order_detail;
 use App\order_image;
 use App\category;
+use App\user_payment;
 use App\user_address;
 use Mail;
 use Swift_Transport;
@@ -58,10 +59,276 @@ class UserProfileController extends Controller
         $package->branch_code = $request['branch_code'];
         $package->save();
 
-      return redirect(url('profile/'.$id.'/edit'))->with('edit_success','Edit successful');
+      return redirect(url('profile/'))->with('edit_success','Edit successful');
 
       }
 
+    }
+
+
+    public function my_order(){
+
+      $get_detail_o = [];
+
+      $order = DB::table('orders')
+            ->where('user_id', Auth::user()->id)
+            ->get();
+
+            foreach($order as $u){
+
+              $order_de = DB::table('order_details')->select(
+                    'order_details.*',
+                    'order_details.id as id_de',
+                    'order_details.created_at as created_ats',
+                    'products.*'
+                    )
+                    ->leftjoin('products', 'products.id',  'order_details.product_id')
+                    ->where('order_details.order_id', $u->id)
+                    ->get();
+
+
+                    foreach($order_de as $h){
+
+
+
+                          $order_option = DB::table('order_options')
+                            ->where('order_id_detail', $h->id)
+                            ->get();
+
+                            foreach($order_option as $j){
+
+                              $name_option = DB::table('option_items')
+                                    ->where('id', $j->option_id)
+                                    ->first();
+                                $j->get_option = $name_option;
+                            }
+
+
+                            $h->get_all_option = $order_option;
+
+                    }
+
+                    $get_detail_o[] = $order_de;
+
+                    $u->option = $order_de;
+
+            }
+
+          //  dd($order);
+            $data['order'] = $order;
+
+      return view('my_order', $data);
+
+    }
+
+
+
+    public function my_order_detail($id){
+
+
+      $order_de = DB::table('order_details')->select(
+            'order_details.*',
+            'order_details.id as id_de',
+            'order_details.created_at as created_ats',
+            'products.*'
+            )
+            ->leftjoin('products', 'products.id',  'order_details.product_id')
+            ->where('order_details.id', $id)
+            ->first();
+
+
+            $order_get = DB::table('orders')->select(
+                  'orders.*'
+                  )
+                  ->where('id', $order_de->order_id)
+                  ->first();
+
+                  $data['objs'] = $order_get;
+
+
+                  $check_bill = DB::table('user_addresses')->select(
+                        'user_addresses.*'
+                        )
+                        ->where('user_id', $order_get->user_id)
+                        ->where('type_address', 1)
+                        ->count();
+
+
+                        if($check_bill > 0){
+
+                          $get_address_bill = DB::table('user_addresses')->select(
+                                'user_addresses.*'
+                                )
+                                ->where('user_id', $order_get->user_id)
+                                ->where('type_address', 1)
+                                ->first();
+
+
+                                $province_bill = DB::table('province')
+                                     ->select(
+                                     'province.*'
+                                     )
+                                     ->where('PROVINCE_ID', $get_address_bill->province)
+                                     ->first();
+                                 $data['province_bill'] = $province_bill;
+
+                                 $district_bill = DB::table('amphur')
+                                      ->select(
+                                      'amphur.*'
+                                      )
+                                      ->where('AMPHUR_ID', $get_address_bill->district)
+                                      ->first();
+                                  $data['district_bill'] = $district_bill;
+
+
+                                  $subdistricts_bill = DB::table('district')
+                                       ->select(
+                                       'district.*'
+                                       )
+                                       ->where('DISTRICT_ID', $get_address_bill->sub_district)
+                                       ->first();
+                                   $data['subdistricts_bill'] = $subdistricts_bill;
+
+
+
+                        }else{
+                          $get_address_bill = null;
+                        }
+
+
+                        $check_address = DB::table('user_addresses')->select(
+                              'user_addresses.*'
+                              )
+                              ->where('id', $order_get->shipping_address)
+                              ->count();
+
+
+                              $get_address = DB::table('user_addresses')->select(
+                                    'user_addresses.*'
+                                    )
+                                    ->where('id', $order_get->shipping_address)
+                                    ->first();
+
+
+                                    if($check_address > 0){
+
+
+                                      $province = DB::table('province')
+                                           ->select(
+                                           'province.*'
+                                           )
+                                           ->where('PROVINCE_ID', $get_address->province)
+                                           ->first();
+                                       $data['province'] = $province;
+
+                                       $district = DB::table('amphur')
+                                            ->select(
+                                            'amphur.*'
+                                            )
+                                            ->where('AMPHUR_ID', $get_address->district)
+                                            ->first();
+                                        $data['district'] = $district;
+
+
+                                        $subdistricts = DB::table('district')
+                                             ->select(
+                                             'district.*'
+                                             )
+                                             ->where('DISTRICT_ID', $get_address->sub_district)
+                                             ->first();
+                                         $data['subdistricts'] = $subdistricts;
+
+                                    }
+
+
+
+
+              $order_option = DB::table('order_options')->select(
+                    'order_options.*',
+                    'order_options.id as id_op',
+                    'option_items.*'
+                    )
+                    ->leftjoin('option_items', 'option_items.id',  'order_options.option_id')
+                    ->where('order_options.order_id_detail', $order_de->id_de)
+                    ->get();
+
+
+                    $order_images = DB::table('order_images')->select(
+                          'order_images.*',
+                          'order_images.id as id_img'
+                          )
+                          ->where('order_id_detail', $order_de->id_de)
+                          ->get();
+
+
+
+
+
+                  //  $get_option = $order_option;
+                    $order_de->order_option = $order_option;
+                    $order_de->order_images = $order_images;
+
+
+            $data['get_address_bill'] = $get_address_bill;
+            $data['order_de'] = $order_de;
+            $data['get_address'] = $get_address;
+      return view('my_order_detail', $data);
+
+    }
+
+
+
+    public function payment_notify(){
+
+      $objs = DB::table('payment_options')
+        ->get();
+
+    $data['bank'] = $objs;
+
+
+      return view('payment_notify', $data);
+    }
+
+
+    public function post_payment_notify(Request $request){
+      $image = $request->file('image');
+      $this->validate($request, [
+            'image' => 'required|max:8048',
+            'name' => 'required',
+            'order_id' => 'required',
+            'email' => 'required',
+            'bank' => 'required',
+            'money' => 'required',
+            'filter_date' => 'required',
+            'image' => 'required'
+      ]);
+
+
+     $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+
+     $destinationPath = asset('assets/image/slip/');
+     $img = Image::make($image->getRealPath());
+     $img->resize(800, 533, function ($constraint) {
+     $constraint->aspectRatio();
+     })->save('assets/image/slip/'.$input['imagename']);
+
+      $package = new user_payment();
+      $package->order_id = $request['order_id'];
+      $package->name = $request['name'];
+      $package->email = $request['email'];
+      $package->bank = $request['bank'];
+      $package->money = $request['money'];
+      $package->time_tran = $request['filter_date'];
+      $package->image_tran = $input['imagename'];
+      $package->save();
+
+      return redirect(url('payment_notify_success/'))->with('add_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
+    }
+
+
+    public function payment_notify_success(){
+
+      return view('payment_notify_success');
     }
 
 
@@ -124,7 +391,7 @@ class UserProfileController extends Controller
 
 
 
-      return redirect(url('edit_address_book/'.$id))->with('edit_address','เพิ่ม เสร็จเรียบร้อยแล้ว');
+      return redirect(url('address_book/'))->with('edit_address','เพิ่ม เสร็จเรียบร้อยแล้ว');
 
     }
 

@@ -619,6 +619,9 @@ $total_img += $u['data'][2]['sum_image'];
               </p>
               @endif
           </div>
+
+
+
           <button type="submit" class="btn btn-next">PAYMENT NOW</button>
         </div>
 

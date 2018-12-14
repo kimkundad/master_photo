@@ -35,9 +35,9 @@ user profile
 							</li>
 							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
 							</li>
-              <li><a href="#"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
 							</li>
-              <li><a href="#"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> My Credit </a>
+              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
 							</li>
 
 						</ul>
@@ -59,7 +59,7 @@ user profile
                     <table class="table ">
                      <thead>
                        <tr>
-                         <th>ชื่อ-สกุล</th>
+                         <th>ชื่อ-นามสกุล</th>
                          <th>ที่อยู่</th>
                          <th>รหัสไปรษณีย์</th>
                          <th>เบอร์โทรศัพท์</th>
@@ -83,7 +83,7 @@ user profile
                            @elseif(($ad->type_address == 1))
                            ที่อยู่ในการออกใบเสร็จ
                            @elseif(($ad->type_address == 2))
-                           ว่าง
+                           ไม่ได้กำหนด
                            @else
                            ที่อยู่ในการจัดส่งร่วมกับ
                            ที่อยู่ในการออกใบเสร็จ
@@ -155,6 +155,33 @@ $.notify({
  // options
  icon: 'icon_set_1_icon-76',
  title: "<h4>เพิ่มข้อมูลที่อยู่ สำเร็จ</h4> ",
+ message: "ข้อมูลที่ถูกต้องทำให้การติดต่อได้ไม่ผิดพลาด. "
+},{
+ // settings
+ type: 'info',
+ delay: 5000,
+ timer: 3000,
+ z_index: 9999,
+ showProgressbar: false,
+ placement: {
+   from: "bottom",
+   align: "right"
+ },
+ animate: {
+   enter: 'animated bounceInUp',
+   exit: 'animated bounceOutDown'
+ },
+});
+@endif
+</script>
+
+
+<script>
+@if ($message = Session::get('edit_address'))
+$.notify({
+ // options
+ icon: 'icon_set_1_icon-76',
+ title: "<h4>อัพเดท สำเร็จ</h4> ",
  message: "ข้อมูลที่ถูกต้องทำให้การติดต่อได้ไม่ผิดพลาด. "
 },{
  // settings
