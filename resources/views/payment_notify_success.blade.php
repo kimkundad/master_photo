@@ -55,12 +55,15 @@ user profile
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h3>แจ้งการชำระเงิน </h3>
+                    <h3>แจ้งการชำระเงินสำเร็จแล้ว </h3>
+                    <p>
+                      คุณได้ทำการแจ้งชำระเงินเสร็จแล้ว เราจะรีบทำการตรวจสอบให้ไวที่สุด
+                    </p>
                     <br />
 
 
 
-                
+
 
 
                 </div>
@@ -112,7 +115,7 @@ user profile
 
 
   <script>
-  @if ($message = Session::get('edit_success'))
+  @if ($message = Session::get('add_success'))
   $.notify({
    // options
    icon: 'icon_set_1_icon-76',

@@ -251,7 +251,7 @@ user profile
                     @if($order_de->order_images)
                     @foreach($order_de->order_images as $h)
                     <div class="col-lg-4 col-md-6" style=" padding-top: 10px;   padding-bottom: 10px;">
-                      <img src="{{url('assets/image/all_image/'.$h->order_image)}}" class="img-responsive" >
+                      <img src="{{url('assets/image/all_image/'.$h->order_image)}}" class="img-responsive" style="    height: 142px;">
                       <div class="score">
 												จำนวน <span>{{$h->order_image_sum}}</span> รูป
 											</div>
