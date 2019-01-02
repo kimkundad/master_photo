@@ -106,6 +106,11 @@ height: 60px;
     <div class="row margin_30">
 
       <div class="col-md-8 ">
+
+
+        @if (Auth::guest())
+
+
         <div class="table-responsive">
         <table class="table table-striped add_bottom_30">
           <thead style="    font-size: 14px;">
@@ -191,6 +196,106 @@ height: 60px;
         </table>
         </div>
 
+
+
+        @else
+
+
+
+
+
+        <div class="table-responsive">
+        <table class="table table-striped add_bottom_30">
+          <thead style="    font-size: 14px;">
+            <tr>
+              <th>
+                Item
+              </th>
+              <th>
+                Quantity
+              </th>
+              <th>
+                Discount
+              </th>
+              <th>
+                PRICE
+              </th>
+              <th>
+                Delete
+              </th>
+            </tr>
+          </thead>
+          <tbody >
+
+            <?php
+              $total_pay = 0;
+              $total_img = 0;
+              $s = 0;
+             ?>
+
+             @if($get_data)
+             @foreach($get_data as $k)
+             <tr>
+               <td style="min-width: 200px;">
+                 <a href="{{url('photo_edit/'.$k->id)}}" >
+                 <div class="thumb_cart1">
+                   <img src="{{url('assets/image/all_image/'.$k->image)}}" alt="image">
+                 </div>
+                 <span class="item_cart" style="color:#333; margin-top: 5px; font-size:13px;">{{$k->product_name}}
+                   <br />
+                   @if($k->option)
+                   @foreach($k->option as $j)
+
+                   {{$j->item_name}}<br />
+
+                   @endforeach
+                   @endif
+                 </span>
+                 </a>
+               </td>
+               <td>
+                 {{$k->sum_image}} Pcs.
+               </td>
+               <td>
+                 0%
+               </td>
+               <td>
+                 <strong>฿ {{number_format((float)$k->sum_image, 2, '.', '')*($k->sum_price)}} </strong>
+               </td>
+               <td class="options">
+                 <form id="myform-{{$k->id}}" name="myform-{{$k->id}}" action="{{ url('del_cart/') }}" method="POST"  style="    margin-bottom: 0em;">
+                   {{ csrf_field() }}
+                   <input type="hidden" value="{{$k->id}}" name="ids">
+                 <a href="#" style="color:#333" onclick="document.getElementById('myform-{{$k->id}}').submit(); return(confirm('Do you want Delete'));"><i class=" icon-trash"></i></a>
+                 </form>
+               </td>
+             </tr>
+             <?php
+             $total_pay += number_format((float)$k->sum_image, 2, '.', '')*($k->sum_price);
+              ?>
+             @endforeach
+             @endif
+
+
+           </tbody>
+         </table>
+         </div>
+
+
+
+
+        @endif
+
+
+
+
+
+
+
+
+
+
+
       </div>
 
 
@@ -220,9 +325,16 @@ height: 60px;
                 <td>
                   Total
                 </td>
+
+                @if (Auth::guest())
                 <td class="text-right">
                   {{sizeof(Session::get('cart'))}}
                 </td>
+                @else
+                <td class="text-right">
+                  {{$count_data}}
+                </td>
+                @endif
               </tr>
               <tr>
                 <td>

@@ -95,9 +95,17 @@ Photo print
 
     </div>
 
-    <div class="row margin_30">
 
-      <div class="col-md-8 " {{$set_size = 0}} >
+
+    <div class="row margin_30" {{$set_size = 0}} >
+
+      <?php $all_img = 0;  ?>
+
+
+      @if (Auth::guest())
+
+
+      <div class="col-md-8 " >
 
 <div style="display:none">
         @if($option_images)
@@ -136,9 +144,7 @@ Photo print
           <tbody {{ $ids = "data".$id }}>
 
 
-            <?php
-            $all_img = 0;
-             ?>
+
 
 
             @foreach(Session::get('cart.'.$id.'.data.image') as $u)
@@ -217,10 +223,144 @@ Photo print
         </table>
 
 
+      </div>
 
 
+      @else
+
+
+      <div style="display:none">
+              @if($option_images)
+              @foreach($option_images as $j)
+
+                @if($set_size == 0)
+
+                  @foreach($j->option as $k)
+                  {{ $get_name_size = $k->item_name}}
+                  {{ $resolution = $k->resolution}}
+                  @endforeach
+                @endif
+
+                    {{$set_size++}}
+
+              @endforeach
+              @endif
+      </div>
+
+
+
+      <div class="col-md-8 " {{$set_size = 0}} >
+
+        <table class="table table-striped  add_bottom_30">
+            <thead>
+              <tr>
+                <th>
+                  Image
+                </th>
+                <th>
+                  Quantity
+                </th>
+
+                <th>
+                  SIZE
+                </th>
+
+                <th>
+                  DELETE
+                </th>
+              </tr>
+            </thead>
+            <tbody >
+
+              @foreach($get_image as $u)
+              <tr>
+                <td class="magnific-gallery">
+
+                  <a href="{{url('assets/image/all_image/'.$u->cart_image)}}" data-effect="mfp-zoom-in">
+                  <div class="thumb_cart1">
+                    <img src="{{url('assets/image/all_image/'.$u->cart_image)}}" alt="image" style="padding: 1px; ">
+
+                    <?php
+
+                    $data = getimagesize(url('assets/image/all_image/'.$u->cart_image));
+                    $width = $data[0];
+                    $height = $data[1];
+                    $get_resolution = $width * $height;
+                    if($get_resolution < $resolution){
+                      $all_img++;
+                    }
+
+                     ?>
+                  </div>
+
+
+                  </a>
+                </td>
+                <td>
+
+
+                  <form id="cutproduct" class="typePay2 " novalidate="novalidate" action="" method="post"  role="form">
+                    <div class="numbers-row">
+                      <input type="text" value="{{$u->cart_image_sum}}" id="quantity_{{$u->id}}" class="qty2 form-control" name="quantity">
+                    </div>
+                    <input type="hidden" class="ids" name="ids" value="{{$id}}">
+                    <input type="hidden" class="num_img" name="num_img" value="{{$u->id}}">
+                    <input type="hidden" class="img_set" name="img_set" value="{{$u->cart_image}}">
+                  </form>
+
+
+
+
+
+                </td>
+                <td >
+                    {{$get_name_size}}<br />
+
+                    @if($get_resolution >= $resolution)
+
+                    @else
+                    <span style="color: #e04f67; font-size:13px;">Resolution ของรูปต่ำกว่า<br /> {{number_format($resolution)}} พิกเซล</span>
+                    @endif
+
+                </td>
+                <td class="options">
+
+                  <form  action="{{url('del_upload_image')}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="num_image" value="{{$u->id}}">
+                                <input type="hidden" name="list_link" value="{{$id}}">
+                                <button style="border:none; background: none; " type="submit" title="ลบบทความ" class="dropdown-item text-1 "><i class=" icon-trash"></i></button>
+                              </form>
+
+                </td>
+              </tr>
+              @endforeach
+
+              </tbody>
+            </table>
 
       </div>
+
+      @endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -228,6 +368,8 @@ Photo print
 
 
         <div class="box_style_1">
+
+          @if (Auth::guest())
 
           <table class="table table_summary" style="font-size: 14px;">
             <tbody>
@@ -293,7 +435,87 @@ Photo print
             </tbody>
           </table>
 
+
+          @else
+
+
+          <table class="table table_summary" style="font-size: 14px;">
+            <tbody>
+
+
+
+              @if($option_images)
+              @foreach($option_images as $j)
+
+              <tr>
+                <td>
+                  @foreach($j->option as $k)
+                  {{$k->item_name}}
+                  @endforeach
+                </td>
+              <td class="text-right">
+                @foreach($j->option as $k)
+                @if($k->item_status == 1)
+                ฿{{number_format((float)$k->item_price, 2, '.', '')}}
+                @endif
+                @endforeach
+              </td>
+
+              </tr>
+
+              @endforeach
+              @endif
+
+
+              <tr>
+                <td>
+                  จำนวนรูป
+                </td>
+              <td class="text-right">
+                <div id="number_image" style="display: none;">
+                  {{$sum_image_value}}
+                  <?php
+                  Session::put('img_f', $all_img);
+                   ?>
+                </div>
+
+                <div id="get_number_image">
+
+                </div>
+
+              </td>
+
+              </tr>
+
+
+              <tr>
+                <td>
+                  ราคารวม
+                </td>
+              <td class="text-right">
+                <div id="sum_image_price" style="display: none;">
+                  {{number_format((float)$sum_price_value*($sum_image_value) , 2, '.', '')}}
+                </div>
+                <div id="get_image_price">
+
+                </div>
+
+              </td>
+
+              </tr>
+
+
+            </tbody>
+          </table>
+
+
+
+          @endif
+
         </div>
+
+
+
         <a type="button" class="btn btn_full_outline_golf btn-block" data-toggle="modal" data-target="#myModal"><i class='sl sl-icon-plus'></i> ADD MORE PHOTO</a>
         <br />
 
@@ -301,10 +523,14 @@ Photo print
 
 
 
-
-
-
         </div>
+
+
+
+
+
+
+
 
 
 
@@ -423,21 +649,32 @@ Photo print
 
         </div>
 
-
         <!-- end Modal -->
 
-
-
-
-
-
-
-
-
-
-
-
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     </div>
@@ -580,7 +817,14 @@ $(document).ready(function(){
           this.on("sendingmultiple", function(data, xhr, formData) {
             //  formData.append("size_photo", jQuery("#size_photo").val()); // value of size_photo input na kub
               formData.set("ids", '{{$id}}'); // value of product_id input na kub
+
+              @if (Auth::guest())
               formData.set("list_link", {{Session::get('cart.'.$id.'.data.list_link')}}); // value of type_image input na kub
+              @else
+              formData.set("list_link", {{$id}}); // value of type_image input na kub
+              @endif
+
+
             //  console.log(xhr);
           });
 
@@ -609,7 +853,11 @@ $(document).ready(function(){
 <script type="text/javascript">
 $(document).ready(function(){
 
+@if (Auth::guest())
 var sum_price_value = {{Session::get('cart.'.$id.'.data.3.sum_price')}};
+@else
+var sum_price_value = {{$sum_price_value}};
+@endif
 
 var number = parseInt($('#number_image').text());
 //console.log(number+1);

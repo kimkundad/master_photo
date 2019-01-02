@@ -33,7 +33,46 @@ function get_menu(){
               $u->options = $options;
               $u->option_count = $options_count;
             }
-
+          //  $dd = Auth::user()->id;
   return $menu_web;
+
+}
+
+function get_count_cart(){
+
+  $check_count = DB::table('cart_details')->select(
+    'cart_details.*'
+    )
+    ->where('user_id', Auth::user()->id)
+    ->count();
+
+  return $check_count;
+
+
+}
+
+
+function get_cart(){
+
+  $get_data = DB::table('cart_details')->select(
+      'cart_details.*'
+      )
+      ->where('user_id', Auth::user()->id)
+      ->get();
+
+      foreach($get_data as $k){
+        $cat = DB::table('products')->select(
+          'products.*'
+          )
+          ->where('products.id', $k->product_id)
+          ->first();
+
+          $k->product_get = $cat;
+      }
+
+
+
+
+      return $get_data;
 
 }

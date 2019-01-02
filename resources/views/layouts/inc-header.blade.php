@@ -76,6 +76,9 @@
                     <a href="#" class="dropdown-toggle" style="font-size:20px; color:#666" data-toggle="dropdown"><i class="fa fa-cart-plus"></i></a>
                     <ul class="dropdown-menu" id="cart_items" >
 
+
+                      @if(Auth::guest())
+
                       <?php
 
                           if(!Session::get('cart')){
@@ -118,6 +121,60 @@
                           }
 
                          ?>
+
+
+                         @else
+
+                         <!-- ////////////////////////////////////////////////////// -->
+
+                         @if(get_count_cart() == 0)
+
+                         <p style="padding:20px;">
+
+                           Cart empty
+                         </p>
+
+                         @else
+
+                         <?php
+                         $total = 0;
+                         $i = 1 ;
+                          ?>
+
+                          @foreach(get_cart() as $k)
+
+                          <?php $total += $k->sum_image*$k->sum_price; ?>
+
+                          <li style="padding-left:10px;">
+                              <a href="{{url('photo_edit/'.$k->id)}}" style="padding: 3px 5px;"><div class="image"><img src="{{url('assets/image/product/'.$k->product_get->pro_image)}}" alt="{{$k->product_get->pro_name}}"></div></a>
+                              <strong>
+                              <a href="{{url('photo_edit/'.$k->id)}}"><?=$i?>. {{$k->product_get->pro_name}}</a>฿<?=$k->sum_price?>.00 x {{$k->sum_image}}</strong>
+                          </li>
+
+                          <?php
+                          $i++;
+                           ?>
+
+                          @endforeach
+
+                          <li>
+                              <div>Total: <span>฿<?=$total?>.00</span></div>
+                              <a href="{{url('cart')}}" style="float: left; margin: 0px 1px 0px 1px;" class="button_drop">Go to cart</a>
+                              <a href="{{url('shipping')}}" style=" margin: 0px 1px 0px 1px;" class="button_drop">Check out</a>
+                          </li>
+
+                         @endif
+
+
+
+                         <!-- ////////////////////////////////////////////////////// -->
+
+                         @endif
+
+
+
+
+
                     </ul>
                 </div><!-- End dropdown-cart-->
             </li>
