@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::auth();
 
 Auth::routes();

@@ -210,7 +210,13 @@
 
           <a href="{{url('/')}}"><img src="{{url('master/assets/image/logo-website.png')}}" height="64" style="height: 40px; display:block" class="logo_normal img-responsive"></a>
 
-          <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;"> SIGN IN /<br /> JOIN </a>
+          <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;">
+            @if(Auth::guest())
+             SIGN IN /<br /> JOIN
+            @else
+              <br />
+            @endif
+           </a>
 
         </div>
       </div>
