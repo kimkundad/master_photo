@@ -97,7 +97,7 @@ user profile
                       </div>
 
 
-                      <div class="form-group">
+                  <!--    <div class="form-group">
                         <label class="col-md-3 control-label" for="profileFirstName">เลขประจำตัวผู้เสียภาษี</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="id_card_no" value="{{ $objs->id_card_no }}" >
@@ -111,7 +111,7 @@ user profile
                           <input type="text" class="form-control" name="branch_code" value="{{ $objs->branch_code }}" >
                           <br />
                         </div>
-                      </div>
+                      </div> -->
 
                     <div class="col-md-12 text-center" >
 

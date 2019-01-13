@@ -303,7 +303,7 @@ Shipping | MASTER PHOTO NETWORK
 
 
                     @else
-                    <label id="new_address_bill_x">คุณยังไม่มี ที่อยู่ ใบกำกับภาษี</label>
+                  
                     @endif
 
 

@@ -72,37 +72,8 @@ user profile
                           </tr>
 
                           <tr>
-                          <td>เลขประจำตัวผู้เสียภาษี</td>
-                          <td>
-                            @if(Auth::user()->id_card_no == null)
 
-                            <span class="text-muted">กรุณาระบุเลขประจำตัวผู้เสียภาษี</span>
-
-                            @else
-
-                            {{Auth::user()->id_card_no}}
-
-                            @endif
-
-                          </td>
-                          </tr>
-
-
-                          <tr>
-                          <td>รหัสสาขา</td>
-                          <td>
-                            @if(Auth::user()->branch_code == null)
-
-                            <span class="text-muted">กรุณาระบุรหัสสาขา</span>
-
-                            @else
-
-                            {{Auth::user()->branch_code}}
-
-                            @endif
-
-                          </td>
-                          </tr>
+                        
 
 
 

@@ -104,7 +104,7 @@
                     <label for="exampleInputPassword1">Password</label>
                     <input  type="password" class="form-control" name="password" placeholder="Password">
                     @if ($errors->has('password'))
-                        <span class="help-block">
+                        <span class="text-danger">
                            <strong>{{ $errors->first('password') }}</strong>
                         </span>
                     @endif

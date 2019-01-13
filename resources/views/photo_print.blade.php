@@ -643,7 +643,7 @@ $('#submit_uption').on('click', function () {
 
 Dropzone.options.myDropzone= {
     url: '{{url('upload_image')}}',
-    autoProcessQueue: false,
+    autoProcessQueue: true,
     uploadMultiple: true,
     parallelUploads: 1000,
     maxFiles: 1000,

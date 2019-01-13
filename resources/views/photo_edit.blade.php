@@ -781,7 +781,7 @@ $(document).ready(function(){
 
   Dropzone.options.myDropzone= {
       url: '{{url('update_photo_print')}}',
-      autoProcessQueue: false,
+      autoProcessQueue: true,
       uploadMultiple: true,
       parallelUploads: 100,
       maxFiles: 1000,
