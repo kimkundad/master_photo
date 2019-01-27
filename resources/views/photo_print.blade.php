@@ -687,7 +687,9 @@ Dropzone.options.myDropzone= {
         this.on("sendingmultiple", function(data, xhr, formData) {
 
         //  var frm = $('#contactForm1');
+        $("#add-photo-set").addClass('hidden');
 
+        $("#next_to_cart2").removeClass('hidden');
         //  console.log(frm);
         var set_size = [];
         for (i = 0; i < {{$s-1}}; i++) {
@@ -718,9 +720,9 @@ Dropzone.options.myDropzone= {
         //  $('.up_btn_kim').addClass('hidden');
 
           //add-image
-          $("#add-photo-set").addClass('hidden');
+
+
           $("#next_to_cart").removeClass('hidden');
-          $("#next_to_cart2").removeClass('hidden');
 
 
           setTimeout(function() {
