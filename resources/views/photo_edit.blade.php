@@ -862,11 +862,11 @@ var sum_price_value = {{$sum_price_value}};
 var number = parseInt($('#number_image').text());
 //console.log(number+1);
 $('#get_number_image').append(number);
-
-var price_image = parseInt($('#sum_image_price').text());
-//console.log(number+1);
-$('#get_image_price').append(price_image.toFixed(2));
-console.log(sum_price_value);
+var price_image = document.getElementById('sum_image_price').innerText;
+//var price_image = parseInt($('#sum_image_price').text());
+console.log(price_image);
+$('#get_image_price').append(price_image);
+//console.log(sum_price_value);
 
 
   $(".button_inc").on("click", function () {
@@ -877,7 +877,8 @@ console.log(sum_price_value);
       //  var username = $('form#cutproduct input[name=id]').val();
 
       var $button = $(this);
-      var oldValue = $button.parent().find("input").val();
+    //var oldValue = $button.parent().fisum_image_pricend("input").val();
+    var oldValue = $button.parent().find("input").val();
 
 
       if ($button.text() == "+") {

@@ -397,13 +397,13 @@ Photo print
 
                                 </div>
                                 <div id="mar-top-15">
-                                  <button class='add-image up_btn_kim btn btn-next'><i class='sl sl-icon-plus'></i> Add Photos </button>
-                                  <button type="submit" id="submit-all" class="up_btn_kim btn btn-next" name="submit_photo"> Confirm </button>
-                                  <button class="up_btn_kim btn btn-next" id="clear-dropzone">Clear All</button>
+                                  <button class='add-image up_btn_kim btn btn-next' id="add-photo-set"><i class='sl sl-icon-plus'></i> Add Photos </button>
+                                  <button type="submit" id="submit-all" class="hidden up_btn_kim btn btn-next" name="submit_photo"> Confirm </button>
+                                  <button class="hidden up_btn_kim btn btn-next" id="clear-dropzone">Clear All</button>
 
 
                                   <div class="hidden" id="next_to_cart2">
-                                    <h4 class="text-succes">Upload Image Success!</h4>
+                                    <h4 class="text-succes">กำลังส่งรูปภาพ!</h4>
 
                                   </div>
 
@@ -716,6 +716,9 @@ Dropzone.options.myDropzone= {
           $("a.next_to_cart").attr("href", "../photo_edit/"+xhr.date_set)
           $("a.next_to_cart2").attr("href", "../photo_edit/"+xhr.date_set)
         //  $('.up_btn_kim').addClass('hidden');
+
+          //add-image
+          $("#add-photo-set").addClass('hidden');
           $("#next_to_cart").removeClass('hidden');
           $("#next_to_cart2").removeClass('hidden');
 

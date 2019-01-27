@@ -1569,7 +1569,7 @@ class HomeController extends Controller
 
 
 
-      //dd(Session::get('cart'));
+    //  dd(Session::get('cart'));
 
       if(Auth::guest()){
 
@@ -1590,7 +1590,7 @@ class HomeController extends Controller
             $option_product = DB::table('option_items')->select(
               'option_items.*'
               )
-              ->whereIn('id', Session::get('cart.'.$u['data']['id'].'.data.0.size_photo'))
+              ->whereIn('id', $u['data'][0]['size_photo'])
               ->get();
 
           $option_set_pro = $option_product;
@@ -1732,6 +1732,7 @@ class HomeController extends Controller
 
 
       if(Auth::guest()){
+
 
 
       $get_price = DB::table('option_items')->select(
@@ -1958,86 +1959,142 @@ class HomeController extends Controller
 
     public function upload_image(Request $request){
 
+      $count_cart = count(Session::get('cart'));
 
       if(Auth::guest()){
 
         $gallary = $request->file('file');
 
-
+        $get_count_cart = count(Session::get('cart'));
         $exp = array();
         $size_photo = $request['size_photo'];
         $path1 = explode(",", $size_photo);
+    //    dd($get_count_cart);
+
+
+
+
         $exp = array_merge($exp, $path1);
-      //  dd($exp);
 
-          $this->validate($request, [
-                 'size_photo' => 'required',
-                 'product_id' => 'required'
-             ]);
-
-
-            $sum_img = sizeof($gallary);
-
-            $cat = DB::table('products')->select(
-              'products.*'
-              )
-              ->where('products.id', $request['product_id'])
-              ->first();
+        $this->validate($request, [
+               'size_photo' => 'required',
+               'product_id' => 'required'
+           ]);
 
 
-                $get_price = DB::table('option_items')->select(
-                  'option_items.*'
-                  )
-                  ->whereIn('id', $exp)
-                  ->where('item_status', 1)
-                  ->sum('item_price');
+          $sum_img = sizeof($gallary);
 
+          $cat = DB::table('products')->select(
+            'products.*'
+            )
+            ->where('products.id', $request['product_id'])
+            ->first();
 
-           if (sizeof($gallary) > 0) {
-            for ($i = 0; $i < sizeof($gallary); $i++) {
-              $path = 'assets/image/all_image/';
-              $filename = time()."-".$gallary[$i]->getClientOriginalName();
-              $gallary[$i]->move($path, $filename);
+            $check_old_cart = 0;
+            $set_link = 0;
 
-              $admins[] = [
-                  'image' => $filename,
-                  'id' => $i,
-                  'num' => 1
-              ];
+              $get_price = DB::table('option_items')->select(
+                'option_items.*'
+                )
+                ->whereIn('id', $exp)
+                ->where('item_status', 1)
+                ->sum('item_price');
 
+        if($count_cart > 0){
 
+          foreach(Session::get('cart') as $u){
+
+            if($u['data'][0]['size_photo'] == $exp && $u['data']['id'] == $request['product_id']){
+              $check_old_cart += 1;
+              $set_link = $u['data']['list_link'];
+            }else{
+              $check_old_cart += 0;
             }
 
-          }
+        }
 
-          $set_num_date = count(Session::get('cart'));
-          $set_num_date += 1;
-          $data_url = $set_num_date;
-          $set_num_date = "data".$set_num_date;
-
-          $item = [
-            'id' => $request['product_id'],
-            ['size_photo' => $exp],
-            'image_pro' => $cat->pro_image,
-            'pro_name' => $cat->pro_name,
-            'image' => $admins,
-            ['status' => 0],
-            ['sum_image' => $sum_img],
-            ['sum_price' => $get_price],
-            'list_link' => $request['product_id']
-          ];
+        }
 
 
-          //dd($item);
+      //
+
+      //  dd($exp);
+      if($check_old_cart == 0){
+
+        if (sizeof($gallary) > 0) {
+         for ($i = 0; $i < sizeof($gallary); $i++) {
+           $path = 'assets/image/all_image/';
+           $filename = time()."-".$gallary[$i]->getClientOriginalName();
+           $gallary[$i]->move($path, $filename);
+
+           $admins[] = [
+               'image' => $filename,
+               'id' => $i,
+               'num' => 1
+           ];
+
+
+         }
+
+       }
+
+       $set_num_date = count(Session::get('cart'));
+       $set_num_date += 1;
+     //  $data_url = $set_num_date;
+     //  $set_num_date = "data".$set_num_date;
+
+       $item = [
+         'id' => $request['product_id'],
+         ['size_photo' => $exp],
+         'image_pro' => $cat->pro_image,
+         'pro_name' => $cat->pro_name,
+         'image' => $admins,
+         ['status' => 0],
+         ['sum_image' => $sum_img],
+         ['sum_price' => $get_price],
+         'list_link' => $set_num_date
+       ];
+
+
+       //dd($item);
 
 
 
-          Session::put('cart.'.$request['product_id'], ['data' => $item]);
+     //  Session::put('cart.'.$request['product_id'], ['data' => $item]);
+       Session::put('cart.'.$set_num_date, ['data' => $item]);
 
-          return Response::json([
-                'date_set' => $request['product_id'],
-                'status' => 'success'
-            ], 200);
+       return Response::json([
+             'date_set' => $set_num_date,
+             'status' => 'success'
+         ], 200);
+
+      }else{
+
+        $set_num_img = count(Session::get('cart.'.$set_link.'.data.image'));
+
+        if (sizeof($gallary) > 0) {
+         for ($i = 0; $i < sizeof($gallary); $i++) {
+           $path = 'assets/image/all_image/';
+           $filename = time()."-".$gallary[$i]->getClientOriginalName();
+           $gallary[$i]->move($path, $filename);
+           session()->push('cart.'.$set_link.'.data.image', ['image' => $filename, 'id' => $set_num_img+$i, 'num' => 1]);
+         }
+       }
+
+       $sum_img = sizeof($gallary);
+       session()->put('cart.'.$set_link.'.data.2', ['sum_image' => (Session::get('cart.'.$set_link.'.data.2.sum_image')+$sum_img)]);
+
+
+       return Response::json([
+             'date_set' => $set_link,
+             'status' => 'success'
+         ], 200);
+
+      }
+
+
+
+
 
 
         /*  return Response::json([
@@ -2087,58 +2144,134 @@ class HomeController extends Controller
               ->first();
 
 
-            $get_deatial = DB::table('cart_details')->select(
-              'cart_details.*'
+            ////////////////////   check option   //////////////////////////
+
+            $get_option = DB::table('cart_options')
+              ->select(
+              'cart_options.*'
               )
-            ->where('id', $get_ids->id)
-            ->first();
+              ->where('cart_id_detail', $get_ids->id)
+              ->get();
 
-            $sum_img = sizeof($gallary);
+            $check_option = [];
 
-            $v4 = $get_deatial->sum_image + $sum_img;
+            foreach($get_option as $ch){
+
+              $check_option[] = $ch->option_id;
+
+            }
+
+            //dd($check_option);
+            ////////////////////   check option   //////////////////////////
+
+            if($exp == $check_option){
+
+
+                            $get_deatial = DB::table('cart_details')->select(
+                              'cart_details.*'
+                              )
+                            ->where('id', $get_ids->id)
+                            ->first();
+
+                            $sum_img = sizeof($gallary);
+
+                            $v4 = $get_deatial->sum_image + $sum_img;
 
 
 
-            $obj = cart_detail::find($get_ids->id);
-            $obj->sum_image = $v4;
-            $obj->save();
+                            $obj = cart_detail::find($get_ids->id);
+                            $obj->sum_image = $v4;
+                            $obj->save();
 
 
-            if (sizeof($gallary) > 0) {
-             for ($i = 0; $i < sizeof($gallary); $i++) {
-               $path = 'assets/image/all_image/';
-               $filename = time()."-".$gallary[$i]->getClientOriginalName();
-               $gallary[$i]->move($path, $filename);
+                            if (sizeof($gallary) > 0) {
+                             for ($i = 0; $i < sizeof($gallary); $i++) {
+                               $path = 'assets/image/all_image/';
+                               $filename = time()."-".$gallary[$i]->getClientOriginalName();
+                               $gallary[$i]->move($path, $filename);
 
-               $admins[] = [
-                   'cart_id_detail' => $get_ids->id,
-                   'cart_image' => $filename,
-                   'cart_image_id' => $i,
-                   'cart_image_sum' => 1
-               ];
+                               $admins[] = [
+                                   'cart_id_detail' => $get_ids->id,
+                                   'cart_image' => $filename,
+                                   'cart_image_id' => $i,
+                                   'cart_image_sum' => 1
+                               ];
+                             }
+                             cart_image::insert($admins);
+                           }
+
+
+                      /*     DB::table('cart_options')->select(
+                             'cart_options.*'
+                             )
+                           ->where('cart_id_detail', $get_ids->id)
+                           ->delete();
+
+
+                           foreach($exp as $k){
+
+                             $obj = new cart_option();
+                             $obj->cart_id_detail = $get_ids->id;
+                             $obj->option_id = $k;
+                             $obj->save();
+
+                            //  echo ($j['image']);
+                          }  */
+
+                           $the_id = $get_ids->id;
+
+            }else{
+
+
+              $obj = new cart_detail();
+              $obj->user_id = Auth::user()->id;
+              $obj->product_id = $cat->id;
+              $obj->product_name = $cat->pro_name;
+              $obj->sum_image = $sum_img;
+              $obj->sum_price = $get_price;
+              $obj->list_link = $cat->id;
+              $obj->save();
+              $the_id = $obj->id;
+
+
+
+              if (sizeof($gallary) > 0) {
+               for ($i = 0; $i < sizeof($gallary); $i++) {
+                 $path = 'assets/image/all_image/';
+                 $filename = time()."-".$gallary[$i]->getClientOriginalName();
+                 $gallary[$i]->move($path, $filename);
+
+                 $admins[] = [
+                     'cart_id_detail' => $the_id,
+                     'cart_image' => $filename,
+                     'cart_image_id' => $i,
+                     'cart_image_sum' => 1
+                 ];
+               }
+               cart_image::insert($admins);
              }
-             cart_image::insert($admins);
-           }
 
 
-           DB::table('cart_options')->select(
-             'cart_options.*'
-             )
-           ->where('cart_id_detail', $get_ids->id)
-           ->delete();
+             foreach($exp as $k){
+
+               $obj = new cart_option();
+               $obj->cart_id_detail = $the_id;
+               $obj->option_id = $k;
+               $obj->save();
+
+              //  echo ($j['image']);
+             }
 
 
-           foreach($exp as $k){
 
-             $obj = new cart_option();
-             $obj->cart_id_detail = $get_ids->id;
-             $obj->option_id = $k;
-             $obj->save();
+            }
 
-            //  echo ($j['image']);
-           }
 
-           $the_id = $get_ids->id;
+
+
+            ////////////////////   check option   //////////////////////////ห
+
+
 
 
 

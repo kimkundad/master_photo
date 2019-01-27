@@ -121,4 +121,5 @@ Route::group(['middleware' => 'admin'], function() {
   Route::post('api/api_order_status', 'OrderController@api_order_status');
   Route::resource('admin/slide', 'SlideController');
   Route::post('api/api_slide_status', 'SlideController@api_slide_status');
+  
 });
