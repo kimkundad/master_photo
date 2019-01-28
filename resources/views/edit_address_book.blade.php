@@ -103,7 +103,7 @@ user profile
                       <div class="form-group">
                         <label class="col-md-3 control-label" for="profileFirstName">รหัสสาขา (ถ้ามี)</label>
                         <div class="col-md-8">
-                          <input type="text" class="form-control"name="branch_code" value="{{ old('branch_code', $package->branch_code)}}" placeholder="กรุณากรอกรหัสสาขา (ถ้ามี)" required="">
+                          <input type="text" class="form-control"name="branch_code" value="{{ old('branch_code', $package->branch_code)}}" placeholder="กรุณากรอกรหัสสาขา (ถ้ามี)" >
                         </div>
                       </div>
 
