@@ -94,6 +94,20 @@ user profile
                       </div>
 
                       <div class="form-group">
+                        <label class="col-md-3 control-label" for="profileFirstName">เลขประจำตัวผู้เสียภาษี</label>
+                        <div class="col-md-8">
+                          <input type="text" class="form-control" name="id_card_no" placeholder="กรุณาระบุเลขประจำตัวผู้เสียภาษี" value="{{ old('id_card_no', $package->id_card_no)}}" >
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-3 control-label" for="profileFirstName">รหัสสาขา (ถ้ามี)</label>
+                        <div class="col-md-8">
+                          <input type="text" class="form-control"name="branch_code" value="{{ old('branch_code', $package->branch_code)}}" placeholder="กรุณากรอกรหัสสาขา (ถ้ามี)" required="">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
                         <label class="col-md-3 control-label" for="profileFirstName">ที่อยู่</label>
                         <div class="col-md-8">
                           <textarea class="form-control" rows="3" name="address"  required="">{{ $package->address_ad }}</textarea>

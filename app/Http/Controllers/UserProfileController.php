@@ -353,7 +353,8 @@ class UserProfileController extends Controller
       $package->address_ad = $request['address'];
       $package->province = $request['province'];
       $package->district = $request['amphur'];
-
+      $package->id_card_no = $request['id_card_no'];
+      $package->branch_code = $request['branch_code'];
       $package->sub_district = $request['district'];
       $package->zip_code = $request['postcode'];
       $package->type_address = $request['type_ad'];
