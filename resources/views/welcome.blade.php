@@ -161,7 +161,7 @@ figure:hover+span {
 
           <h3>{{ Auth::user()->name }}</h3></a>
           <p>
-            ยินดีต้อนรับเข้าสู่เว็บไซต์ Master Photo Network
+            {{ trans('message.welcome') }}ยินดีต้อนรับเข้าสู่เว็บไซต์ Master Photo Network
           </p>
 
 

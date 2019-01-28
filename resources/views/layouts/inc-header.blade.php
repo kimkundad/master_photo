@@ -36,7 +36,7 @@
 
             <li>
 
-                <i class="icon-globe-1"></i> <a href="lang/message.php?lang=eng">EN</a> - <a href="lang/message.php?lang=thai">TH</a>
+                <i class="icon-globe-1"></i> <a href="{{ URL::to('change/en') }}">EN</a> - <a href="{{ URL::to('change/th') }}">TH</a>
 
 
             </li>
@@ -56,7 +56,9 @@
 
                   <li><a href="{{url('profile')}}">Profile</a>
                   </li>
-                  <li><a href="{{url('profile')}}">My Order</a>
+                  <li><a href="{{url('my_order')}}">My Order</a>
+                  </li>
+                  <li><a href="{{url('payment_notify')}}">แจ้งชำระเงิน</a>
                   </li>
                   <li><a href="{{url('logout')}}">Sign out</a>
                   </li>
