@@ -141,6 +141,19 @@
 </script>
 @endif
 
+@if ($message = Session::get('edit_success'))
+<script type="text/javascript">
+
+  var stack_topleft = {"dir1": "down", "dir2": "right", "push": "top"};
+      var notice = new PNotify({
+            title: 'ทำรายการสำเร็จ',
+            text: 'ยินดีด้วย ได้ทำการแก้ไขข้อมูล สำเร็จเรียบร้อยแล้วค่ะ',
+            type: 'success',
+            addclass: 'stack-topright'
+          });
+</script>
+@endif
+
 
 @if ($message = Session::get('delete'))
 <script type="text/javascript">
