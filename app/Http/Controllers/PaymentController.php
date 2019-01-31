@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Input;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
+use App\user_payment;
 /** All Paypal Details class **/
+use Illuminate\Support\Facades\DB;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
@@ -36,6 +38,69 @@ class PaymentController extends Controller
             $paypal_conf['secret'])
         );
         $this->_api_context->setConfig($paypal_conf['settings']);
+    }
+
+    public function get_pay_info(){
+
+      $cat = DB::table('user_payments')->select(
+            'user_payments.*',
+            'user_payments.id as ids',
+            'payment_options.*'
+            )
+            ->leftjoin('payment_options', 'payment_options.id',  'user_payments.bank')
+            ->get();
+
+            $data['objs'] = $cat;
+            $data['datahead'] = "แจ้งการชำระเงิน";
+            return view('admin.get_pay_info.index', $data);
+    }
+
+    public function del_pay_info(Request $request){
+      $id = $request['id_pay'];
+      $objs = DB::table('user_payments')
+          ->where('id', $id)
+          ->first();
+
+
+          $file_path = 'assets/image/slip/'.$objs->image_tran;
+          unlink($file_path);
+
+
+          DB::table('user_payments')
+          ->where('id', $id)
+          ->delete();
+
+          return redirect(url('admin/get_pay_info/'))->with('delete','คุณทำการลบอสังหา สำเร็จ');
+    }
+
+    public function edit_pay_info($id){
+
+      $bank = DB::table('payment_options')
+          ->get();
+
+      $objs = DB::table('user_payments')
+          ->where('id', $id)
+          ->first();
+
+          $data['bank'] = $bank;
+          $data['objs'] = $objs;
+          $data['datahead'] = "แจ้งการชำระเงิน";
+          return view('admin.get_pay_info.edit', $data);
+
+
+    }
+
+    public function post_pay_info(Request $request){
+      $id = $request['id'];
+      $package = user_payment::find($id);
+      $package->name = $request['name'];
+      $package->email = $request['email'];
+      $package->bank = $request['bank'];
+      $package->money = $request['money'];
+      $package->time_tran = $request['time_tran'];
+      $package->pay_status = $request['pay_status'];
+      $package->save();
+      return redirect(url('admin/get_pay_info/'))->with('edit_success','คุณทำการลบอสังหา สำเร็จ');
     }
 
     public function payWithpaypal(Request $request)

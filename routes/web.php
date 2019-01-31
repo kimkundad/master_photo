@@ -13,7 +13,6 @@
 
 
 Route::auth();
-
 Auth::routes();
 
 Route::get('change/{locale}', function ($locale) {
@@ -127,5 +126,10 @@ Route::group(['middleware' => 'admin'], function() {
   Route::post('api/api_order_status', 'OrderController@api_order_status');
   Route::resource('admin/slide', 'SlideController');
   Route::post('api/api_slide_status', 'SlideController@api_slide_status');
+  Route::get('admin/get_pay_info', 'PaymentController@get_pay_info');
+  Route::post('admin/del_pay_info', 'PaymentController@del_pay_info');
+  Route::get('admin/edit_pay_info/{id}/edit', 'PaymentController@edit_pay_info');
+  Route::post('admin/post_pay_info', 'PaymentController@post_pay_info');
+
 
 });

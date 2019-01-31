@@ -101,6 +101,13 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										</a>
 									</li>
 
+                  <li {{ (Request::is('admin/get_pay_info*') ? 'class=nav-expanded' : '') }} >
+										<a href="{{url('admin/get_pay_info/')}}" >
+											<i class="fa fa-coffee" aria-hidden="true"></i>
+											<span>แจ้งการชำระเงิน</span>
+										</a>
+									</li>
+
 
 
                   <li {{ (Request::is('admin/contact_admin*') ? 'class=nav-expanded' : '') }} >
