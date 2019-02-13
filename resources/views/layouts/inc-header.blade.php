@@ -106,7 +106,7 @@
                         <li style="padding-left:10px;">
                             <a href="{{url('photo_edit/'.$item['data']['id'])}}" style="padding: 3px 5px;"><div class="image"><img src="{{url('assets/image/product/'.$item['data']['image_pro'])}}" alt="image"></div></a>
                             <strong>
-                            <a href="{{url('photo_edit/'.$item['data']['id'])}}"><?=$i?>. {{$item['data']['pro_name']}}</a>฿<?=$item['data'][3]['sum_price']?>.00 x {{$item['data'][2]['sum_image']}}</strong>
+                            <a href="{{url('photo_edit/'.$item['data']['id'])}}"><?=$i?>. {{$item['data']['pro_name']}}</a>฿{{number_format((float)$item['data'][3]['sum_price'], 2, '.', '')}} x {{$item['data'][2]['sum_image']}}</strong>
                         </li>
 
                         <?php
@@ -115,7 +115,7 @@
                          ?>
 
                         <li>
-                            <div>Total: <span>฿<?=$total?>.00</span></div>
+                            <div>Total: <span>฿{{number_format((float)$total, 2, '.', '')}}</span></div>
                             <a href="{{url('cart')}}" style="float: left; margin: 0px 1px 0px 1px;" class="button_drop">Go to cart</a>
                             <a href="{{url('shipping')}}" style=" margin: 0px 1px 0px 1px;" class="button_drop">Check out</a>
                         </li>
@@ -150,7 +150,7 @@
                           <li style="padding-left:10px;">
                               <a href="{{url('photo_edit/'.$k->id)}}" style="padding: 3px 5px;"><div class="image"><img src="{{url('assets/image/product/'.$k->product_get->pro_image)}}" alt="{{$k->product_get->pro_name}}"></div></a>
                               <strong>
-                              <a href="{{url('photo_edit/'.$k->id)}}"><?=$i?>. {{$k->product_get->pro_name}}</a>฿<?=$k->sum_price?>.00 x {{$k->sum_image}}</strong>
+                              <a href="{{url('photo_edit/'.$k->id)}}"><?=$i?>. {{$k->product_get->pro_name}}</a>฿{{number_format((float)$k->sum_price, 2, '.', '')}} x {{$k->sum_image}}</strong>
                           </li>
 
                           <?php
@@ -160,7 +160,7 @@
                           @endforeach
 
                           <li>
-                              <div>Total: <span>฿<?=$total?>.00</span></div>
+                              <div>Total: <span>฿{{number_format((float)$total, 2, '.', '')}}</span></div>
                               <a href="{{url('cart')}}" style="float: left; margin: 0px 1px 0px 1px;" class="button_drop">Go to cart</a>
                               <a href="{{url('shipping')}}" style=" margin: 0px 1px 0px 1px;" class="button_drop">Check out</a>
                           </li>

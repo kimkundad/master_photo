@@ -49,8 +49,7 @@
 
                 <div class="col-md-12 " style="padding-left: 1px;">
 
-                  <a class="btn btn-primary " href="{{url('admin/delivery/create')}}" >
-                      <i class="fa fa-plus"></i> เพิ่มช่องทางการส่งสินค้า</a>
+                  
                 </div>
                 <br><br>
 
