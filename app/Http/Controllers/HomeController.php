@@ -662,12 +662,19 @@ class HomeController extends Controller
 
       //  dd($get_my_add);
 
+      $deliveries = DB::table('deliveries')
+            ->get();
+
+
+
+        $data['deli'] = $deliveries;
         $data['package'] = $package;
         $data['check_address'] = $check_address;
 
         return view('shipping_2', $data);
 
       }else{
+
         $check_address = 0;
         $data['check_address'] = $check_address;
         $data['package'] = null;

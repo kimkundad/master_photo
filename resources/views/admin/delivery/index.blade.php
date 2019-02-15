@@ -49,7 +49,7 @@
 
                 <div class="col-md-12 " style="padding-left: 1px;">
 
-                  
+
                 </div>
                 <br><br>
 
@@ -80,11 +80,11 @@
 
   													<a class="dropdown-item text-1" href="{{url('admin/delivery/'.$u->id.'/edit')}}">แก้ไข</a>
 
-                          <form  action="{{url('admin/delivery/'.$u->id)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
+                      <!--    <form  action="{{url('admin/delivery/'.$u->id)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
                               <input type="hidden" name="_method" value="DELETE">
                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                               <button type="submit" title="ลบบทความ" class="dropdown-item text-1 text-danger"><i class="fa fa-times "></i> ลบ</button>
-                          </form>
+                          </form> -->
 
   												</div>
   											</div>

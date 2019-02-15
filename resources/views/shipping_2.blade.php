@@ -303,7 +303,7 @@ Shipping | MASTER PHOTO NETWORK
 
 
                     @else
-                  
+
                     @endif
 
 
@@ -432,6 +432,13 @@ Shipping | MASTER PHOTO NETWORK
                        <label>เลือกรูปแบบการจัดส่ง</label>
                         <select class="form-control" onchange="getComboB(this)" id="shipping_optional" name="deliver_order" required="">
                               <option value="0" data-value="0">-- กรุณาเลือกวิธีรับสินค้า --</option>
+                              @if($deli)
+                              @foreach($deli as $delis)
+                              <option value="{{$delis->name}}" data-value="{{$delis->id}}">{{$delis->name}}</option>
+                              @endforeach
+                              @endif
+
+                              <!--
                               <option value="จัดส่งด่วน 1 วัน แบบ Express" data-value="2">จัดส่งด่วน 1 วัน แบบ Express</option>
                               <option value="จัดส่งทางไปรษณีย์ EMS" data-value="3">จัดส่งทางไปรษณีย์ EMS</option>
                               <option value="จัดส่งผ่านทางรถ บขส." data-value="4">จัดส่งผ่านทางรถ บขส.</option>
@@ -439,7 +446,7 @@ Shipping | MASTER PHOTO NETWORK
                               <option value="จัดส่งผ่านทางรถไฟ " data-value="6">จัดส่งผ่านทางรถไฟ </option>
                               <option value="ทางร้านจัดส่ง Delivery" data-value="7">ทางร้านจัดส่ง Delivery </option>
                               <option value="รับสินค้าด้วยตัวเอง" data-value="8"> รับสินค้าด้วยตัวเอง</option>
-
+                              -->
                         </select>
                       </div>
                       <br>
@@ -468,31 +475,31 @@ Shipping | MASTER PHOTO NETWORK
                        <label>กรุณาเลือกรถ บขส.</label>
 
 
-                        <select class="form-control" name="bus_shipping">
+                      <select class="form-control" name="bus_shipping" id="size_photo1" onchange="getComboA11(this)">
                         <option value="เลือกเขตพื้นที่" selected="selected">เลือกรถ บขส.</option>
-                        <option value="999">999 ค่าจัดส่ง 210 บาท</option>
-                        <option value="กิจการทัวร์">กิจการทัวร์  ค่าจัดส่ง  250 บาท </option>
-                        <option value="โชครุ่งทวี">โชครุ่งทวี  ค่าจัดส่ง 210 บาท</option>
+                        <option value="999" data-value="210">999 ค่าจัดส่ง 210 บาท</option>
+                        <option value="กิจการทัวร์" data-value="250">กิจการทัวร์  ค่าจัดส่ง  250 บาท </option>
+                        <option value="โชครุ่งทวี" data-value="210">โชครุ่งทวี  ค่าจัดส่ง 210 บาท</option>
 
-                        <option value="นครชัยแอร์">นครชัยแอร์  ค่าจัดส่ง 150 บาท</option>
-              		  <option value="เพชรประเสริฐ">เพชรประเสริฐ  ค่าจัดส่ง 150 บาท</option>
-                        <option value="สมบัติทัวร์">สมบัติทัวร์  ค่าจัดส่ง 210 บาท</option>
-                        <option value="สยามเฟิร์ส">สยามเฟิร์ส  ค่าจัดส่ง 100 บาท</option>
-                        <option value="สหพันธ์ร้อยเอ็ด">สหพันธ์ร้อยเอ็ด  ค่าจัดส่ง 210 บาท</option>
-                        <option value="แสงประทีป">แสงประทีป  ค่าจัดส่ง 210 บาท</option>
-                        <option value="แอร์เมืองเลย">แอร์เมืองเลย  ค่าจัดส่ง 210 บาท</option>
+                        <option value="นครชัยแอร์" data-value="150">นครชัยแอร์  ค่าจัดส่ง 150 บาท</option>
+              		  <option value="เพชรประเสริฐ" data-value="150">เพชรประเสริฐ  ค่าจัดส่ง 150 บาท</option>
+                        <option value="สมบัติทัวร์" data-value="210">สมบัติทัวร์  ค่าจัดส่ง 210 บาท</option>
+                        <option value="สยามเฟิร์ส" data-value="100">สยามเฟิร์ส  ค่าจัดส่ง 100 บาท</option>
+                        <option value="สหพันธ์ร้อยเอ็ด" data-value="210">สหพันธ์ร้อยเอ็ด  ค่าจัดส่ง 210 บาท</option>
+                        <option value="แสงประทีป" data-value="210">แสงประทีป  ค่าจัดส่ง 210 บาท</option>
+                        <option value="แอร์เมืองเลย" data-value="210">แอร์เมืองเลย  ค่าจัดส่ง 210 บาท</option>
 
 
-              	      <option value="SP สุภาภัณฑ์">SP สุภาภัณฑ์   ค่าจัดส่ง เก็บปลายทาง บาท</option>
-              	      <option value="SD เอส.ดี.">SD เอส.ดี.  ค่าจัดส่ง เก็บปลายทาง บาท</option>
-              	      <option value="SDS">SDS  ค่าจัดส่ง เก็บปลายทาง บาท</option>
-              	      <option value="PL พีแอล">PL พีแอล  ค่าจัดส่ง เก็บปลายทาง บาท</option>
-                        <option value="KPL ทรานสปอร์ต">KPL ทรานสปอร์ต  ค่าจัดส่ง เก็บปลายทาง บาท</option>
-              	      <option value="SPEED">SPEED  ค่าจัดส่ง เก็บปลายทาง บาท</option>
-              	      <option value="NTC เอ็นทีซี">NTC เอ็นทีซี  ค่าจัดส่ง เก็บปลายทาง บาท</option>
-              	      <option value="นิ่มซี่เส็ง">นิ่มซี่เส็ง  ค่าจัดส่ง เก็บปลายทาง บาท</option>
+              	      <option value="SP สุภาภัณฑ์" data-value="0">SP สุภาภัณฑ์   ค่าจัดส่ง เก็บปลายทาง บาท</option>
+              	      <option value="SD เอส.ดี." data-value="0">SD เอส.ดี.  ค่าจัดส่ง เก็บปลายทาง บาท</option>
+              	      <option value="SDS" data-value="0">SDS  ค่าจัดส่ง เก็บปลายทาง บาท</option>
+              	      <option value="PL พีแอล" data-value="0">PL พีแอล  ค่าจัดส่ง เก็บปลายทาง บาท</option>
+                        <option value="KPL ทรานสปอร์ต" data-value="0">KPL ทรานสปอร์ต  ค่าจัดส่ง เก็บปลายทาง บาท</option>
+              	      <option value="SPEED" data-value="0">SPEED  ค่าจัดส่ง เก็บปลายทาง บาท</option>
+              	      <option value="NTC เอ็นทีซี" data-value="0">NTC เอ็นทีซี  ค่าจัดส่ง เก็บปลายทาง บาท</option>
+              	      <option value="นิ่มซี่เส็ง" data-value="0">นิ่มซี่เส็ง  ค่าจัดส่ง เก็บปลายทาง บาท</option>
 
-       </select>
+                    </select>
                       </div>
                    </div>
 
@@ -695,12 +702,21 @@ Shipping | MASTER PHOTO NETWORK
                 </td>
               </tr>
 
+              <tr>
+                <td>
+                  ค่าขนส่ง
+                </td>
+                <td class="text-right" id="get_ship_price">
+
+                </td>
+              </tr>
+
               <tr class="total" style="font-size: 18px;">
                 <td>
                   Summary
                 </td>
-                <td class="text-right" >
-                ฿ {{number_format((float)$total_pay, 2, '.', '')}}
+                <td class="text-right" id="sum_image_price" style="display:none">{{number_format((float)$total_pay, 2, '.', '')}}</td>
+                <td class="text-right" id="get_image_price">
                 </td>
               </tr>
             </tbody>
@@ -735,7 +751,9 @@ Shipping | MASTER PHOTO NETWORK
 
 
 <script>
-
+var value2 = 0;
+var price_image = document.getElementById('sum_image_price').innerText;
+$('#get_ship_price').append( (0).toFixed(2) );
 function myFunction() {
     var x = document.getElementById("dvPassport");
 
@@ -780,10 +798,11 @@ function getComboA(selectObject) {
 
 
 
+
 function getComboB(selectObject) {
     var e = document.getElementById("shipping_optional");
-    var value2 = e.options[e.selectedIndex].getAttribute('data-value');
-    console.log(value2)
+    value2 = e.options[e.selectedIndex].getAttribute('data-value');
+
 
     if(value2 == 0){
       $("#option_select_op2").hide()
@@ -793,9 +812,12 @@ function getComboB(selectObject) {
       $("#option_select_op6").hide()
       $("#option_select_op7").hide()
       $("#option_select_op8").hide()
+      $('#get_image_price').html("");
+      $('#get_image_price').append(price_image);
+      $('#get_ship_price').append( (0) );
     }
 
-    if(value2 == 2){
+    if(value2 == 4){
       $("#option_select_op2").show()
       $("#option_select_op3").hide()
       $("#option_select_op4").hide()
@@ -803,6 +825,9 @@ function getComboB(selectObject) {
       $("#option_select_op6").hide()
       $("#option_select_op7").hide()
       $("#option_select_op8").hide()
+      $('#get_image_price').html("");
+      $('#get_image_price').append(price_image);
+      $('#get_ship_price').append( (0) );
     }
 
     if(value2 == 3){
@@ -813,9 +838,12 @@ function getComboB(selectObject) {
       $("#option_select_op6").hide()
       $("#option_select_op7").hide()
       $("#option_select_op8").hide()
+      $('#get_image_price').html("");
+      $('#get_image_price').append(price_image);
+      $('#get_ship_price').append( (0) );
     }
 
-    if(value2 == 4){
+    if(value2 == 7){
       $("#option_select_op4").show()
       $("#option_select_op2").hide()
       $("#option_select_op3").hide()
@@ -823,9 +851,12 @@ function getComboB(selectObject) {
       $("#option_select_op6").hide()
       $("#option_select_op7").hide()
       $("#option_select_op8").hide()
+
+
+
     }
 
-    if(value2 == 5){
+    if(value2 == 8){
       $("#option_select_op5").show()
       $("#option_select_op2").hide()
       $("#option_select_op3").hide()
@@ -833,9 +864,12 @@ function getComboB(selectObject) {
       $("#option_select_op6").hide()
       $("#option_select_op7").hide()
       $("#option_select_op8").hide()
+      $('#get_image_price').html("");
+      $('#get_image_price').append(price_image);
+      $('#get_ship_price').append( (0) );
     }
 
-    if(value2 == 6){
+    if(value2 == 9){
       $("#option_select_op6").show()
       $("#option_select_op2").hide()
       $("#option_select_op3").hide()
@@ -843,9 +877,12 @@ function getComboB(selectObject) {
       $("#option_select_op5").hide()
       $("#option_select_op7").hide()
       $("#option_select_op8").hide()
+      $('#get_image_price').html("");
+      $('#get_image_price').append(price_image);
+      $('#get_ship_price').append( (0) );
     }
 
-    if(value2 == 7){
+    if(value2 == 6){
       $("#option_select_op7").show()
       $("#option_select_op2").hide()
       $("#option_select_op3").hide()
@@ -853,9 +890,12 @@ function getComboB(selectObject) {
       $("#option_select_op5").hide()
       $("#option_select_op6").hide()
       $("#option_select_op8").hide()
+      $('#get_image_price').html("");
+      $('#get_image_price').append(price_image);
+      $('#get_ship_price').append( (0) );
     }
 
-    if(value2 == 8){
+    if(value2 == 5){
       $("#option_select_op8").show()
       $("#option_select_op7").hide()
       $("#option_select_op2").hide()
@@ -863,9 +903,29 @@ function getComboB(selectObject) {
       $("#option_select_op4").hide()
       $("#option_select_op5").hide()
       $("#option_select_op6").hide()
+      $('#get_image_price').html("");
+      $('#get_image_price').append(price_image);
+      $('#get_ship_price').append( (0) );
     }
 
+    console.log(value2)
+}
 
+
+console.log(price_image);
+$('#get_image_price').append(price_image);
+
+function getComboA11(selectObject) {
+    var e = document.getElementById("size_photo1");
+    var strUser = e.options[e.selectedIndex].getAttribute('data-value');
+
+    $('#get_image_price').html("");
+    $('#get_image_price').append( (Number(price_image)+Number(strUser)).toFixed(2) );
+
+    $('#get_ship_price').html("");
+    $('#get_ship_price').append( (strUser) );
+    console.log(value2)
+    console.log(strUser);
 }
 
 ;(function( $ ){

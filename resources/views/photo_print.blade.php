@@ -484,8 +484,6 @@ function getComboA1(selectObject) {
     }
 
     console.log(strUser);
-
-
 }
 
 
