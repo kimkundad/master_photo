@@ -434,7 +434,7 @@ Shipping | MASTER PHOTO NETWORK
                               <option value="0" data-value="0">-- กรุณาเลือกวิธีรับสินค้า --</option>
                               @if($deli)
                               @foreach($deli as $delis)
-                              <option value="{{$delis->name}}" data-value="{{$delis->id}}">{{$delis->name}}</option>
+                              <option value="{{$delis->name}}" data-value="{{$delis->id}}" data-price="{{$delis->de_price}}" data-set="{{$delis->de_status}}">{{$delis->name}}</option>
                               @endforeach
                               @endif
 
@@ -520,7 +520,7 @@ Shipping | MASTER PHOTO NETWORK
 
                    <div class="col-md-12 col-sm-12 " id="option_select_op7" style="display:none">
                      <p>
-                        กรุณาตรวจสอบพื้นที่จัดส่งก่อนค่ะ พื้นที่จัดส่ง (ตรวจสอบพื้นที่บริการ) จัดส่งฟรี เมื่อยอดสั่งงานถึง 500 บาท ในกรณีไม่ถึง 500 บาท คิดค่าบริการ 50 บาท ค่ะ เวลาในการจัดส่งจะมีพนักงานแจ้งให้ทราบอีกครั้งเมื่องานเสร็จแล้วค่ะ
+                        กรุณาตรวจสอบพื้นที่จัดส่งก่อนค่ะ พื้นที่จัดส่ง (ตรวจสอบพื้นที่บริการ) จัดส่งฟรี เมื่อยอดสั่งงานถึง {{$deli_set->de_price}} บาท ในกรณีไม่ถึง {{$deli_set->de_price}} บาท คิดค่าบริการ 50 บาท ค่ะ เวลาในการจัดส่งจะมีพนักงานแจ้งให้ทราบอีกครั้งเมื่องานเสร็จแล้วค่ะ
                      </p>
                      <p class="text-danger">
                        **พื้นที่บางส่วนอาจยังไม่ครอบคลุมครบทั้งพื้นที่ สามารถสอบถามได้ที่เบอร์โทรศัพท์ 02-513-0105 ค่ะ
@@ -752,6 +752,8 @@ Shipping | MASTER PHOTO NETWORK
 
 <script>
 var value2 = 0;
+var set_deli = {{$deli_set->de_price}};
+
 var price_image = document.getElementById('sum_image_price').innerText;
 $('#get_ship_price').append( (0).toFixed(2) );
 function myFunction() {
@@ -802,6 +804,8 @@ function getComboA(selectObject) {
 function getComboB(selectObject) {
     var e = document.getElementById("shipping_optional");
     value2 = e.options[e.selectedIndex].getAttribute('data-value');
+    value_price = e.options[e.selectedIndex].getAttribute('data-price');
+    value_set = e.options[e.selectedIndex].getAttribute('data-set');
 
 
     if(value2 == 0){
@@ -813,6 +817,7 @@ function getComboB(selectObject) {
       $("#option_select_op7").hide()
       $("#option_select_op8").hide()
       $('#get_image_price').html("");
+      $('#get_ship_price').html("");
       $('#get_image_price').append(price_image);
       $('#get_ship_price').append( (0) );
     }
@@ -826,6 +831,7 @@ function getComboB(selectObject) {
       $("#option_select_op7").hide()
       $("#option_select_op8").hide()
       $('#get_image_price').html("");
+      $('#get_ship_price').html("");
       $('#get_image_price').append(price_image);
       $('#get_ship_price').append( (0) );
     }
@@ -839,20 +845,23 @@ function getComboB(selectObject) {
       $("#option_select_op7").hide()
       $("#option_select_op8").hide()
       $('#get_image_price').html("");
+      $('#get_ship_price').html("");
       $('#get_image_price').append(price_image);
       $('#get_ship_price').append( (0) );
     }
 
     if(value2 == 7){
-      $("#option_select_op4").show()
+      $("#option_select_op4").hide()
       $("#option_select_op2").hide()
       $("#option_select_op3").hide()
       $("#option_select_op5").hide()
       $("#option_select_op6").hide()
       $("#option_select_op7").hide()
       $("#option_select_op8").hide()
-
-
+      $('#get_image_price').html("");
+      $('#get_ship_price').html("");
+      $('#get_image_price').append(price_image);
+      $('#get_ship_price').append( 'เก็บเงินปลายทาง' );
 
     }
 
@@ -865,8 +874,12 @@ function getComboB(selectObject) {
       $("#option_select_op7").hide()
       $("#option_select_op8").hide()
       $('#get_image_price').html("");
-      $('#get_image_price').append(price_image);
-      $('#get_ship_price').append( (0) );
+      $('#get_ship_price').html("");
+      $('#get_image_price').append((Number(price_image)+Number(value_price)).toFixed(2));
+      $('#get_ship_price').append( (Number(value_price)).toFixed(2) );
+
+
+
     }
 
     if(value2 == 9){
@@ -878,8 +891,9 @@ function getComboB(selectObject) {
       $("#option_select_op7").hide()
       $("#option_select_op8").hide()
       $('#get_image_price').html("");
-      $('#get_image_price').append(price_image);
-      $('#get_ship_price').append( (0) );
+      $('#get_ship_price').html("");
+      $('#get_image_price').append((Number(price_image)+Number(value_price)).toFixed(2));
+      $('#get_ship_price').append( (Number(value_price)).toFixed(2) );
     }
 
     if(value2 == 6){
@@ -891,8 +905,21 @@ function getComboB(selectObject) {
       $("#option_select_op6").hide()
       $("#option_select_op8").hide()
       $('#get_image_price').html("");
-      $('#get_image_price').append(price_image);
-      $('#get_ship_price').append( (0) );
+      $('#get_ship_price').html("");
+
+      if(Number(price_image) > Number(value_set)){
+        $('#get_image_price').append(price_image);
+        $('#get_ship_price').append( (0) );
+
+      }else{
+      //  console.log(value_set);
+      //    console.log(price_image);
+        $('#get_image_price').append((Number(price_image)+Number(value_price)).toFixed(2));
+        $('#get_ship_price').append( (Number(value_price)).toFixed(2) );
+
+      }
+
+
     }
 
     if(value2 == 5){
@@ -904,28 +931,44 @@ function getComboB(selectObject) {
       $("#option_select_op5").hide()
       $("#option_select_op6").hide()
       $('#get_image_price').html("");
+      $('#get_ship_price').html("");
       $('#get_image_price').append(price_image);
       $('#get_ship_price').append( (0) );
     }
 
-    console.log(value2)
+
+    if(value2 == 11){
+      $("#option_select_op8").hide()
+      $("#option_select_op7").hide()
+      $("#option_select_op2").hide()
+      $("#option_select_op3").hide()
+      $("#option_select_op4").hide()
+      $("#option_select_op5").hide()
+      $("#option_select_op6").hide()
+      $('#get_image_price').html("");
+      $('#get_ship_price').html("");
+      $('#get_image_price').append(price_image);
+      $('#get_ship_price').append( 'ค่าจัดส่งฟรี' );
+    }
+
+  //  console.log(value2)
 }
 
 
-console.log(price_image);
+//console.log(price_image);
 $('#get_image_price').append(price_image);
 
 function getComboA11(selectObject) {
     var e = document.getElementById("size_photo1");
     var strUser = e.options[e.selectedIndex].getAttribute('data-value');
 
-    $('#get_image_price').html("");
+  /*  $('#get_image_price').html("");
     $('#get_image_price').append( (Number(price_image)+Number(strUser)).toFixed(2) );
 
     $('#get_ship_price').html("");
     $('#get_ship_price').append( (strUser) );
     console.log(value2)
-    console.log(strUser);
+    console.log(strUser); */
 }
 
 ;(function( $ ){

@@ -72,6 +72,20 @@
           														<input type="text" class="form-control" name="name" value="{{$objs->name}}">
           														</div>
           												</div>
+
+                                  <div class="form-group">
+          													<label class="col-md-3 control-label" for="profileFirstName">ราคาค่าขนส่ง*</label>
+          													<div class="col-md-8">
+          														<input type="text" class="form-control" name="de_price" value="{{$objs->de_price}}">
+          														</div>
+          												</div>
+
+                                  <div class="form-group">
+          													<label class="col-md-3 control-label" for="profileFirstName">Delivery ราคาที่ส่งฟร (Delivery เท่านั้น)</label>
+          													<div class="col-md-8">
+          														<input type="text" class="form-control" name="de_status" value="{{$objs->de_status}}">
+          														</div>
+          												</div>
                                   <br>
 
 

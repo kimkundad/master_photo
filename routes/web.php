@@ -65,7 +65,6 @@ Route::get('payment_notify', 'UserProfileController@payment_notify');
 Route::post('post_payment_notify', 'UserProfileController@post_payment_notify');
 Route::get('payment_notify_success', 'UserProfileController@payment_notify_success');
 
-
 Route::get('category/{id}', 'HomeController@category');
 
 // Social Auth

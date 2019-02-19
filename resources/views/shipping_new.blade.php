@@ -50,12 +50,35 @@ Shipping | MASTER PHOTO NETWORK
       $total_pay = 0;
       $total_img = 0;
      ?>
+
+
+
+@if (Auth::guest())
+
 @foreach(Session::get('cart') as $u)
 <?php
 $total_pay += ($u['data'][3]['sum_price']*$u['data'][2]['sum_image']);
 $total_img += $u['data'][2]['sum_image'];
  ?>
 @endforeach
+
+
+
+@else
+
+@if($get_data2)
+@foreach($get_data2 as $u2)
+<?php
+$total_pay += $u2->sum_image*$u2->sum_price;
+$total_img += $u2->sum_price;
+ ?>
+@endforeach
+@endif
+
+@endif
+
+
+
 
     <div class="row margin_30">
       <form action="{{url('/add_address_order')}}" method="post" enctype="multipart/form-data" name="product">
@@ -82,9 +105,15 @@ $total_img += $u['data'][2]['sum_image'];
                 <td>
                   Total
                 </td>
+                @if (Auth::guest())
                 <td class="text-right">
                   {{sizeof(Session::get('cart'))}}
                 </td>
+                @else
+                <td class="text-right">
+                  {{$count_data2}}
+                </td>
+                @endif
               </tr>
               <tr>
                 <td>
@@ -317,9 +346,15 @@ $total_img += $u['data'][2]['sum_image'];
                 <td>
                   Total
                 </td>
+                @if (Auth::guest())
                 <td class="text-right">
                   {{sizeof(Session::get('cart'))}}
                 </td>
+                @else
+                <td class="text-right">
+                  {{$count_data2}}
+                </td>
+                @endif
               </tr>
               <tr>
                 <td>

@@ -62,8 +62,8 @@
                   <thead>
                     <tr>
                       <th>ช่องทางการส่งสินค้า</th>
-                      <th>จำนวนผู้ใช้งาน</th>
-                      <th>จัดการ</th>
+                      <th>ราคาค่าขนส่ง</th>
+                      <th class="text-center">จัดการ</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -71,7 +71,7 @@
                 @foreach($objs as $u)
                     <tr>
                       <td>{{$u->name}}</td>
-
+                      <td>{{number_format((float)$u->de_price, 2, '.', '')}}</td>
                       <td></td>
                       <td>
                         <div class="btn-group flex-wrap">

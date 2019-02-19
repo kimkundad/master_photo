@@ -57,6 +57,8 @@ return view('admin.delivery.index', $data);
 
         $package = new delivery();
         $package->name = $request['name'];
+        $package->de_price = $request['de_price'];
+        $package->de_status = $request['de_status'];
         $package->save();
         return redirect(url('admin/delivery'))->with('add_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
 
@@ -106,9 +108,11 @@ return view('admin.delivery.index', $data);
 
         $package = delivery::find($id);
         $package->name = $request['name'];
+        $package->de_price = $request['de_price'];
+        $package->de_status = $request['de_status'];
         $package->save();
 
-      return redirect(url('admin/delivery/'.$id.'/edit'))->with('edit_success','แก้ไขหมวดหมู่ ');
+      return redirect(url('admin/delivery/'))->with('edit_success','แก้ไขหมวดหมู่ ');
     }
 
     /**

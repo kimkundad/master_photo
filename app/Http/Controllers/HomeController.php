@@ -663,10 +663,15 @@ class HomeController extends Controller
       //  dd($get_my_add);
 
       $deliveries = DB::table('deliveries')
+            ->where('id', '!=', 12)
             ->get();
 
+            $deli_set = DB::table('deliveries')
+                  ->where('id', 12)
+                  ->first();
 
 
+        $data['deli_set'] = $deli_set;
         $data['deli'] = $deliveries;
         $data['package'] = $package;
         $data['check_address'] = $check_address;
@@ -761,6 +766,28 @@ class HomeController extends Controller
      $data['check_address'] = 3;
 
 
+     $count_data = DB::table('cart_details')->select(
+         'cart_details.*'
+         )
+         ->where('user_id', Auth::user()->id)
+         ->count();
+
+     $get_data = DB::table('cart_details')->select(
+         'cart_details.*'
+         )
+         ->where('user_id', Auth::user()->id)
+         ->get();
+
+     $data['count_data2'] = $count_data;
+     $data['get_data2'] = $get_data;
+
+
+     $get_my_add_count = DB::table('user_addresses')
+         ->where('user_id', Auth::user()->id)
+         ->where('type_address', 1)
+         ->count();
+
+         $data['get_my_add_count'] = $get_my_add_count;
 
      if($check_address == 0){
 
@@ -809,7 +836,7 @@ class HomeController extends Controller
 
             $data['package'] = $package;
 
-            return view('shipping_2', $data);
+            return redirect(url('shipping'))->with('add_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
 
           }else{
 
@@ -855,7 +882,9 @@ class HomeController extends Controller
 
             $data['package'] = $package;
             $data['check_address'] = 3;
-            return view('shipping_2', $data);
+        //    return view('shipping_2', $data);
+
+            return redirect(url('shipping'))->with('add_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
 
           }
 
