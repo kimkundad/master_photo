@@ -130,7 +130,7 @@
           													</div>
           												</div>
 
-                                
+
 
                                   <div class="form-group">
           													<label class="col-md-3 control-label" for="profileFirstName">คำอธิบาย*</label>
@@ -198,10 +198,30 @@
                                   <br />
 
 
+                                  <hr />
+                                  <h4 class="mb-xlg">กำหนดราคา ค่าจัดส่ง</h4>
+
+                                  <div class="form-group">
+          													<label class="col-md-3 control-label" for="profileFirstName">ยอดตัดสินค้า จัดส่ง*</label>
+          													<div class="col-md-8">
+          														<input type="text" class="form-control" name="set_limit" value="{{ $objs->set_limit }}">
+          														</div>
+          												</div>
+
+                                  <div class="form-group">
+          													<label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง*</label>
+          													<div class="col-md-8">
+          														<input type="text" class="form-control" name="a_price_o" value="{{ $objs->a_price_o }}">
+          														</div>
+          												</div>
 
 
-
-
+                                  <div class="form-group">
+          													<label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง (ราคาสอง กรณีไม่คิดราคาแรก)*</label>
+          													<div class="col-md-8">
+          														<input type="text" class="form-control" name="b_price_o" value="{{ $objs->b_price_o }}">
+          														</div>
+          												</div>
 
 
 

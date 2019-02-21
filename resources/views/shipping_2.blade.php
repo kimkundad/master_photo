@@ -78,7 +78,7 @@ Shipping | MASTER PHOTO NETWORK
       <form action="{{url('/add_order')}}" method="post" enctype="multipart/form-data" name="product">
         {{ csrf_field() }}
       <div class="col-md-8 box_style_1  add_bottom_15">
-
+        <input type="hidden" id="get_sum_ship" name="get_sum_ship" value="0" />
 
         <div class="box_style_1 visible-sm visible-xs">
 
@@ -751,8 +751,13 @@ Shipping | MASTER PHOTO NETWORK
 
 
 <script>
+var zero_var = 0;
 var value2 = 0;
 var set_deli = {{$deli_set->de_price}};
+
+var get_sum_ship = {{$get_sum_ship}};
+console.log(get_sum_ship)
+
 
 var price_image = document.getElementById('sum_image_price').innerText;
 $('#get_ship_price').append( (0).toFixed(2) );
@@ -779,7 +784,7 @@ function getComboA(selectObject) {
 
 
     var value1 = selectObject.value;
-    console.log(value1)
+
 
     if(value1 == 3){
       $("#new_address1").show()
@@ -820,6 +825,7 @@ function getComboB(selectObject) {
       $('#get_ship_price').html("");
       $('#get_image_price').append(price_image);
       $('#get_ship_price').append( (0) );
+      document.getElementById("get_sum_ship").value = 0;
     }
 
     if(value2 == 4){
@@ -832,8 +838,41 @@ function getComboB(selectObject) {
       $("#option_select_op8").hide()
       $('#get_image_price').html("");
       $('#get_ship_price').html("");
-      $('#get_image_price').append(price_image);
-      $('#get_ship_price').append( (0) );
+
+
+      if(Number(price_image) >= Number(set_deli)){
+        $('#get_image_price').append(price_image);
+        $('#get_ship_price').append( (0) );
+        document.getElementById("get_sum_ship").value = zero_var;
+      }else{
+
+      $('#get_image_price').append((Number(price_image)+Number(get_sum_ship)).toFixed(2));
+      $('#get_ship_price').append( (get_sum_ship) );
+      document.getElementById("get_sum_ship").value = get_sum_ship;
+    }
+
+    }
+
+    if(value2 == 10){
+      $("#option_select_op2").show()
+      $("#option_select_op3").hide()
+      $("#option_select_op4").hide()
+      $("#option_select_op5").hide()
+      $("#option_select_op6").hide()
+      $("#option_select_op7").hide()
+      $("#option_select_op8").hide()
+      $('#get_image_price').html("");
+      $('#get_ship_price').html("");
+      if(Number(price_image) >= Number(set_deli)){
+        $('#get_image_price').append(price_image);
+        $('#get_ship_price').append( (0) );
+        document.getElementById("get_sum_ship").value = zero_var;
+      }else{
+
+      $('#get_image_price').append((Number(price_image)+Number(get_sum_ship)).toFixed(2));
+      $('#get_ship_price').append( (get_sum_ship) );
+      document.getElementById("get_sum_ship").value = get_sum_ship;
+    }
     }
 
     if(value2 == 3){
@@ -846,8 +885,16 @@ function getComboB(selectObject) {
       $("#option_select_op8").hide()
       $('#get_image_price').html("");
       $('#get_ship_price').html("");
-      $('#get_image_price').append(price_image);
-      $('#get_ship_price').append( (0) );
+      if(Number(price_image) >= Number(set_deli)){
+        $('#get_image_price').append(price_image);
+        $('#get_ship_price').append( (0) );
+        document.getElementById("get_sum_ship").value = zero_var;
+      }else{
+
+      $('#get_image_price').append((Number(price_image)+Number(get_sum_ship)).toFixed(2));
+      $('#get_ship_price').append( (get_sum_ship) );
+      document.getElementById("get_sum_ship").value = get_sum_ship;
+    }
     }
 
     if(value2 == 7){
@@ -862,6 +909,7 @@ function getComboB(selectObject) {
       $('#get_ship_price').html("");
       $('#get_image_price').append(price_image);
       $('#get_ship_price').append( 'เก็บเงินปลายทาง' );
+      document.getElementById("get_sum_ship").value = zero_var;
 
     }
 
@@ -875,9 +923,15 @@ function getComboB(selectObject) {
       $("#option_select_op8").hide()
       $('#get_image_price').html("");
       $('#get_ship_price').html("");
+      if(Number(price_image) >= Number(set_deli)){
+        $('#get_image_price').append(price_image);
+        $('#get_ship_price').append( (0) );
+        document.getElementById("get_sum_ship").value = zero_var;
+      }else{
       $('#get_image_price').append((Number(price_image)+Number(value_price)).toFixed(2));
       $('#get_ship_price').append( (Number(value_price)).toFixed(2) );
-
+      document.getElementById("get_sum_ship").value = value_price;
+    }
 
 
     }
@@ -892,8 +946,16 @@ function getComboB(selectObject) {
       $("#option_select_op8").hide()
       $('#get_image_price').html("");
       $('#get_ship_price').html("");
+
+      if(Number(price_image) >= Number(set_deli)){
+        $('#get_image_price').append(price_image);
+        $('#get_ship_price').append( (0) );
+        document.getElementById("get_sum_ship").value = zero_var;
+      }else{
       $('#get_image_price').append((Number(price_image)+Number(value_price)).toFixed(2));
       $('#get_ship_price').append( (Number(value_price)).toFixed(2) );
+      document.getElementById("get_sum_ship").value = value_price;
+    }
     }
 
     if(value2 == 6){
@@ -907,15 +969,16 @@ function getComboB(selectObject) {
       $('#get_image_price').html("");
       $('#get_ship_price').html("");
 
-      if(Number(price_image) > Number(value_set)){
+      if(Number(price_image) >= Number(value_set)){
         $('#get_image_price').append(price_image);
         $('#get_ship_price').append( (0) );
-
+        document.getElementById("get_sum_ship").value = zero_var;
       }else{
       //  console.log(value_set);
       //    console.log(price_image);
         $('#get_image_price').append((Number(price_image)+Number(value_price)).toFixed(2));
         $('#get_ship_price').append( (Number(value_price)).toFixed(2) );
+        document.getElementById("get_sum_ship").value = value_price;
 
       }
 
@@ -934,6 +997,7 @@ function getComboB(selectObject) {
       $('#get_ship_price').html("");
       $('#get_image_price').append(price_image);
       $('#get_ship_price').append( (0) );
+      document.getElementById("get_sum_ship").value = zero_var;
     }
 
 
@@ -949,6 +1013,7 @@ function getComboB(selectObject) {
       $('#get_ship_price').html("");
       $('#get_image_price').append(price_image);
       $('#get_ship_price').append( 'ค่าจัดส่งฟรี' );
+      document.getElementById("get_sum_ship").value = zero_var;
     }
 
   //  console.log(value2)

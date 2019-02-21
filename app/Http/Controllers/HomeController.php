@@ -436,9 +436,105 @@ class HomeController extends Controller
             ->where('user_id', Auth::user()->id)
             ->get();
 
+            $get_all_price = []; // หาค่าขนส่ง มาเก็บไว้ใน array
+          //  $pack_buy = []; // คิดราคาแบบ pack
+            $get_id_pro = [];
+            $get_test = [];
+            $get_test2 = [];
+            $get_sum_ship = 0;
+
+            foreach($get_data as $k){
+
+              // หาค่าขนส่ง มาเก็บไว้ใน array
+              $get_pro = DB::table('products')->select(
+                  'products.*'
+                  )
+                  ->where('id', $k->product_id)
+                  ->first();
+
+                  $get_id_pro[] = $get_pro->id;
+                //  $total_image += $k->sum_image;
+
+            }
+
+            $get_pro_max = DB::table('products')->select(
+                'products.*'
+                )
+                ->whereIn('id', $get_id_pro)
+                ->orderBy('a_price_o', 'desc')->value('id');
+
+            //dd($get_pro_max); ค่าไอดีที่มากสุดสุด
+
+            foreach($get_data as $h){
+
+              $h->shipping_price = 0;
+              $h->shipping_price2 = 0;
+
+              $get_pro = DB::table('products')->select(
+                  'products.*'
+                  )
+                  ->where('id', $h->product_id)
+                  ->first();
+
+                  $pack_buy = floor($h->sum_image / $get_pro->set_limit); //ปัดเศษทิ้ง
+                //  $total_pack_buy_price = $pack_buy * $get_pro->a_price_o;//คิดราคาแบบ pack
+              //    $get_test2[] = floor($h->sum_image / $get_pro->set_limit); //ปัดเศษทิ้ง
+
+                  $piece_buy = $h->sum_image % $get_pro->set_limit;//หารแบบเอาเศษ
+
+              //    $get_test[] = $h->sum_image % $get_pro->set_limit;//หารแบบเอาเศษ
+
+
+                $h->shipping_price2 += $pack_buy*$get_pro->a_price_o;
+
+                if($piece_buy != 0){
+
+                  $h->shipping_price2 += $get_pro->a_price_o;
+                }
+
+
+                  //เช็คราคา เอาตัวมากที่สุด คิดราคาแรก
+                  if($get_pro_max == $get_pro->id){
+
+                  $get_sum_ship += $pack_buy*$get_pro->a_price_o;
+                  $h->shipping_price += $pack_buy*$get_pro->a_price_o;
+                  // คิดว่ามีส่วนที่เหลือไหม ถ้ามีให้ + ราคาเข้าไป 1
+                    if($piece_buy != 0){
+                      $get_sum_ship += $get_pro->a_price_o;
+                      $h->shipping_price += $get_pro->a_price_o;
+                    }
+                  // คิดว่ามีส่วนที่เหลือไหม
+                  }else{
+
+                    $get_sum_ship += $pack_buy*$get_pro->b_price_o;
+                    $h->shipping_price += $pack_buy*$get_pro->b_price_o;
+                    // คิดว่ามีส่วนที่เหลือไหม ถ้ามีให้ + ราคาเข้าไป 1
+                      if($piece_buy != 0){
+                        $get_sum_ship += $get_pro->b_price_o;
+                        $h->shipping_price += $get_pro->b_price_o;
+                      }
+
+                  }
+
+
+                  $package = cart_detail::find($h->id);
+                  $package->shipping_price = $h->shipping_price;
+                  $package->shipping_price_2 = $h->shipping_price2;
+                  $package->save();
+
+
+
+
+                //  $piece_price = $piece_buy * $product_xx_price;// ราคาของส่วนที่เหลือจากแพ็ก
+            }
+
+          //  dd($get_data);
+          //  dd(max($get_all_price)); // ค่ามากที่สุดใน array สินค้าทั้งหมด
+
+        $data['get_sum_ship'] = $get_sum_ship;
         $data['count_data2'] = $count_data;
         $data['get_data2'] = $get_data;
-      //  dd($count_data);
+
       }
 
 
@@ -924,6 +1020,7 @@ class HomeController extends Controller
              'address_type_order' => 'required',
              'deliver_order' => 'required',
              'total' => 'required',
+             'get_sum_ship' => 'required',
              'order_price' => 'required',
              'c1' => 'required'
          ]);
@@ -1003,6 +1100,7 @@ class HomeController extends Controller
        }
        $package->note = $request['message_order'];
        $package->order_price = $request['order_price'];
+       $package->shipping_p = $request['get_sum_ship'];
        $package->total = $request['total'];
        $package->discount = $request['discount'];
        $package->save();
@@ -1011,49 +1109,6 @@ class HomeController extends Controller
 
 
        if(Auth::guest()){
-
-
-         foreach(Session::get('cart') as $u){
-
-           $cat = DB::table('products')->select(
-             'products.*'
-             )
-             ->where('products.id', $u['data']['id'])
-             ->first();
-
-           $obj = new order_detail();
-           $obj->order_id = $the_id;
-           $obj->product_id = $cat->id;
-           $obj->product_name = $cat->pro_name;
-           $obj->sum_image = $u['data'][2]['sum_image'];
-           $obj->sum_price = $u['data'][3]['sum_price'];
-           $obj->list_link = $u['data']['list_link'];
-           $obj->save();
-
-           $obj_id = $obj->id;
-
-           foreach($u['data']['image'] as $j){
-
-             $obj = new order_image();
-             $obj->order_id_detail = $obj_id;
-             $obj->order_image = $j['image'];
-             $obj->order_image_id = $j['id'];
-             $obj->order_image_sum = $j['num'];
-             $obj->save();
-
-           }
-
-           foreach($u['data'][0]['size_photo'] as $k){
-
-             $obj = new order_option();
-             $obj->order_id_detail = $obj_id;
-             $obj->option_id = $k;
-             $obj->save();
-
-            //  echo ($j['image']);
-           }
-
-         }
 
 
 
@@ -1101,6 +1156,7 @@ class HomeController extends Controller
                  $obj->sum_image = $k->sum_image;
                  $obj->sum_price = $k->sum_price;
                  $obj->list_link = $k->list_link;
+                 $obj->sum_shipping = $k->shipping_price_2;
                  $obj->save();
 
                  $obj_id = $obj->id;
@@ -1157,10 +1213,6 @@ class HomeController extends Controller
 
 
        }
-
-
-
-
 
 
 

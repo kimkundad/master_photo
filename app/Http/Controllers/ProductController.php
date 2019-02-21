@@ -30,7 +30,7 @@ class ProductController extends Controller
               'sub_categories.*'
               )
               ->leftjoin('sub_categories', 'sub_categories.id',  'products.pro_category')
-              ->get();
+              ->paginate(15);
 
 
         $data['objs'] = $cat;
@@ -75,6 +75,9 @@ class ProductController extends Controller
              'pro_status_show' => 'required',
              'pro_title' => 'required',
              'option' => 'required',
+             'set_limit' => 'required',
+             'a_price_o' => 'required',
+             'b_price_o' => 'required',
              'pro_name_detail' => 'required'
          ]);
 
@@ -92,6 +95,9 @@ class ProductController extends Controller
        $package->pro_title = $request['pro_title'];
        $package->pro_name_detail = $request['pro_name_detail'];
        $package->pro_category = $request['pro_category'];
+       $package->set_limit = $request['set_limit'];
+       $package->a_price_o = $request['a_price_o'];
+       $package->b_price_o = $request['b_price_o'];
        $package->pro_price = 0;
        $package->pro_image = $input['imagename'];
        $package->pro_status_show = $request['pro_status_show'];
@@ -241,6 +247,9 @@ class ProductController extends Controller
              'pro_category' => 'required',
              'pro_status_show' => 'required',
              'pro_title' => 'required',
+             'set_limit' => 'required',
+             'a_price_o' => 'required',
+             'b_price_o' => 'required',
              'pro_name_detail' => 'required'
          ]);
 
@@ -252,6 +261,9 @@ class ProductController extends Controller
           $package->pro_title = $request['pro_title'];
           $package->pro_name_detail = $request['pro_name_detail'];
           $package->pro_category = $request['pro_category'];
+          $package->set_limit = $request['set_limit'];
+          $package->a_price_o = $request['a_price_o'];
+          $package->b_price_o = $request['b_price_o'];
           $package->pro_price = 0;
           $package->pro_status_show = $request['pro_status_show'];
           $package->save();

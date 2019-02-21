@@ -237,7 +237,7 @@ Payment | MASTER PHOTO NETWORK
 
               <div class="col-md-4">
                 <div class="form-group">
-              <input type="text" name="amount" value="{{$order->order_price}}" class="form-control">
+              <input type="text" name="amount" value="{{$order->order_price+$order->shipping_p}}" class="form-control">
               </div>
             </div>
               <p>
@@ -289,14 +289,7 @@ Payment | MASTER PHOTO NETWORK
                 </td>
               </tr>
 
-              <tr>
-                <td>
-                  Total
-                </td>
-                <td class="text-right">
-                  {{$order->total}}
-                </td>
-              </tr>
+
               <tr>
                 <td>
                   Discount
@@ -306,12 +299,21 @@ Payment | MASTER PHOTO NETWORK
                 </td>
               </tr>
 
+              <tr>
+                <td>
+                  ค่าจัดส่ง
+                </td>
+                <td class="text-right">
+                  ฿{{$order->shipping_p}}
+                </td>
+              </tr>
+
               <tr class="total">
                 <td>
                   Summary
                 </td>
                 <td class="text-right">
-                  ฿{{$order->order_price}}
+                  ฿{{$order->order_price+$order->shipping_p}}
                 </td>
               </tr>
             </tbody>
