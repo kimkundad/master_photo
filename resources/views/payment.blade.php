@@ -64,7 +64,7 @@ Payment | MASTER PHOTO NETWORK
                   คำสั่งซื้อ
                 </td>
                 <td class="text-right">
-                  #00{{$order->id}}
+                  #00{{$order->code_gen}}
                 </td>
               </tr>
               <tr>
@@ -115,7 +115,7 @@ Payment | MASTER PHOTO NETWORK
 
 
         <div class="step">
-          <h4>คำสั่งซื้อ <a>#00{{$order->id}}</a></h4>
+          <h4>คำสั่งซื้อ <a>#{{$order->code_gen}}</a></h4>
           <br />
           <p class="text-success" style="font-size:14px;">
             <i class="im im-icon-Money-Smiley" style="font-size:32px;"></i> หากลูกค้าเลือกที่จะ ชำระหรือโอนเงินผ่านธนาคาร ลูกค้าสามารถกด <span class="text-danger"><b>"ขั้นตอนต่อไป"</b></span> เพื่อทำรายการภายหลัง หรือ กด
@@ -276,7 +276,7 @@ Payment | MASTER PHOTO NETWORK
                   คำสั่งซื้อ
                 </td>
                 <td class="text-right">
-                  #00{{$order->id}}
+                  #{{$order->code_gen}}
                 </td>
               </tr>
 

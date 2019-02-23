@@ -67,7 +67,7 @@ user profile
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h3>#Oder ID {{$order_de->order_id}}</h3>
+                    <h3>#Oder ID {{$order_main->code_gen}}</h3>
 
                     <p>
                     ชื่อสินค้า : {{$order_de->product_name}}<br />

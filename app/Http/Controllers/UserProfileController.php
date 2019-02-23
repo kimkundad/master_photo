@@ -123,7 +123,52 @@ class UserProfileController extends Controller
 
 
 
+    public function pay_order_choose($id){
+
+      $order_de = DB::table('order_details')
+            ->where('id', $id)
+            ->first();
+
+
+            $order_option = DB::table('order_options')->select(
+                  'order_options.*',
+                  'order_options.id as id_op',
+                  'option_items.*'
+                  )
+                  ->leftjoin('option_items', 'option_items.id',  'order_options.option_id')
+                  ->where('order_options.order_id_detail', $order_de->id)
+                  ->get();
+                  $order_de->order_option = $order_option;
+
+      $get_main_id = $order_de->order_id;
+
+    //  หาจำนวนทั้งหมดของ order นี้
+    $order_count = DB::table('order_details')
+          ->where('order_id', $get_main_id)
+          ->count();
+
+    // รายการทั้งหมดของ ออเดอร์นี้
+    $order_all = DB::table('order_details')
+          ->where('order_id', $get_main_id)
+          ->get();
+
+    // ข้อมูงของออเดอรืหลัก
+    $order_main = DB::table('orders')
+          ->where('id', $get_main_id)
+          ->first();
+
+      $data['order_de'] = $order_de;
+      $data['order_main'] = $order_main;
+      $data['order_count'] = $order_count;
+      $data['order_all'] = $order_all;
+      return view('pay_order_choose', $data);
+    }
+
+
+
     public function my_order_detail($id){
+
+
 
 
       $order_de = DB::table('order_details')->select(
@@ -135,6 +180,12 @@ class UserProfileController extends Controller
             ->leftjoin('products', 'products.id',  'order_details.product_id')
             ->where('order_details.id', $id)
             ->first();
+
+
+            $order_main = DB::table('orders')
+                  ->where('id', $order_de->order_id)
+                  ->first();
+            $data['order_main'] = $order_main;
 
 
             $order_get = DB::table('orders')->select(
@@ -287,6 +338,39 @@ class UserProfileController extends Controller
 
 
       return view('payment_notify', $data);
+    }
+
+
+    public function payment_notify_id($id){
+
+      $get_data_price = 0;
+      $check_order = DB::table('orders')
+            ->where('code_gen', $id)
+            ->count();
+
+      if($check_order > 0){
+
+        $get_data = DB::table('orders')
+              ->where('code_gen', $id)
+              ->first();
+              $get_data_price = $get_data->order_price+$get_data->shipping_p;
+      }else{
+
+        $get_data = DB::table('order_details')
+              ->where('code_gen_d', $id)
+              ->first();
+
+              $get_data_price = $get_data->sum_image*$get_data->sum_price;
+
+      }
+
+      $objs = DB::table('payment_options')
+        ->get();
+        $data['get_data_price'] = $get_data_price;
+        $data['bank'] = $objs;
+        $data['id'] = $id;
+
+      return view('payment_notify_id', $data);
     }
 
 

@@ -58,7 +58,32 @@ user profile
       </aside>
 
 
-
+<style>
+.btn_4{
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: #fff;
+    background: #a94442;
+    cursor: pointer;
+    padding: 7px 8px;
+    font-size: 11px;
+    line-height: 9px;
+    display: block;
+    outline: none;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+}
+.btn_4:hover{
+	background: #333;
+	color:#fff;
+}
+</style>
 
 
 
@@ -84,9 +109,9 @@ user profile
 								<div class="col-lg-2 col-md-2">
 									<img src="{{url('assets/image/product/'.$j->pro_image)}}" class="img-fluid styled" style="width:94px; box-shadow: 0 0 5px 0 rgba(0,0,0,.1);" />
 								</div>
-								<div class="col-lg-6 col-md-5">
+								<div class="col-lg-5 col-md-5">
 									<h3 style="padding-left: 5px;">{{$j->product_name}} <span style="line-height: 16px;">
-                    {{$j->sum_image}} รูป / <strong class="text-danger">ราคา {{$u->order_price}} บาท</strong> / <br />
+                    จำนวน {{$j->sum_image}} ชิ้น <br />
                     @if(isset($j->get_all_option))
                     @foreach($j->get_all_option as $k)
 
@@ -95,15 +120,16 @@ user profile
                   @endif
                   </span></h3>
 								</div>
-								<div class="col-lg-2 col-md-3">
+								<div class="col-lg-3 col-md-3">
 									<ul class="info_booking">
-										<li><strong>ORDER id</strong> {{$j->order_id}}</li>
+										<li><strong>ORDER id #{{$u->code_gen}}</strong> </li>
 										<li><strong>วันที่ทำรายการ</strong> <?php echo DateThai($j->created_ats); ?></li>
 									</ul>
 								</div>
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
-										<a href="{{url('my_order_detail/'.$j->id_de)}}" class="btn_2">ดูข้อมูล</a>
+                    <a href="{{url('pay_order_choose/'.$j->id_de)}}" class="btn_4">ชำระเงิน</a>
+										<a href="{{url('my_order_detail/'.$j->id_de)}}" style="margin-top: 3px;" class="btn_2">ดูข้อมูล</a>
 										<a href="#0" class="btn_3">ยกเลิก</a>
 									</div>
 								</div>

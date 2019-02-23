@@ -1070,13 +1070,15 @@ class HomeController extends Controller
 
          }
 
-
+         $get_count_or = DB::table('orders')
+                 ->count();
 
 
       //  $name_user = $request['firstname_order'];
-
+       $randomSixDigitInt = '62-'.($get_count_or).'-'.(\random_int(100000, 999999));
        $package = new order();
        $package->user_id = Auth::user()->id;
+       $package->code_gen = $randomSixDigitInt;
        $package->shipping_address = $request['address_shipping_order'];
        $package->bill_address = $request['address_bill_order'];
        $package->type_order_check = $request['address_type_order'];
@@ -1148,9 +1150,11 @@ class HomeController extends Controller
                          ->where('cart_id_detail', $k->id)
                          ->get();
 
+                 $randomSixDigitInt2 = '62-'.($the_id).'-'.(\random_int(100000, 999999));
 
                  $obj = new order_detail();
                  $obj->order_id = $the_id;
+                 $obj->code_gen_d = $randomSixDigitInt2;
                  $obj->product_id = $cat->id;
                  $obj->product_name = $cat->pro_name;
                  $obj->sum_image = $k->sum_image;
