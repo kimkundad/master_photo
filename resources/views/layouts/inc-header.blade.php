@@ -267,6 +267,31 @@
             @endforeach
             @endif
 
+            @if(Auth::guest())
+
+            @else
+
+            <li class="submenu">
+              <a href="javascript:void(0);" class="show-submenu"> {{ Auth::user()->name }}
+                <i class="icon-down-open-mini"></i>
+              </a>
+
+              <ul>
+
+                  <li><a href="{{url('profile')}}">Profile</a>
+                  </li>
+                  <li><a href="{{url('my_order')}}">My Order</a>
+                  </li>
+                  <li><a href="{{url('payment_notify')}}">แจ้งชำระเงิน</a>
+                  </li>
+                  <li><a href="{{url('logout')}}">Sign out</a>
+                  </li>
+
+
+                </ul>
+            </li>
+
+            @endif
 
           </ul>
 
