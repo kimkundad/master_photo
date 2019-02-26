@@ -271,7 +271,7 @@
 
             @else
 
-            <li class="submenu">
+            <li class="submenu visible-sm visible-xs">
               <a href="javascript:void(0);" class="show-submenu"> {{ Auth::user()->name }}
                 <i class="icon-down-open-mini"></i>
               </a>
