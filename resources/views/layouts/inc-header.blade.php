@@ -216,7 +216,7 @@
             @if(Auth::guest())
             <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;" href="{{url('login')}}">SIGN IN /<br /> JOIN</a>
             @else
-            <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;" href="{{url('/cart\')}}">
+            <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;" href="{{url('/cart')}}">
               <i class="fa fa-cart-plus" style="margin-top: 5px; font-size: 23px;"></i>
             </a>
 
@@ -232,7 +232,7 @@
 
         <div class="main-menu text-center">
           <div id="header_menu">
-            <img src="{{url('master/assets/image/logo-website.png')}}" height="54" alt="City tours" data-retina="true">
+            <img src="{{url('master/assets/image/logo-website.png')}}" height="54" alt="masterphotonetwork" data-retina="true">
           </div>
           <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
           <ul>
