@@ -1809,6 +1809,7 @@ class HomeController extends Controller
         $set_num_date = count(Session::get('cart'));
 
 
+
         $set_img = array();
         $option_set_pro = [];
 
@@ -1836,6 +1837,11 @@ class HomeController extends Controller
 
 
         return view('cart', $data);
+        if($set_num_date == 0){
+          return view('empty_cart', $data);
+        }else{
+          return view('cart', $data);
+        }
 
       }else{
 
@@ -1881,7 +1887,15 @@ class HomeController extends Controller
 
         $data['get_data'] = $get_data;
         $data['count_data'] = $count_data;
-        return view('cart', $data);
+
+        if($count_data == 0){
+          return view('empty_cart', $data);
+        }else{
+          return view('cart', $data);
+        }
+
+
+      //  return view('cart', $data);
 
       }
 
