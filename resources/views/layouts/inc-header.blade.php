@@ -54,11 +54,11 @@
               <div class="dropdown-menu">
                 <ul id="lang_menu">
 
-                  <li><a href="{{url('profile')}}">Profile</a>
+                  <li><a href="{{url('profile')}}">Account Setting</a>
                   </li>
-                  <li><a href="{{url('my_order')}}">My Order</a>
+                  <li><a href="{{url('my_order')}}">Order History</a>
                   </li>
-                  <li><a href="{{url('payment_notify')}}">แจ้งชำระเงิน</a>
+                  <li><a href="{{url('payment_notify')}}">Payment</a>
                   </li>
                   <li><a href="{{url('logout')}}">Sign out</a>
                   </li>
@@ -216,7 +216,7 @@
             @if(Auth::guest())
             <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;" href="{{url('login')}}">SIGN IN /<br /> JOIN</a>
             @else
-            <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;" href="{{url('/cart')}}">
+            <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;" href="{{url('/cart\')}}">
               <i class="fa fa-cart-plus" style="margin-top: 5px; font-size: 23px;"></i>
             </a>
 
@@ -281,11 +281,11 @@
 
               <ul>
 
-                  <li><a href="{{url('profile')}}">Profile</a>
+                  <li><a href="{{url('profile')}}">Account Setting</a>
                   </li>
-                  <li><a href="{{url('my_order')}}">My Order</a>
+                  <li><a href="{{url('my_order')}}">Order History</a>
                   </li>
-                  <li><a href="{{url('payment_notify')}}">แจ้งชำระเงิน</a>
+                  <li><a href="{{url('payment_notify')}}">Payment</a>
                   </li>
                   <li><a href="{{url('logout')}}">Sign out</a>
                   </li>
