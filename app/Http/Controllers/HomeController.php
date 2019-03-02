@@ -1233,7 +1233,7 @@ class HomeController extends Controller
 
          $package->shipping_t2 = $request['area_shipping'];
 
-       }elseif($request['deliver_order'] == 'รับสินค้าด้วยตัวเอง'){
+       }elseif($request['deliver_order'] == 'รับสินค้าด้วยตัวเองที่สาขา'){
 
          $package->shipping_t2 = $request['man_shipping'];
 

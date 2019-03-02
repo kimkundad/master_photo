@@ -37,12 +37,6 @@
 
 
           <div class="row">
-          							<div class="col-md-2 col-lg-2">
-
-
-
-
-          							</div>
 
 
 
@@ -50,7 +44,8 @@
 
 
 
-                        <div class="col-md-8 col-lg-8">
+
+                        <div class="col-md-6">
 
           							<div class="tabs">
 
@@ -63,7 +58,7 @@
                                 <input type="hidden" class="form-control" name="id" value="{{$objs->id}}">
                                           {{ csrf_field() }}
 
-          											<h4 class="mb-xlg">แจ้งการชำระเงิน #{{$objs->id}}</h4>
+          											<h4 class="mb-xlg">แจ้งการชำระเงิน #{{$objs->order_id}}</h4>
 
           											<fieldset>
 
@@ -166,6 +161,102 @@
           								</div>
           							</div>
           						</div>
+
+
+
+
+                      <div class="col-md-6">
+
+                      <div class="tabs">
+
+                        <div class="tab-content">
+
+                          <div id="edit" class="tab-pane active">
+                            <h4 class="mb-xlg">รายละเอียดของออเดอร์</h4>
+                            <div class="table-responsive">
+										<table class="table table-striped mb-none">
+
+											<tbody>
+
+												<tr>
+													<td>Order ID</td>
+													<td><a href="{{url('admin/order/'.$get_order->id.'/edit')}}">#{{$get_order->code_gen}}</a></td>
+												</tr>
+                        <tr>
+													<td>การรับสินค้า</td>
+													<td>{{$get_order->deliver_order}}</td>
+												</tr>
+                        <tr>
+													<td>ราคาสั่งสินค้า</td>
+													<td>{{$get_order->order_price}} บาท</td>
+												</tr>
+                        <tr>
+													<td>ราคาค่าขนส่ง</td>
+													<td>{{$get_order->shipping_p}} บาท</td>
+												</tr>
+                        <tr>
+													<td><b>ราคารวม</b></td>
+													<td><b>{{$get_order->shipping_p+$get_order->order_price}} บาท</b></td>
+												</tr>
+
+											</tbody>
+										</table>
+                    <br />
+                    @if(isset($get_order->option))
+                    @foreach($get_order->option as $k)
+
+                    <table class="table table-striped mb-none">
+                      <thead>
+												<tr>
+													<th>#{{$k->code_gen_d}}</th>
+													<th></th>
+
+												</tr>
+											</thead>
+											<tbody>
+
+                        <tr>
+													<td>ชื่อสินค้า</td>
+													<td>{{$k->product_name}}</td>
+												</tr>
+                        <tr>
+													<td>จำนวนสินค้า</td>
+													<td>{{$k->sum_image}}</td>
+												</tr>
+                        <tr>
+													<td>ราคาสินค้า</td>
+													<td>{{$k->sum_price*$k->sum_image}} บาท</td>
+												</tr>
+                        <tr>
+													<td>ราคาค่าขนส่ง</td>
+                          @if($get_order->shipping_p == 0)
+													<td>0 บาท</td>
+                          @else
+                          <td>{{$k->sum_shipping}} บาท</td>
+                          @endif
+												</tr>
+
+                        <tr>
+													<td><b>ราคารวม</b></td>
+                          @if($get_order->shipping_p == 0)
+													<td>{{$k->sum_price*$k->sum_image}} บาท</td>
+                          @else
+                          <td>{{($k->sum_price*$k->sum_image)*$k->sum_shipping}} บาท</td>
+                          @endif
+
+												</tr>
+
+
+											</tbody>
+										</table>
+
+                    @endforeach
+                    @endif
+									</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
 
 

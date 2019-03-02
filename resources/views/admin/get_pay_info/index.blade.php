@@ -96,7 +96,7 @@
   												<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
   												<div class="dropdown-menu" role="menu">
 
-  													<a class="dropdown-item text-1" href="{{url('admin/edit_pay_info/'.$u->ids.'/edit')}}">แก้ไข</a>
+  													<a class="dropdown-item text-1" href="{{url('admin/edit_pay_info/'.$u->ids.'/edit')}}">ดูข้อมูล</a>
 
                           <form  action="{{url('admin/del_pay_info/')}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
                               <input type="hidden" name="id_pay" value="{{$u->ids}}">

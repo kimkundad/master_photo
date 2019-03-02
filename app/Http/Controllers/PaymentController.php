@@ -82,6 +82,48 @@ class PaymentController extends Controller
           ->where('id', $id)
           ->first();
 
+        //  $objs->order_id;
+
+        $check_order = DB::table('orders')
+            ->where('code_gen', $objs->order_id)
+            ->count();
+
+            if($check_order > 0){
+
+              $get_order = DB::table('orders')
+                  ->where('code_gen', $objs->order_id)
+                  ->first();
+
+                  $get_order_de = DB::table('order_details')
+                      ->where('order_id', $get_order->id)
+                      ->get();
+
+
+                  $get_order->option = $get_order_de;
+
+            }else{
+
+              $set_data = DB::table('order_details')
+                  ->where('code_gen_d', $objs->order_id)
+                  ->first();
+
+                  $get_order = DB::table('orders')
+                      ->where('id', $set_data->order_id)
+                      ->first();
+
+                    //  dd($get_order);
+                      $get_order_de = DB::table('order_details')
+                          ->where('order_id', $get_order->id)
+                          ->get();
+
+                      $get_order->option = $get_order_de;
+
+              //    $set_data->order_id;
+
+            }
+
+        //    dd($get_order);
+          $data['get_order'] = $get_order;
           $data['bank'] = $bank;
           $data['objs'] = $objs;
           $data['datahead'] = "แจ้งการชำระเงิน";

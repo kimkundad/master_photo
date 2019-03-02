@@ -295,6 +295,8 @@ class OrderController extends Controller
       $data['datahead'] = "ข้อมูล Order";
       $data['get_address'] = $get_address;
       $data['objs'] = $obj;
+      $data['url'] = url('admin/order/'.$id);
+      $data['method'] = "put";
       $data['order_detail'] = $order_detail;
     //  dd($order_detail);
       return view('admin.order.edit', $data);
@@ -310,6 +312,17 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+           'option_type' => 'required'
+       ]);
+
+       $package = order::find($id);
+        $package->status = $request['option_type'];
+        $package->save();
+
+      return redirect(url('admin/order/'.$id.'/edit'))->with('edit_success','แก้ไขหมวดหมู่ ');
+
+
     }
 
 

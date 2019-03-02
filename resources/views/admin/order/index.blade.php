@@ -69,10 +69,10 @@
              @if($objs)
                 @foreach($objs as $u)
                     <tr id="{{$u->id}}">
-                      <td >{{$u->id}}</td>
+                      <td >#{{$u->code_gen}}</td>
                       <td>{{$u->name}}</td>
                       <td >{{$u->phone}}</td>
-                      <td>{{number_format($u->order_price)}} บาท</td>
+                      <td>{{$u->order_price+$u->shipping_p}} บาท</td>
                       <th>
 
                         @if($u->status == 0)
