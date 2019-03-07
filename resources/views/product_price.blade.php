@@ -31,6 +31,13 @@ h4 {
 
   <div class="container margin_60">
 
+
+
+
+
+    @if(trans('message.lang') == 'Thai')
+
+
     <div class=" margin_30 text-center">
       <h2 class="major"><span style="background: #fff;">Product Price</span></h2>
 
@@ -328,27 +335,327 @@ h4 {
     				</div>
 
 
+					</div>
+
+          <hr style="border-top: 1px solid #ddd;"/>
+
+				</div>
+
+    </div>
+
+
+    @else
 
 
 
+
+    <div class=" margin_30 text-center">
+      <h2 class="major"><span style="background: #fff;">Product Price</span></h2>
+
+    </div>
+
+    <div class="row">
+
+
+
+
+        <div class="col-md-10 col-md-offset-1 ">
+
+          <div class="col-md-12">
+            <div class="text-center">
+              <a href="{{url('product_price')}}"><img src="{{url('master/assets/image/mprice1.png')}}" alt="Image" class="text-center" style="padding:10px;"></a>
+              <a href="{{url('product_price_2')}}"><img src="{{url('master/assets/image/mprice2.png')}}" alt="Image" class="text-center" style="padding:10px;"></a>
+            </div>
+          </div>
+
+          <br />
+          <br />
+          <br />
+
+
+
+					<h3> price<span>Clear the color</span></h3>
+					<p>
+						 <strong>Master</strong>With complete products and services To support your needs You can ask for details with various branches. At any time
+					</p>
+          <hr style="border-top: 1px solid #ddd;"/>
+          <div class="row">
+
+						<div class="col-md-6 col-sm-6">
+              <h4>HOT <span class="head-lines-green"></span></h4>
+
+              <div class="course-overall-wrapper" style="background: #dff0d8;border-radius: 10px;">
+
+
+              <div class="table-scrollable table-scrollable-borderless " style="padding:8px;">
+                                         <table class="table table-hover table-light">
+                                          <thead class="uppercase">
+                                              <tr>
+                                                  <th>Description</th>
+                                                  <th>price</th>
+                                              </tr>
+                                          </thead>
+
+                                          <tbody>
+                                            <?php
+
+                                   $urlpath = 'assets/table_price/HOT.csv';
+
+                                 //  $urlpath = file_get_contents($urlpath);
+                            // header('Content-Type: text/html; charset=utf-8');
+                              $urlpath =  utf8_encode($urlpath);
+                            $urlpath = iconv("TIS-620", "utf-8", $urlpath);
+
+                           //$urlpath = trim($urlpath);
+                              $f = fopen($urlpath, "r");
+                              while (($line = fgetcsv($f)) !== false) {
+                                      echo "<tr class='success'>";
+
+                                      foreach ($line as $cell) {
+                                              echo "<td>" . htmlspecialchars($cell) . "</td>";
+                                      }
+                                      echo "</tr>\n";
+                              }
+                              fclose($f);
+                                  ?>
+                                          </tbody>
+                                          </table>
+              </div>
+              </div>
+
+              <!-- end line table  -->
+
+              <br />
+
+              <h4>Poster Size <span class="head-lines-green"></span></h4>
+
+              <div class="course-overall-wrapper" style="background: #d9edf7;border-radius: 10px;">
+
+
+              <div class="table-scrollable table-scrollable-borderless text-center" style="padding:8px;">
+                                         <table class="table table-hover table-light" >
+                                          <thead class="uppercase ">
+                                              <tr>
+                                                <th>Size (inch)</th>
+                                                <th>Compressed from file</th>
+                                                <th>Compressed from film (135)</th>
+                                              </tr>
+                                          </thead>
+
+                                          <tbody>
+                                            <?php
+
+                                   $urlpath = 'assets/table_price/Poster-Size.csv';
+
+                                 //  $urlpath = file_get_contents($urlpath);
+                            // header('Content-Type: text/html; charset=utf-8');
+                              $urlpath =  utf8_encode($urlpath);
+                            $urlpath = iconv("TIS-620", "utf-8", $urlpath);
+
+                           //$urlpath = trim($urlpath);
+                              $f = fopen($urlpath, "r");
+                              while (($line = fgetcsv($f)) !== false) {
+                                      echo "<tr class='info'>";
+
+                                      foreach ($line as $cell) {
+                                              echo "<td>" . htmlspecialchars($cell) . "</td>";
+                                      }
+                                      echo "</tr>\n";
+                              }
+                              fclose($f);
+                                  ?>
+                                          </tbody>
+                                          </table>
+              </div>
+              </div>
+
+              <!-- end line table  -->
+
+
+						</div>
+
+						<div class="col-md-6 col-sm-6">
+
+
+
+              <h4>Promotion price, new digital image compression system <span class="head-lines-green"></span></h4>
+
+              <div class="course-overall-wrapper" style="background: #fcf8e3;border-radius: 10px;">
+
+
+              <div class="table-scrollable table-scrollable-borderless text-center" style="padding:8px;">
+                                         <table class="table table-hover table-light">
+                                          <thead class="uppercase ">
+                                              <tr>
+                                                <th>Size (inch)</th>
+                                                <th>Compressed from file</th>
+                                                <th>Compressed from film (135)</th>
+                                              </tr>
+                                          </thead>
+
+                                          <tbody>
+                                            <?php
+
+                                   $urlpath = 'assets/table_price/Promotion.csv';
+
+                                 //  $urlpath = file_get_contents($urlpath);
+                            // header('Content-Type: text/html; charset=utf-8');
+                              $urlpath =  utf8_encode($urlpath);
+                            $urlpath = iconv("TIS-620", "utf-8", $urlpath);
+
+                           //$urlpath = trim($urlpath);
+                              $f = fopen($urlpath, "r");
+                              while (($line = fgetcsv($f)) !== false) {
+                                      echo "<tr class='warning'>";
+
+                                      foreach ($line as $cell) {
+                                              echo "<td>" . htmlspecialchars($cell) . "</td>";
+                                      }
+                                      echo "</tr>\n";
+                              }
+                              fclose($f);
+                                  ?>
+                                          </tbody>
+                                          </table>
+              </div>
+              </div>
+              <!-- end line table  -->
+
+              <br />
+
+              <h4>Panorama <span class="head-lines-green"></span></h4>
+
+              <div class="course-overall-wrapper" style="background: #f5f5f5;border-radius: 10px;">
+
+
+              <div class="table-scrollable table-scrollable-borderless text-center" style="padding:8px;">
+                                         <table class="table table-hover table-light">
+                                          <thead class="uppercase ">
+                                              <tr>
+                                                  <th>Size (inch)</th>
+                                                  <th>Compressed from file</th>
+                                                  <th>Compressed from film (135)</th>
+                                              </tr>
+                                          </thead>
+
+                                          <tbody>
+                                            <?php
+
+                                   $urlpath = 'assets/table_price/Promotion.csv';
+
+                                 //  $urlpath = file_get_contents($urlpath);
+                            // header('Content-Type: text/html; charset=utf-8');
+                              $urlpath =  utf8_encode($urlpath);
+                            $urlpath = iconv("TIS-620", "utf-8", $urlpath);
+
+                           //$urlpath = trim($urlpath);
+                              $f = fopen($urlpath, "r");
+                              while (($line = fgetcsv($f)) !== false) {
+                                      echo "<tr class='active'>";
+
+                                      foreach ($line as $cell) {
+                                              echo "<td>" . htmlspecialchars($cell) . "</td>";
+                                      }
+                                      echo "</tr>\n";
+                              }
+                              fclose($f);
+                                  ?>
+                                          </tbody>
+                                          </table>
+              </div>
+              </div>
+              <!-- end line table  -->
+
+
+						</div>
+
+            <div class="col-md-12">
+              <br /><br />
+              <p class="text-danger text-center">
+                *** Please call for price with the staff at "Online Department" Tel. 02-5130105
+              </p>
+              <p class="text-success text-center">
+                Custom Size (according to order), width of paper 20 inches and 24 inches, maximum length of 100 inches, costing 0.20 baht per square inch
+                 Custom Size (according to order), paper width 30 inches, maximum length 150 inches, price per square inch 0.25 baht
+                 The difference of printed images with digital is that the colors are brighter and sharper.
+              </p>
+
+
+
+              <br />
+
+              <h4>The table below introduces the appropriate image size for each level of resolution. <span class="head-lines-green"></span></h4>
+
+              <div class="course-overall-wrapper" style="background: #f5f5f5;border-radius: 10px;">
+
+
+              <div class="table-scrollable table-scrollable-borderless text-center" style="padding:8px;">
+                                         <table class="table table-hover table-light">
+                                          <thead class="uppercase ">
+                                              <tr>
+                                                  <th class="text-center">Size Pixel</th>
+                                                  <th class="text-center">Pixel number (estimated)</th>
+                                                  <th class="text-center">Maximum size suitable*</th>
+                                              </tr>
+                                          </thead>
+
+                                          <tbody>
+                                            <?php
+
+                                   $urlpath = 'assets/table_price/stand_price.csv';
+
+                                 //  $urlpath = file_get_contents($urlpath);
+                            // header('Content-Type: text/html; charset=utf-8');
+                              $urlpath =  utf8_encode($urlpath);
+                            $urlpath = iconv("TIS-620", "utf-8", $urlpath);
+
+                           //$urlpath = trim($urlpath);
+                              $f = fopen($urlpath, "r");
+                              while (($line = fgetcsv($f)) !== false) {
+                                      echo "<tr class=''>";
+
+                                      foreach ($line as $cell) {
+                                              echo "<td>" . htmlspecialchars($cell) . "</td>";
+                                      }
+                                      echo "</tr>\n";
+                              }
+                              fclose($f);
+                                  ?>
+                                          </tbody>
+                                          </table>
+              </div>
+              </div>
+              <!-- end line table  -->
+
+              <br /><br />
+              <p class="text-danger text-center">
+                * Compared with the estimated file size. The quality of the compressed file also depends on the data compression value. And the quality of the camera as well
+              </p>
+
+
+            </div>
+
+            <div class="col-md-4 col-sm-4">
+    					<img src="{{url('master/assets/image/n7.JPG')}}" alt="Image" class="img-responsive styled">
+    				</div>
+            <div class="col-md-4 col-sm-4">
+    					<img src="{{url('master/assets/image/n5.JPG')}}" alt="Image" class="img-responsive styled">
+    				</div>
+            <div class="col-md-4 col-sm-4">
+    					<img src="{{url('master/assets/image/n6.JPG')}}" alt="Image" class="img-responsive styled">
+    				</div>
 
 
 					</div>
 
-
-
-
           <hr style="border-top: 1px solid #ddd;"/>
-
-
 
 				</div>
 
-
-
-
-
     </div>
+
+    @endif
+
 
 
 

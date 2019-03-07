@@ -32,7 +32,7 @@ user profile
   <div class="container margin_60">
 
     <div class=" margin_30 text-center">
-      <h2 class="major"><span>Profile & Setting </span></h2>
+      <h2 class="major"><span>{{ trans('message.user_order') }} </span></h2>
 
     </div>
 
@@ -42,15 +42,15 @@ user profile
       <aside class="col-md-3">
         <div class="box_style_cat">
           <ul id="cat_nav">
-							<li><a href="{{url('profile')}}"><i class="icon_set_1_icon-29"></i>ข้อมูลส่วนตัว </a>
+							<li><a href="{{url('profile')}}"><i class="icon_set_1_icon-29"></i>{{ trans('message.user_pro') }} </a>
 							</li>
-							<li><a href="{{url('address_book')}}"><i class="icon_set_1_icon-41"></i>สมุดที่อยู่ </a>
+							<li><a href="{{url('address_book')}}"><i class="icon_set_1_icon-41"></i>{{ trans('message.address') }} </a>
 							</li>
-							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
+							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.credit') }} </a>
 							</li>
-              <li><a href="{{url('my_order')}}" id="active"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}" id="active"><i class="icon_set_1_icon-50" ></i> {{ trans('message.user_order') }} </a>
 							</li>
-              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
+              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.pay_ment') }} </a>
 							</li>
 
 						</ul>
@@ -70,41 +70,41 @@ user profile
                     <h3>#Oder ID {{$order_main->code_gen}}</h3>
 
                     <p>
-                    ชื่อสินค้า : {{$order_de->product_name}}<br />
+                    {{ trans('message.pro_name') }} : {{$order_de->product_name}}<br />
 
-                    จำนวนรูป : {{$order_de->sum_image}} รูป<br />
-                    การจัดส่งสินค้า : {{$objs->deliver_order}} ,@if($objs->deliver_order != null) {{$objs->shipping_t2}} @else @endif<br />
+                    {{ trans('message.total_sum') }} : {{$order_de->sum_image}} รูป<br />
+                    {{ trans('message.shipping_address') }} : {{$objs->deliver_order}} ,@if($objs->deliver_order != null) {{$objs->shipping_t2}} @else @endif<br />
                     <div class="form-group">
-                      <label class="col-md-3 control-label" for="profileFirstName">การขอใบกำกับภาษี</label>
+                      <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Requesting_a_tax_invoice') }}</label>
 
                       @if( $objs->bil_req == 0)
-                      ไม่ขอ
+                      {{ trans('message.Don_ask') }}
                       @endif
 
                       @if( $objs->bil_req == 1)
-                      ขอใบกำกับภาษี
+                      {{ trans('message.Request_tax_invoice') }}
                       @endif
 
                     </div>
                     <div class="form-group">
-                      <label class="col-md-3 control-label" for="profileFirstName">เลือกที่จัดส่งใบกำกับภาษี</label>
+                      <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Choose_to_send_a_tax_invoice') }}</label>
 
                       @if( $objs->text_re_user == 1)
-                      ใช้ที่อยู่จัดส่ง
+                      {{ trans('message.Use_shipping_address') }}
                       @endif
 
                       @if( $objs->text_re_user == 2)
-                      ใช้ที่อยู่ที่เคยออกใบกำกับภาษี
+                      {{ trans('message.Use_the_address_that') }}
                       @endif
 
 
                     </div>
                     <br />
-                    <b>ที่อยู่ในการจัดส่ง</b><br />
+                    <b>{{ trans('message.Shipping_address_1') }}</b><br />
                     <hr />
                     <fieldset>
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">ชื่อผู้รับสินค้า</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.name_pro') }}</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="name_cat" value="{{$get_address->name_ad}}">
                           </div>
@@ -112,7 +112,7 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">เบอร์ติดต่อ</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.telephone_num') }}</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="name_cat" value="{{$get_address->phone_ad}}">
                           </div>
@@ -120,7 +120,7 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">ที่อยู่</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.address_1') }}</label>
                         <div class="col-md-8">
                           <textarea class="form-control" name="pro_name_detail" rows="6">{{ $get_address->address_ad }}</textarea>
                           </div>
@@ -129,7 +129,7 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">จังหวัด</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.province') }}</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="name_cat" value="{{$province->PROVINCE_NAME}}">
                           </div>
@@ -137,21 +137,21 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">เขต/อำเภอ</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.District') }}</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="name_cat" value="{{$district->AMPHUR_NAME}}">
                           </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">แขวง/ตำบล</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Subdistrict') }}</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="name_cat" value="{{$subdistricts->DISTRICT_NAME}}">
                           </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">รหัสไปรษณีย์</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.zip_code') }}</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="name_cat" value="{{$get_address->zip_code}}">
                           </div>
@@ -163,7 +163,7 @@ user profile
 
 
                       <br />
-                      <b>ที่อยู่ในการจัดส่งใบกำกับภาษี</b><br />
+                      <b>{{ trans('message.Use_the_address_that') }}</b><br />
                       <hr />
 
 
@@ -173,7 +173,7 @@ user profile
 
                       <fieldset>
                         <div class="form-group">
-                          <label class="col-md-3 control-label" for="profileFirstName">ชื่อผู้รับสินค้า</label>
+                          <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.name_pro') }}</label>
                           <div class="col-md-8">
                             <input type="text" class="form-control" name="name_cat" value="{{$get_address_bill->name_ad}}">
                             </div>
@@ -181,7 +181,7 @@ user profile
 
 
                         <div class="form-group">
-                          <label class="col-md-3 control-label" for="profileFirstName">เบอร์ติดต่อ</label>
+                          <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.telephone_num') }}</label>
                           <div class="col-md-8">
                             <input type="text" class="form-control" name="name_cat" value="{{$get_address_bill->phone_ad}}">
                             </div>
@@ -189,7 +189,7 @@ user profile
 
 
                         <div class="form-group">
-                          <label class="col-md-3 control-label" for="profileFirstName">ที่อยู่</label>
+                          <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.address_1') }}</label>
                           <div class="col-md-8">
                             <textarea class="form-control" name="pro_name_detail" rows="6">{{ $get_address_bill->address_ad }}</textarea>
                             </div>
@@ -198,7 +198,7 @@ user profile
 
 
                         <div class="form-group">
-                          <label class="col-md-3 control-label" for="profileFirstName">จังหวัด</label>
+                          <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.province') }}</label>
                           <div class="col-md-8">
                             <input type="text" class="form-control" name="name_cat" value="{{$province_bill->PROVINCE_NAME}}">
                             </div>
@@ -206,21 +206,21 @@ user profile
 
 
                         <div class="form-group">
-                          <label class="col-md-3 control-label" for="profileFirstName">เขต/อำเภอ</label>
+                          <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.District') }}</label>
                           <div class="col-md-8">
                             <input type="text" class="form-control" name="name_cat" value="{{$district_bill->AMPHUR_NAME}}">
                             </div>
                         </div>
 
                         <div class="form-group">
-                          <label class="col-md-3 control-label" for="profileFirstName">แขวง/ตำบล</label>
+                          <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Subdistrict') }}</label>
                           <div class="col-md-8">
                             <input type="text" class="form-control" name="name_cat" value="{{$subdistricts_bill->DISTRICT_NAME}}">
                             </div>
                         </div>
 
                         <div class="form-group">
-                          <label class="col-md-3 control-label" for="profileFirstName">รหัสไปรษณีย์</label>
+                          <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.zip_code') }}</label>
                           <div class="col-md-8">
                             <input type="text" class="form-control" name="name_cat" value="{{$get_address_bill->zip_code}}">
                             </div>
@@ -232,7 +232,7 @@ user profile
                       @endif
 
 
-                    <b>Option ที่คุณเลือก</b><br />
+                    <b>Option</b><br />
                     @if($order_de->order_option)
                     @foreach($order_de->order_option as $k1)
 
@@ -253,7 +253,7 @@ user profile
                     <div class="col-lg-4 col-md-6" style=" padding-top: 10px;   padding-bottom: 10px;">
                       <img src="{{url('assets/image/all_image/'.$h->order_image)}}" class="img-responsive" style="    height: 142px;">
                       <div class="score">
-												จำนวน <span>{{$h->order_image_sum}}</span> รูป
+												{{ trans('message.total_sum') }} <span>{{$h->order_image_sum}}</span> {{ trans('message.item') }}
 											</div>
                     </div>
                     @endforeach

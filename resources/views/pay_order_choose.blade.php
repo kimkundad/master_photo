@@ -32,7 +32,7 @@ user profile
   <div class="container margin_60">
 
     <div class=" margin_30 text-center">
-      <h2 class="major"><span>Profile & Setting </span></h2>
+      <h2 class="major"><span>{{ trans('message.pay_ment') }} </span></h2>
 
     </div>
 
@@ -42,15 +42,15 @@ user profile
       <aside class="col-md-3">
         <div class="box_style_cat">
           <ul id="cat_nav">
-							<li><a href="{{url('profile')}}"><i class="icon_set_1_icon-29"></i>ข้อมูลส่วนตัว </a>
+							<li><a href="{{url('profile')}}"><i class="icon_set_1_icon-29"></i>{{ trans('message.user_pro') }} </a>
 							</li>
-							<li><a href="{{url('address_book')}}"><i class="icon_set_1_icon-41"></i>สมุดที่อยู่ </a>
+							<li><a href="{{url('address_book')}}"><i class="icon_set_1_icon-41"></i>{{ trans('message.address') }} </a>
 							</li>
-							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
+							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.credit') }} </a>
 							</li>
-              <li><a href="{{url('my_order')}}" id="active"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}" id="active"><i class="icon_set_1_icon-50" ></i> {{ trans('message.user_order') }} </a>
 							</li>
-              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
+              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.pay_ment') }} </a>
 							</li>
 
 						</ul>
@@ -89,7 +89,7 @@ ul#profile_summary li span {
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h4> ตัวเลือก การชำระเงินของคุณ</h4>
+                    <h4> {{ trans('message.Your_payment_options') }}</h4>
                     <br />
 
                 </div>
@@ -97,10 +97,10 @@ ul#profile_summary li span {
 
                 <div class="col-md-6">
                   <div class="content-current">
-                    <p class="spanser"><b>เลือกชำระ ยอดทั้งหมด  ออเดอร์ #{{$order_main->code_gen}}</b></p>
+                    <p class="spanser"><b>{{ trans('message.Your_payment_options_2') }} #{{$order_main->code_gen}}</b></p>
                     <hr />
                     <ul id="profile_summary">
-                      <li>ยอดสินค้าที่สั่ง  <span>{{$order_count}} รายการ</span>
+                      <li>{{ trans('message.Your_payment_options_3') }}  <span>{{$order_count}} {{ trans('message.item') }}</span>
                       </li>
 
                       @if(isset($order_all))
@@ -109,31 +109,32 @@ ul#profile_summary li span {
                       </li>
                       @endforeach
                       @endif
-                      <li>การจัดส่ง  <span>{{$order_main->deliver_order}} </span>
+                      <li>{{ trans('message.delivery') }}  <span>{{$order_main->deliver_order}} </span>
                       </li>
-                      <li>ยอดที่ต้องชำระ  <span class="text-danger" style="font-size:15px;"><b>{{number_format($order_main->order_price+$order_main->shipping_p,2)}} บาท</b></span>
+                      <li>{{ trans('message.Paid_amount') }}  <span class="text-danger" style="font-size:15px;"><b>{{number_format($order_main->order_price+$order_main->shipping_p,2)}} {{ trans('message.baht') }}</b></span>
                       </li>
 
                     </ul>
                     <p style="font-size:12px;">
-                      *หมายเหตุ ราคานี้ได้รวมกับค่าขนส่งเข้าไปแล้ว
+                      {{ trans('message.note_o_h') }}
+
                     </p>
                     <hr />
-                    <a href="{{url('pay_order_detail/'.$order_main->code_gen)}}" class="btn_1">ชำระเงิน</a>
+                    <a href="{{url('pay_order_detail/'.$order_main->code_gen)}}" class="btn_1">{{ trans('message.Payment_order') }}</a>
                   </div>
                 </div>
 
                 <div class="col-md-6">
                   <div class="content-current">
-                    <p class="spanser"><b>เลือกชำระ เฉพาะยอดของสินค้านี้ <!--#{{$order_de->code_gen_d}}--></b></p>
+                    <p class="spanser"><b>{{ trans('message.Your_payment_options_4') }} <!--#{{$order_de->code_gen_d}}--></b></p>
                     <hr />
 
                     <ul id="profile_summary">
-                      <li>ชื่อสินค้า  <span>{{$order_de->product_name}}</span>
+                      <li>Product  <span>{{$order_de->product_name}}</span>
                       </li>
-                      <li>จำนวน  <span>{{$order_de->sum_image}} pcs.</span>
+                      <li>{{ trans('message.number_jum') }}  <span>{{$order_de->sum_image}} pcs.</span>
                       </li>
-                      <li>รายละเอียด  <span>&nbsp</span>
+                      <li>{{ trans('message.detail') }}  <span>&nbsp</span>
                       </li>
                       @if($order_de->order_option)
                       @foreach($order_de->order_option as $k1)
@@ -148,20 +149,20 @@ ul#profile_summary li span {
                       @endif
 
                       @if($order_main->shipping_p == 0)
-                      <li>ยอดที่ต้องชำระ  <span class="text-danger" style="font-size:15px;"><b>{{number_format(($order_de->sum_price*$order_de->sum_image),2)}} บาท</b></span>
+                      <li>{{ trans('message.Paid_amount') }}  <span class="text-danger" style="font-size:15px;"><b>{{number_format(($order_de->sum_price*$order_de->sum_image),2)}} {{ trans('message.baht') }}</b></span>
                       </li>
                       @else
-                      <li>ยอดที่ต้องชำระ  <span class="text-danger" style="font-size:15px;"><b>{{number_format(($order_de->sum_price*$order_de->sum_image)+$order_de->sum_shipping,2)}} บาท</b></span>
+                      <li>{{ trans('message.Paid_amount') }}  <span class="text-danger" style="font-size:15px;"><b>{{number_format(($order_de->sum_price*$order_de->sum_image)+$order_de->sum_shipping,2)}} บาท</b></span>
                       </li>
                       @endif
 
 
                     </ul>
                     <p style="font-size:12px;">
-                      *หมายเหตุ ราคานี้ได้รวมกับค่าขนส่งเข้าไปแล้ว
+                      {{ trans('message.note_o_h') }}
                     </p>
                     <hr />
-                    <a href="{{url('pay_order_detail/'.$order_de->code_gen_d)}}" class="btn_1">ชำระเงิน</a>
+                    <a href="{{url('pay_order_detail/'.$order_de->code_gen_d)}}" class="btn_1">{{ trans('message.Payment_order') }}</a>
                   </div>
                 </div>
 

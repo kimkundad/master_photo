@@ -21,15 +21,17 @@ kerry express | MASTER PHOTO NETWORK
 
   <div class="container margin_60">
 
+
+
+
+    @if(trans('message.lang') == 'Thai')
+
     <div class=" margin_30 text-center">
       <h2 class="major"><span style="background: #fff;">จัดส่งแบบ Kerry Express</span></h2>
 
     </div>
 
     <div class="row">
-
-
-
 
         <div class="col-md-8 col-md-offset-2 ">
 
@@ -57,17 +59,51 @@ kerry express | MASTER PHOTO NETWORK
 
               <h5 class="text-center"> <strong>รายละเอียดเพิ่มเติมสามารถติดต่อได้ที่ มาสเตอร์ออนไลน์ โทร. 02-513-0105 ทุกวัน เวลา 8.00-22.00 น.</strong></h5>
 
+				</div>
+
+    </div>
+
+    @else
 
 
+    <div class=" margin_30 text-center">
+      <h2 class="major"><span style="background: #fff;">Kerry Express delivery</span></h2>
 
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-8 col-md-offset-2 ">
+
+          <div class="text-center" style=" text-align: -webkit-center;">
+            <img src="{{url('master/assets/image/banner23.gif')}}" alt=" Kerry Express" class="img-responsive styled text-center">
+          </div>
+          <br />
+          <h3> New service from Master Online. Express delivery within 1 day. Send today to tomorrow anywhere in Thailand.</h3>
+
+          <ul class="list_ok" style="font-size:15px;">
+								<li>Customers have to submit work files and <strong class="text-danger">Pay before 10:00</strong> The goods will be delivered to the destination the next day.</li>
+								<li>Customers who order work on Saturday The goods will be delivered to the destination on Monday. Customers who work on Sunday The goods will be delivered to the destination on Tuesday.</li>
+								<li>Only for online master customers And reserves the right to change conditions without prior notice</li>
+
+							</ul>
+              <p class="text-warning">
+                <strong>* Areas that need to be delivered more than 1 day</strong>
+              </p>
+              <br />
+              <div class="text-center" style=" text-align: -webkit-center;">
+                <img src="{{url('master/assets/image/kerry.jpg')}}" alt="จัดส่งแบบ Kerry Express" class="img-responsive styled text-center" style="width:70%;">
+              </div>
+
+              <br />
+
+              <h5 class="text-center"> <strong>More details can be contacted at Master Online, Tel. 02-513-0105, Daily, 8:00 - 22:00 hrs.</strong></h5>
 
 				</div>
 
-
-
-
-
     </div>
+
+    @endif
 
 
 

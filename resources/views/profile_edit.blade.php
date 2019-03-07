@@ -19,7 +19,7 @@ user profile
   <div class="container margin_60">
 
     <div class=" margin_30 text-center">
-      <h2 class="major"><span>Profile & Setting </span></h2>
+      <h2 class="major"><span>{{ trans('message.user_pro') }} </span></h2>
 
     </div>
 
@@ -29,15 +29,15 @@ user profile
       <aside class="col-md-3">
         <div class="box_style_cat">
           <ul id="cat_nav">
-							<li><a href="{{url('profile')}}" id="active"><i class="icon_set_1_icon-29"></i>ข้อมูลส่วนตัว </a>
+							<li><a href="{{url('profile')}}" id="active"><i class="icon_set_1_icon-29"></i>{{ trans('message.user_pro') }} </a>
 							</li>
-							<li><a href="{{url('address_book')}}"><i class="icon_set_1_icon-41"></i>สมุดที่อยู่ </a>
+							<li><a href="{{url('address_book')}}"><i class="icon_set_1_icon-41"></i>{{ trans('message.address') }} </a>
 							</li>
-							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
+							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.credit') }} </a>
 							</li>
-              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> {{ trans('message.user_order') }} </a>
 							</li>
-              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
+              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.pay_ment') }} </a>
 							</li>
 
 						</ul>
@@ -54,7 +54,7 @@ user profile
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h3>ข้อมูลส่วนตัว </h3>
+                    <h3>{{ trans('message.user_pro') }} </h3>
                     <br />
 
 
@@ -65,7 +65,7 @@ user profile
 											{{ csrf_field() }}
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">ชื่อ-นามสกุล</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.name_pro') }}</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="name" value="{{ $objs->name }}" >
                           <input type="hidden" class="form-control" name="user_id" value="{{ $objs->id }}" >
@@ -74,7 +74,7 @@ user profile
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileCompany">อีเมล์</label>
+                        <label class="col-md-3 control-label" for="profileCompany">{{ trans('message.email_pro') }}</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="email" value="{{ $objs->email }}"  >
                           <br />
@@ -89,7 +89,7 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileCompany">เบอร์โทรศัพท์มือถือ</label>
+                        <label class="col-md-3 control-label" for="profileCompany">{{ trans('message.telephone_num') }}</label>
                         <div class="col-md-8">
                           <input type="number" class="form-control" name="phone" value="{{ $objs->phone }}"  >
                           <br />
@@ -115,8 +115,8 @@ user profile
 
                     <div class="col-md-12 text-center" >
 
-                    <button type="submit" class="btn btn-next">อัพเดทข้อมูล</button>
-                    <a href="{{url('profile')}}" class="btn btn-default">ยกเลิก</a>
+                    <button type="submit" class="btn btn-next">{{ trans('message.btn_submit_pro_save') }}</button>
+                    <a href="{{url('profile')}}" class="btn btn-default">{{ trans('message.btn_cancel') }}</a>
                   </div>
                     </form>
 

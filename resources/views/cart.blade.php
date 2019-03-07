@@ -108,6 +108,7 @@ height: 60px;
       <div class="col-md-8 ">
 
 
+
         @if (Auth::guest())
 
 
@@ -165,19 +166,19 @@ height: 60px;
                  </a>
                </td>
                <td>
-                 {{$u['data'][2]['sum_image']-Session::get('img_f')}} Pcs.
+                 {{$u['data'][2]['sum_image']}} Pcs.
                </td>
                <td>
                  0%
                </td>
                <td>
-                 <strong>฿ {{number_format((float)$u['data'][3]['sum_price'], 2, '.', '')*($u['data'][2]['sum_image']-Session::get('img_f'))}} </strong>
+                 <strong>฿ {{number_format((float)$u['data'][3]['sum_price'], 2, '.', '')*($u['data'][2]['sum_image'])}} </strong>
                </td>
                <td class="options">
-                 <form id="myform-{{$u['data']['id']}}" name="myform-{{$u['data']['id']}}" action="{{ url('del_cart/') }}" method="POST"  style="    margin-bottom: 0em;">
+                 <form id="myform-{{$u['data']['list_link']}}" name="myform-{{$u['data']['list_link']}}" action="{{ url('del_cart/') }}" method="POST"  style="    margin-bottom: 0em;">
                    {{ csrf_field() }}
-                   <input type="hidden" value="{{$u['data']['id']}}" name="ids">
-                 <a href="#" style="color:#333" onclick="document.getElementById('myform-{{$u['data']['id']}}').submit(); return(confirm('Do you want Delete'));"><i class=" icon-trash"></i></a>
+                   <input type="hidden" value="{{$u['data']['list_link']}}" name="ids">
+                 <a href="#" style="color:#333" onclick="document.getElementById('myform-{{$u['data']['list_link']}}').submit(); return(confirm('Do you want Delete'));"><i class=" icon-trash"></i></a>
                  </form>
                </td>
              </tr>

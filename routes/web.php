@@ -94,7 +94,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('pay_order_choose/{id}', 'UserProfileController@pay_order_choose')->name('pay_order_choose');
 	Route::get('pay_order_detail/{id}', 'UserProfileController@payment_notify_id')->name('pay_order_detail');
 
-
 });
 
 Route::group(['middleware' => 'admin'], function() {

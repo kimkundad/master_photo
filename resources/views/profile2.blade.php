@@ -19,7 +19,7 @@ user profile
   <div class="container margin_60">
 
     <div class=" margin_30 text-center">
-      <h2 class="major"><span>Profile & Setting </span></h2>
+      <h2 class="major"><span>{{ trans('message.user_pro') }} </span></h2>
 
     </div>
 
@@ -29,15 +29,15 @@ user profile
       <aside class="col-md-3">
         <div class="box_style_cat">
           <ul id="cat_nav">
-							<li><a href="{{url('profile')}}" id="active"><i class="icon_set_1_icon-29"></i>ข้อมูลส่วนตัว </a>
+							<li><a href="{{url('profile')}}" id="active"><i class="icon_set_1_icon-29"></i>{{ trans('message.user_pro') }} </a>
 							</li>
-							<li><a href="{{url('address_book')}}"><i class="icon_set_1_icon-41"></i>สมุดที่อยู่ </a>
+							<li><a href="{{url('address_book')}}"><i class="icon_set_1_icon-41"></i>{{ trans('message.address') }} </a>
 							</li>
-							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
+							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.credit') }} </a>
 							</li>
-              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> {{ trans('message.user_order') }} </a>
 							</li>
-              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
+              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.pay_ment') }} </a>
 							</li>
 
 						</ul>
@@ -54,26 +54,26 @@ user profile
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h3>ข้อมูลส่วนตัว </h3>
+                    <h3>{{ trans('message.user_pro') }} </h3>
                     <br />
                     <table class="table ">
                       <tbody>
 
 
                         <tr>
-                          <td>ชื่อ-นามสกุล</td><td>{{Auth::user()->name}}</td>
+                          <td>{{ trans('message.name_pro') }}</td><td>{{Auth::user()->name}}</td>
                         </tr>
                         <tr>
-                          <td>อีเมล์</td><td>{{Auth::user()->email}}</td>
+                          <td>{{ trans('message.email_pro') }}</td><td>{{Auth::user()->email}}</td>
                           </tr>
 
                           <tr>
-                          <td>เบอร์โทรศัพท์มือถือ</td><td>{{Auth::user()->phone}}</td>
+                          <td>{{ trans('message.telephone_num') }}</td><td>{{Auth::user()->phone}}</td>
                           </tr>
 
                           <tr>
 
-                        
+
 
 
 
@@ -81,7 +81,7 @@ user profile
                     </table>
                   <div class="col-md-12 text-center" >
                     <br />
-                  <a href="{{url('profile/'.Auth::user()->id.'/edit')}}" class="btn btn-submit">แก้ไขข้อมูลส่วนตัว</a>
+                  <a href="{{url('profile/'.Auth::user()->id.'/edit')}}" class="btn btn-submit">{{ trans('message.btn_submit_pro') }}</a>
                   </div>
                 </div>
 

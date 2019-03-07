@@ -32,6 +32,9 @@ h4 {
 
   <div class="container margin_60">
 
+
+    @if(trans('message.lang') == 'Thai')
+
       <div class=" margin_30 text-center">
         <h2 class="major"><span style="background: #fff;">ราคากรอบลอย และ กรอบวิทยาศาสตร์</span></h2>
 
@@ -711,30 +714,721 @@ h4 {
               				</div>
 
 
+  					</div>
+
+  				</div>
+
+      </div>
+
+
+
+
+
+      @else
+
+
+
+
+      <div class=" margin_30 text-center">
+        <h2 class="major"><span style="background: #fff;">Floating frame price and science framework</span></h2>
+
+      </div>
+
+      <div class="row">
+
+
+
+
+          <div class="col-md-10 col-md-offset-1 ">
+
+            <div class="col-md-12">
+              <div class="text-center">
+                <a href="{{url('product_price')}}"><img src="{{url('master/assets/image/mprice1.png')}}" alt="Image" class="text-center" style="padding:10px;"></a>
+                <a href="{{url('product_price_2')}}"><img src="{{url('master/assets/image/mprice2.png')}}" alt="Image" class="text-center" style="padding:10px;"></a>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+
+
+
+  					<h3> <span>Floating frame price and science framework</span></h3>
+  					<p>
+  						 <strong>Master</strong> With complete products and services To support your needs You can ask for details with various branches. At any time
+  					</p>
+            <hr style="border-top: 2px solid #ddd;"/>
+            <div class="row">
+
+
+
+              <div id="tabs" class="tabs">
+              				<nav>
+              					<ul>
+              						<li class="tab-current"><a href="#section-1" class="icon-magic"><span>Floating frame</span></a>
+              						</li>
+              						<li><a href="#section-2" class="icon-th-large"><span>Shadow floating frame</span></a>
+              						</li>
+              						<li><a href="#section-3" class="icon-link-ext"><span>Science framework</span></a>
+              						</li>
+              						<li><a href="#section-4" class="icon-bookmark"><span>Shadow frame</span></a>
+              						</li>
+                          <li><a href="#section-5" class="icon-picture"><span>Samples of framed designs</span></a>
+              						</li>
+              					</ul>
+              				</nav>
+              				<div class="content">
+
+              					<section id="section-1" class="content-current">
+
+
+                          <div class="row">
+
+
+                            <p class="text-danger">
+                  					 <strong>**From 600 square inches or more 1.10 baht per square inch</strong>
+                  					</p>
+
+
+                            <div class="table-responsive" style="padding:8px;">
+                                                       <table class="table table-bordered table-striped">
+                                                        <thead class="uppercase">
+                                                            <tr class="success">
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                          <?php
+
+                                                 $urlpath = 'assets/table_price/bordered_1.csv';
+
+                                               //  $urlpath = file_get_contents($urlpath);
+                                          // header('Content-Type: text/html; charset=utf-8');
+                                            $urlpath =  utf8_encode($urlpath);
+                                          $urlpath = iconv("TIS-620", "utf-8", $urlpath);
+
+                                         //$urlpath = trim($urlpath);
+                                            $f = fopen($urlpath, "r");
+                                            while (($line = fgetcsv($f)) !== false) {
+                                                    echo "<tr >";
+
+                                                    foreach ($line as $cell) {
+                                                            echo "<td>" . htmlspecialchars($cell) . "</td>";
+                                                    }
+                                                    echo "</tr>\n";
+                                            }
+                                            fclose($f);
+                                                ?>
+                                                        </tbody>
+                                                        </table>
+                            </div>
+
+
+
+                          </div>
+                          <!-- End row -->
+
+
+              					</section>
+              					<!-- End section 1 -->
+
+              					<section id="section-2">
+                          <div class="row">
+
+
+                            <p class="text-danger">
+                  					 <strong>**From 600 square inches or more 1.10 baht per square inch</strong>
+                  					</p>
+
+
+                            <div class="table-responsive" style="padding:8px;">
+                                                       <table class="table table-bordered table-striped">
+                                                        <thead class="uppercase">
+                                                            <tr class="success">
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                          <?php
+
+                                                 $urlpath = 'assets/table_price/bordered_2.csv';
+
+                                               //  $urlpath = file_get_contents($urlpath);
+                                          // header('Content-Type: text/html; charset=utf-8');
+                                            $urlpath =  utf8_encode($urlpath);
+                                          $urlpath = iconv("TIS-620", "utf-8", $urlpath);
+
+                                         //$urlpath = trim($urlpath);
+                                            $f = fopen($urlpath, "r");
+                                            while (($line = fgetcsv($f)) !== false) {
+                                                    echo "<tr >";
+
+                                                    foreach ($line as $cell) {
+                                                            echo "<td>" . htmlspecialchars($cell) . "</td>";
+                                                    }
+                                                    echo "</tr>\n";
+                                            }
+                                            fclose($f);
+                                                ?>
+                                                        </tbody>
+                                                        </table>
+                            </div>
+
+
+
+                          </div>
+                          <!-- End row -->
+
+              					</section>
+              					<!-- End section 2 -->
+
+              					<section id="section-3">
+                          <div class="row">
+
+
+                            <p class="text-danger">
+                  					 <strong>**From 600 square inches or more 1.10 baht per square inch</strong>
+                  					</p>
+
+
+                            <div class="table-responsive" style="padding:8px;">
+                                                       <table class="table table-bordered table-striped">
+                                                        <thead class="uppercase">
+                                                            <tr class="success">
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                              <th>Size</th>
+                                                              <th>price</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                          <?php
+
+                                                 $urlpath = 'assets/table_price/bordered_3.csv';
+
+                                               //  $urlpath = file_get_contents($urlpath);
+                                          // header('Content-Type: text/html; charset=utf-8');
+                                            $urlpath =  utf8_encode($urlpath);
+                                          $urlpath = iconv("TIS-620", "utf-8", $urlpath);
+
+                                         //$urlpath = trim($urlpath);
+                                            $f = fopen($urlpath, "r");
+                                            while (($line = fgetcsv($f)) !== false) {
+                                                    echo "<tr >";
+
+                                                    foreach ($line as $cell) {
+                                                            echo "<td>" . htmlspecialchars($cell) . "</td>";
+                                                    }
+                                                    echo "</tr>\n";
+                                            }
+                                            fclose($f);
+                                                ?>
+                                                        </tbody>
+                                                        </table>
+                            </div>
+
+
+
+                          </div>
+                          <!-- End row -->
+
+
+              						<!-- End row -->
+              					</section>
+              					<!-- End section 3 -->
+
+              					<section id="section-4">
+
+
+
+
+
+                          <div class="row">
+
+
+                            <p class="text-danger">
+                  					 <strong>**From 600 square inches or more 1.10 baht per square inch</strong>
+                  					</p>
+
+
+                            <div class="table-responsive" style="padding:8px;">
+                                                       <table class="table table-bordered table-striped">
+                                                        <thead class="uppercase">
+                                                            <tr class="success">
+                                                                <th>Size</th>
+                                                                <th>price</th>
+                                                                <th>Size</th>
+                                                                <th>price</th>
+                                                                <th>Size</th>
+                                                                <th>price</th>
+                                                                <th>Size</th>
+                                                                <th>price</th>
+                                                                <th>Size</th>
+                                                                <th>price</th>
+                                                                <th>Size</th>
+                                                                <th>price</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                          <?php
+
+                                                 $urlpath = 'assets/table_price/bordered_4.csv';
+
+                                               //  $urlpath = file_get_contents($urlpath);
+                                          // header('Content-Type: text/html; charset=utf-8');
+                                            $urlpath =  utf8_encode($urlpath);
+                                          $urlpath = iconv("TIS-620", "utf-8", $urlpath);
+
+                                         //$urlpath = trim($urlpath);
+                                            $f = fopen($urlpath, "r");
+                                            while (($line = fgetcsv($f)) !== false) {
+                                                    echo "<tr >";
+
+                                                    foreach ($line as $cell) {
+                                                            echo "<td>" . htmlspecialchars($cell) . "</td>";
+                                                    }
+                                                    echo "</tr>\n";
+                                            }
+                                            fclose($f);
+                                                ?>
+                                                        </tbody>
+                                                        </table>
+                            </div>
+
+
+
+                          </div>
+                          <!-- End row -->
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+                      </section>
+              					<!-- End section 4 -->
+
+
+                        <section id="section-5" >
+
+                          <div class="row">
+
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-001.JPG')}}" class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-002.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-003.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-004.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-005.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-006.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-007.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-008.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-009.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-010.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-011.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-012.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-013.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-014.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-015.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-016.JPG')}}"  class="img-responsive styled">
+                            </div>
+
+
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-017.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-018.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-019.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-020.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-021.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-022.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-023.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-024.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-025.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-026.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-027.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-028.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-029.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-030.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-031.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-032.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-033.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-034.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-035.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-036.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-037.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-038.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-039.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-040.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-041.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-042.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-043.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-044.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-045.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-046.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-047.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-048.JPG')}}"  class="img-responsive styled">
+                            </div>
+
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-049.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-050.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-051.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-052.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-053.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-054.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-055.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-056.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-057.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-058.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-059.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-060.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-061.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-062.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-063.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-064.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-065.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-066.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-067.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-068.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-069.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-070.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-071.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-072.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-073.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-074.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-075.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-076.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-077.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-078.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-079.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-080.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-081.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-082.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-083.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-084.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-085.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-086.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-087.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-088.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-089.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-090.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-091.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-092.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-093.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-094.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-095.JPG')}}"  class="img-responsive styled">
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-6">
+                                <img src="{{url('assets/nice_places/image-096.JPG')}}"  class="img-responsive styled">
+                            </div>
+
+
+
+
+
+
+
+
+                          </div>
+                          <br /><br />
+                          <div class="col-md-12">
+                            <h4>How to order a floating frame Send image file with details as follows  <span class="head-lines-green"></span></h4>
+                            <ol>
+                              <li>
+                                Specify the desired size and amount.
+                              </li>
+                              <li>
+                                Specify the type of frame you want (floating frame or frame floating frame)
+                              </li>
+                              <li>
+                                Specify the desired frame surface (shadow or side)
+                              </li>
+                            </ol>
+                            <br />
+                            <h4>How to order a science framework Send image file with details as follows <span class="head-lines-green"></span></h4>
+                            <ol>
+                              <li>
+                              Specify the desired size and amount.
+                              </li>
+                              <li>
+                              Specify the desired frame surface (shadow or side)
+                              </li>
+                              <li>
+                                Specify the desired pattern Can see the whole frame of science
+                              </li>
+                            </ol>
+                            <br />
+                            <p>
+                              Send all details to the email. master-print@hotmail.com <br />
+                            With name and contact number And the preferred delivery method (More details) <br />
+                              Floating frame and scientific framework takes 3 days to complete after the payment date. (Excluding Sunday)
+                            </p>
+                            <p>
+                              For more information on
+                                Master online every day 8.00-22.00 hrs.
+                               <strong>call. 02-513-0105</strong>
+                            </p>
+                          </div>
+
+                        </section>
+                  			<!-- End section 5 -->
+
+
+
+
+
+              					</div>
+              					<!-- End content -->
+              				</div>
 
 
   					</div>
 
-
-
-
-
-
-
-
   				</div>
 
-
-
-
-
       </div>
+
+
+      @endif
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

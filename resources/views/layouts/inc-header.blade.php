@@ -46,21 +46,24 @@
               <div class="dropdown dropdown-mini">
 
               @if (Auth::guest())
-              <a href="{{url('login')}}" id="access_link" >Sign in</a>
+              <a href="{{url('login')}}" id="access_link" >{{ trans('message.login') }}</a>
               @else
 
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link" >{{ Auth::user()->name }}</a>
 
-              <div class="dropdown-menu">
+              <div class="dropdown-menu" style="min-width: 120px;">
                 <ul id="lang_menu">
 
-                  <li><a href="{{url('profile')}}">Account Setting</a>
+                  <li><a href="{{url('my_order')}}">{{ trans('message.user_order') }}</a>
                   </li>
-                  <li><a href="{{url('my_order')}}">Order History</a>
+                  <li><a href="#">{{ trans('message.credit') }}</a>
                   </li>
-                  <li><a href="{{url('payment_notify')}}">Payment</a>
+                  <li><a href="{{url('profile')}}">{{ trans('message.user_pro') }}</a>
                   </li>
-                  <li><a href="{{url('logout')}}">Sign out</a>
+
+                  <li><a href="{{url('logout')}}">{{ trans('message.logout') }}</a>
+                  </li>
+                  <li><a href="{{url('help')}}">{{ trans('message.help') }}</a>
                   </li>
 
                 </ul>
@@ -104,9 +107,9 @@
                        ?>
 
                         <li style="padding-left:10px;">
-                            <a href="{{url('photo_edit/'.$item['data']['id'])}}" style="padding: 3px 5px;"><div class="image"><img src="{{url('assets/image/product/'.$item['data']['image_pro'])}}" alt="image"></div></a>
+                            <a href="{{url('photo_edit/'.$item['data']['list_link'])}}" style="padding: 3px 5px;"><div class="image"><img src="{{url('assets/image/product/'.$item['data']['image_pro'])}}" alt="image"></div></a>
                             <strong>
-                            <a href="{{url('photo_edit/'.$item['data']['id'])}}"><?=$i?>. {{$item['data']['pro_name']}}</a>฿{{number_format((float)$item['data'][3]['sum_price'], 2, '.', '')}} x {{$item['data'][2]['sum_image']}}</strong>
+                            <a href="{{url('photo_edit/'.$item['data']['list_link'])}}"><?=$i?>. {{$item['data']['pro_name']}}</a>฿{{number_format((float)$item['data'][3]['sum_price'], 2, '.', '')}} x {{$item['data'][2]['sum_image']}}</strong>
                         </li>
 
                         <?php
@@ -214,7 +217,7 @@
 
 
             @if(Auth::guest())
-            <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;" href="{{url('login')}}">SIGN IN /<br /> JOIN</a>
+            <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;" href="{{url('login')}}">{{ trans('message.login') }} /<br /> {{ trans('message.regis') }}</a>
             @else
             <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;" href="{{url('/cart')}}">
               <i class="fa fa-cart-plus" style="margin-top: 5px; font-size: 23px;"></i>
@@ -280,15 +283,17 @@
               </a>
 
               <ul>
+                <li><a href="{{url('my_order')}}">{{ trans('message.user_order') }}</a>
+                </li>
+                <li><a href="#">{{ trans('message.credit') }}</a>
+                </li>
+                <li><a href="{{url('profile')}}">{{ trans('message.user_pro') }}</a>
+                </li>
 
-                  <li><a href="{{url('profile')}}">Account Setting</a>
-                  </li>
-                  <li><a href="{{url('my_order')}}">Order History</a>
-                  </li>
-                  <li><a href="{{url('payment_notify')}}">Payment</a>
-                  </li>
-                  <li><a href="{{url('logout')}}">Sign out</a>
-                  </li>
+                <li><a href="{{url('logout')}}">{{ trans('message.logout') }}</a>
+                </li>
+                <li><a href="{{url('help')}}">{{ trans('message.help') }}</a>
+                </li>
 
 
                 </ul>

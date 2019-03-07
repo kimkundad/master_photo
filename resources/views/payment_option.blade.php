@@ -25,14 +25,18 @@ kerry express | MASTER PHOTO NETWORK
   <div class="container margin_60">
 
     <div class=" margin_30 text-center">
+      @if(trans('message.lang') == 'Thai')
       <h2 class="major"><span style="background: #fff;">ช่องทางการชำระเงิน</span></h2>
+      @else
+      <h2 class="major"><span style="background: #fff;">Payment Option</span></h2>
+      @endif
 
     </div>
 
     <div class="row">
 
 
-
+      @if(trans('message.lang') == 'Thai')
 
         <div class="col-md-10 col-md-offset-1 ">
 
@@ -182,6 +186,166 @@ kerry express | MASTER PHOTO NETWORK
 
 
 				</div>
+
+
+        @else
+
+
+
+        <div class="col-md-10 col-md-offset-1 ">
+
+          <p>
+            At present, you can pay by bank. Then please inform the payment via the website on your account page and select payment confirmation and complete the information. Or you can call us at 02-513-0105 or send a fax slip to 02-939-3080 between 8.00 - 22.00 hrs. Every day
+          </p>
+
+          <div class="form_title">
+          <h3><strong>1</strong>โอนเงินผ่านธนาคาร</h3>
+
+          </div>
+
+          <div class="step">
+						<div class="row">
+							<div class="col-md-12">
+
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Account Name</th>
+                      <th>account number</th>
+                      <th>Branch</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img src="{{url('master/assets/image/bank/icon-bankbbl.png')}}" height="35">
+                      </td>
+                      <td class="p_top">
+                        บริษัท มาสเตอร์ โฟโต้ เน็ตเวิร์ค จำกัด
+                      </td>
+                      <td class="p_top">
+                        129-5-51893-8 (ออมทรัพย์)
+                      </td>
+                      <td class="p_top">
+                        ลาดพร้าว
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <img src="{{url('master/assets/image/bank/icon-bankscb.png')}}" height="35">
+                      </td>
+                      <td class="p_top">
+                        บริษัท มาสเตอร์ โฟโต้ เน็ตเวิร์ค จำกัด
+                      </td>
+                      <td class="p_top">
+                         041-270703-6 (ออมทรัพย์)
+                      </td>
+                      <td class="p_top">
+                        บางเขน
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <img src="{{url('master/assets/image/bank/icon-bankktc.png')}}" height="35">
+                      </td>
+                      <td class="p_top">
+                        บริษัท มาสเตอร์ โฟโต้ เน็ตเวิร์ค จำกัด
+                      </td>
+                      <td class="p_top">
+                         477-0-10789-7 (ออมทรัพย์)
+                      </td>
+                      <td class="p_top">
+                        ยูเนี่ยนมอลล์
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <img src="{{url('master/assets/image/bank/icon-bankkrugsri.png')}}" height="35">
+                      </td>
+                      <td class="p_top">
+                        บริษัท มาสเตอร์ โฟโต้ เน็ตเวิร์ค จำกัด
+                      </td>
+                      <td class="p_top">
+                         106-1-35383-5 (ออมทรัพย์)
+                      </td>
+                      <td class="p_top">
+                        ยูเนี่ยนมอลล์ ลาดพร้าว
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <td>
+                        <img src="{{url('master/assets/image/bank/icon-bankkbank.png')}}" height="35">
+                      </td>
+                      <td class="p_top">
+                        บริษัท มาสเตอร์ โฟโต้ เน็ตเวิร์ค จำกัด
+                      </td>
+                      <td class="p_top">
+                         752-229-3029 (ออมทรัพย์)
+                      </td>
+                      <td class="p_top">
+                        ลาดพร้าว 10
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+                </div>
+							</div>
+
+						</div>
+
+					</div>
+
+
+
+
+
+          <div class="form_title">
+						<h3><strong>2</strong>Cash</h3>
+
+					</div>
+          <br />
+          <br />
+
+          <div class="form_title">
+						<h3><strong>3</strong>Credit Cards</h3>
+
+					</div>
+
+          <div class="step">
+						<div class="row">
+							<div class="col-md-12">
+                <h4>
+                  Accepting payments via credit and debit cards
+                </h4>
+                <p>
+                  All transactions via credit and debit cards are secured with 2c2p Payment gateway api, Paypal certified. You will receive confirmation and electronic tickets via email within 60 minutes after the payment is completed.
+                </p>
+                <img src="{{url('master/assets/image/bank/logo-master-card2.png')}}"  height="29" >
+                <img src="{{url('master/assets/image/bank/paypal_bt.png')}}"  height="35" >
+                <img src="{{url('master/assets/image/logo-2c2p.png')}}"  height="35" >
+                </div>
+                </div>
+                </div>
+
+
+
+				</div>
+
+        @endif
+
+
+
+
+
 
 
 

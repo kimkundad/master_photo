@@ -32,7 +32,7 @@ user profile
   <div class="container margin_60">
 
     <div class=" margin_30 text-center">
-      <h2 class="major"><span>Profile & Setting </span></h2>
+      <h2 class="major"><span>{{ trans('message.user_order') }} </span></h2>
 
     </div>
 
@@ -42,15 +42,15 @@ user profile
       <aside class="col-md-3">
         <div class="box_style_cat">
           <ul id="cat_nav">
-							<li><a href="{{url('profile')}}"><i class="icon_set_1_icon-29"></i>ข้อมูลส่วนตัว </a>
+							<li><a href="{{url('profile')}}"><i class="icon_set_1_icon-29"></i>{{ trans('message.user_pro') }} </a>
 							</li>
-							<li><a href="{{url('address_book')}}"><i class="icon_set_1_icon-41"></i>สมุดที่อยู่ </a>
+							<li><a href="{{url('address_book')}}"><i class="icon_set_1_icon-41"></i>{{ trans('message.address') }} </a>
 							</li>
-							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
+							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.credit') }} </a>
 							</li>
-              <li><a href="{{url('my_order')}}" id="active"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}" id="active"><i class="icon_set_1_icon-50" ></i> {{ trans('message.user_order') }} </a>
 							</li>
-              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
+              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.pay_ment') }} </a>
 							</li>
 
 						</ul>
@@ -92,7 +92,7 @@ user profile
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h3>รายการสั่งซื้อของฉัน </h3>
+                    <h3>{{ trans('message.user_order') }} </h3>
                     <br />
 
 
@@ -111,7 +111,7 @@ user profile
 								</div>
 								<div class="col-lg-5 col-md-5">
 									<h3 style="padding-left: 5px;">{{$j->product_name}} <span style="line-height: 16px;">
-                    จำนวน {{$j->sum_image}} ชิ้น <br />
+                    {{ trans('message.number_jum') }} {{$j->sum_image}} {{ trans('message.Piece') }} <br />
                     @if(isset($j->get_all_option))
                     @foreach($j->get_all_option as $k)
 
@@ -123,14 +123,14 @@ user profile
 								<div class="col-lg-3 col-md-3">
 									<ul class="info_booking">
 										<li><strong>ORDER id #{{$u->code_gen}}</strong> </li>
-										<li><strong>วันที่ทำรายการ</strong> <?php echo DateThai($j->created_ats); ?></li>
+										<li><strong>{{ trans('message.Transaction_date') }}</strong> <?php echo DateThai($j->created_ats); ?></li>
 									</ul>
 								</div>
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
-                    <a href="{{url('pay_order_choose/'.$j->id_de)}}" class="btn_4">ชำระเงิน</a>
-										<a href="{{url('my_order_detail/'.$j->id_de)}}" style="margin-top: 3px;" class="btn_2">ดูข้อมูล</a>
-										<a href="#0" class="btn_3">ยกเลิก</a>
+                    <a href="{{url('pay_order_choose/'.$j->id_de)}}" class="btn_4">{{ trans('message.Payment_order') }}</a>
+										<a href="{{url('my_order_detail/'.$j->id_de)}}" style="margin-top: 3px;" class="btn_2">{{ trans('message.View') }}</a>
+										<a href="#0" class="btn_3">{{ trans('message.btn_cancel') }}</a>
 									</div>
 								</div>
 							</div>

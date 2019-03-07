@@ -20,7 +20,7 @@ user profile
   <div class="container margin_60">
 
     <div class=" margin_30 text-center">
-      <h2 class="major"><span>Profile & Setting </span></h2>
+      <h2 class="major"><span>{{ trans('message.pay_ment') }} </span></h2>
 
     </div>
 
@@ -30,15 +30,15 @@ user profile
       <aside class="col-md-3">
         <div class="box_style_cat">
           <ul id="cat_nav">
-							<li><a href="{{url('profile')}}" ><i class="icon_set_1_icon-29"></i>ข้อมูลส่วนตัว </a>
+							<li><a href="{{url('profile')}}" ><i class="icon_set_1_icon-29"></i>{{ trans('message.user_pro') }} </a>
 							</li>
-							<li><a href="{{url('address_book')}}"><i class="icon_set_1_icon-41"></i>สมุดที่อยู่ </a>
+							<li><a href="{{url('address_book')}}"><i class="icon_set_1_icon-41"></i>{{ trans('message.address') }} </a>
 							</li>
-							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
+							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.credit') }} </a>
 							</li>
-              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> {{ trans('message.user_order') }} </a>
 							</li>
-              <li><a href="{{url('payment_notify')}}" id="active"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
+              <li><a href="{{url('payment_notify')}}" id="active"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.pay_ment') }} </a>
 							</li>
 
 						</ul>
@@ -55,7 +55,7 @@ user profile
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h3>แจ้งการชำระเงิน </h3>
+                    <h3>{{ trans('message.pay_ment') }}s </h3>
                     <br />
 
 
@@ -64,7 +64,7 @@ user profile
 											{{ csrf_field() }}
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">เลขคำสั่งซื้อ*</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Order_number') }}*</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="order_id" value="{{ $id }}" >
                           @if ($errors->has('order_id'))
@@ -77,7 +77,7 @@ user profile
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">ชื่อ-นามสกุล*</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.name_pro') }}*</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="name" value="{{ old('name')}}" >
                           @if ($errors->has('name'))
@@ -90,7 +90,7 @@ user profile
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">อีเมล์*</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.email_pro') }}*</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="email" value="{{ old('email')}}" >
                           @if ($errors->has('email'))
@@ -101,7 +101,7 @@ user profile
                             <br />
                         </div>
                       </div>
-                      <label class="col-md-3 control-label" for="profileFirstName">โอนเงินเข้าธนาคารไหน*</label>
+                      <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Which_bank') }}*</label>
 
                       <label class="col-md-9 control-label" for="profileFirstName">
                         @if ($errors->has('bank'))
@@ -132,7 +132,7 @@ user profile
 
 
                                                     <div class="form-group">
-                                                      <label class="col-md-3 control-label" for="profileFirstName">จำนวนเงิน*</label>
+                                                      <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.money_bank') }}*</label>
                                                       <div class="col-md-8">
                                                         <input type="text" class="form-control" name="money" value="{{ $get_data_price }}" >
                                                         @if ($errors->has('money'))
@@ -146,7 +146,7 @@ user profile
 
 
                                                     <div class="form-group">
-                                                      <label class="col-md-3 control-label" for="profileFirstName">วันที่-เวลาโอนเงิน*</label>
+                                                      <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Time_to_transfer_money') }}*</label>
                                                       <div class="col-md-8">
                                                         <input type="text" class="form-control date-pick" name="filter_date" id="filter-date" value="<?php echo date('d/m/Y H:i')?>"/>
                                                         @if ($errors->has('filter_date'))
@@ -160,7 +160,7 @@ user profile
 
 
                                                     <div class="form-group">
-                                                      <label class="col-md-3 control-label" for="profileFirstName">สลิปการโอนเงิน*</label>
+                                                      <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Money_transfer_slip') }}*</label>
                                                       <div class="col-md-8">
                                                         <input type="file" name="image">
                                                         @if ($errors->has('filter_date'))
@@ -177,8 +177,8 @@ user profile
 
                     <div class="col-md-12 text-center" >
 
-                    <button type="submit" class="btn btn-next">ส่งข้อมูล</button>
-                    <a href="{{url('profile')}}" class="btn btn-default">ยกเลิก</a>
+                    <button type="submit" class="btn btn-next">{{ trans('message.sub_memory') }}</button>
+                    <a href="{{url('profile')}}" class="btn btn-default">{{ trans('message.btn_cancel') }}</a>
                   </div>
                     </form>
 

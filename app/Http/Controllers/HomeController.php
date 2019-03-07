@@ -178,7 +178,7 @@ class HomeController extends Controller
                               }else{
 
                                 $obj = new cart_detail();
-                                $obj->product_id = $u['data']['list_link'];
+                                $obj->product_id = $u['data']['id'];
                                 $obj->user_id = Auth::user()->id;
                                 $obj->product_name = $u['data']['pro_name'];
                                 $obj->sum_image = $u['data'][2]['sum_image'];
@@ -221,7 +221,7 @@ class HomeController extends Controller
 
 
                           $obj = new cart_detail();
-                          $obj->product_id = $u['data']['list_link'];
+                          $obj->product_id = $u['data']['id'];
                           $obj->user_id = Auth::user()->id;
                           $obj->product_name = $u['data']['pro_name'];
                           $obj->sum_image = $u['data'][2]['sum_image'];
@@ -470,6 +470,7 @@ class HomeController extends Controller
 
 
       if($set_num_date > 0){
+
         foreach(Session::get('cart') as $u){
 
 
@@ -479,6 +480,138 @@ class HomeController extends Controller
                 ->where('product_id', $u['data']['id'])
                 ->where('user_id', Auth::user()->id)
                 ->count();
+
+                $get_ids = DB::table('cart_details')
+                        ->where('product_id', $u['data']['id'])
+                        ->where('user_id', Auth::user()->id)
+                        ->first();
+
+
+                        if($check_count > 0){
+
+                          ////////////////////   check option   //////////////////////////
+
+                          $get_option = DB::table('cart_options')
+                            ->where('cart_id_detail', $get_ids->id)
+                            ->get();
+
+                            $check_option = [];
+
+                            foreach($get_option as $ch){
+                              $check_option[] = $ch->option_id;
+                            }
+
+                            if($u['data'][0]['size_photo'] == $check_option){
+
+
+
+
+                                $get_deatial = DB::table('cart_details')->select(
+                                  'cart_details.*'
+                                  )
+                                ->where('id', $get_ids->id)
+                                ->first();
+
+                                $sum_img = $u['data'][2]['sum_image'];
+
+                                $v4 = $get_deatial->sum_image + $sum_img;
+
+
+
+                                $obj = cart_detail::find($get_ids->id);
+                                $obj->sum_image = $v4;
+                                $obj->save();
+
+                                $obj_id = $get_ids->id;
+
+                              //dd('มีข้อมูลซ้ำนะ');
+
+                            }else{
+
+                              $obj = new cart_detail();
+                              $obj->product_id = $u['data']['id'];
+                              $obj->user_id = Auth::user()->id;
+                              $obj->product_name = $u['data']['pro_name'];
+                              $obj->sum_image = $u['data'][2]['sum_image'];
+                              $obj->sum_price = $u['data'][3]['sum_price'];
+                              $obj->list_link = $u['data']['list_link'];
+                              $obj->save();
+
+                              $obj_id = $obj->id;
+
+
+                              foreach($u['data'][0]['size_photo'] as $k){
+
+                                $obj = new cart_option();
+                                $obj->cart_id_detail = $obj_id;
+                                $obj->option_id = $k;
+                                $obj->save();
+
+                               //  echo ($j['image']);
+                              }
+
+                            //  dd('ไม่มีข้อมูลซ้ำนะ');
+                            }
+
+                            foreach($u['data']['image'] as $j){
+
+                            $obj = new cart_image();
+                            $obj->cart_id_detail = $obj_id;
+                            $obj->cart_image = $j['image'];
+                            $obj->cart_image_id = $j['id'];
+                            $obj->cart_image_sum = $j['num'];
+                            $obj->save();
+
+                          }
+
+
+
+
+
+
+                        }else{
+
+                          $obj = new cart_detail();
+                        $obj->product_id = $u['data']['id'];
+                        $obj->user_id = Auth::user()->id;
+                        $obj->product_name = $u['data']['pro_name'];
+                        $obj->sum_image = $u['data'][2]['sum_image'];
+                        $obj->sum_price = $u['data'][3]['sum_price'];
+                        $obj->list_link = $u['data']['list_link'];
+                        $obj->save();
+
+                        $obj_id = $obj->id;
+
+
+                        foreach($u['data'][0]['size_photo'] as $k){
+
+                          $obj = new cart_option();
+                          $obj->cart_id_detail = $obj_id;
+                          $obj->option_id = $k;
+                          $obj->save();
+
+                         //  echo ($j['image']);
+                        }
+
+                        foreach($u['data']['image'] as $j){
+
+                          $obj = new cart_image();
+                          $obj->cart_id_detail = $obj_id;
+                          $obj->cart_image = $j['image'];
+                          $obj->cart_image_id = $j['id'];
+                          $obj->cart_image_sum = $j['num'];
+                          $obj->save();
+
+                        }
+
+                      //  dd('ไม่มีข้อมูลใน cart online');
+
+
+
+                        }
+
+
+/*
 
           if($check_count == 0){
 
@@ -541,19 +674,31 @@ class HomeController extends Controller
 
         }
 
+        foreach($u['data']['image'] as $j){
+
+          $obj = new cart_image();
+          $obj->cart_id_detail = $obj_id;
+          $obj->cart_image = $j['image'];
+          $obj->cart_image_id = $j['id'];
+          $obj->cart_image_sum = $j['num'];
+          $obj->save();
+
+        }
 
 
 
-          foreach($u['data']['image'] as $j){
 
-            $obj = new cart_image();
-            $obj->cart_id_detail = $obj_id;
-            $obj->cart_image = $j['image'];
-            $obj->cart_image_id = $j['id'];
-            $obj->cart_image_sum = $j['num'];
-            $obj->save();
 
-          }
+
+
+
+
+*/
+
+
+
+
+
 
 
 
@@ -2287,8 +2432,10 @@ class HomeController extends Controller
 
        }
 
-       $set_num_date = count(Session::get('cart'));
-       $set_num_date += 1;
+      // $set_num_date = count(Session::get('cart'));
+
+       $set_num_date = (\random_int(100, 999));
+
      //  $data_url = $set_num_date;
      //  $set_num_date = "data".$set_num_date;
 

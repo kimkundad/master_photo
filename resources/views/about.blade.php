@@ -21,6 +21,13 @@
 
   <div class="container margin_60">
 
+
+
+
+@if(trans('message.lang') == 'Thai')
+
+    <!-- Start row -->
+
     <div class="row">
 
 
@@ -30,12 +37,10 @@
 
     </div>
 
-
       <div class="col-md-5 col-sm-6">
 					<img src="{{url('assets/image/about/th_1134386378.jpg')}}" alt="Image" class="img-responsive styled">
 
 				</div>
-
 
         <div class="col-md-7 col-sm-6">
 					<h3><span>" มาสเตอร์ "</span> Master Photo Network</h3>
@@ -72,7 +77,6 @@
 					</div>
 
 
-
 				</div>
 
         <div class="col-md-12">
@@ -99,14 +103,101 @@
         </div>
 
 
+    </div>
 
+<!-- end row -->
+
+@else
+
+
+
+
+<!-- Start row -->
+
+<div class="row">
+
+
+
+<div class=" margin_30 text-center">
+  <h2 class="major"><span style="background: #fff;">ABOUT US </span></h2>
+
+</div>
+
+  <div class="col-md-5 col-sm-6">
+      <img src="{{url('assets/image/about/th_1134386378.jpg')}}" alt="Image" class="img-responsive styled">
+
+    </div>
+
+    <div class="col-md-7 col-sm-6">
+      <h3><span>" Master "</span> Master Photo Network</h3>
+      <p class="p_16">
+        We have more than 40 years of experience in image <strong>compression (since 1967)</strong>
+        We are the first in Thailand to install a continuous image compression system. Can complete the painting within 45 minutes
+         (Replacing the image that has to wait 1-2 days) is the origin of the word <a>"Waiting to receive immediately"</a> Which is widely used today
+      </p>
+
+      <p class="p_16">
+        When technology changes <strong>"Master"</strong> Is the first to pioneer the systematic and complete digital image compression
+         By investing in image compressors that support digital work since 2002 <strong>"Master"</strong> Is also the creator of various compression format standards
+         In order to order digital photos that originated from the Lat Phrao area
+      </p>
+
+      <p class="p_16">
+        "Master" Realizing the importance of using the internet and the benefits that customers receive on the website. <a href="{{url('/')}}" target="_blank"><b>www.MasterPhotoNetwork.com</b></a>
+      Has been founded since 2005 and allows customers to upload and order images via the website in 2008
+      </p>
+
+      <p class="p_16">
+        At present, there are customers using our online system from all regions nationwide. We have a variety of delivery systems for the convenience of customers.
+         And with the staff that will take care of you with the most advanced photo compressors We can support all forms of work. Customers can be confident that the work that goes out of us will be of a quality that is standard and delivered directly to the customers for sure.
+      </p>
+
+      <div class="general_icons">
+        <ul>
+          <li><i class="icon_set_1_icon-34"></i>Camera</li>
+          <li><i class="icon_set_1_icon-31"></i>Video camera</li>
+
+          <li><i class="icon_set_1_icon-63"></i>Mobile</li>
+          <li><i class="icon_set_1_icon-35"></i>Credit cards</li>
+        </ul>
+      </div>
 
 
     </div>
 
+    <div class="col-md-12">
+      <hr style="border-top: 2px solid #ddd;"/>
+
+      <h4>Master Photo Network working time: 8:00 - 22:00</h4>
+      <p>
+        Leader in color printing, Digital Offset Print (business cards, cards, brochures, brochures, flyers etc.), frames, albums, photobook and photo gift
+      </p>
+    </div>
+
+    <div class="col-md-3">
+        <img src="{{url('assets/image/about/n1.JPG')}}" alt="Image" class="img-responsive styled">
+    </div>
+    <div class="col-md-3">
+        <img src="{{url('assets/image/about/n2.JPG')}}" alt="Image" class="img-responsive styled">
+    </div>
+    <div class="col-md-3">
+        <img src="{{url('assets/image/about/n3.JPG')}}" alt="Image" class="img-responsive styled">
+    </div>
+
+    <div class="col-md-3">
+        <img src="{{url('assets/image/about/20106628_1548914058505765_7634972826482356699_n.jpg')}}" alt="Image" class="img-responsive styled">
+    </div>
+
+
+</div>
+
+<!-- end row -->
 
 
 
+
+
+@endif
 
 
 

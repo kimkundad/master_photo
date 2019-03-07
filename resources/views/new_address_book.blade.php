@@ -19,7 +19,7 @@ user profile
   <div class="container margin_60">
 
     <div class=" margin_30 text-center">
-      <h2 class="major"><span>Profile & Setting </span></h2>
+      <h2 class="major"><span>{{ trans('message.add_new_add') }} </span></h2>
 
     </div>
 
@@ -29,15 +29,15 @@ user profile
       <aside class="col-md-3">
         <div class="box_style_cat">
           <ul id="cat_nav">
-							<li><a href="{{url('profile')}}"><i class="icon_set_1_icon-29"></i>ข้อมูลส่วนตัว </a>
+							<li><a href="{{url('profile')}}"><i class="icon_set_1_icon-29"></i>{{ trans('message.user_pro') }} </a>
 							</li>
-							<li><a href="{{url('address_book')}}" id="active"><i class="icon_set_1_icon-41"></i>สมุดที่อยู่ </a>
+							<li><a href="{{url('address_book')}}" id="active"><i class="icon_set_1_icon-41"></i>{{ trans('message.address') }} </a>
 							</li>
-							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
+							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.credit') }} </a>
 							</li>
-              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> {{ trans('message.user_order') }} </a>
 							</li>
-              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
+              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.pay_ment') }} </a>
 							</li>
 
 						</ul>
@@ -54,7 +54,7 @@ user profile
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h3>เพิ่มที่อยู่ใหม่  </h3>
+                    <h3>{{ trans('message.add_new_add') }}  </h3>
                     <br />
                     @if (count($errors) > 0)
                     <br>
@@ -73,21 +73,21 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">ชื่อ-นามสกุล</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.name_pro') }}</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="name" value="{{ old('name') }}" required="">
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">เบอร์โทรศัพท์</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.telephone_num') }}</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="phone" value="{{ old('phone') }}" required="">
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">ที่อยู่</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.address_1') }}</label>
                         <div class="col-md-8">
                           <textarea class="form-control" rows="3" name="address"  required="">{{ old('address') }}</textarea>
                         </div>
@@ -95,12 +95,12 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">จังหวัด</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.province') }}</label>
                         <div class="col-md-8">
 
                           <select id="province" name="province" class="form-control " required="">
 
-                          <option value="">- กรุณาเลือกจังหวัด -</option>
+                          <option value="">- {{ trans('message.select') }}{{ trans('message.province') }} -</option>
 
                           </select>
 
@@ -109,12 +109,12 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">เขต/อำเภอ</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.District') }}</label>
                         <div class="col-md-8">
 
                           <select id="amphur" name="amphur" class="form-control " required="">
 
-                          <option value="">- กรุณาเลือกอำเภอ -</option>
+                          <option value="">- {{ trans('message.select') }}{{ trans('message.District') }} -</option>
 
                           </select>
 
@@ -123,12 +123,12 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">แขวง/ตำบล</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Subdistrict') }}</label>
                         <div class="col-md-8">
 
                           <select id="district" name="district" class="form-control " required="">
 
-                          <option value="">- กรุณาเลือกตำบล -</option>
+                          <option value="">- {{ trans('message.select') }}{{ trans('message.Subdistrict') }} -</option>
 
                           </select>
 
@@ -137,7 +137,7 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">รหัสไปรษณีย์</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.zip_code') }}</label>
                         <div class="col-md-8">
 
                           <input type="text" id="postcode" class="form-control" name="postcode"  required="">
@@ -147,15 +147,15 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">ประเภทที่อยู่</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Address_Type') }}</label>
                         <div class="col-md-8">
 
                           <select name="type_ad" class="form-control " required="">
 
-                          <option value="0">ที่อยู่ในการจัดส่ง</option>
-                          <option value="1" >ที่อยู่ในการออกใบเสร็จ</option>
+                          <option value="0">{{ trans('message.shipping_address') }}</option>
+                          <option value="1" >{{ trans('message.address_of_the_receipt') }}</option>
 
-                          <option value="3" selected>ที่อยู่ในการจัดส่ง ร่วมกับที่อยู่ในการออกใบเสร็จ</option>
+                          <option value="3" selected>{{ trans('message.shipping_address_together') }}</option>
                           </select>
 
                         </div>
@@ -164,8 +164,8 @@ user profile
 
 
                   <div class="col-md-12 text-center" >
-                    <button type="submit" class="btn btn-next">บันทึก</button>
-                    <a href="{{url('address_book')}}" class="btn btn-default">ยกเลิก</a>
+                    <button type="submit" class="btn btn-next">{{ trans('message.sub_memory') }}</button>
+                    <a href="{{url('address_book')}}" class="btn btn-default">{{ trans('message.btn_cancel') }}</a>
                   </div>
                   </form>
 

@@ -7,12 +7,12 @@
 
 
 				<ul class="" id="top_links" style="float: none; text-align: center;">
-﻿          <li><a href="{{url('/about')}}">ABOUT US</a></li>
-          <li><a href="{{url('/product_price')}}">PRODUCT PRICE</a></li>
-          <li><a href="{{url('/options_derivatives')}}">DELIVERY OPTIONS</a></li>
-          <li><a href="{{url('/payment_option')}}">PAYMENT OPTIONS</a></li>
-          <li><a href="{{url('/terms_conditions')}}">TERM OF SERVICES</a></li>
-          <li><a href="{{url('/contact_master')}}">CONTACT US</a></li>
+﻿          <li><a href="{{url('/about')}}">{{ trans('message.about') }}</a></li>
+          <li><a href="{{url('/product_price')}}">{{ trans('message.price') }}</a></li>
+          <li><a href="{{url('/options_derivatives')}}">{{ trans('message.delivery2') }}</a></li>
+          <li><a href="{{url('/payment_option')}}">{{ trans('message.payment_op') }}</a></li>
+          <li><a href="{{url('/terms_conditions')}}">{{ trans('message.term') }}</a></li>
+          <li><a href="{{url('/contact_master')}}">{{ trans('message.contact') }}</a></li>
         </ul>
       </div>
     </div>

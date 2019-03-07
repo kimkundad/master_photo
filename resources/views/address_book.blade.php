@@ -19,7 +19,7 @@ user profile
   <div class="container margin_60">
 
     <div class=" margin_30 text-center">
-      <h2 class="major"><span>Profile & Setting </span></h2>
+      <h2 class="major"><span>{{ trans('message.address') }} </span></h2>
 
     </div>
 
@@ -29,15 +29,15 @@ user profile
       <aside class="col-md-3">
         <div class="box_style_cat">
           <ul id="cat_nav">
-							<li><a href="{{url('profile')}}"><i class="icon_set_1_icon-29"></i>ข้อมูลส่วนตัว </a>
+							<li><a href="{{url('profile')}}"><i class="icon_set_1_icon-29"></i>{{ trans('message.user_pro') }} </a>
 							</li>
-							<li><a href="{{url('address_book')}}" id="active"><i class="icon_set_1_icon-41"></i>สมุดที่อยู่ </a>
+							<li><a href="{{url('address_book')}}" id="active"><i class="icon_set_1_icon-41"></i>{{ trans('message.address') }} </a>
 							</li>
-							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
+							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.credit') }} </a>
 							</li>
-              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> {{ trans('message.user_order') }} </a>
 							</li>
-              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
+              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.pay_ment') }} </a>
 							</li>
 
 						</ul>
@@ -54,16 +54,16 @@ user profile
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h3>สมุดที่อยู่ </h3>
+                    <h3>{{ trans('message.address') }} </h3>
                     <br />
                     <table class="table ">
                      <thead>
                        <tr>
-                         <th>ชื่อ-นามสกุล</th>
-                         <th>ที่อยู่</th>
-                         <th>รหัสไปรษณีย์</th>
-                         <th>เบอร์โทรศัพท์</th>
-                         <th>Type</th>
+                         <th>{{ trans('message.name_pro') }}</th>
+                         <th>{{ trans('message.address_1') }}</th>
+                         <th>{{ trans('message.zip_code') }}</th>
+                         <th>{{ trans('message.telephone_num') }}</th>
+                         <th>{{ trans('message.Address_Type') }}</th>
                          <th>
 
                          </th>
@@ -79,18 +79,17 @@ user profile
                          <td>{{$ad->phone_ad}}</td>
                          <td>
                            @if($ad->type_address == 0)
-                           ที่อยู่ในการจัดส่ง
+                           {{ trans('message.shipping_address') }}
                            @elseif(($ad->type_address == 1))
-                           ที่อยู่ในการออกใบเสร็จ
+                           {{ trans('message.address_of_the_receipt') }}
                            @elseif(($ad->type_address == 2))
-                           ไม่ได้กำหนด
+                           {{ trans('message.indeterminate') }}
                            @else
-                           ที่อยู่ในการจัดส่งร่วมกับ
-                           ที่อยู่ในการออกใบเสร็จ
+                           {{ trans('message.shipping_address_together') }}
                            @endif
                          </td>
                          <td>
-                          <a class="btn btn-primary btn-xs pull-left" style="margin-right:8px;" href="{{url('edit_address_book/'.$ad->id)}}" role="button">แก้ไข </a>
+                          <a class="btn btn-primary btn-xs pull-left" style="margin-right:8px;" href="{{url('edit_address_book/'.$ad->id)}}" role="button">{{ trans('message.edit') }} </a>
 
                       <!--    <form  action="{{url('admin/delete_user_address/')}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
                               <input type="hidden" name="_method" value="POST">
@@ -106,7 +105,7 @@ user profile
                    </table>
                   <div class="col-md-12 text-center" >
                     <br />
-                  <a href="{{url('new_address_book/')}}" class="btn btn-submit"><i class='sl sl-icon-plus'></i> เพิ่มที่อยู่ใหม่</a>
+                  <a href="{{url('new_address_book/')}}" class="btn btn-submit"><i class='sl sl-icon-plus'></i> {{ trans('message.add_new_add') }}</a>
                   </div>
                 </div>
 

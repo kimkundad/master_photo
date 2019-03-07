@@ -21,6 +21,8 @@ kerry express | MASTER PHOTO NETWORK
 
   <div class="container margin_60">
 
+    @if(trans('message.lang') == 'Thai')
+
     <div class=" margin_30 text-center">
       <h2 class="major"><span style="background: #fff;">บริการจัดส่งเดลิเวอรี่</span></h2>
 
@@ -47,17 +49,41 @@ kerry express | MASTER PHOTO NETWORK
 
               <h5 class="text-center"> <strong> ติดต่อได้ที่เบอร์โทร 02-513-0105, Line ID : @masterphotonetwork, Fax. 02-939-3080 ทุกวัน เวลา 8.00-22.00น.</strong></h5>
 
-
-
-
-
 				</div>
+    </div>
 
+    @else
 
-
-
+    <div class=" margin_30 text-center">
+      <h2 class="major"><span style="background: #fff;">Delivery service</span></h2>
 
     </div>
+
+    <div class="row">
+
+
+
+
+        <div class="col-md-10 col-md-offset-1 ">
+
+
+          <h3>Delivery service In Bangkok</h3>
+
+              <p class="text-warning">
+                <strong>Delivery fee 50 baht per time, use 500 baht or more, free delivery service! (Only service areas) Expand delivery areas in Bangkok.</strong>
+              </p>
+              <br />
+
+              <div id="map" class="map desk-three-forth"></div>
+
+
+
+              <h5 class="text-center"> <strong>Contact at 02-513-0105, Line ID: @masterphotonetwork, Fax. 02-939-3080. Daily 8:00 - 22:00 hrs</strong></h5>
+
+				</div>
+    </div>
+
+    @endif
 
 
 

@@ -38,10 +38,10 @@ CONTACT US | MASTER PHOTO NETWORK
         <div class="col-md-10 col-md-offset-1 ">
 
 
-          <h3>มารับด้วยตนเองที่สาขาของมาสเตอร์</h3>
+          <h3>{{ trans('message.re_cp') }}</h3>
 
               <p class="text-warning">
-                <strong> สำหรับการติดต่อทางร้านมาสเตอร์มีสาขาต่างๆดังนี้</strong>
+                <strong> {{ trans('message.re_cp2') }}</strong>
               </p>
               <br />
 

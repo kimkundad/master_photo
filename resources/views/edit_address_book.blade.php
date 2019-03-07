@@ -19,7 +19,7 @@ user profile
   <div class="container margin_60">
 
     <div class=" margin_30 text-center">
-      <h2 class="major"><span>Profile & Setting </span></h2>
+      <h2 class="major"><span>{{ trans('message.address') }} </span></h2>
 
     </div>
 
@@ -29,15 +29,15 @@ user profile
       <aside class="col-md-3">
         <div class="box_style_cat">
           <ul id="cat_nav">
-							<li><a href="{{url('profile')}}"><i class="icon_set_1_icon-29"></i>ข้อมูลส่วนตัว </a>
+							<li><a href="{{url('profile')}}"><i class="icon_set_1_icon-29"></i>{{ trans('message.user_pro') }} </a>
 							</li>
-							<li><a href="{{url('address_book')}}" id="active"><i class="icon_set_1_icon-41"></i>สมุดที่อยู่ </a>
+							<li><a href="{{url('address_book')}}" id="active"><i class="icon_set_1_icon-41"></i>{{ trans('message.address') }} </a>
 							</li>
-							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> คูปองส่วนลด </a>
+							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.credit') }} </a>
 							</li>
-              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> รายการสั่งซื้อของฉัน </a>
+              <li><a href="{{url('my_order')}}"><i class="icon_set_1_icon-50" ></i> {{ trans('message.user_order') }} </a>
 							</li>
-              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> แจ้งการชำระเงิน </a>
+              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.pay_ment') }} </a>
 							</li>
 
 						</ul>
@@ -54,11 +54,11 @@ user profile
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h3>แก้ไขที่อยู่  <form  action="{{url('delete_address_book/')}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
+                    <h3>{{ trans('message.address') }}  <form  action="{{url('delete_address_book/')}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
                             <input type="hidden" name="_method" value="POST">
                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
                              <input type="hidden" name="address_id" value="{{ $package->id }}">
-                            <button type="submit" title="ลบบทความ" class="btn btn-danger btn-xs pull-right"> ลบ</button>
+                            <button type="submit" title="ลบบทความ" class="btn btn-danger btn-xs pull-right"> {{ trans('message.delete') }}</button>
                         </form></h3>
                     <br />
                     @if (count($errors) > 0)
@@ -78,7 +78,7 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">ชื่อ-นามสกุล</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.name_pro') }}</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="name" value="{{ $package->name_ad }}" required="">
                           <input type="hidden" class="form-control" name="address_id" value="{{ $package->id }}" required="">
@@ -87,28 +87,28 @@ user profile
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">เบอร์โทรศัพท์</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.telephone_num') }}</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control" name="phone" value="{{ $package->phone_ad }}" required="">
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">เลขประจำตัวผู้เสียภาษี</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Tax_ID') }}</label>
                         <div class="col-md-8">
-                          <input type="text" class="form-control" name="id_card_no" placeholder="กรุณาระบุเลขประจำตัวผู้เสียภาษี" value="{{ old('id_card_no', $package->id_card_no)}}" >
+                          <input type="text" class="form-control" name="id_card_no" placeholder="{{ trans('message.Tax_ID') }}" value="{{ old('id_card_no', $package->id_card_no)}}" >
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">รหัสสาขา (ถ้ามี)</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.branch_code') }} ({{ trans('message.if_there_is') }})</label>
                         <div class="col-md-8">
                           <input type="text" class="form-control"name="branch_code" value="{{ old('branch_code', $package->branch_code)}}" placeholder="กรุณากรอกรหัสสาขา (ถ้ามี)" >
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">ที่อยู่</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.address_1') }}</label>
                         <div class="col-md-8">
                           <textarea class="form-control" rows="3" name="address"  required="">{{ $package->address_ad }}</textarea>
                         </div>
@@ -116,7 +116,7 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">จังหวัด</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.province') }}</label>
                         <div class="col-md-8">
 
                           <select id="province" name="province" class="form-control " required="">
@@ -130,7 +130,7 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">เขต/อำเภอ</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.District') }}</label>
                         <div class="col-md-8">
 
                           <select id="amphur" name="amphur" class="form-control " required="">
@@ -144,7 +144,7 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">แขวง/ตำบล</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Subdistrict') }}</label>
                         <div class="col-md-8">
 
                           <select id="district" name="district" class="form-control " required="">
@@ -158,7 +158,7 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">รหัสไปรษณีย์</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.zip_code') }}</label>
                         <div class="col-md-8">
 
                           <input type="text" id="postcode" class="form-control" name="postcode" value="{{$package->zip_code}}"  required="">
@@ -168,21 +168,21 @@ user profile
 
 
                       <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">ประเภทที่อยู่</label>
+                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Address_Type') }}</label>
                         <div class="col-md-8">
 
                           <select name="type_ad" class="form-control " required="">
 
                           <option value="0" @if( $package->type_address == 0)
                           selected='selected'
-                          @endif >ที่อยู่ในการจัดส่ง</option>
+                          @endif >{{ trans('message.shipping_address') }}</option>
                           <option value="1" @if( $package->type_address == 1)
                           selected='selected'
-                          @endif>ที่อยู่ในการออกใบเสร็จ</option>
+                          @endif>{{ trans('message.address_of_the_receipt') }}</option>
 
                           <option value="3" @if( $package->type_address == 3)
                           selected='selected'
-                          @endif>ที่อยู่ในการจัดส่ง ร่วมกับที่อยู่ในการออกใบเสร็จ</option>
+                          @endif>{{ trans('message.shipping_address_together') }}</option>
                           </select>
 
                         </div>
@@ -191,8 +191,8 @@ user profile
 
 
                   <div class="col-md-12 text-center" >
-                    <button type="submit" class="btn btn-next">อัพเดทข้อมูล</button>
-                    <a href="{{url('address_book')}}" class="btn btn-default">ยกเลิก</a>
+                    <button type="submit" class="btn btn-next">{{ trans('message.sub_memory') }}</button>
+                    <a href="{{url('address_book')}}" class="btn btn-default">{{ trans('message.btn_cancel') }}</a>
                   </div>
                   </form>
 
