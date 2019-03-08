@@ -3,7 +3,7 @@ return [
     'index' => 'Home',
     'lang' => 'Eng',
     'category' => 'Category',
-    'welcome' => 'Welcome',
+    'welcome' => 'Welcome to the Master Photo Network',
     'login' => 'SIGN IN',
     'regis' => 'JOIN',
     'user_order' => 'Order History',

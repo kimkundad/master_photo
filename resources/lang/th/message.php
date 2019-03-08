@@ -3,7 +3,7 @@ return [
   'index' => 'หน้าหลัก',
   'lang' => 'Thai',
   'category' => 'หมวดหมู่',
-  'welcome' => 'ยินดีต้อนรับ',
+  'welcome' => 'ยินดีต้อนรับเข้าสู่เว็บไซต์ Master Photo Network',
   'login' => 'เข้าสู่ระบบ',
   'regis' => 'สมัคร',
   'user_order' => 'ประวัติ การสั่งซื้อ',

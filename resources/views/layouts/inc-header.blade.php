@@ -78,7 +78,7 @@
 
             <li style=" margin-bottom:-7px;">
                 <div class="dropdown dropdown-cart">
-                    <a href="#" class="dropdown-toggle" style="font-size:20px; color:#666" data-toggle="dropdown"><i class="fa fa-cart-plus"></i></a>
+                    <a href="#" class="dropdown-toggle" style="font-size:20px; color:#666" data-toggle="dropdown"><img src="{{url('assets/image/16757-200.png')}}" style="height:19px; " /> </a>
                     <ul class="dropdown-menu" id="cart_items" >
 
 
@@ -220,7 +220,7 @@
             <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;" href="{{url('login')}}">{{ trans('message.login') }} /<br /> {{ trans('message.regis') }}</a>
             @else
             <a class="pull-right" style="position:  absolute;width:20%;color:#666;line-height: 15px;font-size:12px;padding-top:7px;top: 0;right: 0;" href="{{url('/cart')}}">
-              <i class="fa fa-cart-plus" style="margin-top: 5px; font-size: 23px;"></i>
+              <img src="{{url('assets/image/16757-200.png')}}" style="height:19px; margin-top: 5px;" />
             </a>
 
             @endif
@@ -278,7 +278,7 @@
             @else
 
             <li class="submenu visible-sm visible-xs">
-              <a href="javascript:void(0);" class="show-submenu"> {{ Auth::user()->name }}
+              <a ><i class="icon-user-1 pull-left"></i> {{ Auth::user()->name }}
                 <i class="icon-down-open-mini"></i>
               </a>
 
