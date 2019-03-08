@@ -277,22 +277,22 @@
 
             @else
 
-            <li class="submenu visible-sm visible-xs">
+            <li class="submenu visible-sm visible-xs" style="background-color: #fdfddf; font-weight: 600;">
               <a ><i class="icon-user-1 pull-left"></i> {{ Auth::user()->name }}
-                <i class="icon-down-open-mini"></i>
+
               </a>
 
               <ul>
-                <li><a href="{{url('my_order')}}">{{ trans('message.user_order') }}</a>
+                <li><a href="{{url('my_order')}}"><i class="icon-cart pull-left" style="margin-right:5px;"></i> {{ trans('message.user_order') }}</a>
                 </li>
-                <li><a href="#">{{ trans('message.credit') }}</a>
+                <li><a href="#"><i class="icon-gift-2 pull-left" style="margin-right:5px;"></i> {{ trans('message.credit') }}</a>
                 </li>
-                <li><a href="{{url('profile')}}">{{ trans('message.user_pro') }}</a>
+                <li><a href="{{url('profile')}}"><i class="icon-user pull-left" style="margin-right:5px;"></i> {{ trans('message.user_pro') }}</a>
                 </li>
 
-                <li><a href="{{url('logout')}}">{{ trans('message.logout') }}</a>
+                <li><a href="{{url('logout')}}"><i class="icon-lock-5 pull-left" style="margin-right:5px;"></i> {{ trans('message.logout') }}</a>
                 </li>
-                <li><a href="{{url('help')}}">{{ trans('message.help') }}</a>
+                <li><a href="{{url('help')}}"><i class=" icon-info-circled-3 pull-left" style="margin-right:5px;"></i> {{ trans('message.help') }}</a>
                 </li>
 
 
