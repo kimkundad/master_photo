@@ -63,7 +63,7 @@ user profile
                          <th>{{ trans('message.address_1') }}</th>
                          <th>{{ trans('message.zip_code') }}</th>
                          <th>{{ trans('message.telephone_num') }}</th>
-                         <th>{{ trans('message.Address_Type') }}</th>
+                        <!-- <th>{{ trans('message.Address_Type') }}</th> -->
                          <th>
 
                          </th>
@@ -77,7 +77,7 @@ user profile
                          <td>{{$ad->address_ad}}</td>
                          <td>{{$ad->zip_code}}</td>
                          <td>{{$ad->phone_ad}}</td>
-                         <td>
+                      <!--   <td>
                            @if($ad->type_address == 0)
                            {{ trans('message.shipping_address') }}
                            @elseif(($ad->type_address == 1))
@@ -87,7 +87,7 @@ user profile
                            @else
                            {{ trans('message.shipping_address_together') }}
                            @endif
-                         </td>
+                         </td> -->
                          <td>
                           <a class="btn btn-primary btn-xs pull-left" style="margin-right:8px;" href="{{url('edit_address_book/'.$ad->id)}}" role="button">{{ trans('message.edit') }} </a>
 

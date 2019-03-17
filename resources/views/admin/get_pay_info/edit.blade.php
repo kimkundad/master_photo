@@ -150,7 +150,7 @@
           												<div class="row">
           													<div class="col-md-9 col-md-offset-3">
           														<button type="submit" class="btn btn-primary">แก้ไขข้อมูล</button>
-          														<a href="{{url('delivery')}}" class="btn btn-default">ยกเลิก</a>
+          														<a href="{{url('admin/get_pay_info')}}" class="btn btn-default">ยกเลิก</a>
           													</div>
           												</div>
           											</div>

@@ -167,7 +167,7 @@ user profile
                       </div>
 
 
-                      <div class="form-group">
+                  <!--    <div class="form-group">
                         <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Address_Type') }}</label>
                         <div class="col-md-8">
 
@@ -186,7 +186,7 @@ user profile
                           </select>
 
                         </div>
-                      </div>
+                      </div> -->
 
 
 

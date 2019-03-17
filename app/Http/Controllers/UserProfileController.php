@@ -429,6 +429,8 @@ class UserProfileController extends Controller
             'postcode' => 'required'
       ]);
 
+      $request['type_ad'] = 0;
+
       $id = $request['address_id'];
 
       $package = user_address::find($id);
@@ -463,11 +465,11 @@ class UserProfileController extends Controller
       }elseif($request['type_ad'] == 0){
 
 
-        DB::table('user_addresses')
+      /*  DB::table('user_addresses')
         ->where('user_id', Auth::user()->id)
         ->where('id', '!=', $id)
         ->where('type_address', 3)
-        ->update(array('type_address' => 2));
+        ->update(array('type_address' => 2)); */
 
       }else{
 
@@ -505,6 +507,8 @@ class UserProfileController extends Controller
             'district' => 'required',
             'postcode' => 'required'
       ]);
+
+      $request['type_ad'] = 0;
 
       $user_id = Auth::user()->id;
 
