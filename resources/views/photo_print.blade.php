@@ -547,7 +547,7 @@ $(document).ready(function(){
       $radio.prop("checked",!$radio.prop("checked"));
       get_value_radio = $radio.val();
       $radio.checked = true;
-      console.log(get_value_radio);
+    //  console.log(get_value_radio);
 
       if($(this).find('input[type="radio"]').first().attr("checked")){
           $(this).addClass('image-radio-checked');
@@ -566,7 +566,7 @@ $(document).ready(function(){
       $radio.prop("checked",!$radio.prop("checked"));
     //  var selValue = $('input[type="radio"]').val();
       get_value_radio = $radio.val();
-      console.log(get_value_radio);
+    //  console.log(get_value_radio);
       $radio.checked = true;
       e.preventDefault();
 

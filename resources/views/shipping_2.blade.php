@@ -156,7 +156,7 @@ Shipping | MASTER PHOTO NETWORK
         </div>
 
         <div class="form_title">
-          <h3><strong>1</strong>ที่อยู่ในการจัดส่ง/ใบกำกับภาษี</h3>
+          <h3><strong>1</strong>ที่อยู่ในการจัดส่ง/ใบกำกับภาษี {{$check_address}}</h3>
           <p style="font-size:14px; margin-top:10px;">
             ลูกค้าสามารถเข้าไปจัดการ ที่อยู่ในการจัดส่ง และ ใบกำกับภาษี <a href="{{url('/address_book')}}">แก้ไข</a>
           </p>
@@ -167,51 +167,29 @@ Shipping | MASTER PHOTO NETWORK
 
             @if($check_address != 10)
 
-
-            @if($check_address == 3)
-            <p style="font-size:14px; margin-top:10px;">
-              {{$package->name_ad}}, {{$package->phone_ad}}
-            </p>
-            <p style="font-size:14px; margin-top:10px;">
-              {{$package->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$package->zip_code}}
-              <input type="hidden" name="address_shipping_order" value="{{$package->id}}" />
-              <input type="hidden" name="address_type_order" value="{{$check_address}}" />
-            </p>
-
-            <p class="text-success" style="font-size:15px; margin-top:10px; ">
-              <b><i class="sl sl-icon-check text-success"></i></b> ลูกค้าใช้ ที่อยู่ในการออกใบกำกับภาษีใช้ที่อยู่เดียวกับการจัดส่ง <a href="{{url('/address_book')}}">แก้ไข</a>
-            </p>
-            <hr />
-            @endif
+            <div class="col-md-12">
 
 
-            @if($check_address == 1)
-            <input type="hidden" name="address_shipping_order" value="{{$package->id}}" />
-            <input type="hidden" name="address_bill_order" value="{{$package_1->id}}" />
-            <input type="hidden" name="address_type_order" value="{{$check_address}}" />
-            <p style="font-size:14px; margin-top:10px;">
-              {{$package->name_ad}}, {{$package->phone_ad}}
-            </p>
-            <p style="font-size:14px; margin-top:10px;">
-              {{$package->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$package->zip_code}}
-            </p>
 
-            <p class="text-success" style="font-size:14px; margin-top:10px; ">
-              <b><i class="sl sl-icon-check "></i> ลูกค้าใช้ ที่อยู่นี้ ในการจัดส่ง <a href="{{url('/address_book')}}">แก้ไข</a> </b>
-            </p>
-            <hr />
-            <p style="font-size:14px; margin-top:10px;">
-              {{$package_1->name_ad}}, {{$package_1->phone_ad}}
-            </p>
-            <p style="font-size:14px; margin-top:10px;">
-              {{$package_1->address_ad}} {{$subdistricts1->DISTRICT_NAME}} {{$district1->AMPHUR_NAME}} {{$province1->PROVINCE_NAME}} {{$package_1->zip_code}}
-            </p>
 
-            <p class="text-success" style="font-size:14px; margin-top:10px; ">
-              <b><i class="sl sl-icon-check "></i> ลูกค้าใช้ ที่อยู่นี้ ในการออกใบกำกับภาษี <a href="{{url('/address_book')}}">แก้ไข</a> </b>
-            </p>
-            <hr />
-            @endif
+                <input type="hidden" name="address_type_order" value="{{$check_address}}" />
+                <div class="form-group ">
+                  <label>เลือกที่อยู่ในการจัดส่ง <span class="text-danger">*</span></label>
+                  <select name="address_shipping_order" class="form-control " >
+                    @if($get_my_add_3)
+                    @foreach($get_my_add_3 as $add)
+                    <option value="{{$add->id}}">{{$add->name_ad}}, {{$add->address_ad}} {{$add->subdistrictsz}} {{$add->districtz}} {{$add->provincez}} {{$add->zip_code}}</option>
+                    @endforeach
+                    @endif
+
+                  </select>
+
+                </div>
+
+                <hr />
+                <br />
+
+            </div>
 
 
 
@@ -250,8 +228,8 @@ Shipping | MASTER PHOTO NETWORK
                             <select id="text_re_user" onchange="getComboA(this)" name="text_re_user" class="form-control " >
 
                             <option value="1">1. ใช้ที่อยู่จัดส่ง</option>
-                            <option value="2">2. ใช้ที่อยู่ที่เคยออกใบกำกับภาษี</option>
-                            <option value="3">3. กำหนดเอง</option>
+
+                            <option value="3">2. กำหนดเอง</option>
                             </select>
 
                           </div>
@@ -635,7 +613,7 @@ Shipping | MASTER PHOTO NETWORK
 
               <label class="image-radio"  id="radio_get" style="font-size:15px;">
 
-                <input type="checkbox" name="c1" value="1" />
+                <input type="checkbox" name="c1" value="1" checked/>
 
                 <i class="icon-check-1 hidden"></i>
 

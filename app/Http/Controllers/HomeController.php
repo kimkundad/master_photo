@@ -834,22 +834,28 @@ class HomeController extends Controller
 
       if($user_addresses > 0){
 
+/*
+
+
 
         $package_check_add_3 = DB::table('user_addresses')
             ->where('user_id', Auth::user()->id)
             ->where('type_address', 3)
             ->count();
 
+
+
             if($package_check_add_3 > 0){
 
               $check_address = 3;
 
-              //ภ้าเจอ 3 ให้ใช้ 3ไป อันแรก ไว้ใน $package
+
 
               $package = DB::table('user_addresses')
                   ->where('user_id', Auth::user()->id)
                   ->where('type_address', 3)
                   ->first();
+
 
             }else{
 
@@ -886,7 +892,7 @@ class HomeController extends Controller
                               ->where('type_address', 1)
                               ->first();
 
-                              //  dd(get address); สำหรับ type 1
+
                                  $province = DB::table('province')
                                       ->select(
                                       'province.*'
@@ -912,9 +918,9 @@ class HomeController extends Controller
                                         ->where('DISTRICT_ID', $package->sub_district)
                                         ->first();
                                     $data['subdistricts1'] = $subdistricts;
-                              //  //  dd(get address); สำหรับ type 1
+
                                 $data['package_1'] = $package_1;
-                            //    dd($data['package_1']);
+
                         }
 
 
@@ -945,7 +951,7 @@ class HomeController extends Controller
 
 
 
-        //  dd($package);
+
 
 
         if($package != null){
@@ -1032,16 +1038,100 @@ class HomeController extends Controller
 
           $data['get_my_add'] = $get_my_add;
 
-        //  dd($get_my_add);
+
 
         }else{
           $data['get_my_add'] = null;
         }
 
 
-        $data['get_my_add_count'] = $get_my_add_count;
 
-      //  dd($get_my_add);
+
+        $get_my_add_3 = DB::table('user_addresses')
+            ->where('user_id', Auth::user()->id)
+            ->get();
+
+            foreach($get_my_add_3 as $add){
+
+
+                 $provincez = DB::table('province')
+                      ->select(
+                      'province.*'
+                      )
+                      ->where('PROVINCE_ID', $add->province)
+                      ->first();
+                  $add->provincez = $provincez->PROVINCE_NAME;
+
+                  $districtz = DB::table('amphur')
+                       ->select(
+                       'amphur.*'
+                       )
+                       ->where('AMPHUR_ID', $add->district)
+                       ->first();
+                   $add->districtz = $districtz->AMPHUR_NAME;
+
+
+                   $subdistrictsz = DB::table('district')
+                        ->select(
+                        'district.*'
+                        )
+                        ->where('DISTRICT_ID', $add->sub_district)
+                        ->first();
+                    $add->subdistrictsz = $subdistrictsz->DISTRICT_NAME;
+
+
+            }
+
+
+
+*/
+
+
+
+$get_my_add = DB::table('user_addresses')
+    ->where('user_id', Auth::user()->id)
+    ->get();
+
+    foreach($get_my_add as $add){
+
+      //  dd(get address);
+         $provincez = DB::table('province')
+              ->select(
+              'province.*'
+              )
+              ->where('PROVINCE_ID', $add->province)
+              ->first();
+          $add->provincez = $provincez->PROVINCE_NAME;
+
+          $districtz = DB::table('amphur')
+               ->select(
+               'amphur.*'
+               )
+               ->where('AMPHUR_ID', $add->district)
+               ->first();
+           $add->districtz = $districtz->AMPHUR_NAME;
+
+
+           $subdistrictsz = DB::table('district')
+                ->select(
+                'district.*'
+                )
+                ->where('DISTRICT_ID', $add->sub_district)
+                ->first();
+            $add->subdistrictsz = $subdistrictsz->DISTRICT_NAME;
+      //  //  dd(get address);
+
+    }
+
+  //  dd($check_address);
+
+$data['get_my_add'] = $get_my_add;
+
+
+
+      $data['get_my_add_3'] = $get_my_add;
+
+      $data['get_my_add_count'] = $user_addresses;
 
       $deliveries = DB::table('deliveries')
             ->where('id', '!=', 12)
@@ -1051,11 +1141,14 @@ class HomeController extends Controller
                   ->where('id', 12)
                   ->first();
 
+        $data['deli'] = $deliveries;
+
 
         $data['deli_set'] = $deli_set;
-        $data['deli'] = $deliveries;
+
         $data['package'] = $package;
-        $data['check_address'] = $check_address;
+    //    $data['check_address'] = $check_address;
+    $data['check_address'] = 5;
 
         return view('shipping_2', $data);
 
