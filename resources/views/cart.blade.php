@@ -136,6 +136,7 @@ height: 60px;
           <tbody >
 
             <?php
+              $p_1 = 0;
               $total_pay = 0;
               $total_img = 0;
               $s = 0;
@@ -155,13 +156,19 @@ height: 60px;
                  </div>
                  <span class="item_cart" style="color:#333; margin-top: 5px; font-size:13px;">{{$u['data']['pro_name']}}
                    <br />
-                   @if($option_set_pro)
-                   @foreach($option_set_pro as $k)
 
-                   {{$k->item_name}}<br />
 
-                   @endforeach
-                   @endif
+
+                   @for ($i = 1; $i < sizeof($option_set_pro); $i++)
+
+                      @for ($j = 0; $j < 3; $j++)
+                        {{$option_set_pro[$s][$j]->item_name}}<br />
+                      @endfor
+
+                   @endfor
+
+
+
                  </span>
                  </a>
                </td>

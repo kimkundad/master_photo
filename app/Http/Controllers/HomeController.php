@@ -2049,7 +2049,7 @@ $data['get_my_add'] = $get_my_add;
 
 
         $set_img = array();
-        $option_set_pro = [];
+
 
         foreach(Session::get('cart') as $u){
 
@@ -2065,12 +2065,14 @@ $data['get_my_add'] = $get_my_add;
               ->whereIn('id', $u['data'][0]['size_photo'])
               ->get();
 
-          $option_set_pro = $option_product;
+          $option_set_pro[] = $option_product;
           $set_img[] = $cat->pro_image;
         }
 
       //  dd($option_set_pro);
         $data['set_img'] = $set_img;
+
+
         $data['option_set_pro'] = $option_set_pro;
 
 
