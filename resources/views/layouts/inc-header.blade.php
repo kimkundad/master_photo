@@ -273,6 +273,19 @@
             @endforeach
             @endif
 
+
+            <li class="submenu">
+              <a href="javascript:void(0);" class="show-submenu">Language : {{ trans('message.lang') }}
+                <i class="icon-down-open-mini"></i>
+              </a>
+
+              <ul>
+                <li><a href="{{ URL::to('change/th') }}">Thai language</a></li>
+                <li><a href="{{ URL::to('change/en') }}">Englist language</a></li>
+              </ul>
+
+            </li>
+
             @if(Auth::guest())
 
             @else
