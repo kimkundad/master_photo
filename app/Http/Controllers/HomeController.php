@@ -2072,7 +2072,7 @@ $data['get_my_add'] = $get_my_add;
       //  dd($option_set_pro);
         $data['set_img'] = $set_img;
 
-        if($option_set_pro != null){
+        if(isset($option_set_pro)){
           $data['option_set_pro'] = $option_set_pro;
         }else{
           $data['option_set_pro'] = null;
