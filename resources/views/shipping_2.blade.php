@@ -156,7 +156,7 @@ Shipping | MASTER PHOTO NETWORK
         </div>
 
         <div class="form_title">
-          <h3><strong>1</strong>ที่อยู่ในการจัดส่ง/ใบกำกับภาษี {{$check_address}}</h3>
+          <h3><strong>1</strong>ที่อยู่ในการจัดส่ง/ใบกำกับภาษี</h3>
           <p style="font-size:14px; margin-top:10px;">
             ลูกค้าสามารถเข้าไปจัดการ ที่อยู่ในการจัดส่ง และ ใบกำกับภาษี <a href="{{url('/address_book')}}">แก้ไข</a>
           </p>
