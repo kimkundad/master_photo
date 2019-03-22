@@ -139,6 +139,11 @@ $('input').on('ifChanged', function () {
 		console.log(x);
     if (x.style.display === "none") {
         x.style.display = "block";
+
+				$('html, body').animate({
+	        scrollTop: $("#"+checkedValue).offset().top
+	    }, 500);
+
     } else {
         x.style.display = "none";
 
