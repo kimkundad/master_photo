@@ -42,163 +42,79 @@ figure:hover+span {
 
   <div class="container margin_60">
 
-    <div class=" margin_30 text-center">
-      <h2 class="major"><span style="background: #fff;">{{$sub_categories->sub_name}}</span></h2>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
 
+						@if(isset($cat_head))
+						@foreach($cat_head as $a)
+						<label  style="font-size:15px; margin-right: 25px;">
+							<input type="checkbox" class="messageCheckbox" name="c1" data-value="open_pro_{{$a->id}}" value="{{$a->id}}"
+								@if($a->id == $p_id)
+								checked
+								@endif
+							/>
+							<i class="icon-check-1 hidden"></i>
+							{{$a->sub_name}}
+						</label >
+						@endforeach
+						@endif
+				</div>
+			</div>
+
+		</div>
+
+
+
+		@if(isset($cat_head))
+		@foreach($cat_head as $b)
+
+		<div id="open_pro_{{$b->id}}"
+
+			@if($b->id != $p_id)
+			style="display:none"
+			@endif
+			>
+
+
+
+    <div class=" margin_30 ">
+
+			<h4 style="border-bottom: 2px solid #666; padding-bottom:10px;">{{$b->sub_name}}</h4>
     </div>
 
     <div class="row">
 
-  <!--    @if($product)
-      @foreach($product as $u)
+			@if(isset($b->option))
+			@foreach($b->option as $u)
 
       <div class="col-md-3 col-sm-6 text-center">
 
         <div class="hover01">
-          <a href="{{url('product_1')}}">
+          <a href="{{url('themes/'.$u->id)}}">
             <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
+              <img src="{{url('assets/image/product/'.$u->pro_image)}}" alt="{{$u->pro_name}}" class="img-responsive">
             </figure>
           </a>
         </div>
-        <h4>FLAT CARDS</h4>
+        <h4>{{$u->pro_name}}</h4>
         <p>
-          70% off 5x7 Stationery Flat Cards.
+          {{$u->pro_title}}
         </p>
       </div>
 
-      @endforeach
-      @endif -->
-
-
-
-			<div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HPhotobooks.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/Hframes.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/Hframes.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HPhotobooks.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
+			@endforeach
+			@endif
 
 
 
 
     </div>
 
+		</div>
+
+		@endforeach
+		@endif
 
 
 
@@ -212,6 +128,28 @@ figure:hover+span {
 @endsection
 
 @section('scripts')
+
+
+<script>
+
+$('input').on('ifChanged', function () {
+	var checkedValue = $(this).attr('data-value');
+	console.log(checkedValue);
+		var x = document.getElementById(checkedValue);
+		console.log(x);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+
+    }
+
+
+});
+
+
+
+</script>
 
 
 

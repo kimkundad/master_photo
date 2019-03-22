@@ -58,12 +58,12 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										</a>
 									</li>
 
-            <!--      <li {{ (Request::is('admin/photo*') ? 'class=nav-expanded' : '') }} >
-										<a href="{{url('admin/photo/')}}"  >
-											<i class="fa fa-cube" aria-hidden="true"></i>
-											<span>Photo Print</span>
+                 <li {{ (Request::is('admin/themes*') ? 'class=nav-expanded' : '') }} >
+										<a href="{{url('admin/themes/')}}"  >
+											<i class="fa fa-asterisk" aria-hidden="true"></i>
+											<span>Themes</span>
 										</a>
-									</li> -->
+									</li>
 
                   <li {{ (Request::is('admin/option_product*') ? 'class=nav-expanded' : '') }} >
 										<a href="{{url('admin/option_product/')}}"  >

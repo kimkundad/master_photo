@@ -46,7 +46,7 @@ figure:hover+span {
   <div class="container margin_60">
 
     <div class=" margin_30 text-center">
-      <h2 class="major"><span style="background: #fff;">DIGITAL OFFSET PRINTS</span></h2>
+      <h2 class="major"><span style="background: #fff;">{{$product->pro_name}}</span></h2>
 
     </div>
 
@@ -59,44 +59,29 @@ figure:hover+span {
 
 
 
-        <div class="slider-pro" id="my-slider" style="margin-top: 0px !important;">
-          <div class="sp-slides">
+          <div class="slider-pro" id="my-slider" style="margin-top: 0px !important;">
+            <div class="sp-slides">
 
-            <div class="sp-slide">
-              <img class="sp-image" src="{{url('master/assets/images/bnk48/ac7a07dda4cc55010519e1983bfaa84f.jpg')}}" data-src="{{url('master/assets/images/bnk48/ac7a07dda4cc55010519e1983bfaa84f.jpg')}}" data-src="{{url('master/assets/images/bnk48/ac7a07dda4cc55010519e1983bfaa84f.jpg')}}"/>
+              @if($img_all)
+              @foreach($img_all as $img_u)
+
+              <div class="sp-slide">
+                <img class="sp-image" src="{{url('assets/image/gallery/'.$img_u->image)}}" data-src="{{url('assets/image/gallery/'.$img_u->image)}}" data-src="{{url('assets/image/gallery/'.$img_u->image)}}"/>
+              </div>
+
+              @endforeach
+              @endif
+
             </div>
 
-            <div class="sp-slide">
-                <img class="sp-image" src="{{url('master/assets/images/bnk48/b1c501d0027efe27ca3eb2bbce1b308e.jpg')}}" data-src="{{url('master/assets/images/bnk48/b1c501d0027efe27ca3eb2bbce1b308e.jpg')}}" data-retina="{{url('master/assets/images/bnk48/b1c501d0027efe27ca3eb2bbce1b308e.jpg')}}"/>
+            <div class="sp-thumbnails">
+              @if($img_all)
+              @foreach($img_all as $img_u)
+              <img class="sp-thumbnail" src="{{url('assets/image/gallery/'.$img_u->image)}}" data-src="{{url('assets/image/gallery/'.$img_u->image)}}" data-retina="{{url('assets/image/gallery/'.$img_u->image)}}"/>
+              @endforeach
+              @endif
             </div>
-
-            <div class="sp-slide">
-              <img class="sp-image" src="{{url('master/assets/images/bnk48/ba11a6d6bb915d3ec72116f4b9b4eeb4.jpg')}}" data-src="{{url('master/assets/images/bnk48/ba11a6d6bb915d3ec72116f4b9b4eeb4.jpg')}}" data-retina="{{url('master/assets/images/bnk48/ba11a6d6bb915d3ec72116f4b9b4eeb4.jpg')}}"/>
-            </div>
-
-            <div class="sp-slide">
-              <img class="sp-image" src="{{url('master/assets/images/bnk48/cfce0b522ac116081d1c98288f4c15f9.jpg')}}" data-src="{{url('master/assets/images/bnk48/cfce0b522ac116081d1c98288f4c15f9.jpg')}}" data-retina="{{url('master/assets/images/bnk48/cfce0b522ac116081d1c98288f4c15f9.jpg')}}"/>
-            </div>
-
-            <div class="sp-slide">
-              <img class="sp-image" src="{{url('master/assets/images/bnk48/d88444d6206b4305377486120d9c0774.jpg')}}" data-src="{{url('master/assets/images/bnk48/d88444d6206b4305377486120d9c0774.jpg')}}" data-retina="{{url('master/assets/images/bnk48/d88444d6206b4305377486120d9c0774.jpg')}}"/>
-            </div>
-
-            <div class="sp-slide">
-              <img class="sp-image" src="{{url('master/assets/images/bnk48/da176da12cd7329faa530d969a66cccf.jpg')}}" data-src="{{url('master/assets/images/bnk48/da176da12cd7329faa530d969a66cccf.jpg')}}" data-retina="{{url('master/assets/images/bnk48/da176da12cd7329faa530d969a66cccf.jpg')}}"/>
-            </div>
-
           </div>
-
-          <div class="sp-thumbnails">
-            <img class="sp-thumbnail" src="{{url('master/assets/images/bnk48/ac7a07dda4cc55010519e1983bfaa84f.jpg')}}" data-src="{{url('master/assets/images/bnk48/ac7a07dda4cc55010519e1983bfaa84f.jpg')}}" data-retina="{{url('master/assets/images/bnk48/ac7a07dda4cc55010519e1983bfaa84f.jpg')}}"/>
-            <img class="sp-thumbnail" src="{{url('master/assets/images/bnk48/b1c501d0027efe27ca3eb2bbce1b308e.jpg')}}" data-src="{{url('master/assets/images/bnk48/b1c501d0027efe27ca3eb2bbce1b308e.jpg')}}" data-retina="{{url('master/assets/images/bnk48/b1c501d0027efe27ca3eb2bbce1b308e.jpg')}}"/>
-            <img class="sp-thumbnail" src="{{url('master/assets/images/bnk48/ba11a6d6bb915d3ec72116f4b9b4eeb4.jpg')}}" data-src="{{url('master/assets/images/bnk48/ba11a6d6bb915d3ec72116f4b9b4eeb4.jpg')}}" data-retina="{{url('master/assets/images/bnk48/ba11a6d6bb915d3ec72116f4b9b4eeb4.jpg')}}"/>
-            <img class="sp-thumbnail" src="{{url('master/assets/images/bnk48/cfce0b522ac116081d1c98288f4c15f9.jpg')}}" data-src="{{url('master/assets/images/bnk48/cfce0b522ac116081d1c98288f4c15f9.jpg')}}" data-retina="{{url('master/assets/images/bnk48/cfce0b522ac116081d1c98288f4c15f9.jpg')}}"/>
-            <img class="sp-thumbnail" src="{{url('master/assets/images/bnk48/d88444d6206b4305377486120d9c0774.jpg')}}" data-src="{{url('master/assets/images/bnk48/d88444d6206b4305377486120d9c0774.jpg')}}" data-retina="{{url('master/assets/images/bnk48/d88444d6206b4305377486120d9c0774.jpg')}}"/>
-            <img class="sp-thumbnail" src="{{url('master/assets/images/bnk48/da176da12cd7329faa530d969a66cccf.jpg')}}" data-src="{{url('master/assets/images/bnk48/da176da12cd7329faa530d969a66cccf.jpg')}}" data-retina="{{url('master/assets/images/bnk48/da176da12cd7329faa530d969a66cccf.jpg')}}"/>
-          </div>
-        </div>
         <br />
           </div>
 
@@ -106,8 +91,8 @@ figure:hover+span {
 
       <div class="col-md-6 col-sm-6 ">
         <div class="single-ofset">
-          <h3>OFFSET PRINT</h3>
-          <p>A frame adds instant polish to any photo. Our beautiful Framed Prints come with an easel backing for easy tabletop display and a wall mount, if you’d prefer to hang your special photo. Makes a great gift!</p>
+          <h3>{{$product->pro_name}}</h3>
+          <p>{{$product->pro_title}}</p>
              <hr />
 
              <style>
@@ -352,12 +337,13 @@ figure:hover+span {
                           </td>
 
                         </tr>
+                        <!--
                         <tr class="total">
 
                           <td >
-                          Total Price  <span>$154</span>
+                          Total Price  <span>{{	$product->pro_price}}</span>
                           </td>
-                        </tr>
+                        </tr> -->
                       </tbody>
                     </table>
 

@@ -401,7 +401,60 @@ class HomeController extends Controller
       return view('product_1');
     }
 
+
+    public function product_get($id){
+
+      $get_product = DB::table('products')->select(
+        'products.*'
+        )
+        ->where('id', $id)
+        ->first();
+
+        $img_all = DB::table('galleries')->select(
+          'galleries.*'
+          )
+          ->where('pro_id', $id)
+          ->get();
+
+        $data['img_all'] = $img_all;
+        $data['product'] = $get_product;
+      return view('product_1', $data);
+    }
+
+
+    public function themes_pro($id){
+
+      $get_product = DB::table('products')->select(
+        'products.*'
+        )
+        ->where('id', $id)
+        ->first();
+
+        $sub_categories = DB::table('sub_categories')->select(
+          'sub_categories.*'
+          )
+          ->where('id', $get_product->pro_category)
+          ->first();
+
+      $product = DB::table('themepros')->select(
+        'themepros.*'
+        )
+        ->where('pro_id', $id)
+        ->paginate(16);
+
+        $data['sub_categories'] = $sub_categories;
+        $data['product'] = $product;
+        $data['product_id'] = $id;
+        $data['get_product'] = $get_product;
+
+      //  dd($product);
+
+      return view('themes', $data);
+    }
+
     public function category($id){
+
+
 
       $sub_categories = DB::table('sub_categories')->select(
         'sub_categories.*'
@@ -409,12 +462,39 @@ class HomeController extends Controller
         ->where('id', $id)
         ->first();
 
+
+        $cat_head = DB::table('sub_categories')->select(
+          'sub_categories.*'
+          )
+          ->where('sub_category', $sub_categories->sub_category)
+          ->get();
+        //  dd($cat_head);
+
+          $get_product_ar = [];
+
+          foreach($cat_head as $b){
+
+            $get_product = DB::table('products')->select(
+              'products.*'
+              )
+              ->where('pro_category', $b->id)
+              ->paginate(12);
+
+            //  $get_product_ar[] = $get_product;
+              $b->option = $get_product;
+
+          }
+
+        //  dd($cat_head);
+
       $product = DB::table('products')->select(
         'products.*'
         )
         ->where('pro_category', $id)
         ->paginate(16);
 
+        $data['cat_head'] = $cat_head;
+        $data['p_id'] = $id;
         $data['product'] = $product;
         $data['sub_categories'] = $sub_categories;
 
