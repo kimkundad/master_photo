@@ -104,39 +104,42 @@ figure:hover+span {
              }
              </style>
 
-             <div id="step1" style="font-size: 14px; font-weight: 600;">
+             @if($option_product)
+             @foreach($option_product as $item)
+             <div id="step{{$j}}" style="font-size: 14px; font-weight: 600;">
 
-             </div>
+             </div {{$j++}}>
+             @endforeach
+             @endif
 
-             <div id="step2" style="font-size: 14px; font-weight: 600;">
 
-             </div>
-
-             <div id="step3" style="font-size: 14px; font-weight: 600;">
-
-             </div>
-
-             <div id="step4" style="font-size: 14px; font-weight: 600;">
-
-             </div>
 
 
              <form role="form" action="" name="myForm" method="post" class="f1">
 
 
-               <div class="f1-steps">
+               <div class="f1-steps" >
                  <div class="f1-progress">
                      <div class="f1-progress-line" data-now-value="13.66" data-number-of-steps="4" style="width: 13.66%;"></div>
                  </div>
-                 <div class="f1-step active">
-                   <div class="f1-step-icon">1</div>
-                   <p>SIZE</p>
-                 </div>
-                 <div class="f1-step">
+
+                 @if($option_product)
+                 @foreach($option_product as $item)
+
+                 <div class="f1-step " id="step_no_{{$s}}">
+                   <div class="f1-step-icon" >{{$s}}</div>
+                   <p>{{$item->options_detail->option_name}}</p>
+                 </div {{$s++}}>
+
+                 @endforeach
+                 @endif
+
+              <!--   <div class="f1-step active">
                    <div class="f1-step-icon">2</div>
                    <p>ORIENTATION</p>
                  </div>
-                   <div class="f1-step">
+
+                  <div class="f1-step">
                    <div class="f1-step-icon">3</div>
                    <p>FRAMES</p>
                  </div>
@@ -144,57 +147,56 @@ figure:hover+span {
                  <div class="f1-step">
                  <div class="f1-step-icon">4</div>
                  <p>Finish</p>
+               </div> -->
+
                </div>
-               </div>
 
 
-
+               @if($option_product)
+               @foreach($option_product as $item)
                <fieldset class="masonry">
 
 
-
+                 @foreach($item->options_detail->opt as $item_2)
                      <div class="form-group">
 
                         <label class="step1">
 
-                            <input type="radio" id="f1-last-name" name="step1" value="4x6">
+                            <input type="radio" id="f1-last-name" data-value="{{$k}}" name="step{{$k}}" value="{{$item_2->item_name}}">
                             <ins class="iCheck-helper" ></ins>
 
-                          Size 4x6  <span class="jet-span">$24.99</span>
+                          {{$item_2->item_name}}
+                          @if($item_2->item_price != 0)
+                          <span class="jet-span">฿ {{number_format($item_2->item_price,2)}}</span>
+                          @endif
                         </label>
 
                      </div>
+                 @endforeach
 
-                       <div class="form-group">
 
-                          <label class="item">
 
-                              <input type="radio" id="f1-last-name" name="step1" value="5x7">
-                              <ins class="iCheck-helper" ></ins>
-
-                            Size 5x7  <span class="jet-span">$24.99</span>
-                          </label>
-
-                       </div>
-                       <div class="form-group">
-
-                          <label class="item">
-
-                              <input type="radio" id="f1-last-name" name="step1" value="8x10">
-                              <ins class="iCheck-helper" ></ins>
-
-                            Size 8x10  <span class="jet-span">$24.99</span>
-                          </label>
-
-                       </div>
 
 
                        <div class="f1-buttons">
-                           <button type="button" class="btn btn-next">Next</button>
-                       </div>
-                   </fieldset>
+                            @if($k != 1)
+                           <button type="button" class="btn btn-previous">Previous</button>
+                            @endif
 
-                   <fieldset>
+                            @if($option_count != $k)
+                           <button type="button" class="btn btn-next">Next</button>
+                           @endif
+                       </div>
+                       <div>
+                         <p style="padding-top:10px;">
+                           {{$item->options_detail->option_detail}}
+                         </p>
+                       </div>
+                   </fieldset {{$k++}}>
+                   @endforeach
+                   @endif
+
+              <!--     <fieldset>
 
                      <div class="form-group">
 
@@ -326,7 +328,7 @@ figure:hover+span {
                      <br />
 
 
-                   </fieldset>
+                   </fieldset>  -->
 
 
                    <table class="table table_summary" style="margin-top:20px;">
@@ -406,6 +408,28 @@ figure:hover+span {
 
 <script type="text/javascript">
 
+
+
+@if($option_product)
+@foreach($option_product as $item)
+
+$('input[name=step{{$h}}]').on('ifChecked', function(event){
+  document.getElementById('step{{$h}}').innerHTML = "{{$item->options_detail->option_name}} : "+$(this).val();
+  console.log($(this).val());
+
+  var element = document.getElementById("step_no_{{$h}}");
+  element.classList.add("active");
+
+ });
+
+{{$h++}}
+@endforeach
+@endif
+
+/*
+
+step_no_{{$s}}
+
 $('input[name=step1]').on('ifChecked', function(event){
   document.getElementById('step1').innerHTML = "Size : "+$(this).val();
   console.log($(this).val());
@@ -424,7 +448,7 @@ $('input[name=step1]').on('ifChecked', function(event){
    $('input[name=step4]').on('ifChecked', function(event){
      document.getElementById('step4').innerHTML = "Wood : "+$(this).val();
      console.log($(this).val());
-    });
+   }); */
 
 </script>
 

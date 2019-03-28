@@ -67,6 +67,7 @@ class OptionProController extends Controller
           $package = new option_product();
           $package->option_name = $request['option_name'];
           $package->option_type = $request['option_type'];
+          $package->option_detail = $request['option_detail'];
           $package->save();
 
         }else{
@@ -83,6 +84,7 @@ class OptionProController extends Controller
           $package->option_name = $request['option_name'];
           $package->option_title = $input['imagename'];
           $package->option_type = $request['option_type'];
+          $package->option_detail = $request['option_detail'];
           $package->save();
 
         }
@@ -153,6 +155,7 @@ class OptionProController extends Controller
           $package = option_product::find($id);
           $package->option_name = $request['option_name'];
           $package->option_type = $request['option_type'];
+          $package->option_detail = $request['option_detail'];
           $package->save();
 
         }else{
@@ -169,6 +172,7 @@ class OptionProController extends Controller
           $package->option_name = $request['option_name'];
           $package->option_title = $input['imagename'];
           $package->option_type = $request['option_type'];
+          $package->option_detail = $request['option_detail'];
           $package->save();
 
         }

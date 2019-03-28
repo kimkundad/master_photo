@@ -57,6 +57,11 @@ Route::get('/cart', 'HomeController@cart')->name('cart');
 Route::post('/upload_image', 'HomeController@upload_image')->name('upload_image');
 Route::post('/images_delete', 'HomeController@images_delete')->name('images_delete');
 
+Route::get('/new_arrivals', 'HomeController@new_arrivals')->name('new_arrivals');
+
+Route::get('/what_hot', 'HomeController@what_hot')->name('what_hot');
+
+Route::get('/what_new', 'HomeController@what_new')->name('what_new');
 
 Route::post('update_product_option', 'HomeController@update_product_option');
 

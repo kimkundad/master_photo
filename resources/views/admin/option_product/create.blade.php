@@ -74,7 +74,14 @@
           												</div>
 
                                   <div class="form-group">
-                                    <label class="col-md-3 control-label" for="exampleInputEmail1">รูป คำอธิบาย*</label>
+          													<label class="col-md-3 control-label" for="profileFirstName">คำอธิบายข้อความ</label>
+          													<div class="col-md-8">
+          														<textarea class="form-control" name="option_detail" rows="6">{{ old('option_detail') }}</textarea>
+          														</div>
+          												</div>
+
+                                  <div class="form-group">
+                                    <label class="col-md-3 control-label" for="exampleInputEmail1">รูป คำอธิบาย</label>
                                     <div class="col-md-8">
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
                                               <div class="input-append">

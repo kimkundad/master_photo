@@ -98,6 +98,8 @@
                                         <option value="3">WHAT'S HOT</option>
                                         <option value="4">WHAT'S NEW</option>
                                         <option value="5">PROMOTION</option>
+                                        <option value="6">NEW ARRIVALS! (บนซ้าย)</option>
+                                        <option value="7">NEW ARRIVALS! (บนขวา)</option>
 
   								                    </select>
           								            </select>

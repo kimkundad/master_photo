@@ -191,99 +191,64 @@ figure:hover+span {
 
     <div class="row">
 
+			@if(isset($arrivals_t_l))
       <div class="col-md-6 col-sm-6 text-center">
         <div class="hover01">
-            <a href="{{url('product_1')}}">
+            <a href="{{url('themes/'.$arrivals_t_l->id)}}">
               <figure>
-                <img src="{{url('master/assets/images/nn1.jpg')}}" alt="Pic" class="img-responsive">
+                <img src="{{url('assets/image/product/'.$arrivals_t_l->pro_image)}}" alt="{{$arrivals_t_l->pro_name}}" class="img-responsive">
               </figure>
             </a>
         </div>
-		<h4>FLAT CARDS</h4>
-    <p>70% off 5x7 Stationery Flat Cards.</p>
+				<h4>{{$arrivals_t_l->pro_name}}</h4>
+				<p>
+					{{str_limit($arrivals_t_l->pro_title, 38, '..')}}
+				</p>
       </div>
+			@endif
 
 <!-- NEW ARRIVALS! 2 -->
 
 
-      <div class="col-md-6 col-sm-6 text-center">
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/nn2.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>70% off 5x7 Stationery Flat Cards.</p>
-      </div>
+@if(isset($arrivals_t_r))
+<div class="col-md-6 col-sm-6 text-center">
+	<div class="hover01">
+			<a href="{{url('themes/'.$arrivals_t_r->id)}}">
+				<figure>
+					<img src="{{url('assets/image/product/'.$arrivals_t_r->pro_image)}}" alt="{{$arrivals_t_r->pro_name}}" class="img-responsive">
+				</figure>
+			</a>
+	</div>
+	<h4>{{$arrivals_t_r->pro_name}}</h4>
+	<p>
+		{{str_limit($arrivals_t_r->pro_title, 38, '..')}}
+	</p>
+</div>
+@endif
 
 
-			<div class="col-md-4 col-sm-6 text-center">
 
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
 
-      <div class="col-md-4 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HPhotobooks.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-4 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/Hframes.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-	<!--		@if($arrivals)
+			@if($arrivals)
            @foreach($arrivals as $u)
 
       <div class="col-md-4 col-sm-6 text-center">
 
         <div class="hover01">
-          <a href="#">
+          <a href="{{url('themes/'.$u->id)}}">
             <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
+              <img src="{{url('assets/image/product/'.$u->pro_image)}}" alt="{{$u->pro_name}}" class="img-responsive">
             </figure>
           </a>
         </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
+				<h4>{{$u->pro_name}}</h4>
+				<p>
+					{{str_limit($u->pro_title, 38, '..')}}
+				</p>
       </div>
 
 			@endforeach
-     @endif -->
+     @endif
 
 
 
@@ -292,7 +257,7 @@ figure:hover+span {
 
 
     <p class="text-center add_bottom_30 margin_60">
-      <a href="{{url('category/13')}}" class="btn_1">All Product   </a>
+      <a href="{{url('new_arrivals')}}" class="btn_1">All Product   </a>
     </p>
 
 
@@ -305,88 +270,30 @@ figure:hover+span {
 
     <div class="row">
 
-		<!--	@if($hot)
+		@if($hot)
            @foreach($hot as $u)
 
       <div class="col-md-3 col-sm-6 text-center">
 
-        <div class="hover01">
-          <a href="#">
+				<div class="hover01">
+          <a href="{{url('themes/'.$u->id)}}">
             <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
+              <img src="{{url('assets/image/product/'.$u->pro_image)}}" alt="{{$u->pro_name}}" class="img-responsive">
             </figure>
           </a>
         </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
+				<h4>{{$u->pro_name}}</h4>
+				<p>
+					{{str_limit($u->pro_title, 38, '..')}}
+				</p>
       </div>
 
 			@endforeach
-		 @endif -->
+		 @endif
 
 
 
-		 <div class="col-md-3 col-sm-6 text-center">
 
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HPhotobooks.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/Hframes.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
 
 
     </div>
@@ -395,7 +302,7 @@ figure:hover+span {
 
 
     <p class="text-center add_bottom_30 margin_60">
-      <a href="{{url('category/13')}}" class="btn_1">All Product  </a>
+      <a href="{{url('what_hot')}}" class="btn_1">All Product  </a>
     </p>
 
 
@@ -411,85 +318,27 @@ figure:hover+span {
     <div class="row">
 
 
-	<!--		@if($hot_new)
+			@if($hot_new)
            @foreach($hot_new as $u)
       <div class="col-md-4 col-sm-6 text-center">
 
-        <div class="hover01">
-          <a href="#">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
+			<div class="hover01">
+				<a href="{{url('themes/'.$u->id)}}">
+					<figure>
+						<img src="{{url('assets/image/product/'.$u->pro_image)}}" alt="{{$u->pro_name}}" class="img-responsive">
+					</figure>
+				</a>
+			</div>
+			<h4>{{$u->pro_name}}</h4>
+			<p>
+				{{str_limit($u->pro_title, 38, '..')}}
+			</p>
       </div>
 			@endforeach
-		 @endif -->
+		 @endif
 
 
-		 <div class="col-md-3 col-sm-6 text-center">
 
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HPhotobooks.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/Hframes.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
-
-      <div class="col-md-3 col-sm-6 text-center">
-
-        <div class="hover01">
-          <a href="{{url('product_1')}}">
-            <figure>
-              <img src="{{url('master/assets/images/HGifts.jpg')}}" alt="Pic" class="img-responsive">
-            </figure>
-          </a>
-        </div>
-        <h4>FLAT CARDS</h4>
-        <p>
-          70% off 5x7 Stationery Flat Cards.
-        </p>
-      </div>
 
 
 
@@ -502,7 +351,7 @@ figure:hover+span {
 
 
     <p class="text-center add_bottom_30 margin_60">
-      <a href="{{url('category/13')}}" class="btn_1">All Product  </a>
+      <a href="{{url('what_new')}}" class="btn_1">All Product  </a>
     </p>
 
 

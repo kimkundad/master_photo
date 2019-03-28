@@ -56,6 +56,23 @@ class HomeController extends Controller
         ->get();
 
 
+        $arrivals_t_l = DB::table('products')->select(
+          'products.*'
+          )
+          ->where('pro_status_show', 6)
+          ->first();
+
+          $arrivals_t_r = DB::table('products')->select(
+            'products.*'
+            )
+            ->where('pro_status_show', 7)
+            ->first();
+
+
+            $data['arrivals_t_l'] = $arrivals_t_l;
+            $data['arrivals_t_r'] = $arrivals_t_r;
+
+
         $hot = DB::table('products')->select(
           'products.*'
           )
@@ -359,6 +376,54 @@ class HomeController extends Controller
         return view('welcome', $data);
     }
 
+
+
+    public function new_arrivals(){
+
+
+      $arrivals = DB::table('products')->select(
+        'products.*'
+        )
+        ->where('pro_status_show', 2)
+        ->get();
+
+        $data['arrivals'] = $arrivals;
+
+
+        return view('new_arrivals', $data);
+
+    }
+
+    public function what_hot(){
+
+      $arrivals = DB::table('products')->select(
+        'products.*'
+        )
+        ->where('pro_status_show', 3)
+        ->get();
+
+        $data['arrivals'] = $arrivals;
+
+
+        return view('what_hot', $data);
+
+    }
+
+    public function what_new(){
+
+      $arrivals = DB::table('products')->select(
+        'products.*'
+        )
+        ->where('pro_status_show', 4)
+        ->get();
+
+        $data['arrivals'] = $arrivals;
+
+
+        return view('what_new', $data);
+
+    }
+
     public function about(){
       return view('about');
     }
@@ -410,13 +475,65 @@ class HomeController extends Controller
         ->where('id', $id)
         ->first();
 
+        $option_count = DB::table('product_items')->select(
+            'product_items.*'
+            )
+            ->where('product_set_id', $id)
+            ->count();
+
+
+        $option_product = DB::table('product_items')->select(
+            'product_items.*'
+            )
+            ->where('product_set_id', $id)
+            ->get();
+
+            foreach ($option_product as $objd) {
+
+        $options = DB::table('option_products')
+            ->where('id', $objd->option_set_id)
+            ->first();
+
+
+
+
+          $option_data_item = DB::table('option_items')->select(
+              'option_items.*'
+              )
+              ->where('item_option_id', $options->id)
+              ->get();
+
+              $options->opt = $option_data_item;
+
+
+
+          $objd->options_detail = $options;
+
+
+      }
+
         $img_all = DB::table('galleries')->select(
           'galleries.*'
           )
           ->where('pro_id', $id)
           ->get();
 
+        //  dd($option_count);
+        $data['option_product'] = $option_product;
+        $data['option_count'] = $option_count;
         $data['img_all'] = $img_all;
+        $s = 1;
+        $data['s'] = $s;
+
+        $k = 1;
+        $data['k'] = $k;
+
+        $j = 1;
+        $data['j'] = $j;
+
+        $h = 1;
+        $data['h'] = $h;
+
         $data['product'] = $get_product;
       return view('product_1', $data);
     }

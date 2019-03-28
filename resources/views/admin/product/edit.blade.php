@@ -125,6 +125,15 @@
                                         @endif
                                         >PROMOTION</option>
 
+                                        <option value="6"
+                                        @if( $objs->pro_status_show == 6)
+                                        selected='selected'
+                                        @endif>NEW ARRIVALS! (บนซ้าย)</option>
+                                        <option value="7"
+                                        @if( $objs->pro_status_show == 7)
+                                        selected='selected'
+                                        @endif>NEW ARRIVALS! (บนขวา)</option>
+
   								                    </select>
           								            </select>
           													</div>

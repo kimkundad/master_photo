@@ -74,6 +74,14 @@
           												</div>
 
 
+                                  <div class="form-group">
+          													<label class="col-md-3 control-label" for="profileFirstName">คำอธิบายข้อความ</label>
+          													<div class="col-md-8">
+          														<textarea class="form-control" name="option_detail" rows="6">{{ $objs->option_detail }}</textarea>
+          														</div>
+          												</div>
+
+
                                   @if($objs->option_title != null)
                                   <div class="form-group">
           													<label class="col-md-3 control-label" for="profileFirstName">ชื่อ option*</label>
@@ -321,7 +329,7 @@
                                   <div class="form-group">
           													<label class="col-md-3 control-label" for="profileFirstName">item price*</label>
           													<div class="col-md-8">
-          														<input type="text" class="form-control" name="item_price" value="{{ old('item_price')}}">
+          														<input type="text" class="form-control" value="0" name="item_price" value="{{ old('item_price')}}">
           														</div>
           												</div>
 
