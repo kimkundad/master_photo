@@ -159,13 +159,13 @@ height: 60px;
 
 
 
-                   @for ($i = 1; $i < sizeof($option_set_pro); $i++)
+
 
                       @for ($j = 0; $j < 3; $j++)
                         {{$option_set_pro[$s][$j]->item_name}}<br />
                       @endfor
 
-                   @endfor
+
 
 
 

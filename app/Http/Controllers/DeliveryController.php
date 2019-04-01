@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\delivery;
+use App\deliverop;
 use App\order;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
@@ -47,6 +48,23 @@ return view('admin.delivery.index', $data);
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function add_deli_item(Request $request){
+      $this->validate($request, [
+       'name' => 'required',
+       'de_price' => 'required'
+      ]);
+
+      $package = new deliverop();
+      $package->deli_name = $request['name'];
+      $package->deli_id = $request['de_status'];
+      $package->deli_price = $request['de_price'];
+      $package->save();
+      return redirect(url('admin/delivery/'.$request['de_status'].'/edit'))->with('edit_item_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
+
+
+    }
+
     public function store(Request $request)
     {
         //
@@ -83,6 +101,14 @@ return view('admin.delivery.index', $data);
      */
     public function edit($id)
     {
+
+      $cat = DB::table('deliverops')
+            ->where('deli_id', $id)
+            ->get();
+
+            $data['item'] = $cat;
+
+
         //
         $obj = delivery::find($id);
         $data['url'] = url('admin/delivery/'.$id);
@@ -115,12 +141,36 @@ return view('admin.delivery.index', $data);
       return redirect(url('admin/delivery/'))->with('edit_success','แก้ไขหมวดหมู่ ');
     }
 
+    public function edit_deli_item(Request $request){
+
+      $this->validate($request, [
+       'name' => 'required',
+       'de_price' => 'required'
+      ]);
+
+      $package = deliverop::find($request['de_status']);
+      $package->deli_name = $request['name'];
+      $package->deli_price = $request['de_price'];
+      $package->save();
+
+    return redirect(url('admin/delivery/'.$request['de_status2'].'/edit'))->with('edit_item_success2','เพิ่ม เสร็จเรียบร้อยแล้ว');
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function del_deli_item(Request $request){
+
+      $obj = deliverop::find($request['de_status']);
+      $obj->delete();
+      return redirect(url('admin/delivery/'.$request['de_status2'].'/edit'))->with('edit_item_success2','เพิ่ม เสร็จเรียบร้อยแล้ว');
+    }
+
     public function destroy($id)
     {
         //

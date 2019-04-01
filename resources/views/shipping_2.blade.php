@@ -453,29 +453,13 @@ Shipping | MASTER PHOTO NETWORK
                        <label>กรุณาเลือกรถ บขส.</label>
 
 
-                      <select class="form-control" name="bus_shipping" id="size_photo1" onchange="getComboA11(this)">
-                        <option value="เลือกเขตพื้นที่" selected="selected">เลือกรถ บขส.</option>
-                        <option value="999" data-value="210">999 ค่าจัดส่ง 210 บาท</option>
-                        <option value="กิจการทัวร์" data-value="250">กิจการทัวร์  ค่าจัดส่ง  250 บาท </option>
-                        <option value="โชครุ่งทวี" data-value="210">โชครุ่งทวี  ค่าจัดส่ง 210 บาท</option>
-
-                        <option value="นครชัยแอร์" data-value="150">นครชัยแอร์  ค่าจัดส่ง 150 บาท</option>
-              		  <option value="เพชรประเสริฐ" data-value="150">เพชรประเสริฐ  ค่าจัดส่ง 150 บาท</option>
-                        <option value="สมบัติทัวร์" data-value="210">สมบัติทัวร์  ค่าจัดส่ง 210 บาท</option>
-                        <option value="สยามเฟิร์ส" data-value="100">สยามเฟิร์ส  ค่าจัดส่ง 100 บาท</option>
-                        <option value="สหพันธ์ร้อยเอ็ด" data-value="210">สหพันธ์ร้อยเอ็ด  ค่าจัดส่ง 210 บาท</option>
-                        <option value="แสงประทีป" data-value="210">แสงประทีป  ค่าจัดส่ง 210 บาท</option>
-                        <option value="แอร์เมืองเลย" data-value="210">แอร์เมืองเลย  ค่าจัดส่ง 210 บาท</option>
-
-
-              	      <option value="SP สุภาภัณฑ์" data-value="0">SP สุภาภัณฑ์   ค่าจัดส่ง เก็บปลายทาง บาท</option>
-              	      <option value="SD เอส.ดี." data-value="0">SD เอส.ดี.  ค่าจัดส่ง เก็บปลายทาง บาท</option>
-              	      <option value="SDS" data-value="0">SDS  ค่าจัดส่ง เก็บปลายทาง บาท</option>
-              	      <option value="PL พีแอล" data-value="0">PL พีแอล  ค่าจัดส่ง เก็บปลายทาง บาท</option>
-                        <option value="KPL ทรานสปอร์ต" data-value="0">KPL ทรานสปอร์ต  ค่าจัดส่ง เก็บปลายทาง บาท</option>
-              	      <option value="SPEED" data-value="0">SPEED  ค่าจัดส่ง เก็บปลายทาง บาท</option>
-              	      <option value="NTC เอ็นทีซี" data-value="0">NTC เอ็นทีซี  ค่าจัดส่ง เก็บปลายทาง บาท</option>
-              	      <option value="นิ่มซี่เส็ง" data-value="0">นิ่มซี่เส็ง  ค่าจัดส่ง เก็บปลายทาง บาท</option>
+                      <select class="form-control" name="bus_shipping" id="get_bsk" onchange="getComboA11(this)">
+                        <option value="0" data-value="0">-- กรุณาเลือกช่องทางรับสินค้า --</option>
+                        @if(isset($bsk))
+                          @foreach($bsk as $u)
+                          <option value="{{$u->deli_name}}" data-value="{{$u->deli_price}}">{{$u->deli_name}} ราคา {{$u->deli_price}}</option>
+                          @endforeach
+                        @endif
 
                     </select>
                       </div>
@@ -486,13 +470,39 @@ Shipping | MASTER PHOTO NETWORK
                        อีกทางเลือกสำหรับลูกค้าที่อยู่ต่างจังหวัด ทางร้านสามารถจัดส่งผ่านทางรถตู้ ที่วิ่งระหว่างจังหวัดได้ค่ะ ซึ่งทั้งสะดวก รวดเร็ว และประหยัดมากๆค่ะ
  สนใจติดต่อได้ที่เบอร์โทร 02-513-0105 ทุกวัน เวลา 8.00-22.00น.
                      </p>
+
+                     <div class="form-group ">
+
+                       <label>เลือกรูปแบบการจัดส่ง รถตู้</label>
+                        <select class="form-control" name="man_shipping" id="get_van" onchange="getComboA8(this)">
+                          <option value="0" data-value="0">-- กรุณาเลือกช่องทางรับสินค้า --</option>
+                            @if(isset($van))
+                              @foreach($van as $u)
+                              <option value="{{$u->deli_name}}" data-value="{{$u->deli_price}}">{{$u->deli_name}} ราคา {{$u->deli_price}}</option>
+                              @endforeach
+                            @endif
+                        </select>
+                      </div>
+
                    </div>
 
-                   <div class="col-md-12 col-sm-12 " id="option_select_op6" style="display:none">
+                   <div class="col-md-12 col-sm-12 " id="option_select_op6"  style="display:none">
                      <p>
                        อีกทางเลือกสำหรับลูกค้าที่อยู่ต่างจังหวัด ทางร้านสามารถจัดส่งผ่านทางรถไฟ ที่วิ่งระหว่างจังหวัดได้ค่ะ ซึ่งทั้งสะดวก รวดเร็ว และประหยัดมากๆค่ะ
 สนใจติดต่อได้ที่เบอร์โทร 02-513-0105 ทุกวัน เวลา 8.00-22.00น.
                      </p>
+                     <div class="form-group ">
+
+                       <label>เลือกรูปแบบการจัดส่ง รถไฟ</label>
+                        <select class="form-control" name="man_shipping" id="get_train" onchange="getComboA9(this)">
+                          <option value="0" data-value="0">-- กรุณาเลือกช่องทางรับสินค้า --</option>
+                            @if(isset($train))
+                              @foreach($train as $u)
+                              <option value="{{$u->deli_name}}" data-value="{{$u->deli_price}}">{{$u->deli_name}} ราคา {{$u->deli_price}}</option>
+                              @endforeach
+                            @endif
+                        </select>
+                      </div>
                    </div>
 
 
@@ -575,6 +585,10 @@ Shipping | MASTER PHOTO NETWORK
                       </div>
 
                    </div>
+
+
+
+
 
                    <div class="col-md-12 col-sm-12 ">
                             <div class="form-group ">
@@ -729,6 +743,9 @@ Shipping | MASTER PHOTO NETWORK
 
 
 <script>
+var get_van = 0;
+var get_bsk = 0;
+var get_train = 0;
 var zero_var = 0;
 var value2 = 0;
 var set_deli = {{$deli_set->de_price}};
@@ -780,8 +797,46 @@ function getComboA(selectObject) {
 
 }
 
+function getComboA8(selectObject) {
+    var a3 = document.getElementById("get_van");
+    get_van = a3.options[a3.selectedIndex].getAttribute('data-value');
+
+    $('#get_image_price').html("");
+    $('#get_ship_price').html("");
+
+    $('#get_image_price').append((Number(price_image)+Number(get_van)).toFixed(2));
+    $('#get_ship_price').append( Number(get_van) );
+    document.getElementById("get_sum_ship").value = Number(get_van);
+
+}
 
 
+function getComboA9(selectObject) {
+    var a2 = document.getElementById("get_train");
+    get_train = a2.options[a2.selectedIndex].getAttribute('data-value');
+
+    $('#get_image_price').html("");
+    $('#get_ship_price').html("");
+
+    $('#get_image_price').append((Number(price_image)+Number(get_train)).toFixed(2));
+    $('#get_ship_price').append( Number(get_train) );
+    document.getElementById("get_sum_ship").value = Number(get_train);
+
+}
+
+
+function getComboA11(selectObject) {
+    var a1 = document.getElementById("get_bsk");
+    get_bsk = a1.options[a1.selectedIndex].getAttribute('data-value');
+
+    $('#get_image_price').html("");
+    $('#get_ship_price').html("");
+
+    $('#get_image_price').append((Number(price_image)+Number(get_bsk)).toFixed(2));
+    $('#get_ship_price').append( Number(get_bsk) );
+    document.getElementById("get_sum_ship").value = Number(get_bsk);
+
+}
 
 
 function getComboB(selectObject) {
@@ -906,9 +961,7 @@ function getComboB(selectObject) {
         $('#get_ship_price').append( (0) );
         document.getElementById("get_sum_ship").value = zero_var;
       }else{
-      $('#get_image_price').append((Number(price_image)+Number(value_price)).toFixed(2));
-      $('#get_ship_price').append( (Number(value_price)).toFixed(2) );
-      document.getElementById("get_sum_ship").value = value_price;
+
     }
 
 
@@ -930,9 +983,9 @@ function getComboB(selectObject) {
         $('#get_ship_price').append( (0) );
         document.getElementById("get_sum_ship").value = zero_var;
       }else{
-      $('#get_image_price').append((Number(price_image)+Number(value_price)).toFixed(2));
-      $('#get_ship_price').append( (Number(value_price)).toFixed(2) );
-      document.getElementById("get_sum_ship").value = value_price;
+
+
+
     }
     }
 
@@ -994,6 +1047,32 @@ function getComboB(selectObject) {
       document.getElementById("get_sum_ship").value = zero_var;
     }
 
+
+    if(value2 == 13){
+      $("#option_select_op8").hide()
+      $("#option_select_op7").hide()
+      $("#option_select_op2").hide()
+      $("#option_select_op3").hide()
+      $("#option_select_op4").show()
+      $("#option_select_op5").hide()
+      $("#option_select_op6").hide()
+      $('#get_image_price').html("");
+      $('#get_ship_price').html("");
+
+      if(Number(price_image) >= Number(set_deli)){
+        $('#get_image_price').append(price_image);
+        $('#get_ship_price').append( (0) );
+        document.getElementById("get_sum_ship").value = zero_var;
+      }else{
+
+
+
+    }
+
+
+
+    }
+
   //  console.log(value2)
 }
 
@@ -1001,18 +1080,7 @@ function getComboB(selectObject) {
 //console.log(price_image);
 $('#get_image_price').append(price_image);
 
-function getComboA11(selectObject) {
-    var e = document.getElementById("size_photo1");
-    var strUser = e.options[e.selectedIndex].getAttribute('data-value');
 
-  /*  $('#get_image_price').html("");
-    $('#get_image_price').append( (Number(price_image)+Number(strUser)).toFixed(2) );
-
-    $('#get_ship_price').html("");
-    $('#get_ship_price').append( (strUser) );
-    console.log(value2)
-    console.log(strUser); */
-}
 
 ;(function( $ ){
   $.fn.AutoProvince = function( options ) {

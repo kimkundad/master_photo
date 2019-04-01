@@ -1339,11 +1339,27 @@ $data['get_my_add'] = $get_my_add;
                   ->first();
 
         $data['deli'] = $deliveries;
-
-
         $data['deli_set'] = $deli_set;
-
         $data['package'] = $package;
+
+
+
+        $bsk = DB::table('deliverops')
+              ->where('deli_id', 13)
+              ->get();
+        $data['bsk'] = $bsk;
+
+        $van = DB::table('deliverops')
+              ->where('deli_id', 8)
+              ->get();
+        $data['van'] = $van;
+
+        $train = DB::table('deliverops')
+              ->where('deli_id', 9)
+              ->get();
+        $data['train'] = $train;
+
+
     //    $data['check_address'] = $check_address;
     $data['check_address'] = 5;
 

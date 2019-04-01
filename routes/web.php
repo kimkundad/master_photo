@@ -106,6 +106,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'admin'], function() {
 
+
+
+	Route::post('admin/del_deli_item/', 'DeliveryController@del_deli_item');
+	Route::post('admin/edit_deli_item/', 'DeliveryController@edit_deli_item');
+	Route::post('admin/add_deli_item/', 'DeliveryController@add_deli_item');
   Route::get('admin/load_img/{id}', 'OrderController@load_img');
 
   Route::post('admin/delete_user_address/', 'StudentController@delete_user_address');

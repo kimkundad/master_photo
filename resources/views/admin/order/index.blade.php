@@ -69,7 +69,7 @@
              @if($objs)
                 @foreach($objs as $u)
                     <tr id="{{$u->id}}">
-                      <td >#{{$u->code_gen}}</td>
+                      <td ><a href="{{url('admin/order/'.$u->id.'/edit')}}">#{{$u->code_gen}}</a></td>
                       <td>{{$u->name}}</td>
                       <td >{{$u->phone}}</td>
                       <td>{{$u->order_price+$u->shipping_p}} บาท</td>
@@ -93,7 +93,7 @@
   												<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
   												<div class="dropdown-menu" role="menu">
 
-  													<a class="dropdown-item text-1" href="{{url('admin/order/'.$u->id.'/edit')}}">ดูข้อมูล</a>
+  													<a class="dropdown-item text-1 text-primary" href="{{url('admin/order/'.$u->id.'/edit')}}"><i class="fa fa-gear"></i> แก้ไขข้อมูล</a>
   												<!--	<a class="dropdown-item text-1 text-danger" href="">ลบ</a> -->
                           <form  action="{{url('admin/order/'.$u->id)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
                               <input type="hidden" name="_method" value="DELETE">
