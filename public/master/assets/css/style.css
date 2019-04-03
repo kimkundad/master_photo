@@ -1147,6 +1147,166 @@ ul#top_links li:first-child {
 
 
 
+.accordion .card:first-child {
+    margin-top: 0;
+}
+.accordion .card {
+    margin-top: 5px !important;
+}
+.card {
+    background: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+}
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(171, 168, 168, 0.125);
+    border-radius: 0.25rem;
+}
+.accordion a:hover {
+	text-decoration: none !important;
+}
+
+.accordion .card {
+	margin-top: 5px !important;
+}
+
+.accordion .card:first-child {
+	margin-top: 0;
+}
+
+.accordion .card-title {
+	font-size: 16px;
+  margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.accordion .card-header {
+	padding: 0;
+	border-radius: 3px !important;
+	border-bottom: 0;
+}
+
+.accordion .card-header a {
+	display: block;
+  color: #565a5c;
+	padding: 5px 10px;
+}
+
+.accordion .card-header a:hover, .accordion .card-header a:focus {
+	text-decoration: none;
+}
+
+.accordion .card-header a [class^="icon-"] {
+	margin-right: 4px;
+	position: relative;
+	top: 1px;
+}
+
+.accordion .card-header a .fa, .accordion .card-header a .icons {
+	display: inline-block;
+	margin-right: 5px;
+	position: relative;
+	top: -1px;
+}
+
+.accordion .card-body {
+	border-radius: 0 0 5px 5px;
+}
+
+.accordion.accordion-sm .card-header a {
+	padding: 5px 15px;
+	font-size: 0.9em;
+}
+
+.accordion.accordion-sm .card-body {
+	font-size: 0.9em;
+}
+
+.accordion.accordion-lg .card-header a {
+	padding: 15px 15px;
+	font-size: 1em;
+	font-weight: 600;
+}
+
+.accordion.without-bg .card-default {
+	background: transparent !important;
+}
+
+.accordion.without-bg .card-default > .card-header {
+	background: transparent !important;
+}
+
+.accordion.without-bg .card-body {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.accordion.without-borders .card {
+	border: 0;
+	box-shadow: none;
+	border-bottom: 1px solid #DDD;
+	border-radius: 0;
+}
+
+.accordion.without-borders .card-header a {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.accordion.without-borders .card-body {
+	padding: 0;
+}
+
+.card-accordion {
+	margin-top: 5px !important;
+	border: 0 !important;
+}
+
+.card-accordion a:hover {
+	text-decoration: none !important;
+}
+
+.card-accordion.card-accordion-first {
+	margin-top: 0 !important;
+}
+
+.card-accordion .card-body {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.card-accordion .card-title {
+	font-size: 1rem;
+}
+.card-body {
+    background: #fdfdfd;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+}
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+.card-header {
+    background: #f6f6f6;
+    border-radius: 5px 5px 0 0 !important;
+    border-bottom: 1px solid #DADADA;
+    padding: 18px;
+    position: relative;
+}
+
 
 
 .dropdown-mini .dropdown-menu ul#lang_menu li a:hover{background-color:#f9f9f9;color:#e8c028!important;padding-left:15px}

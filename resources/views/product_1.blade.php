@@ -28,6 +28,8 @@ figure:hover+span {
 	-webkit-transform: scale(1.3);
 	transform: scale(1.1);
 }
+
+
 </style>
 
 @stop('stylesheet')
@@ -93,18 +95,9 @@ figure:hover+span {
         <div class="single-ofset">
           <h3>{{$product->pro_name}}</h3>
           <p>{{$product->pro_title}}</p>
-             <hr />
 
-             <style>
-             .f1-step {
-             width: 25%;
-             }
-             .table {
-             margin-bottom: 0px;
-             }
-             </style>
 
-             @if($option_product)
+          @if($option_product)
              @foreach($option_product as $item)
              <div id="step{{$j}}" style="font-size: 14px; font-weight: 600;">
 
@@ -113,43 +106,19 @@ figure:hover+span {
              @endif
 
 
+<form role="form" action="" name="myForm" method="post" >
+
+<!--
 
 
-             <form role="form" action="" name="myForm" method="post" class="f1">
 
 
-               <div class="f1-steps" >
-                 <div class="f1-progress">
-                     <div class="f1-progress-line" data-now-value="13.66" data-number-of-steps="4" style="width: 13.66%;"></div>
-                 </div>
 
-                 @if($option_product)
-                 @foreach($option_product as $item)
 
-                 <div class="f1-step " id="step_no_{{$s}}">
-                   <div class="f1-step-icon" >{{$s}}</div>
-                   <p>{{$item->options_detail->option_name}}</p>
-                 </div {{$s++}}>
 
-                 @endforeach
-                 @endif
 
-              <!--   <div class="f1-step active">
-                   <div class="f1-step-icon">2</div>
-                   <p>ORIENTATION</p>
-                 </div>
 
-                  <div class="f1-step">
-                   <div class="f1-step-icon">3</div>
-                   <p>FRAMES</p>
-                 </div>
 
-                 <div class="f1-step">
-                 <div class="f1-step-icon">4</div>
-                 <p>Finish</p>
-               </div> -->
-
-               </div>
 
 
                @if($option_product)
@@ -157,178 +126,72 @@ figure:hover+span {
                <fieldset class="masonry">
 
 
-                 @foreach($item->options_detail->opt as $item_2)
-                     <div class="form-group">
-
-                        <label class="step1">
-
-                            <input type="radio" id="f1-last-name" data-value="{{$k}}" name="step{{$k}}" value="{{$item_2->item_name}}">
-                            <ins class="iCheck-helper" ></ins>
-
-                          {{$item_2->item_name}}
-                          @if($item_2->item_price != 0)
-                          <span class="jet-span">฿ {{number_format($item_2->item_price,2)}}</span>
-                          @endif
-                        </label>
-
-                     </div>
-                 @endforeach
 
 
 
 
 
-                       <div class="f1-buttons">
-                            @if($k != 1)
-                           <button type="button" class="btn btn-previous">Previous</button>
-                            @endif
 
-                            @if($option_count != $k)
-                           <button type="button" class="btn btn-next">Next</button>
-                           @endif
-                       </div>
-                       <div>
-                         <p style="padding-top:10px;">
-                           {{$item->options_detail->option_detail}}
-                         </p>
-                       </div>
-                   </fieldset {{$k++}}>
+
+                   </fieldset >
                    @endforeach
                    @endif
 
-              <!--     <fieldset>
-
-                     <div class="form-group">
-
-                        <label class="">
-
-                            <input type="radio" id="f1-last-name" name="step2" value="portrait">
-                            <ins class="iCheck-helper" ></ins>
-
-                          portrait
-                        </label>
-
-                     </div>
+            -->
 
 
-                     <div class="form-group">
-
-                        <label class="">
-
-                            <input type="radio" id="f1-last-name" name="step2" value="landscape">
-                            <ins class="iCheck-helper" ></ins>
-
-                          landscape
-                        </label>
-
-                     </div>
-
-                     <div class="f1-buttons">
-                         <button type="button" class="btn btn-previous">Previous</button>
-                         <button type="button" class="btn btn-next">Next</button>
-                     </div>
-
-                   </fieldset>
-
-                   <fieldset>
-
-                     <div class="form-group">
-
-                        <label class="">
-
-                            <input type="radio" id="f1-last-name" name="step3" value="portrait">
-                            <ins class="iCheck-helper" ></ins>
-
-                          portrait
-                        </label>
-
-                     </div>
 
 
-                     <div class="form-group">
+            <div class="accordion" id="accordion">
 
-                        <label class="">
+              @if($option_product)
+              @foreach($option_product as $item)
 
-                            <input type="radio" id="f1-last-name" name="step3" value="landscape">
-                            <ins class="iCheck-helper" ></ins>
-
-                          landscape
-                        </label>
-
-                     </div>
-
-                     <div class="f1-buttons">
-                         <button type="button" class="btn btn-previous">Previous</button>
-                         <button type="button" class="btn btn-next">Next</button>
-                     </div>
-
-                   </fieldset>
-
-                   <fieldset>
+              <div class="card card-default">
+                <div class="card-header">
+                  <h4 class="card-title m-0">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1{{$s}}">
+                      {{$s}} : {{$item->options_detail->option_name}}
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse1{{$s}}" class="collapse">
+                  <div class="card-body">
 
 
-                     <div class="form-group">
-
-                        <label class="">
-
-                            <input type="radio" id="f1-last-name" name="step4" value="black wood">
-                            <ins class="iCheck-helper" ></ins>
-
-                          <img src="{{url('master/assets/images/138ec0b1bd0c12b962b376e8d8d7e56a-11127.png')}}" width="50" />
-                          black wood
-                        </label>
-
-                     </div>
+                    <fieldset class="masonry">
 
 
-                     <div class="form-group">
+                      @foreach($item->options_detail->opt as $item_2)
+                          <div class="form-group">
 
-                        <label class="">
+                             <label class="step1">
 
-                            <input type="radio" id="f1-last-name" name="step4" value="natural wood">
-                            <ins class="iCheck-helper" ></ins>
+                                 <input type="radio" id="f1-last-name" data-value="{{$s}}" name="step{{$s}}" value="{{$item_2->item_name}}">
+                                 <ins class="iCheck-helper" ></ins>
 
-                          <img src="{{url('master/assets/images/ecd0a579f9cae01aeb12866d9e5800bc-11129.png')}}" width="50" />
-                          natural  wood
-                        </label>
+                               {{$item_2->item_name}}
+                               @if($item_2->item_price != 0)
+                               <span class="jet-span">฿ {{number_format($item_2->item_price,2)}}</span>
+                               @endif
+                             </label>
 
-                     </div>
+                          </div>
+                      @endforeach
 
-
-                     <div class="form-group">
-
-                        <label class="">
-
-                            <input type="radio" id="f1-last-name" name="step4" value="walnut wood">
-                            <ins class="iCheck-helper" ></ins>
-
-                          <img src="{{url('master/assets/images/6daa87d3921328958155c36af4751bb2-11128.png')}}" width="50" />
-                          walnut   wood
-                        </label>
-
-                     </div>
+                    </fieldset >
 
 
-                     <div class="form-group">
+                  </div>
+                </div>
+              </div {{$s++}}>
 
-                        <label class="">
-
-                            <input type="radio" id="f1-last-name" name="step4" value="white wood">
-                            <ins class="iCheck-helper" ></ins>
-
-                          <img src="{{url('master/assets/images/187b5ce94e83199fc958e54931ee2652-11125.png')}}" width="50" />
-                          white  wood
-                        </label>
-
-                     </div>
-                     <br />
-                     <div class="f1-buttons">
-                     <button type="button" class="btn btn-previous">Previous</button>
-                     </div>
-                     <br />
+              @endforeach
+              @endif
 
 
-                   </fieldset>  -->
+
+            </div>
 
 
                    <table class="table table_summary" style="margin-top:20px;">
@@ -404,6 +267,12 @@ figure:hover+span {
       autoHeight: true,
     });
   });
+
+
+  var element1 = document.getElementById("collapse11");
+  element1.classList.add("show");
+  element1.classList.add("in");
+
 </script>
 
 <script type="text/javascript">
@@ -417,12 +286,24 @@ $('input[name=step{{$h}}]').on('ifChecked', function(event){
   document.getElementById('step{{$h}}').innerHTML = "{{$item->options_detail->option_name}} : "+$(this).val();
   console.log($(this).val());
 
-  var element = document.getElementById("step_no_{{$h}}");
-  element.classList.add("active");
+  if({{$option_count}} != {{$h}}){
+
+    var element = document.getElementById("collapse1{{$h+1}}");
+    element.classList.add("show");
+    element.classList.add("in");
+
+    var element_del = document.getElementById("collapse1{{$h}}");
+    element_del.classList.remove("show");
+    element_del.classList.remove("in");
+
+
+  }
+
 
  });
 
 {{$h++}}
+
 @endforeach
 @endif
 
