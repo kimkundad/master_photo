@@ -297,6 +297,10 @@ $('input[name=step{{$h}}]').on('ifChecked', function(event){
     element_del.classList.remove("in");
 
 
+  }else{
+    var element_del = document.getElementById("collapse1{{$h}}");
+    element_del.classList.remove("show");
+    element_del.classList.remove("in");
   }
 
 
