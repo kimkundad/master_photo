@@ -432,13 +432,15 @@
                                   <label class="col-md-3 control-label" for="profileFirstName">จำนวน {{$h->order_image_sum}}</label>
                                   <div class="col-md-8">
                                     <img src="{{url('assets/image/all_image/'.$h->order_image)}}" class="img-responsive" style="width:50%">
-                                    <a class="mb-xs mt-xs mr-xs btn btn-sm btn-default " href="{{url('admin/load_img/'.$h->id_img)}}" >
-                                         Download</a>
+
                                     </div>
                                 </div>
                                 <hr />
                                 @endforeach
                                 @endif
+
+                                <a class="mb-xs mt-xs mr-xs btn btn-sm btn-default " href="{{url('admin/load_img/'.$u->id_de)}}" >
+                                     Download ทั้งหมด</a>
 
                               </fieldset>
 

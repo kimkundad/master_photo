@@ -328,17 +328,41 @@ class OrderController extends Controller
 
     public function load_img($id){
 
-
-      $order_images = DB::table('order_images')->select(
-            'order_images.*'
+      $order_code = DB::table('order_details')->select(
+            'order_details.code_gen_d'
             )
             ->where('id', $id)
             ->first();
 
+
+
+      $order_images = DB::table('order_images')->select(
+            'order_images.*'
+            )
+            ->where('order_id_detail', $id)
+            ->get();
+
+            $save_data = [];
+
+            foreach($order_images as $u){
+                $save_data[] = public_path('assets/image/all_image/'.$u->order_image);
+              }
+
+            //  dd($save_data);
+
+
+      $zipper = new \Chumper\Zipper\Zipper;
+
+      $zipper->make(public_path('order_'.$order_code->code_gen_d.'.zip'))->folder('image_'.$order_code->code_gen_d)->add(
+        $save_data);
+      $zipper->close();
+
+      return response()->download(public_path('order_'.$order_code->code_gen_d.'.zip'));
+
     //  $filepath = public_path('assets/image/all_image/').$order_images->order_image;
     //  return Response::download($filepath);
 
-      return response()->download(public_path('assets/image/all_image/').$order_images->order_image);
+    //  return response()->download(public_path('assets/image/all_image/').$order_images->order_image);
 
     }
 
