@@ -181,7 +181,9 @@
                             <div class="row">
                               <div class="col-md-9 col-md-offset-3">
                                 <button type="submit" class="btn btn-primary">อัพเดทข้อมูล</button>
+                                <a href="{{url('admin/order_print/'.$objs->id_or)}}" class="btn btn-warning">Print ใบปะหน้า</a>
                                 <a href="{{url('admin/order')}}" class="btn btn-default">ยกเลิก</a>
+
                               </div>
                             </div>
                           </div>

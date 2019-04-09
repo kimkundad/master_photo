@@ -107,6 +107,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'admin'], function() {
 
 
+	Route::get('admin/order_print/{id}', 'OrderController@order_print');
 
 	Route::post('admin/del_deli_item/', 'DeliveryController@del_deli_item');
 	Route::post('admin/edit_deli_item/', 'DeliveryController@edit_deli_item');
