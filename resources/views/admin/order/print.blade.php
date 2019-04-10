@@ -279,7 +279,7 @@ border: 1px solid #ddd;
               <b>วิธีการรับสินค้า </b> {{$obj->deliver_order}}
               <br/>
               <b>สถานที่ </b>
-              {{$obj->shipping_t1}} {{$obj->shipping_t2}}
+              {{$obj->shipping_t1}} {{$obj->shipping_t2}} {{$obj->shipping_t1}} {{$obj->shipping_t2}} {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
             </address>
           </div>
         </div>

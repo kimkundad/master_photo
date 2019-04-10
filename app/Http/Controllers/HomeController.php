@@ -1684,7 +1684,15 @@ $data['get_my_add'] = $get_my_add;
 
          $package->shipping_t2 = $request['area_shipping'];
 
-       }elseif($request['deliver_order'] == 'รับสินค้าด้วยตัวเองที่สาขา'){
+       }elseif($request['deliver_order'] == 'จัดส่งผ่านทางรถตู้'){
+
+       $package->shipping_t2 = $request['van_shipping'];
+
+     }elseif($request['deliver_order'] == 'จัดส่งผ่านทางรถไฟ'){
+
+     $package->shipping_t2 = $request['train_shipping'];
+
+   }elseif($request['deliver_order'] == 'รับสินค้าด้วยตัวเองที่สาขา'){
 
          $package->shipping_t2 = $request['man_shipping'];
 

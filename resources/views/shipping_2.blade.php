@@ -474,7 +474,7 @@ Shipping | MASTER PHOTO NETWORK
                      <div class="form-group ">
 
                        <label>เลือกรูปแบบการจัดส่ง รถตู้</label>
-                        <select class="form-control" name="man_shipping" id="get_van" onchange="getComboA8(this)">
+                        <select class="form-control" name="van_shipping" id="get_van" onchange="getComboA8(this)">
                           <option value="0" data-value="0">-- กรุณาเลือกช่องทางรับสินค้า --</option>
                             @if(isset($van))
                               @foreach($van as $u)
@@ -494,7 +494,7 @@ Shipping | MASTER PHOTO NETWORK
                      <div class="form-group ">
 
                        <label>เลือกรูปแบบการจัดส่ง รถไฟ</label>
-                        <select class="form-control" name="man_shipping" id="get_train" onchange="getComboA9(this)">
+                        <select class="form-control" name="train_shipping" id="get_train" onchange="getComboA9(this)">
                           <option value="0" data-value="0">-- กรุณาเลือกช่องทางรับสินค้า --</option>
                             @if(isset($train))
                               @foreach($train as $u)
@@ -700,6 +700,15 @@ Shipping | MASTER PHOTO NETWORK
                 </td>
                 <td class="text-right" id="get_ship_price">
 
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  ราคาสินค้า x {{$count_data2}}
+                </td>
+                <td class="text-right" >
+                  {{number_format((float)$total_pay, 2, '.', '')}}
                 </td>
               </tr>
 
