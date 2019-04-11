@@ -77,6 +77,14 @@
     													<td>{{$objs->phone}}</td>
     												</tr>
                             <tr>
+    													<td>ราคาสินค้า</td>
+    													<td>{{$objs->order_price}} บาท</td>
+    												</tr>
+                            <tr>
+    													<td>ค่าขนส่ง</td>
+    													<td>{{$objs->shipping_p}} บาท</td>
+    												</tr>
+                            <tr>
     													<td>ยอดชำระ</td>
     													<td>{{$objs->order_price+$objs->shipping_p}} บาท</td>
     												</tr>
@@ -115,6 +123,10 @@
                               @endif
 
                             </td>
+    												</tr>
+                            <tr>
+    													<td>วิธีการจัดส่ง</td>
+    													<td>{{$objs->deliver_order}}</td>
     												</tr>
                             @if($objs->deliver_order != null)
                             <tr>
@@ -411,7 +423,7 @@
 
           													<td>{{$u->sum_price*$u->sum_image}} บาท</td>
                                     @else
-                                    <td>{{($u->sum_price*$u->sum_image)*$u->sum_shipping}} บาท</td>
+                                    <td>{{($u->sum_price*$u->sum_image)+$u->sum_shipping}} บาท</td>
                                     @endif
                                   </tr>
 
@@ -428,7 +440,7 @@
 
 
 
-                                @if($u->order_images)
+                              <!--  @if($u->order_images)
                                 @foreach($u->order_images as $h)
                                 <div class="form-group">
                                   <label class="col-md-3 control-label" for="profileFirstName">จำนวน {{$h->order_image_sum}}</label>
@@ -439,7 +451,7 @@
                                 </div>
                                 <hr />
                                 @endforeach
-                                @endif
+                                @endif -->
 
                                 <a class="mb-xs mt-xs mr-xs btn btn-sm btn-default " href="{{url('admin/load_img/'.$u->id_de)}}" >
                                      Download ทั้งหมด</a>

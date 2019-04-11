@@ -443,10 +443,48 @@ class OrderController extends Controller
     public function load_img($id){
 
       $order_code = DB::table('order_details')->select(
-            'order_details.code_gen_d'
+            'order_details.*',
+            'order_details.id as id_de',
+            'products.*'
             )
-            ->where('id', $id)
+            ->leftjoin('products', 'products.id',  'order_details.product_id')
+            ->where('order_details.id', $id)
             ->first();
+
+
+            $order_option_count = DB::table('order_options')->select(
+                  'order_options.*',
+                  'order_options.id as id_op',
+                  'option_items.*'
+                  )
+                  ->leftjoin('option_items', 'option_items.id',  'order_options.option_id')
+                  ->where('order_options.order_id_detail', $id)
+                  ->count();
+
+
+            $order_option = DB::table('order_options')->select(
+                  'order_options.*',
+                  'order_options.id as id_op',
+                  'option_items.*'
+                  )
+                  ->leftjoin('option_items', 'option_items.id',  'order_options.option_id')
+                  ->where('order_options.order_id_detail', $id)
+                  ->get();
+
+
+                //  dd($order_option_count);
+                  $name_op = [];
+                  $name_op1 = [];
+                //  dd($order_option[0]->item_name);
+
+                for($i = 0; $i < $order_option_count; $i++){
+                  $name_op[] = $order_option[$i]->item_name;
+                  $name_op1=implode('',$name_op);
+
+                //  $name_op1.="".serialize($name_op);
+                }
+
+                //dd($name_op1);
 
 
 
@@ -467,7 +505,7 @@ class OrderController extends Controller
 
       $zipper = new \Chumper\Zipper\Zipper;
 
-      $zipper->make(public_path('order_'.$order_code->code_gen_d.'.zip'))->folder('image_'.$order_code->code_gen_d)->add(
+      $zipper->make(public_path('order_'.$order_code->code_gen_d.'.zip'))->folder($order_code->pro_name.''.$name_op1.'x'.$order_code->sum_image)->add(
         $save_data);
       $zipper->close();
 
