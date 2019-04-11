@@ -479,7 +479,7 @@ class OrderController extends Controller
 
                 for($i = 0; $i < $order_option_count; $i++){
                   $name_op[] = $order_option[$i]->item_name;
-                  $name_op1=implode('',$name_op);
+                  $name_op1=implode(',',$name_op);
 
                 //  $name_op1.="".serialize($name_op);
                 }
@@ -505,7 +505,7 @@ class OrderController extends Controller
 
       $zipper = new \Chumper\Zipper\Zipper;
 
-      $zipper->make(public_path('order_'.$order_code->code_gen_d.'.zip'))->folder($order_code->pro_name.''.$name_op1.'x'.$order_code->sum_image)->add(
+      $zipper->make(public_path('order_'.$order_code->code_gen_d.'.zip'))->folder($order_code->pro_name.','.$name_op1.',x'.$order_code->sum_image)->add(
         $save_data);
       $zipper->close();
 
