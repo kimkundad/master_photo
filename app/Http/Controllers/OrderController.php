@@ -11,6 +11,7 @@ use Swift_Transport;
 use Swift_Message;
 use Swift_Mailer;
 use Illuminate\Http\Response;
+use File;
 
 class OrderController extends Controller
 {
@@ -487,7 +488,7 @@ class OrderController extends Controller
                 //dd($name_op1);
 
 
-
+      $zipper = new \Chumper\Zipper\Zipper;
       $order_images = DB::table('order_images')->select(
             'order_images.*'
             )
@@ -496,21 +497,56 @@ class OrderController extends Controller
 
             $save_data = [];
 
+            $a = 1;
+            setlocale(LC_ALL, 'th_TH');
+
+            $maon_f = 'order_'.$order_code->code_gen_d;
+
+
+            @mkdir(public_path($maon_f), 0777, true);
+
+
+
+
+
+          //  @mkdir(public_path("$order_code->pro_name,$name_op1 x $order_code->sum_image"), 0777, true);
+          //  copy(public_path('assets/image/4765.jpg'), public_path("$order_code->pro_name,$name_op1 x $order_code->sum_image/4765.jpg"));
+          //  $files = 'public/files/';
+
+
+
+
+
+          //  return response()->download(public_path('order_'.$order_code->code_gen_d.'.zip'));
+          //  dd($a);
+
             foreach($order_images as $u){
-                $save_data[] = public_path('assets/image/all_image/'.$u->order_image);
+              //  $save_data[] = public_path('assets/image/all_image/'.$u->order_image);
+            //    @mkdir("$a.'.'.$order_code->pro_name.','.$name_op1.',x'.$order_code->sum_image",0777);
+
+            @mkdir(public_path($maon_f.'/'.$a), 0777, true);
+            copy(public_path('assets/image/all_image/'.$u->order_image), public_path($maon_f.'/'.$a.'/'.$u->order_image));
+            $var=fopen($maon_f.'/'.$a."/note.txt","wb");
+            fwrite($var, "$order_code->pro_name , $name_op1 จำนวน $u->order_image_sum");
+
+                $a++;
               }
 
             //  dd($save_data);
 
 
-      $zipper = new \Chumper\Zipper\Zipper;
+            $maon_l = public_path('order_'.$order_code->code_gen_d.'/');
+            $zipper->make(public_path('order_'.$order_code->code_gen_d.'.zip'))->folder($order_code->code_gen_d)->add($maon_l)->close();
 
-      $zipper->make(public_path('order_'.$order_code->code_gen_d.'.zip'))->folder($order_code->pro_name.','.$name_op1.',x'.$order_code->sum_image)->add(
+
+
+
+    /*  $zipper->make(public_path('order_'.$order_code->code_gen_d.'.zip'))->folder($order_code->code_gen_d)->add(
         $save_data);
-      $zipper->close();
+      $zipper->close(); */
 
       return response()->download(public_path('order_'.$order_code->code_gen_d.'.zip'));
-
+    //  File::delete(public_path('order_'.$order_code->code_gen_d.'.zip'));
     //  $filepath = public_path('assets/image/all_image/').$order_images->order_image;
     //  return Response::download($filepath);
 
