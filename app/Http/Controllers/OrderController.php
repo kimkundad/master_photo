@@ -495,6 +495,15 @@ class OrderController extends Controller
             ->where('order_id_detail', $id)
             ->get();
 
+
+            $order_images_count = DB::table('order_images')->select(
+                  'order_images.*'
+                  )
+                  ->where('order_id_detail', $id)
+                  ->count();
+
+                  dd($order_images_count);
+
             $save_data = [];
 
             $a = 1;
@@ -529,7 +538,7 @@ class OrderController extends Controller
           //  $var=fopen($maon_f.'/'.$order_code->pro_name,$name_op1,$u->order_image_sum."/note.txt","wb");
           //  fwrite($var, "$order_code->pro_name , $name_op1 จำนวน $u->order_image_sum");
 
-                $a++;
+              //  $a++;
               }
 
             //  dd($save_data);
