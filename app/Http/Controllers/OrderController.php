@@ -541,7 +541,7 @@ class OrderController extends Controller
                 $a++;
               }
 
-              dd($a);
+            //  dd($a);
 
 
             $maon_l = public_path('order_'.$order_code->code_gen_d.'/');
