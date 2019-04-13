@@ -524,10 +524,10 @@ class OrderController extends Controller
               //  $save_data[] = public_path('assets/image/all_image/'.$u->order_image);
             //    @mkdir("$a.'.'.$order_code->pro_name.','.$name_op1.',x'.$order_code->sum_image",0777);
 
-            @mkdir(public_path($maon_f.'/'.$a), 0777, true);
-            copy(public_path('assets/image/all_image/'.$u->order_image), public_path($maon_f.'/'.$a.'/'.$u->order_image));
-            $var=fopen($maon_f.'/'.$a."/note.txt","wb");
-            fwrite($var, "$order_code->pro_name , $name_op1 จำนวน $u->order_image_sum");
+            @mkdir(public_path($maon_f.'/'.$order_code->pro_name.','.$name_op1.','.$u->order_image_sum), 0777, true);
+            copy(public_path('assets/image/all_image/'.$u->order_image), public_path($maon_f.'/'.$order_code->pro_name.','.$name_op1.','.$u->order_image_sum.'/'.$u->order_image));
+          //  $var=fopen($maon_f.'/'.$order_code->pro_name,$name_op1,$u->order_image_sum."/note.txt","wb");
+          //  fwrite($var, "$order_code->pro_name , $name_op1 จำนวน $u->order_image_sum");
 
                 $a++;
               }
