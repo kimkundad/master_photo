@@ -45,12 +45,51 @@
 
 
               <div class="panel-body">
+                <div class="row">
+                   <div class="col-md-2" >
+                     <a class="btn btn-primary btn-block" style="float:left" href="{{url('admin/taopix/create')}}" >
+                         <i class="fa fa-plus"></i> เพิ่มข้อมูลใหม่</a>
 
-                <div class="col-md-12 " style="padding-left: 1px;">
 
-                  <a class="btn btn-primary " href="{{url('admin/product/create')}}" >
-                      <i class="fa fa-plus"></i> เพิ่มสินค้าใหม่</a>
-                </div>
+
+                   </div>
+                   <div class="col-md-3" >
+                     <form class="form-horizontal" name="search_type" action="{{url('admin/taopix_search')}}" method="POST" enctype="multipart/form-data">
+                       {{ csrf_field() }}
+                     <select class="form-control ">
+
+                        <option value="0">แสดงทั้งหมด</option>
+                        @if($sub_cat)
+                          @foreach($sub_cat as $u)
+                          <option value="{{$u->id}}">{{$u->sub_name}}</option>
+                          @endforeach
+                       @endif
+
+                      </select>
+                      </form>
+                  </div>
+                   <div class="col-md-7 " style="padding-left: 1px;">
+
+                     <div class="form-group ">
+                      <label class="col-md-4 control-label"></label>
+                      <div class="col-md-8">
+                        <form class="form-horizontal" name="search_name" action="{{url('admin/taopix_search')}}" method="GET" enctype="multipart/form-data">
+                          {{ csrf_field() }}
+                        <div class="input-group input-search">
+                          <input type="text" class="form-control" name="search" placeholder="Search..." required>
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                          </span>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+
+                   </div>
+
+              </div>
+
+
                 <br><br>
 
 
@@ -60,68 +99,16 @@
                   <thead>
                     <tr>
 
-                      <th>ชื่อสินค้า</th>
-                      <th>หมวดหมู่</th>
-
-                      <th>ประเภท</th>
-                      <th>เปิด / ปิด</th>
+                      <th>รูปภาพ</th>
+                      <th>สถานะ</th>
                       <th>จัดการ</th>
                     </tr>
                   </thead>
                   <tbody>
-             @if($objs)
-                @foreach($objs as $u)
-                    <tr id="{{$u->id_p}}">
 
-                      <td>{{$u->pro_name}}</td>
-                      <td>{{$u->sub_name}}</td>
-                      <td>
-
-                        @if( $u->pro_status_show == 1)
-                        สินค้าทั่วไป
-                        @endif
-
-                        @if( $u->pro_status_show == 2)
-                        NEW ARRIVALS!
-                        @endif
-                        @if( $u->pro_status_show == 3)
-                        WHAT'S HOT
-                        @endif
-                        @if( $u->pro_status_show == 4)
-                        WHAT'S NEW
-                        @endif
-
-                      </td>
-
-                      <td>
-                        <div class="switch switch-sm switch-success">
-                          <input type="checkbox" name="switch" data-plugin-ios-switch
-                          @if($u->pro_status == 1)
-                          checked="checked"
-                          @endif
-                          />
-                        </div>
-                      </td>
-                      <td>
-
-                        <div class="btn-group flex-wrap">
-  												<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
-  												<div class="dropdown-menu" role="menu">
-  												<!--	<a class="dropdown-item text-1" href="#">ดูข้อมูล</a> -->
-  													<a class="dropdown-item text-1" href="{{url('admin/product/'.$u->id_p.'/edit')}}">แก้ไข</a>
-
-
-  												</div>
-  											</div>
-
-                      </td>
-                    </tr>
-                 @endforeach
-              @endif
 
                   </tbody>
                 </table>
-                <div class="pagination"> {{ $objs->links() }} </div>
               </div>
             </section>
 
@@ -143,7 +130,7 @@ $(document).ready(function(){
 
     $.ajax({
             type:'POST',
-            url:'{{url('api/api_post_status')}}',
+            url:'{{url('api/api_slide_status')}}',
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
             data: { "user_id" : user_id },
             success: function(data){
@@ -181,7 +168,7 @@ $(document).ready(function(){
 @endif
 
 
-@if ($message = Session::get('del_product'))
+@if ($message = Session::get('delete'))
 <script type="text/javascript">
 
 

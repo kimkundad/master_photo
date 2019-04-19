@@ -78,6 +78,8 @@ Photo print
              <div style="display:none">
                {{$s = 0}}
              </div>
+
+            
              @foreach($option_product as $item)
 
                  @if($item->options_detail->option_type == 1)
@@ -459,13 +461,17 @@ Photo print
 
 <script>
 
+
+console.log({{$s}})
+
+
 var e = document.getElementById("size_photo1");
 var strUser = e.options[e.selectedIndex].getAttribute('data-value');
 if(strUser == 0){
   var x = document.getElementById("photo_t");
   x.style.display = "none";
 }
-console.log(strUser);
+//console.log(strUser);
 
 function getComboA1(selectObject) {
     var e = document.getElementById("size_photo1");
@@ -482,8 +488,8 @@ function getComboA1(selectObject) {
       var y = document.getElementById("photo_t");
       y.style.display = "block";
     }
+  //  console.log(jQuery("#size_photo1").val());
 
-    console.log(strUser);
 }
 
 
@@ -586,7 +592,7 @@ $('#submit_uption').on('click', function () {
     set_size.push(get_value_radio);
      // value of size_photo input na kub
 
-  //  alert(set_size);
+
 
 
 
@@ -690,11 +696,18 @@ Dropzone.options.myDropzone= {
         $("#next_to_cart2").removeClass('hidden');
         //  console.log(frm);
         var set_size = [];
-        for (i = 0; i < {{$s-1}}; i++) {
-            set_size[i] = jQuery("#size_photo"+i).val();
+        if({{$s}} == 2){
+          set_size[0] = jQuery("#size_photo0").val();
+          set_size[1] = jQuery("#size_photo1").val();
+          console.log(set_size);
+        }else{
+          for (i = 0; i < {{$s-1}}; i++) {
+              set_size[i] = jQuery("#size_photo"+i).val();
+          }
         }
-        set_size.push(get_value_radio);
 
+        set_size.push(get_value_radio);
+      //  console.log(set_size);
 
       //  var data = $('#contactForm1').serialize() + 'ption_number[]='+get_value_radio;
             formData.append("size_photo", set_size); // value of size_photo input na kub

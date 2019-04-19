@@ -65,6 +65,13 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										</a>
 									</li>
 
+                  <li {{ (Request::is('admin/taopix*') ? 'class=nav-expanded' : '') }} >
+ 										<a href="{{url('admin/taopix/')}}"  >
+ 											<i class="fa fa-life-bouy" aria-hidden="true"></i>
+ 											<span>Taopix</span>
+ 										</a>
+ 									</li>
+
                   <li {{ (Request::is('admin/option_product*') ? 'class=nav-expanded' : '') }} >
 										<a href="{{url('admin/option_product/')}}"  >
 											<i class="fa fa-graduation-cap" aria-hidden="true"></i>

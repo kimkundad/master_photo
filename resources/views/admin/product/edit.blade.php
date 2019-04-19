@@ -183,7 +183,9 @@
                                             </div>
                                   </div>
 
-                                  <hr />
+
+
+                            <!--      <hr />
                                   <div class="col-md-12">
                                     <p>
                                       เลือก option ได้มากกว่า 1 ทางเลือก
@@ -205,7 +207,7 @@
                                    </div>
                                   @endforeach
                                   <br />
-
+ -->
 
                                   <hr />
                                   <h4 class="mb-xlg">กำหนดราคา ค่าจัดส่ง</h4>
@@ -246,6 +248,7 @@
           												<div class="row">
           													<div class="col-md-9 col-md-offset-3">
           														<button type="submit" class="btn btn-primary">อัพเดทข้อมูล</button>
+                                      <a href="{{url('admin/product_option/'.$objs->id_q)}}" class="mb-1 mt-1 mr-1 btn btn-warning">แก้ไข Option สินค้า</a>
           														<a href="{{url('admin/product')}}" class="btn btn-default">ยกเลิก</a>
           													</div>
           												</div>

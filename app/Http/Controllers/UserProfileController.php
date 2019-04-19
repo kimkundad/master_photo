@@ -66,6 +66,13 @@ class UserProfileController extends Controller
     }
 
 
+    public function check_toupic(Request $request){
+
+      $set_size_option = $request['set_size_option'];
+      dd($set_size_option);
+    }
+
+
     public function my_order(){
 
       $get_detail_o = [];

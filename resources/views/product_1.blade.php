@@ -167,7 +167,7 @@ figure:hover+span {
 
                              <label class="step1">
 
-                                 <input type="radio" id="f1-last-name" data-value="{{$s}}" name="step{{$s}}" value="{{$item_2->item_name}}">
+                                 <input type="radio" id="f1-last-name{{$s}}" data-value="{{$s}}" data-set="{{$b_set}}" data-id="{{$item_2->id}}" name="step{{$a}}" value="{{$item_2->item_name}}">
                                  <ins class="iCheck-helper" ></ins>
 
                                {{$item_2->item_name}}
@@ -184,7 +184,7 @@ figure:hover+span {
 
                   </div>
                 </div>
-              </div {{$s++}}>
+              </div {{$s++}} {{$a++}} {{$b_set++}}>
 
               @endforeach
               @endif
@@ -217,7 +217,37 @@ figure:hover+span {
                      <div class="f1-buttons">
                        <br />
 
-                         <a href="#" class="btn btn-submit btn-block">MAKE ORDER</a>
+                         <a href="#" id="alert_show" style="display:block" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal_optionx_1">MAKE ORDER</a>
+                         <a href="#" id="submit_form" style="display:none; cursor: pointer;" class="btn btn-submit btn-block">MAKE ORDER</a>
+
+
+
+                         <div class="modal fade" id="myModal_optionx_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                           <div class="modal-dialog" role="document" >
+                             <div class="modal-content text-right">
+
+                               <a type="button" class="btn btn-secondary text-right" style=" color: #666;" data-dismiss="modal"><i class="fa fa-remove"></i> Close</a>
+
+
+                               <div class="modal-body">
+
+                                 <div class="row text-center ">
+
+                                   <div class="col-md-12">
+                                     <h4>กำหนดค่าต่างๆของสินค้า</h4>
+                                     <p>
+                                       ท่านต้องเลือกกำหนดค่าต่างๆของสินค้าให้ครบก่อน เพื่อไปยังขั้นตอนต่อไป
+                                     </p>
+                                   </div>
+
+                                 </div>
+                               </div>
+
+                             </div>
+                           </div>
+                         </div>
+
+
                      </div>
 
              </form>
@@ -279,12 +309,27 @@ figure:hover+span {
 
 
 
+var set_size_option = [];
+var get_value_radio = 0;
+
+set_size_option[0] = {{$get_product_id}}
+set_size_option[1] = {{$get_theme_id}}
+
 @if($option_product)
 @foreach($option_product as $item)
 
 $('input[name=step{{$h}}]').on('ifChecked', function(event){
   document.getElementById('step{{$h}}').innerHTML = "{{$item->options_detail->option_name}} : "+$(this).val();
-  console.log($(this).val());
+  //console.log($(this).val());
+  var get_id_op = $(this).attr("data-id");
+  var get_opset = $(this).attr("data-set");
+
+  set_size_option[get_opset] = get_id_op;
+
+//  var el = document.getElementById("f1-last-name{{$h}}").getAttribute("data-id");
+  console.log(set_size_option);
+  console.log(get_value_radio);
+  //console.log(get_opset);
 
   if({{$option_count}} != {{$h}}){
 
@@ -301,15 +346,50 @@ $('input[name=step{{$h}}]').on('ifChecked', function(event){
     var element_del = document.getElementById("collapse1{{$h}}");
     element_del.classList.remove("show");
     element_del.classList.remove("in");
+
+
+    var x = document.getElementById("alert_show");
+    x.style.display = "none";
+    var y = document.getElementById("submit_form");
+    y.style.display = "block";
+
+
   }
 
 
  });
 
+
+
 {{$h++}}
 
 @endforeach
 @endif
+
+
+$( "#submit_form" ).click(function() {
+
+  $.ajax({
+          type:'POST',
+          url:'{{url('api/check_toupic')}}',
+          headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+          data: { "set_size_option" : set_size_option },
+          success: function(data){
+            if(data.data.success){
+
+
+
+
+
+
+
+            }
+          }
+      });
+
+});
+
+
 
 /*
 
@@ -336,5 +416,8 @@ $('input[name=step1]').on('ifChecked', function(event){
    }); */
 
 </script>
+
+
+
 
 @stop('scripts')

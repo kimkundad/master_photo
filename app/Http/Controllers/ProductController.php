@@ -12,6 +12,7 @@ use App\option_product;
 use App\product;
 use App\gallery;
 use App\product_item;
+use App\option_item;
 
 class ProductController extends Controller
 {
@@ -64,6 +65,199 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     public function product_option($id){
+
+       $option_product = DB::table('product_items')->select(
+           'product_items.*'
+           )
+           ->where('product_set_id', $id)
+           ->orderBy('sort_no')
+           ->get();
+
+           foreach ($option_product as $objd) {
+
+       $options = DB::table('option_products')
+           ->where('id', $objd->option_set_id)
+           ->first();
+
+
+
+
+         $option_data_item = DB::table('option_items')->select(
+             'option_items.*',
+             'option_items.id as id_item'
+             )
+             ->where('item_option_id', $options->id)
+             ->get();
+
+             $options->opt = $option_data_item;
+
+
+
+         $objd->options_detail = $options;
+
+
+     }
+
+    //  dd($option_product);
+       $data['get_option_main'] = $option_product;
+
+
+
+       $option_product = option_product::all();
+       $data['option_product'] = $option_product;
+       $data['product_id'] = $id;
+       $data['method'] = "post";
+       $data['url'] = url('admin/product');
+       $data['datahead'] = "สร้าง Option สินค้า";
+       return view('admin.product.product_option', $data);
+
+     }
+
+
+     public function updatesort_video(Request $request, $id)
+    {
+      $sort_order = $request['sort_order'];
+
+
+
+         // dd($sort_order);
+          $sort_order = json_decode($sort_order,true);
+         // dd($sort_order);
+        //  return redirect(url('admin/category'))->with('edit','Edit successful');
+
+          foreach($sort_order as $index=>$ids) {
+         // $ids = (int) $ids;
+
+         $obj = DB::table('product_items')
+          ->select(
+          'product_items.*'
+          )
+          ->where('id', $ids['id'])
+          ->where('product_set_id', $id)
+          ->update(array('sort_no' => ($index + 1) ));
+
+         // echo $ids['id'];
+  }
+
+  return redirect(url('admin/product_option/'.$id))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+
+
+}
+
+    public function add_option_product_item_inpro(Request $request){
+
+      $product_id = $request['product_id'];
+
+
+      $this->validate($request, [
+       'item_name' => 'required',
+       'option_id' => 'required',
+       'item_price' => 'required'
+      ]);
+
+      $package = new option_item();
+      $package->item_name = $request['item_name'];
+      $package->item_price = $request['item_price'];
+      $package->resolution = $request['resolution'];
+      $package->item_option_id = $request['option_id'];
+      $package->save();
+
+      return redirect(url('admin/product_option/'.$product_id))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+    }
+
+    public function edit_option_product_item_inpro(Request $request){
+
+
+      $this->validate($request, [
+       'option_name' => 'required'
+      ]);
+
+      $product_id = $request['product_id'];
+      $option_id = $request['option_id'];
+
+      $package = option_product::find($option_id);
+      $package->option_name = $request['option_name'];
+      $package->option_detail = $request['option_detail'];
+      $package->save();
+
+      return redirect(url('admin/product_option/'.$product_id))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+    }
+
+
+    public function edit_item_only(Request $request, $id){
+
+      $product_id = $request['product_id'];
+
+
+      $package = option_item::find($id);
+      $package->item_name = $request['item_name'];
+      $package->item_price = $request['item_price'];
+      $package->item_option_id = $request['option_id'];
+      $package->save();
+
+      return redirect(url('admin/product_option/'.$product_id))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+    }
+
+    public function del_item_on(Request $request, $id){
+
+      $product_id = $request['product_id'];
+
+
+      DB::table('option_items')
+      ->where('id', $id)
+      ->delete();
+
+      return redirect(url('admin/product_option/'.$product_id))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+    }
+
+    public function delete_option_product_item_inpro(Request $request){
+
+      $product_id = $request['product_id'];
+      $option_id = $request['option_id'];
+
+      DB::table('product_items')
+      ->where('option_set_id', $option_id)
+      ->delete();
+
+      DB::table('option_items')
+      ->where('item_option_id', $option_id)
+      ->delete();
+
+      DB::table('option_products')
+      ->where('id', $option_id)
+      ->delete();
+
+      return redirect(url('admin/product_option/'.$product_id))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+
+    }
+
+
+     public function add_product_option_sub(Request $request){
+
+       $product_id = $request['product_id'];
+
+       $package = new option_product();
+       $package->option_name = $request['option_name'];
+       $package->option_type = $request['option_type'];
+       $package->option_detail = $request['option_detail'];
+       $package->save();
+
+       $the_id = $package->id;
+
+       $obj = new product_item();
+       $obj->option_set_id = $the_id;
+       $obj->product_set_id = $product_id;
+       $obj->save();
+
+    //   dd($product_id);
+
+
+       return redirect(url('admin/product_option/'.$product_id))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+     }
+
+
     public function store(Request $request)
     {
         //
@@ -72,13 +266,7 @@ class ProductController extends Controller
              'image' => 'required|max:8048',
              'pro_name' => 'required',
              'pro_category' => 'required',
-             'pro_status_show' => 'required',
-             'pro_title' => 'required',
-             'option' => 'required',
-             'set_limit' => 'required',
-             'a_price_o' => 'required',
-             'b_price_o' => 'required',
-             'pro_name_detail' => 'required'
+             'pro_status_show' => 'required'
          ]);
 
          $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
@@ -95,9 +283,9 @@ class ProductController extends Controller
        $package->pro_title = $request['pro_title'];
        $package->pro_name_detail = $request['pro_name_detail'];
        $package->pro_category = $request['pro_category'];
-       $package->set_limit = $request['set_limit'];
+    /*   $package->set_limit = $request['set_limit'];
        $package->a_price_o = $request['a_price_o'];
-       $package->b_price_o = $request['b_price_o'];
+       $package->b_price_o = $request['b_price_o']; */
        $package->pro_price = 0;
        $package->pro_image = $input['imagename'];
        $package->pro_status_show = $request['pro_status_show'];
@@ -105,7 +293,13 @@ class ProductController extends Controller
 
        $the_id = $package->id;
 
-       $gallary = $request['option'];
+
+       /* 'option' => 'required',
+        'set_limit' => 'required',
+        'a_price_o' => 'required',
+        'b_price_o' => 'required', */
+
+    /*   $gallary = $request['option'];
 
 
        if (sizeof($gallary) > 0) {
@@ -117,7 +311,7 @@ class ProductController extends Controller
           }
           product_item::insert($admins);
         }
-
+ */
 
        return redirect(url('admin/product_gallery/'.$the_id))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
 
@@ -153,7 +347,7 @@ class ProductController extends Controller
           gallery::insert($admins);
         }
 
-        return redirect(url('admin/product/'.$request['pro_id'].'/edit'))->with('add_success_img','คุณทำการแก้ไขอสังหา สำเร็จ');
+        return redirect(url('admin/product_option/'.$request['pro_id']))->with('add_success_img','คุณทำการแก้ไขอสังหา สำเร็จ');
 
     }
 
@@ -184,7 +378,7 @@ class ProductController extends Controller
             ->get();
 
             $option_product = DB::table('option_products')
-                ->get();
+            ->get();
 
 
             foreach ($option_product as $obj) {
@@ -199,10 +393,6 @@ class ProductController extends Controller
               $obj->options = $options;
 
             }
-
-
-
-
 
             $data['option_product'] = $option_product;
             $sub_category = sub_category::all();
@@ -235,6 +425,23 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function product_price(Request $request, $id){
+
+      $cat = DB::table('products')->select(
+        'products.*',
+        'products.id as id_q',
+        'products.created_at as create',
+        'sub_categories.*'
+        )
+        ->leftjoin('sub_categories', 'sub_categories.id',  'products.pro_category')
+        ->where('products.id', $id)
+        ->first();
+
+        $data['objs'] = $cat;
+        $data['datahead'] = "เพิ่มราคาค่าขนส่ง";
+      return view('admin.product.product_price', $data);
+    }
     public function update(Request $request, $id)
     {
         //
@@ -347,6 +554,19 @@ class ProductController extends Controller
 
 
         return redirect(url('admin/product/'.$id.'/edit'))->with('edit_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+    }
+
+
+    public function add_price_product(Request $request, $id){
+
+      $package = product::find($id);
+      $package->set_limit = $request['set_limit'];
+      $package->a_price_o = $request['a_price_o'];
+      $package->b_price_o = $request['b_price_o'];
+      $package->pro_price = 0;
+      $package->save();
+
+      return redirect(url('admin/product/'.$id.'/edit'))->with('edit_success','คุณทำการเพิ่มอสังหา สำเร็จ');
     }
 
     public function property_image_del(Request $request){

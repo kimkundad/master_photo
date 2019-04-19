@@ -36,9 +36,11 @@ Route::get('contact_master', 'HomeController@contact_master')->name('contact_mas
 Route::get('payment_option', 'HomeController@payment_option')->name('payment_option');
 Route::get('terms_conditions', 'HomeController@terms_conditions')->name('terms_conditions');
 
-Route::get('product_1/{id}', 'HomeController@product_get');
+Route::get('product_1/{id}/{theme_id}', 'HomeController@product_get');
 
 Route::get('themes/{id}', 'HomeController@themes_pro');
+
+Route::post('api/check_toupic', 'UserProfileController@check_toupic');
 
 
 Route::get('photo_edit/{id}', 'HomeController@photo_edit')->name('photo_edit');
@@ -107,6 +109,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'admin'], function() {
 
 
+	Route::resource('admin/taopix', 'TaopixController');
+
 	Route::get('admin/order_print/{id}', 'OrderController@order_print');
 
 	Route::post('admin/del_deli_item/', 'DeliveryController@del_deli_item');
@@ -131,6 +135,20 @@ Route::group(['middleware' => 'admin'], function() {
   Route::post('admin/option_product_item_edit/{id}', 'OptionProController@option_product_item_edit');
   Route::post('admin/option_product_item_del/{id}', 'OptionProController@option_product_item_del');
   Route::get('admin/product_gallery/{id}', 'ProductController@product_gallery');
+
+	Route::get('admin/product_option/{id}', 'ProductController@product_option');
+	Route::get('admin/product_price/{id}', 'ProductController@product_price');
+	Route::post('admin/add_product_option_sub', 'ProductController@add_product_option_sub');
+	Route::post('admin/updatesort_video/{id}', 'ProductController@updatesort_video');
+	Route::post('admin/add_option_product_item_inpro/', 'ProductController@add_option_product_item_inpro');
+	Route::post('admin/edit_option_product_item_inpro/', 'ProductController@edit_option_product_item_inpro');
+	Route::post('admin/delete_option_product_item_inpro/', 'ProductController@delete_option_product_item_inpro');
+	Route::post('admin/edit_item_only/{id}', 'ProductController@edit_item_only');
+	Route::post('admin/del_item_on/{id}', 'ProductController@del_item_on');
+	Route::post('admin/add_price_product/{id}', 'ProductController@add_price_product');
+
+
+
   Route::post('admin/add_gallery/', 'ProductController@add_gallery');
   Route::post('property_image_del', 'ProductController@property_image_del');
   Route::post('api/api_post_status', 'ProductController@api_post_status');

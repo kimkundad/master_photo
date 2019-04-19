@@ -57,7 +57,7 @@ figure:hover+span {
       <div class="col-md-3 col-sm-6 text-center">
 
         <div class="hover01">
-          <a href="{{url('product_1/'.$product_id)}}">
+          <a href="{{url('product_1/'.$product_id.'/'.$u->id)}}">
             <figure>
               <img src="{{url('assets/image/themepro_image/'.$u->themepro_image)}}" alt="{{$u->themepro_name}}" class="img-responsive">
             </figure>

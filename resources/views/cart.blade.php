@@ -160,10 +160,16 @@ height: 60px;
 
 
 
-
+                    @if(sizeof($option_set_pro) == 1)
+                        @for ($j = 0; $j <= 1; $j++)
+                          {{$option_set_pro[$s][$j]->item_name}}<br />
+                        @endfor
+                    @else
                       @for ($j = 0; $j < 3; $j++)
                         {{$option_set_pro[$s][$j]->item_name}}<br />
                       @endfor
+                    @endif
+
 
 
 
@@ -241,7 +247,7 @@ height: 60px;
               $s = 0;
              ?>
 
-             @if($get_data)
+             @if(isset($get_data))
              @foreach($get_data as $k)
              <tr>
                <td style="min-width: 200px;">

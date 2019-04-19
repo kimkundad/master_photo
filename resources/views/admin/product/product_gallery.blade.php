@@ -59,6 +59,26 @@
 
                         <div class="col-md-8 col-lg-8">
 
+                          <div class="wizard-progress wizard-progress-lg">
+                            <div class="steps-progress">
+												<div class="progress-indicator" style="width: 33%;"></div>
+											</div>
+      											<ul class="nav wizard-steps">
+      												<li class="nav-item active completed">
+      													<a class="nav-link"  data-toggle="tab"><span>1</span>ข้อมูลสินค้า</a>
+      												</li>
+      												<li class="nav-item active">
+      													<a class="nav-link"  data-toggle="tab"><span>2</span>รูปประกอบ</a>
+      												</li>
+      												<li class="nav-item">
+      													<a class="nav-link" data-toggle="tab"><span>3</span>ออฟชั่นสินค้า</a>
+      												</li>
+      												<li class="nav-item">
+      													<a class="nav-link" data-toggle="tab"><span>4</span>ราคาจัดส่ง</a>
+      												</li>
+      											</ul>
+      										</div>
+
                     <section class="panel">
                       <div class="panel-body">
   											<form  method="POST" action="{{url('admin/add_gallery')}}" enctype="multipart/form-data">
@@ -67,7 +87,11 @@
 
   		                                          <div class="row">
   		                                              <div class="col-md-12" style="padding-right: 15px;">
+                                                      <h4 >เพิ่มรูปภาพประกอบ อย่างน้อย 4 รูปขึ้นไป</h4>
 
+                                                      <img src="{{url('assets/image/Photo_print_Google_Chrome.jpg')}}" class="img-responsive img-thumbnail"/>
+
+                                                      <br /><br />
 
   		                            <div class="form-group">
 

@@ -63,7 +63,7 @@
                       <th>ชื่อ Themes</th>
                       <th>Product</th>
 
-                      <th>จำนวน Themes</th>
+                      <!--<th>จำนวน Themes</th> -->
                       <th>จัดการ</th>
                     </tr>
                   </thead>
@@ -73,7 +73,7 @@
                     <tr>
                       <td>{{$u->themepro_name}}</td>
                       <td>{{$u->pro_name}}</td>
-                      <td>{{$u->option}}</td>
+                  <!--    <td>{{$u->option}}</td> -->
 
 
                       <td>

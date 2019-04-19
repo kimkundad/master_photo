@@ -467,7 +467,9 @@ class HomeController extends Controller
     }
 
 
-    public function product_get($id){
+    public function product_get($id, $theme_id){
+
+    //  dd($theme_id);
 
       $get_product = DB::table('products')->select(
         'products.*'
@@ -522,6 +524,13 @@ class HomeController extends Controller
         $data['option_product'] = $option_product;
         $data['option_count'] = $option_count;
         $data['img_all'] = $img_all;
+
+        $a = 1;
+        $data['a'] = $a;
+
+        $b_set = 2;
+        $data['b_set'] = $b_set;
+
         $s = 1;
         $data['s'] = $s;
 
@@ -535,6 +544,8 @@ class HomeController extends Controller
         $data['h'] = $h;
 
         $data['product'] = $get_product;
+        $data['get_theme_id'] = $theme_id;
+        $data['get_product_id'] = $id;
       return view('product_1', $data);
     }
 
@@ -595,6 +606,7 @@ class HomeController extends Controller
               'products.*'
               )
               ->where('pro_category', $b->id)
+              ->where('pro_status', 1)
               ->paginate(12);
 
             //  $get_product_ar[] = $get_product;
@@ -608,6 +620,7 @@ class HomeController extends Controller
         'products.*'
         )
         ->where('pro_category', $id)
+        ->where('pro_status', 1)
         ->paginate(16);
 
         $data['cat_head'] = $cat_head;
@@ -2674,7 +2687,7 @@ $data['get_my_add'] = $get_my_add;
       $count_cart = count(Session::get('cart'));
 
       if(Auth::guest()){
-
+      //  dd($request['size_photo']);
         $gallary = $request->file('file');
 
         $get_count_cart = count(Session::get('cart'));

@@ -52,22 +52,60 @@
 
                         <div class="col-md-8 col-lg-8">
 
+                          <div class="wizard-progress wizard-progress-lg">
+      											<div class="steps-progress">
+      												<div class="progress-indicator">
+
+                            </div>
+      											</div>
+      											<ul class="nav wizard-steps">
+      												<li class="nav-item active ">
+      													<a class="nav-link"  data-toggle="tab"><span>1</span>ข้อมูลสินค้า</a>
+      												</li>
+      												<li class="nav-item ">
+      													<a class="nav-link"  data-toggle="tab"><span>2</span>รูปประกอบ</a>
+      												</li>
+      												<li class="nav-item">
+      													<a class="nav-link" data-toggle="tab"><span>3</span>ออฟชั่นสินค้า</a>
+      												</li>
+      												<li class="nav-item">
+      													<a class="nav-link" data-toggle="tab"><span>4</span>ราคาจัดส่ง</a>
+      												</li>
+      											</ul>
+      										</div>
+
+
+
           							<div class="tabs">
 
           								<div class="tab-content">
 
           									<div id="edit" class="tab-pane active">
 
+                              @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
 
                               <form  method="POST" action="{{$url}}" enctype="multipart/form-data">
                                           {{ method_field($method) }}
                                           {{ csrf_field() }}
 
-          											<h4 class="mb-xlg">เพิ่ม สินค้าใหม่</h4>
+          											<h4 >เพิ่ม สินค้าใหม่</h4>
+                                <p class="text-muted">
+                                  ช่องกรอกข้อมูลที่มี (<span class="text-danger"> * </span>) จำเป็นต้องกรอกข้อมูลลงไป
+                                </p>
+                                <hr />
 
           											<fieldset>
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">ชื่อสินค้า*</label>
+          													<label class="col-md-3 control-label" for="profileFirstName">ชื่อสินค้า<span class="text-danger">*</span></label>
           													<div class="col-md-8">
           														<input type="text" class="form-control" name="pro_name" value="{{ old('pro_name')}}">
           														</div>
@@ -75,7 +113,7 @@
 
 
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileAddress">หมวดหมู่*</label>
+          													<label class="col-md-3 control-label" for="profileAddress">หมวดหมู่<span class="text-danger">*</span></label>
           													<div class="col-md-8">
           														<select name="pro_category" class="form-control mb-md" required>
 
@@ -89,7 +127,7 @@
           												</div>
 
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileAddress">ประเภทสินค้า*</label>
+          													<label class="col-md-3 control-label" for="profileAddress">ประเภทสินค้า<span class="text-danger">*</span></label>
           													<div class="col-md-8">
           														<select name="pro_status_show" class="form-control mb-md" required>
 
@@ -109,14 +147,14 @@
 
 
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">คำอธิบาย*</label>
+          													<label class="col-md-3 control-label" for="profileFirstName">คำอธิบาย</label>
           													<div class="col-md-8">
           														<textarea class="form-control" name="pro_title" rows="5">{{ old('pro_title') }}</textarea>
           														</div>
           												</div>
 
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">รายละเอียดสินค้า*</label>
+          													<label class="col-md-3 control-label" for="profileFirstName">รายละเอียดสินค้า</label>
           													<div class="col-md-8">
           														<textarea class="form-control" name="pro_name_detail" rows="6">{{ old('pro_name_detail') }}</textarea>
           														</div>
@@ -124,7 +162,7 @@
 
 
                                   <div class="form-group">
-                                    <label class="col-md-3 control-label" for="exampleInputEmail1">รูปหลักสินค้า*</label>
+                                    <label class="col-md-3 control-label" for="exampleInputEmail1">รูปหลักสินค้า<span class="text-danger">*</span></label>
                                     <div class="col-md-8">
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
                                               <div class="input-append">
@@ -143,6 +181,8 @@
                                             </div>
                                   </div>
 
+
+<!--
                                   <hr />
                                   <div class="col-md-12">
                                     <p>
@@ -193,7 +233,7 @@
           														</div>
           												</div>
 
-
+ -->
 
 
           											</fieldset>

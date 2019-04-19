@@ -76,8 +76,8 @@
 													<label class="col-md-3 control-label" for="profileFirstName">เลือกสินค้า*</label>
 
                           <div class="col-md-8">
-                            <select name="pro_id" class="form-control mb-md" required>
 
+													  <select name="pro_id" data-plugin-selectTwo class="form-control populate" required>
                               <option value="">-- เลือกสินค้า --</option>
                                 @foreach($category as $categorys)
                                    <option value="{{$categorys->id}}">{{$categorys->pro_name}}</option>
