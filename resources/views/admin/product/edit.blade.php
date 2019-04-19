@@ -275,7 +275,7 @@
             <div class="col-md-8 col-md-offset-2">
                   <section class="panel">
                     <div class="panel-body">
-											<form  method="POST" action="{{url('admin/add_gallery')}}" enctype="multipart/form-data">
+											<form  method="POST" action="{{url('admin/add_gallery2')}}" enctype="multipart/form-data">
 
 		                                          {{ csrf_field() }}
 

@@ -351,6 +351,34 @@ class ProductController extends Controller
 
     }
 
+
+    public function add_gallery2(Request $request){
+
+
+      $gallary = $request->file('product_image');
+        $this->validate($request, [
+             'product_image' => 'required|max:8048',
+             'pro_id' => 'required'
+         ]);
+
+         if (sizeof($gallary) > 0) {
+          for ($i = 0; $i < sizeof($gallary); $i++) {
+            $path = 'assets/image/gallery/';
+            $filename = time()."-".$gallary[$i]->getClientOriginalName();
+            $gallary[$i]->move($path, $filename);
+            $admins[] = [
+                'image' => $filename,
+                'pro_id' => $request['pro_id']
+            ];
+          }
+          gallery::insert($admins);
+        }
+
+
+        return redirect(url('admin/product/'.$request['pro_id'].'/edit'))->with('edit_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+
+    }
+
     /**
      * Display the specified resource.
      *

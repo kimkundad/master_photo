@@ -150,6 +150,7 @@ Route::group(['middleware' => 'admin'], function() {
 
 
   Route::post('admin/add_gallery/', 'ProductController@add_gallery');
+	Route::post('admin/add_gallery2/', 'ProductController@add_gallery2');
   Route::post('property_image_del', 'ProductController@property_image_del');
   Route::post('api/api_post_status', 'ProductController@api_post_status');
   Route::resource('admin/photo', 'PhotoController');
