@@ -320,7 +320,7 @@ figure:hover+span {
 
 			@if($hot_new)
            @foreach($hot_new as $u)
-      <div class="col-md-4 col-sm-6 text-center">
+      <div class="col-md-3 col-sm-6 text-center">
 
 			<div class="hover01">
 				<a href="{{url('themes/'.$u->id)}}">
