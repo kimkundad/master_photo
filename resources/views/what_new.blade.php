@@ -76,7 +76,8 @@ figure:hover+span {
         </p>
       </div>
 
-
+			@endforeach
+			@endif
 
 
 
@@ -85,8 +86,7 @@ figure:hover+span {
 
 		</div>
 
-		@endforeach
-		@endif
+
 
 
 

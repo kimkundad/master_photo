@@ -94,7 +94,7 @@ class HomeController extends Controller
             'products.*'
             )
             ->where('pro_status_show', 4)
-            ->limit(3)
+            ->limit(4)
             ->get();
 
 
