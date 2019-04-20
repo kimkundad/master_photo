@@ -251,7 +251,7 @@
               @if($menu->option_count > 0)
               <ul>
 
-                @foreach($menu->options as $menu_sub)
+              @foreach($menu->options as $menu_sub)
 
                 @if($menu->id == 3)
 
@@ -262,10 +262,13 @@
                   @endif
 
                 @else
-                <li><a href="{{url('category/'.$menu_sub->id)}}">{{$menu_sub->sub_name}}</a></li>
+                <li><a href="#">coming soon</a></li>
+                <!--  <li><a href="{{url('category/'.$menu_sub->id)}}">{{$menu_sub->sub_name}}</a></li> -->
                 @endif
 
                 @endforeach
+
+              
 
               </ul>
               @endif
