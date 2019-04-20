@@ -81,7 +81,7 @@
                         สินค้าทั่วไป
                         @endif
 
-                        @if( $u->pro_status_show == 2)
+                        @if( $u->pro_status_show == 2 || $u->pro_status_show == 6 || $u->pro_status_show == 7)
                         NEW ARRIVALS!
                         @endif
                         @if( $u->pro_status_show == 3)
