@@ -633,6 +633,42 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        $image_all =   $objs = DB::table('galleries')
+            ->select(
+               'galleries.*'
+               )
+            ->where('pro_id', $id)
+            ->get();
+
+          //  dd($image_all);
+        if($image_all != null){
+          foreach ($image_all as $u) {
+          DB::table('galleries')->where('id', $u->id)->delete();
+          $file_path = 'assets/image/gallery/'.$u->image;
+          unlink($file_path);
+        }
+        }
+
+
+
+        $data_product = DB::table('products')
+        ->where('id', $id)
+        ->first();
+
+        $file_path = 'assets/image/product/'.$data_product->pro_image;
+        unlink($file_path);
+
+
+        DB::table('products')
+        ->where('id', $id)
+        ->delete();
+
+        DB::table('product_items')
+        ->where('product_set_id', $id)
+        ->delete();
+
+        return redirect(url('admin/product/'))->with('delete','คุณทำการลบอสังหา สำเร็จ');
+
     }
 
 
