@@ -108,7 +108,7 @@ Photo print
       <div class="col-md-8 " >
 
 <div style="display:none">
-        @if($option_images)
+        @if(isset($option_images))
         @foreach($option_images as $k)
 
           @if($set_size == 0)
@@ -119,6 +119,8 @@ Photo print
               {{$set_size++}}
 
         @endforeach
+        @else
+        {{$resolution = 0}}
         @endif
 </div>
 
@@ -230,7 +232,7 @@ Photo print
 
 
       <div style="display:none">
-              @if($option_images)
+              @if(isset($option_images))
               @foreach($option_images as $j)
 
                 @if($set_size == 0)
@@ -244,6 +246,8 @@ Photo print
                     {{$set_size++}}
 
               @endforeach
+              @else
+              {{$resolution = 0}}
               @endif
       </div>
 
@@ -271,6 +275,8 @@ Photo print
               </tr>
             </thead>
             <tbody >
+
+
 
               @foreach($get_image as $u)
               <tr>
@@ -378,7 +384,7 @@ Photo print
           <table class="table table_summary" style="font-size: 14px;">
             <tbody>
 
-              @if($option_images)
+              @if(isset($option_images))
               @foreach($option_images as $k)
 
               <tr>
@@ -448,7 +454,7 @@ Photo print
 
 
 
-              @if($option_images)
+              @if(isset($option_images))
               @foreach($option_images as $j)
 
               <tr>
