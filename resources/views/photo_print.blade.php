@@ -342,7 +342,7 @@ Photo print
                 </div>
               </div>
 
-          <!--    <a type="button" id="photo_t" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a> -->
+              <a type="button" id="photo_t" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
 
 
 
@@ -507,6 +507,11 @@ if({{$check_option_count}} > 0){
   y.style.display = "block";
 
 }else{
+
+  var x = document.getElementById("photo_f");
+  x.style.display = "none";
+  var y = document.getElementById("photo_t");
+  y.style.display = "block";
 
 /*
 
