@@ -12,6 +12,10 @@ Photo print
 @section('content')
 
 
+<?php
+$resolution = 0;
+?>
+
 <main class="slider-pro" >
 
 
