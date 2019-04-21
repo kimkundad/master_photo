@@ -693,7 +693,7 @@ Dropzone.options.myDropzone= {
         $("#next_to_cart2").removeClass('hidden');
         //  console.log(frm);
         var set_size = [];
-
+        set_size[0] = 0;
         if(get_value_radio == 0){
           for (i = 0; i < {{$s}}; i++) {
               set_size[i] = jQuery("#size_photo"+i).val();
@@ -707,9 +707,7 @@ Dropzone.options.myDropzone= {
         }
 
 
-        if(set_size == undefined || set_size == null){
-          set_size[0] = 0;
-        }
+
 
 
 
