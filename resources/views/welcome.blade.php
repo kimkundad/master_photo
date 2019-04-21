@@ -424,5 +424,43 @@ figure:hover+span {
     });
   });
 </script>
+<style>
+.customized_notify i span img {
+    width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+    border-width: 0px;
+    border-style: solid;
+    border-color: rgb(237, 237, 237);
+    border-image: initial;
+    border-radius: 0%;
+}
+</style>
+<script>
+setTimeout(function() {
+$.notify({
+ // options
+ icon: '{{url('master/assets/image/TOP657971755logo-website.png')}}',
+ title: "<h4>ยินดีต้อนรับสู่เว็บไซต์ใหม่ของ</h4> ",
+ message: "www.masterphotonetwork.com "
+},{
+ // settings
+ type: 'info',
+ icon_type: 'image',
+ delay: 5000,
+ timer: 3000,
+ z_index: 9999,
+ showProgressbar: false,
+ placement: {
+   from: "bottom",
+   align: "right"
+ },
+ animate: {
+   enter: 'animated bounceInUp',
+   exit: 'animated bounceOutDown'
+ },
+});
+}, 1000);
+</script>
 
 @stop('scripts')

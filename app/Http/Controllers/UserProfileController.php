@@ -136,6 +136,8 @@ class UserProfileController extends Controller
             ->where('id', $id)
             ->first();
 
+          //  dd($order_de);
+
 
             $order_option = DB::table('order_options')->select(
                   'order_options.*',

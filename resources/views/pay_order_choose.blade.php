@@ -147,12 +147,12 @@ ul#profile_summary li span {
 
                       @endforeach
                       @endif
-
+                    
                       @if($order_main->shipping_p == 0)
                       <li>{{ trans('message.Paid_amount') }}  <span class="text-danger" style="font-size:15px;"><b>{{number_format(($order_de->sum_price*$order_de->sum_image),2)}} {{ trans('message.baht') }}</b></span>
                       </li>
                       @else
-                      <li>{{ trans('message.Paid_amount') }}  <span class="text-danger" style="font-size:15px;"><b>{{number_format(($order_de->sum_price*$order_de->sum_image)+$order_de->sum_shipping,2)}} บาท</b></span>
+                      <li>{{ trans('message.Paid_amount') }}  <span class="text-danger" style="font-size:15px;"><b>{{number_format((($order_de->sum_price*$order_de->sum_image)+$order_de->sum_shipping),2)}} บาท</b></span>
                       </li>
                       @endif
 

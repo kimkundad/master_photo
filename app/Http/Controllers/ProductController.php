@@ -382,8 +382,8 @@ class ProductController extends Controller
        $package->pro_title = $request['pro_title'];
        $package->pro_name_detail = $request['pro_name_detail'];
        $package->pro_category = $request['pro_category'];
-    /*   $package->set_limit = $request['set_limit'];
-       $package->a_price_o = $request['a_price_o'];
+       $package->set_limit = 1;
+    /* $package->a_price_o = $request['a_price_o'];
        $package->b_price_o = $request['b_price_o']; */
        $package->pro_price = 0;
        $package->pro_image = $input['imagename'];
@@ -587,6 +587,12 @@ class ProductController extends Controller
              'pro_name_detail' => 'required'
          ]);
 
+         if($request['set_limit'] == 0){
+           $set_limit = 1;
+         }else{
+           $set_limit = $request['set_limit'];
+         }
+
         if($image == null){
           //dd($image);
 
@@ -595,7 +601,7 @@ class ProductController extends Controller
           $package->pro_title = $request['pro_title'];
           $package->pro_name_detail = $request['pro_name_detail'];
           $package->pro_category = $request['pro_category'];
-          $package->set_limit = $request['set_limit'];
+          $package->set_limit = $set_limit;
           $package->a_price_o = $request['a_price_o'];
           $package->b_price_o = $request['b_price_o'];
           $package->pro_price = 0;
@@ -686,8 +692,16 @@ class ProductController extends Controller
 
     public function add_price_product(Request $request, $id){
 
+      if($request['set_limit'] == 0){
+        $set_limit = 1;
+      }else{
+        $set_limit = $request['set_limit'];
+      }
+
+
+
       $package = product::find($id);
-      $package->set_limit = $request['set_limit'];
+      $package->set_limit = $set_limit;
       $package->a_price_o = $request['a_price_o'];
       $package->b_price_o = $request['b_price_o'];
       $package->pro_price = 0;

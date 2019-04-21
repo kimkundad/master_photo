@@ -71,4 +71,6 @@ $(document).ready(function(){
 </script>
 <script src="{{url('master/assets/js/bootstrap-notify.js')}}"></script>
 
-<!-- <script src="assets/js/notify_func.js"></script> -->
+
+
+ <script src="{{url('master/assets/js/notify_func.js')}}"></script>

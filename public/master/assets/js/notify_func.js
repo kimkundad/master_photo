@@ -1,28 +1,7 @@
  $(function() {
- setTimeout(function() {
-$.notify({
-	// options
-	icon: 'icon_set_1_icon-29',
-	title: "<h4>Welcome Traveller</h4> ",
-	message: "Epicuri vituperata complectitur in quo, primis labore possim sed in, vim no elaboraret reprehendunt. "
-},{
-	// settings
-	type: 'info',
-	delay: 5000,
-	timer: 3000,
-	z_index: 9999,
-	showProgressbar: false,
-	placement: {
-		from: "bottom",
-		align: "right"
-	},
-	animate: {
-		enter: 'animated bounceInUp',
-		exit: 'animated bounceOutDown'
-	},
-});
- }, 1000);
+ 
 
+/*
 setTimeout(function() {
 $.notify({
 	// options
@@ -47,6 +26,6 @@ $.notify({
 	},
 });
  }, 5000);
-
+*/
 
  });
