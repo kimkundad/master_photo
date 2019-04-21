@@ -263,7 +263,7 @@ height: 60px;
                    <br />
 
 
-                   @if($k->option)
+                   @if(isset($k->option))
                    @foreach($k->option as $j)
 
                    {{$j->item_name}}<br />
