@@ -283,6 +283,10 @@ Photo print
                     <?php
 
                     $data = getimagesize(url('assets/image/all_image/'.$u->cart_image));
+
+
+
+
                     $width = $data[0];
                     $height = $data[1];
                     $get_resolution = $width * $height;

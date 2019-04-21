@@ -140,6 +140,7 @@ height: 60px;
               $total_pay = 0;
               $total_img = 0;
               $s = 0;
+              $h = 1;
              ?>
 
 
@@ -155,19 +156,21 @@ height: 60px;
                    <img src="{{url('assets/image/all_image/'.$u['data']['image'][0]['image'])}}" alt="image">
                  </div>
                  <span class="item_cart" style="color:#333; margin-top: 5px; font-size:13px;">{{$u['data']['pro_name']}}
-                   <br />
+                   <br {{$p8 = 0}} />
 
 
 
 
-                    @if(sizeof($option_set_pro) == 1)
-                        @for ($j = 0; $j <= 1; $j++)
-                          {{$option_set_pro[$s][$j]->item_name}}<br />
-                        @endfor
-                    @else
-                      @for ($j = 0; $j < 3; $j++)
-                        {{$option_set_pro[$s][$j]->item_name}}<br />
+                    @if(isset($option_set_pro))
+
+                      @for ($p = 1; $p <= $size_count[$h]; $p++)
+
+
+                        {{$option_set_pro[$s][$p8]->item_name}}<br {{$p8++}}/>
+
+
                       @endfor
+
                     @endif
 
 
@@ -200,6 +203,7 @@ height: 60px;
               $total_pay += ($u['data'][3]['sum_price']*($u['data'][2]['sum_image']-Session::get('img_f')));
               $total_img += $u['data'][2]['sum_image'];
               $s++;
+              $h++;
               ?>
 
 @endforeach
@@ -257,6 +261,8 @@ height: 60px;
                  </div>
                  <span class="item_cart" style="color:#333; margin-top: 5px; font-size:13px;">{{$k->product_name}}
                    <br />
+
+
                    @if($k->option)
                    @foreach($k->option as $j)
 

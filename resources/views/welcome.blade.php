@@ -243,7 +243,7 @@ figure:hover+span {
         </div>
 				<h4>{{$u->pro_name}}</h4>
 				<p>
-					{{str_limit($u->pro_title, 38, '..')}}
+					{{$u->pro_title}}
 				</p>
       </div>
 
@@ -284,7 +284,7 @@ figure:hover+span {
         </div>
 				<h4>{{$u->pro_name}}</h4>
 				<p>
-					{{str_limit($u->pro_title, 38, '..')}}
+					{{$u->pro_title}}
 				</p>
       </div>
 
@@ -331,7 +331,7 @@ figure:hover+span {
 			</div>
 			<h4>{{$u->pro_name}}</h4>
 			<p>
-				{{str_limit($u->pro_title, 38, '..')}}
+				{{$u->pro_title}}
 			</p>
       </div>
 			@endforeach

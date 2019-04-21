@@ -79,7 +79,7 @@ Photo print
                {{$s = 0}}
              </div>
 
-            
+
              @foreach($option_product as $item)
 
                  @if($item->options_detail->option_type == 1)
@@ -89,12 +89,37 @@ Photo print
 
 
 
+                        <!-- <p style="margin-bottom:5px;"><b> {{$item->options_detail->option_name}}</b></p> -->
+                        @if($item->options_detail->option_title != null)
+                         <a href="" style="margin-bottom:5px; color: #565a5c;" data-toggle="modal" data-target="#myModal_option{{$item->options_detail->id}}"><b><i class="sl sl-icon-question"></i> {{$item->options_detail->option_name}}</b></a>
+                         <!-- Modal style="color: #666;" -->
+                         <div class="modal fade" id="myModal_option{{$item->options_detail->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                           <div class="modal-dialog" role="document">
+                             <div class="modal-content text-right">
+                               <a type="button" class="btn btn-secondary text-right" style=" color: #666;" data-dismiss="modal"><i class="fa fa-remove"></i> Close</a>
+
+
+                               <div class="modal-body">
+
+                                 <div class="row text-center ">
+
+                                   <div class="col-md-12">
+                                     <img src="{{url('assets/image/product/'.$item->options_detail->option_title)}}" class="img-responsive" />
+                                   </div>
+
+                                 </div>
+                               </div>
+
+                             </div>
+                           </div>
+                         </div>
+                         @else
                          <p style="margin-bottom:5px;"><b> {{$item->options_detail->option_name}}</b></p>
+                         @endif
 
 
 
-
-                        <select id="size_photo{{$s}}" class="form-control" onchange="getComboA{{$s}}(this)" name="option_number[]" required>
+                        <select id="size_photo{{$s}}" style="margin-top:8px;" class="form-control" onchange="getComboA{{$s}}(this)" name="option_number[]" required>
                           @foreach($item->options_detail->opt as $item_2)
                           <option value="{{$item_2->id}}" data-value="{{$item_2->item_price}}">{{$item_2->item_name}} </option>
                           @endforeach
@@ -118,7 +143,7 @@ Photo print
                        @foreach($item->options_detail->opt as $item_2)
                         <label class="item text-center image-radio" id="radio_get">
                           <img src="{{url('assets/image/option/'.$item_2->item_image)}}" width="95" style="box-shadow: 0 0 5px 0 rgba(0,0,0,.8);" />
-                          <input type="radio" id="size_photo{{$s}}" name="option_number{{$s}}" value="{{$item_2->id}}" required/>
+                          <input type="radio"  name="option_number{{$s}}" value="{{$item_2->id}}" required/>
                           <i class="icon-check-1 hidden"></i>
                           <br />
                           {{$item_2->item_name}}
@@ -461,17 +486,36 @@ Photo print
 
 <script>
 
+const data_get = {{$s}};
 
 console.log({{$s}})
 
-
+/*
 var e = document.getElementById("size_photo1");
 var strUser = e.options[e.selectedIndex].getAttribute('data-value');
 if(strUser == 0){
   var x = document.getElementById("photo_t");
   x.style.display = "none";
-}
+} */
 //console.log(strUser);
+
+if({{$check_option_count}} > 0){
+
+  var x = document.getElementById("photo_f");
+  x.style.display = "none";
+  var y = document.getElementById("photo_t");
+  y.style.display = "block";
+
+}else{
+
+
+
+  var x = document.getElementById("photo_t");
+  x.style.display = "none";
+  var y = document.getElementById("photo_f");
+  y.style.display = "block";
+
+}
 
 function getComboA1(selectObject) {
     var e = document.getElementById("size_photo1");
@@ -535,6 +579,7 @@ var formData = $('#contactForm1').serialize();
 
 //console.log({{$s}});
 var get_value_radio = 0;
+
 $(document).ready(function(){
 
 
@@ -562,7 +607,7 @@ $(document).ready(function(){
       }
   });
 
-
+  console.log(get_value_radio);
 
   // sync the input state
   $(".image-radio").on("click", function(e){
@@ -572,73 +617,20 @@ $(document).ready(function(){
       $radio.prop("checked",!$radio.prop("checked"));
     //  var selValue = $('input[type="radio"]').val();
       get_value_radio = $radio.val();
-    //  console.log(get_value_radio);
+      console.log($radio);
       $radio.checked = true;
       e.preventDefault();
 
   });
+
+  //console.log($radio);
+
+
 });
 
 
 
-$('#submit_uption').on('click', function () {
 
-
-
-    var set_size = [];
-    for (i = 0; i < {{$s-1}}; i++) {
-        set_size[i] = jQuery("#size_photo"+i).val();
-    }
-    set_size.push(get_value_radio);
-     // value of size_photo input na kub
-
-
-
-
-
-
-    $.ajax({
-            type:'POST',
-            url:'{{url('update_product_option')}}',
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-            data: { "product_id" : {{$objs->id_q}}, "size_photo" : set_size},
-            success: function(data){
-              if(data.status == 'success'){
-
-
-
-              $.notify({
-               // options
-               icon: 'icon_set_1_icon-76',
-               title: "<h4>ปรับ Option สำเร็จ</h4> ",
-               message: "ท่านสามารถสามารถกลับมาปรับ Option ได้เรื่อยๆ. "
-              },{
-               // settings
-               type: 'info',
-               delay: 500,
-               timer: 2000,
-               z_index: 9999,
-               showProgressbar: false,
-               placement: {
-                 from: "bottom",
-                 align: "right"
-               },
-               animate: {
-                 enter: 'animated bounceInUp',
-                 exit: 'animated bounceOutDown'
-               },
-              });
-
-
-              }
-              setTimeout(function() {
-                window.location.href = "{{url('photo_edit/'.$objs->id_q)}}/";
-            }, 2000);
-            }
-        });
-
-
-    });
 
 
 
@@ -696,17 +688,24 @@ Dropzone.options.myDropzone= {
         $("#next_to_cart2").removeClass('hidden');
         //  console.log(frm);
         var set_size = [];
-        if({{$s}} == 2){
-          set_size[0] = jQuery("#size_photo0").val();
-          set_size[1] = jQuery("#size_photo1").val();
-          console.log(set_size);
-        }else{
-          for (i = 0; i < {{$s-1}}; i++) {
+
+        if(get_value_radio == 0){
+          for (i = 0; i < {{$s}}; i++) {
               set_size[i] = jQuery("#size_photo"+i).val();
           }
+        }else{
+          {{$s-1}}
+          for (i = 0; i < {{$s}}; i++) {
+              set_size[i] = jQuery("#size_photo"+i).val();
+          }
+          set_size.push(get_value_radio);
         }
 
-        set_size.push(get_value_radio);
+
+
+
+
+
       //  console.log(set_size);
 
       //  var data = $('#contactForm1').serialize() + 'ption_number[]='+get_value_radio;

@@ -2283,7 +2283,9 @@ $data['get_my_add'] = $get_my_add;
 
 
         $set_img = array();
-
+        $size_count = [];
+        $option_set_pro = array();
+        $s = 1;
 
         foreach(Session::get('cart') as $u){
 
@@ -2294,17 +2296,27 @@ $data['get_my_add'] = $get_my_add;
             ->first();
 
             $option_product = DB::table('option_items')->select(
-              'option_items.*'
+              'option_items.item_name'
               )
               ->whereIn('id', $u['data'][0]['size_photo'])
               ->get();
 
+              $option_product_c = DB::table('option_items')->select(
+                'option_items.item_name'
+                )
+                ->whereIn('id', $u['data'][0]['size_photo'])
+                ->count();
+
           $option_set_pro[] = $option_product;
           $set_img[] = $cat->pro_image;
+          $size_count[$s] = $option_product_c;
+          $s++;
         }
 
-      //  dd($option_set_pro);
+        // dd(count($size_count));
+         //{{$option_set_pro[$s][$j]->item_name}}<br />
         $data['set_img'] = $set_img;
+        $data['size_count'] = $size_count;
 
         if(isset($option_set_pro)){
           $data['option_set_pro'] = $option_set_pro;
@@ -2346,6 +2358,7 @@ $data['get_my_add'] = $get_my_add;
                 'cart_options.*'
                 )
                 ->where('cart_id_detail', $k->id)
+                ->where('option_id', '!=', 0)
                 ->get();
 
                 foreach ($get_option as $j) {
@@ -2399,6 +2412,15 @@ $data['get_my_add'] = $get_my_add;
               ->where('product_set_id', $id)
               ->get();
 
+
+              $check_option_count = DB::table('product_items')->select(
+                  'product_items.*'
+                  )
+                  ->where('product_set_id', $id)
+                  ->count();
+
+                //  dd($check_option_count);
+
               foreach ($option_product as $objd) {
 
           $options = DB::table('option_products')
@@ -2441,7 +2463,7 @@ $data['get_my_add'] = $get_my_add;
               $option_set = 0;
             }
 
-
+            $data['check_option_count'] = $check_option_count;
             $data['objs'] = $cat;
             $data['option_set'] = $option_set;
             $data['option_product'] = $option_product;
@@ -2498,6 +2520,7 @@ $data['get_my_add'] = $get_my_add;
         'cart_options.*'
         )
         ->where('cart_id_detail', $id)
+        ->where('option_id', '!=', 0)
         ->get();
 
         foreach ($get_option as $k) {
@@ -2544,7 +2567,7 @@ $data['get_my_add'] = $get_my_add;
     }
 
 
-    //  dd($get_price);
+    //  dd($get_option);
       return view('photo_edit', $data);
     }
 
@@ -2751,7 +2774,8 @@ $data['get_my_add'] = $get_my_add;
 
 
            $path = 'assets/image/all_image/';
-           $filename = time()."-".$gallary[$i]->getClientOriginalName();
+           $ext = $gallary[$i]->getClientOriginalExtension();
+           $filename = time()."-".$i."-".time().".".$ext;
            $gallary[$i]->move($path, $filename);
 
            $admins[] = [
@@ -2804,7 +2828,8 @@ $data['get_my_add'] = $get_my_add;
         if (sizeof($gallary) > 0) {
          for ($i = 0; $i < sizeof($gallary); $i++) {
            $path = 'assets/image/all_image/';
-           $filename = time()."-".$gallary[$i]->getClientOriginalName();
+           $ext = $gallary[$i]->getClientOriginalExtension();
+           $filename = time()."-".$i."-".time().".".$ext;
            $gallary[$i]->move($path, $filename);
            session()->push('cart.'.$set_link.'.data.image', ['image' => $filename, 'id' => $set_num_img+$i, 'num' => 1]);
          }
@@ -2835,8 +2860,11 @@ $data['get_my_add'] = $get_my_add;
 
         $exp = array();
         $size_photo = $request['size_photo'];
+        //dd($size_photo);
         $path1 = explode(",", $size_photo);
         $exp = array_merge($exp, $path1);
+
+      //  dd($exp);
 
         $gallary = $request->file('file');
         $sum_img = sizeof($gallary);
@@ -2916,7 +2944,8 @@ $data['get_my_add'] = $get_my_add;
                             if (sizeof($gallary) > 0) {
                              for ($i = 0; $i < sizeof($gallary); $i++) {
                                $path = 'assets/image/all_image/';
-                               $filename = time()."-".$gallary[$i]->getClientOriginalName();
+                               $ext = $gallary[$i]->getClientOriginalExtension();
+                               $filename = time()."-".$i."-".time().".".$ext;
                                $gallary[$i]->move($path, $filename);
 
                                $admins[] = [
@@ -2967,7 +2996,8 @@ $data['get_my_add'] = $get_my_add;
               if (sizeof($gallary) > 0) {
                for ($i = 0; $i < sizeof($gallary); $i++) {
                  $path = 'assets/image/all_image/';
-                 $filename = time()."-".$gallary[$i]->getClientOriginalName();
+                 $ext = $gallary[$i]->getClientOriginalExtension();
+                 $filename = time()."-".$i."-".time().".".$ext;
                  $gallary[$i]->move($path, $filename);
 
                  $admins[] = [
@@ -2983,10 +3013,15 @@ $data['get_my_add'] = $get_my_add;
 
              foreach($exp as $k){
 
-               $obj = new cart_option();
-               $obj->cart_id_detail = $the_id;
-               $obj->option_id = $k;
-               $obj->save();
+               if($k != ''){
+
+                 $obj = new cart_option();
+                 $obj->cart_id_detail = $the_id;
+                 $obj->option_id = $k;
+                 $obj->save();
+
+               }
+
 
               //  echo ($j['image']);
              }
@@ -3022,7 +3057,8 @@ $data['get_my_add'] = $get_my_add;
             if (sizeof($gallary) > 0) {
              for ($i = 0; $i < sizeof($gallary); $i++) {
                $path = 'assets/image/all_image/';
-               $filename = time()."-".$gallary[$i]->getClientOriginalName();
+               $ext = $gallary[$i]->getClientOriginalExtension();
+               $filename = time()."-".$i."-".time().".".$ext;
                $gallary[$i]->move($path, $filename);
 
                $admins[] = [

@@ -157,12 +157,35 @@ class ProductController extends Controller
        'item_price' => 'required'
       ]);
 
-      $package = new option_item();
-      $package->item_name = $request['item_name'];
-      $package->item_price = $request['item_price'];
-      $package->resolution = $request['resolution'];
-      $package->item_option_id = $request['option_id'];
-      $package->save();
+      $image = $request->file('image_main');
+      //dd($image);
+      if($image == null){
+        $package = new option_item();
+        $package->item_name = $request['item_name'];
+        $package->item_price = $request['item_price'];
+        $package->resolution = $request['resolution'];
+        $package->item_option_id = $request['option_id'];
+        $package->save();
+      }else{
+
+        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+          $destinationPath = asset('assets/image/option/');
+          $img = Image::make($image->getRealPath());
+          $img->resize(400, 350, function ($constraint) {
+          $constraint->aspectRatio();
+        })->save('assets/image/option/'.$input['imagename']);
+
+        $package = new option_item();
+        $package->item_name = $request['item_name'];
+        $package->item_price = $request['item_price'];
+        $package->item_option_id = $request['option_id'];
+        $package->resolution = $request['resolution'];
+        $package->item_image = $input['imagename'];
+        $package->save();
+
+      }
+
+
 
       return redirect(url('admin/product_option/'.$product_id))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
     }
@@ -177,10 +200,38 @@ class ProductController extends Controller
       $product_id = $request['product_id'];
       $option_id = $request['option_id'];
 
-      $package = option_product::find($option_id);
-      $package->option_name = $request['option_name'];
-      $package->option_detail = $request['option_detail'];
-      $package->save();
+      $image = $request->file('image_main');
+      //dd($image);
+      if($image == null){
+
+        $package = option_product::find($option_id);
+        $package->option_name = $request['option_name'];
+        $package->option_type = $request['option_type'];
+        $package->option_detail = $request['option_detail'];
+        $package->save();
+
+      }else{
+
+
+        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+
+        $destinationPath = asset('assets/image/product/');
+        $img = Image::make($image->getRealPath());
+        $img->resize(800, 533, function ($constraint) {
+        $constraint->aspectRatio();
+        })->save('assets/image/product/'.$input['imagename']);
+
+        $package = option_product::find($option_id);
+        $package->option_name = $request['option_name'];
+        $package->option_title = $input['imagename'];
+        $package->option_type = $request['option_type'];
+        $package->option_detail = $request['option_detail'];
+        $package->save();
+
+      }
+
+
+
 
       return redirect(url('admin/product_option/'.$product_id))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
     }
@@ -190,12 +241,37 @@ class ProductController extends Controller
 
       $product_id = $request['product_id'];
 
+      $image = $request->file('image_main');
+      //dd($image);
+      if($image == null){
 
-      $package = option_item::find($id);
-      $package->item_name = $request['item_name'];
-      $package->item_price = $request['item_price'];
-      $package->item_option_id = $request['option_id'];
-      $package->save();
+        $package = option_item::find($id);
+        $package->item_name = $request['item_name'];
+        $package->item_price = $request['item_price'];
+        $package->item_option_id = $request['option_id'];
+        $package->resolution = $request['resolution'];
+        $package->save();
+
+      }else{
+
+        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+          $destinationPath = asset('assets/image/option/');
+          $img = Image::make($image->getRealPath());
+          $img->resize(400, 350, function ($constraint) {
+          $constraint->aspectRatio();
+        })->save('assets/image/option/'.$input['imagename']);
+
+        $package = option_item::find($id);
+        $package->item_name = $request['item_name'];
+        $package->item_price = $request['item_price'];
+        $package->item_option_id = $request['option_id'];
+        $package->resolution = $request['resolution'];
+        $package->item_image = $input['imagename'];
+        $package->save();
+
+      }
+
+
 
       return redirect(url('admin/product_option/'.$product_id))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
     }
@@ -238,11 +314,34 @@ class ProductController extends Controller
 
        $product_id = $request['product_id'];
 
+
+       $image = $request->file('image_main');
+       //dd($image);
+       if($image == null){
+
        $package = new option_product();
        $package->option_name = $request['option_name'];
        $package->option_type = $request['option_type'];
        $package->option_detail = $request['option_detail'];
        $package->save();
+       }else{
+
+       $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+
+       $destinationPath = asset('assets/image/product/');
+       $img = Image::make($image->getRealPath());
+       $img->resize(800, 533, function ($constraint) {
+       $constraint->aspectRatio();
+       })->save('assets/image/product/'.$input['imagename']);
+
+       $package = new option_product();
+       $package->option_name = $request['option_name'];
+       $package->option_title = $input['imagename'];
+       $package->option_type = $request['option_type'];
+       $package->option_detail = $request['option_detail'];
+       $package->save();
+
+     }
 
        $the_id = $package->id;
 

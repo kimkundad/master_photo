@@ -61,7 +61,7 @@ CONTACT US | MASTER PHOTO NETWORK
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 02-513-0105 <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทรศัพท์มือถือ : 086-600-5055 <br />
                     <i class="icon_set_1_icon-95 p_15" ></i> Fax. 02-939-3080 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 8.00-22.00 น.
                   </p>
 								</div>
@@ -95,7 +95,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> ตั้งอยู่ ตรงข้ามเซ็นทรัลลาดพร้าว <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 0-2930-9388-9 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 8.00-22.00 น.
                   </p>
 								</div>
@@ -130,7 +130,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> อยู่ตรงข้ามตลาด กม.4 <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 0-2971-9127-8 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 9.00-21.00 น.
                   </p>
 								</div>
@@ -165,7 +165,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> อยู่ติดทางออก The Mall ฝั่งถนนกาญจนาภิเษก <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 0-2455-8903-4 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 8.30-21.00 น.
                   </p>
 								</div>
@@ -199,7 +199,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> ติดถนนเพชรเกษม ปากทางเข้าหมู่บ้านเศรษฐกิจข้างโรงเรียนอนุบาลเด่นหล้า <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 0-2809-4495-6 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 8.00-20.00 น.
                   </p>
 								</div>
@@ -235,7 +235,7 @@ CONTACT US | MASTER PHOTO NETWORK
                     <i class="icon_set_1_icon-41 p_15" ></i> อยู่ภายในโรงแรม เดอะแอม บาซี่ โฮลเทล อยู่ก่อนถึงสถานฑูตมาเลเซีย <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 02-679-1511 <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 089-682-9888 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 9.00-19.00 น.
                   </p>
 								</div>
@@ -270,7 +270,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> อยู่ตรงข้าม Tops Supermarket ถ.สุขาภิบาล 3 (ติดVIVA) <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 0-2729-5592 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 8.00-20.00 น.
                   </p>
 								</div>
@@ -306,7 +306,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> อยู่ปากซอยลาดพร้าว 99 ติดธ.กรุงเทพ <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 0-2538-1477-8 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 9.00-19.00 น.
                   </p>
 								</div>
@@ -341,7 +341,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> อยู่ปากซอยเสรีไทย 3 ตรงข้าม ธ.กรุงเทพ สาขาคลองจั่น <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 0-2378-1158 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 9.00-19.00 น.
                   </p>
 								</div>
@@ -377,7 +377,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> อยู่ตรงข้ามประตู 1 ม.เกษตรศาสตร์ ด้านถนนงามวงศ์วาน <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 0-2941-1161 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 8.30-19.00 น.
                   </p>
 								</div>
@@ -413,7 +413,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> อยู่ ปากซอยพัฒนาการ 57/1 <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 0-2722-0703-4 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 9.00-19.00 น.
                   </p>
 								</div>
@@ -448,7 +448,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> อยู่ ปากซอยรามคำแหง 150 <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 0-2728-0113 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 8.00-19.00 น.
                   </p>
 								</div>
@@ -483,7 +483,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> อยู่ใกล้กับ HomePro สาขาราชพฤกษ์ <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 02-4087282-3 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 9.30-19.00 น.
                   </p>
 								</div>
@@ -518,7 +518,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> อยู่ปากซอยคู้บอน <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 02-943-1008-9 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 10.00-19.30 น.
                   </p>
 								</div>
@@ -554,7 +554,7 @@ CONTACT US | MASTER PHOTO NETWORK
                     <i class="icon_set_1_icon-41 p_15" ></i> ท้ายซอยรามอินทรา 65 ก่อนเลี้ยวเข้าตลาดถนอมมิตร <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 02-945-8861 <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> Fax: 02-945-8864 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 9.30-19.00 น.
                   </p>
 								</div>
@@ -589,7 +589,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> 562/11 ซอยสวนพลู แขวงทุ่งมหาเมฆ เขตสาทร กรุงเทพ 10120 <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 02-012-9610, 02-012-9611<br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 9.00-19.00 น.
                   </p>
 								</div>
@@ -623,7 +623,7 @@ CONTACT US | MASTER PHOTO NETWORK
 									<p style="line-height: 25px; ">
                     <i class="icon_set_1_icon-41 p_15" ></i> อยู่ก่อนถึง Big C พระประแดง  <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 02-010-1930 <br />
-                    <i class="icon_set_1_icon-84 p_15" ></i> E-mail : master-print@hotmail.com <br />
+
                     <i class="icon_set_1_icon-83 p_15" ></i> เปิด 9.00-20.00 น.
                   </p>
 								</div>

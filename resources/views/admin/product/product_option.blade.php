@@ -103,7 +103,7 @@
 
 
 
-                    <form  method="POST" action="{{url('admin/add_product_option_sub')}}" name="add_product_option_sub">
+                    <form  method="POST" action="{{url('admin/add_product_option_sub')}}" name="add_product_option_sub" enctype="multipart/form-data">
                       {{ csrf_field() }}
                       <div class="modal-body">
 
@@ -114,7 +114,7 @@
                               <label class="col-md-3 control-label" for="profileFirstName">ชื่อ option*</label>
                               <div class="col-md-8">
                                 <input type="text" class="form-control" name="option_name" value="{{ old('option_name')}}">
-                                <input type="hidden" class="form-control" name="option_type" value="1">
+
                                 <input type="hidden" class="form-control" name="product_id" value="{{$product_id}}">
                                 </div>
                             </div>
@@ -124,6 +124,37 @@
                               <div class="col-md-8">
                                 <textarea class="form-control" name="option_detail" rows="6">{{ old('option_detail') }}</textarea>
                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-md-3 control-label" for="exampleInputEmail1">รายละเอียด แบบรูปภาพ</label>
+                              <div class="col-md-8">
+                              <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <div class="input-append">
+                                          <div class="uneditable-input">
+                                            <i class="fa fa-file fileupload-exists"></i>
+                                            <span class="fileupload-preview"></span>
+                                          </div>
+                                          <span class="btn btn-default btn-file">
+                                            <span class="fileupload-exists">Change</span>
+                                            <span class="fileupload-new">Select file</span>
+                                            <input type="file" name="image_main">
+                                          </span>
+                                          <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                        </div>
+                                      </div>
+                                      </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-md-3 control-label" for="profileAddress">รูปแบบการแสดงผล*</label>
+                              <div class="col-md-8">
+                                <select name="option_type" class="form-control mb-md" required>
+
+                                 <option value="1"> แสดงแบบข้อความ </option>
+                                 <option value="2"> แสดง รูปและข้อความ </option>
+                                </select>
+                              </div>
                             </div>
 
 
@@ -185,7 +216,7 @@
 
 
 
-                          <form  method="POST" action="{{url('admin/edit_item_only/'.$item_2->id_item)}}" name="edit_item_only{{$item_2->id_item}}">
+                          <form  method="POST" action="{{url('admin/edit_item_only/'.$item_2->id_item)}}" name="edit_item_only{{$item_2->id_item}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="modal-body">
 
@@ -208,6 +239,45 @@
                                       <input type="text" class="form-control" name="item_price" value="{{$item_2->item_price}}">
                                       </div>
                                   </div>
+
+                                  <div class="form-group">
+                                    <label class="col-md-3 control-label" for="profileFirstName">resolution ของรูป (ถ้ามี)</label>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="resolution" value="{{$item_2->resolution}}">
+                                      </div>
+                                  </div>
+
+                                  @if($u->options_detail->option_type == 2)
+                                  <div class="form-group">
+                                    <label class="col-md-3 control-label" for="exampleInputEmail1">item image*</label>
+                                    <div class="col-md-8">
+                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                              <div class="input-append">
+                                                <div class="uneditable-input">
+                                                  <i class="fa fa-file fileupload-exists"></i>
+                                                  <span class="fileupload-preview"></span>
+                                                </div>
+                                                <span class="btn btn-default btn-file">
+                                                  <span class="fileupload-exists">Change</span>
+                                                  <span class="fileupload-new">Select file</span>
+                                                  <input type="file" name="image_main">
+                                                </span>
+                                                <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                              </div>
+                                            </div>
+                                            </div>
+                                  </div>
+                                  @endif
+
+                                  @if($u->options_detail->option_title != null)
+                                  <div class="form-group">
+                                    <label class="col-md-3 control-label" for="profileFirstName">รายละเอียดแบบรูป</label>
+                                    <div class="col-md-8">
+                                      <img src="{{url('assets/image/option/'.$item_2->item_image)}}" class="img-responsive "  />
+                                      </div>
+                                  </div>
+                                  @endif
+
                                 </fieldset>
                             </div>
                             <div class="panel-footer">
@@ -284,12 +354,12 @@
 
 
 
-                      <form  method="POST" action="{{url('admin/add_option_product_item_inpro')}}" name="add_option_product_item_inpro{{$u->option_set_id}}">
+                      <form  method="POST" action="{{url('admin/add_option_product_item_inpro')}}" name="add_option_product_item_inpro{{$u->option_set_id}}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="modal-body">
 
 
-                            <h4 class="mb-xlg text-center">เพิ่มหัวข้อของ Option </h4>
+                            <h4 class="mb-xlg text-center">เพิ่ม item ของ Option </h4>
                             <fieldset>
 
                               <div class="form-group">
@@ -307,6 +377,37 @@
                                   <input type="text" class="form-control" value="0" name="item_price" value="{{ old('item_price')}}">
                                   </div>
                               </div>
+
+                              <div class="form-group">
+                                <label class="col-md-3 control-label" for="profileFirstName">resolution ของรูป (ถ้ามี)</label>
+                                <div class="col-md-8">
+                                  <input type="text" class="form-control" name="resolution" value="0">
+                                  </div>
+                              </div>
+
+                              @if($u->options_detail->option_type == 2)
+                              <div class="form-group">
+                                <label class="col-md-3 control-label" for="exampleInputEmail1">item image*</label>
+                                <div class="col-md-8">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                          <div class="input-append">
+                                            <div class="uneditable-input">
+                                              <i class="fa fa-file fileupload-exists"></i>
+                                              <span class="fileupload-preview"></span>
+                                            </div>
+                                            <span class="btn btn-default btn-file">
+                                              <span class="fileupload-exists">Change</span>
+                                              <span class="fileupload-new">Select file</span>
+                                              <input type="file" name="image_main">
+                                            </span>
+                                            <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                          </div>
+                                        </div>
+                                        </div>
+                              </div>
+                              @endif
+
+
                             </fieldset>
                         </div>
                         <div class="panel-footer">
@@ -334,7 +435,7 @@
 
 
 
-                      <form  method="POST" action="{{url('admin/edit_option_product_item_inpro/')}}" name="edit_option_product_item_inpro{{$u->option_set_id}}">
+                      <form  method="POST" action="{{url('admin/edit_option_product_item_inpro/')}}" name="edit_option_product_item_inpro{{$u->option_set_id}}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="modal-body">
 
@@ -345,7 +446,7 @@
                                 <label class="col-md-3 control-label" for="profileFirstName">ชื่อ option*</label>
                                 <div class="col-md-8">
                                   <input type="text" class="form-control" name="option_name" value="{{$u->options_detail->option_name}}">
-                                  <input type="hidden" class="form-control" name="option_type" value="1">
+
                                   <input type="hidden" class="form-control" name="option_id" value="{{ $u->option_set_id }}">
                                   <input type="hidden" class="form-control" name="product_id" value="{{$product_id}}">
                                   </div>
@@ -356,6 +457,53 @@
                                 <div class="col-md-8">
                                   <textarea class="form-control" name="option_detail" rows="6">{{$u->options_detail->option_detail}}</textarea>
                                   </div>
+                              </div>
+
+                              @if($u->options_detail->option_title != null)
+                              <div class="form-group">
+                                <label class="col-md-3 control-label" for="profileFirstName">รายละเอียดแบบรูป</label>
+                                <div class="col-md-8">
+                                  <img src="{{url('assets/image/product/'.$u->options_detail->option_title)}}" class="img-responsive "  />
+                                  </div>
+                              </div>
+                              @endif
+
+
+                              <div class="form-group">
+                                <label class="col-md-3 control-label" for="exampleInputEmail1">รายละเอียด แบบรูปภาพ</label>
+                                <div class="col-md-8">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                          <div class="input-append">
+                                            <div class="uneditable-input">
+                                              <i class="fa fa-file fileupload-exists"></i>
+                                              <span class="fileupload-preview"></span>
+                                            </div>
+                                            <span class="btn btn-default btn-file">
+                                              <span class="fileupload-exists">Change</span>
+                                              <span class="fileupload-new">Select file</span>
+                                              <input type="file" name="image_main">
+                                            </span>
+                                            <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                          </div>
+                                        </div>
+                                        </div>
+                              </div>
+
+
+
+                              <div class="form-group">
+                                <label class="col-md-3 control-label" for="profileAddress">option type*</label>
+                                <div class="col-md-8">
+                                  <select name="option_type" class="form-control mb-md" required>
+
+                                   <option value="1" @if( $u->options_detail->option_type == 1)
+                                        selected='selected'
+                                        @endif> แสดงแบบข้อความ </option>
+                                   <option value="2" @if( $u->options_detail->option_type == 2)
+                                        selected='selected'
+                                        @endif> แสดง รูปและข้อความ </option>
+                                  </select>
+                                </div>
                               </div>
 
 
