@@ -194,7 +194,13 @@ figure:hover+span {
 			@if(isset($arrivals_t_l))
       <div class="col-md-6 col-sm-6 text-center">
         <div class="hover01">
-            <a href="{{url('themes/'.$arrivals_t_l->id)}}">
+
+							@if($arrivals_t_l->sub_category == 3)
+							<a href="{{url('photo_print/'.$arrivals_t_l->id_p)}}">
+							@else
+							<a href="{{url('themes/'.$arrivals_t_l->id_p)}}">
+							@endif
+
               <figure>
                 <img src="{{url('assets/image/product/'.$arrivals_t_l->pro_image)}}" alt="{{$arrivals_t_l->pro_name}}" class="img-responsive">
               </figure>
@@ -213,7 +219,13 @@ figure:hover+span {
 @if(isset($arrivals_t_r))
 <div class="col-md-6 col-sm-6 text-center">
 	<div class="hover01">
-			<a href="{{url('themes/'.$arrivals_t_r->id)}}">
+
+				@if($arrivals_t_r->sub_category == 3)
+				<a href="{{url('photo_print/'.$arrivals_t_r->id_p)}}">
+				@else
+				<a href="{{url('themes/'.$arrivals_t_r->id_p)}}">
+				@endif
+
 				<figure>
 					<img src="{{url('assets/image/product/'.$arrivals_t_r->pro_image)}}" alt="{{$arrivals_t_r->pro_name}}" class="img-responsive">
 				</figure>
@@ -235,7 +247,12 @@ figure:hover+span {
       <div class="col-md-4 col-sm-6 text-center">
 
         <div class="hover01">
-          <a href="{{url('themes/'.$u->id)}}">
+					@if($u->sub_category == 3)
+					<a href="{{url('photo_print/'.$u->id_p)}}">
+					@else
+					<a href="{{url('themes/'.$u->id_p)}}">
+					@endif
+
             <figure>
               <img src="{{url('assets/image/product/'.$u->pro_image)}}" alt="{{$u->pro_name}}" class="img-responsive">
             </figure>
@@ -276,7 +293,12 @@ figure:hover+span {
       <div class="col-md-3 col-sm-6 text-center">
 
 				<div class="hover01">
-          <a href="{{url('themes/'.$u->id)}}">
+
+						@if($arrivals_t_l->sub_category == 3)
+						<a href="{{url('photo_print/'.$u->id_p)}}">
+						@else
+						<a href="{{url('themes/'.$u->id_p)}}">
+						@endif
             <figure>
               <img src="{{url('assets/image/product/'.$u->pro_image)}}" alt="{{$u->pro_name}}" class="img-responsive">
             </figure>
@@ -323,7 +345,12 @@ figure:hover+span {
       <div class="col-md-3 col-sm-6 text-center">
 
 			<div class="hover01">
-				<a href="{{url('themes/'.$u->id)}}">
+				@if($arrivals_t_l->sub_category == 3)
+				<a href="{{url('photo_print/'.$u->id_p)}}">
+				@else
+				<a href="{{url('themes/'.$u->id_p)}}">
+				@endif
+
 					<figure>
 						<img src="{{url('assets/image/product/'.$u->pro_image)}}" alt="{{$u->pro_name}}" class="img-responsive">
 					</figure>

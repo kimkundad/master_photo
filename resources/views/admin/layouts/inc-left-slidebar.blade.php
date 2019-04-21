@@ -86,6 +86,13 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										</a>
 									</li>
 
+                  <li {{ (Request::is('admin/get_pay_info*') ? 'class=nav-expanded' : '') }}  {{ (Request::is('admin/edit_pay_info*') ? 'class=nav-expanded' : '') }}>
+										<a href="{{url('admin/get_pay_info/')}}" >
+											<i class="fa fa-coffee" aria-hidden="true"></i>
+											<span>แจ้งการชำระเงิน</span>
+										</a>
+									</li>
+
 
                   <li {{ (Request::is('admin/slide*') ? 'class=nav-expanded' : '') }} >
 										<a href="{{url('admin/slide/')}}"  >
@@ -108,21 +115,10 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										</a>
 									</li>
 
-                  <li {{ (Request::is('admin/get_pay_info*') ? 'class=nav-expanded' : '') }}  {{ (Request::is('admin/edit_pay_info*') ? 'class=nav-expanded' : '') }}>
-										<a href="{{url('admin/get_pay_info/')}}" >
-											<i class="fa fa-coffee" aria-hidden="true"></i>
-											<span>แจ้งการชำระเงิน</span>
-										</a>
-									</li>
 
 
 
-                  <li {{ (Request::is('admin/contact_admin*') ? 'class=nav-expanded' : '') }} >
-										<a href="{{url('admin/contact_admin/')}}"  >
-											<i class="fa fa-envelope-o" aria-hidden="true"></i>
-											<span>จัดการข้อความ</span>
-										</a>
-									</li>
+
 
 
 

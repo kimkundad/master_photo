@@ -36,7 +36,7 @@
 
             <li>
 
-                <i class="icon-globe-1"></i> <a href="{{ URL::to('change/en') }}">EN</a> - <a href="{{ URL::to('change/th') }}">TH</a>
+                <i class="icon-globe-1"></i> EN<!-- <a href="{{ URL::to('change/en') }}">EN</a> --> - <a href="{{ URL::to('change/th') }}">TH</a>
 
 
             </li>
@@ -268,7 +268,7 @@
 
                 @endforeach
 
-              
+
 
               </ul>
               @endif
@@ -283,7 +283,10 @@
               </a>
 
               <ul>
+                <!--
                 <li><a href="{{ URL::to('change/th') }}">Thai language</a></li>
+              -->
+                <li><a>Thai language</a></li>
                 <li><a href="{{ URL::to('change/en') }}">Englist language</a></li>
               </ul>
 

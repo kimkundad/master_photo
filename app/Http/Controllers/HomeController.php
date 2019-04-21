@@ -48,24 +48,36 @@ class HomeController extends Controller
 
   //    session()->pull('cart.data2.data.image.image', '1534489077-logo-major.png');
 
+
       $arrivals = DB::table('products')->select(
-        'products.*'
+        'products.*',
+        'products.id as id_p',
+        'sub_categories.*'
         )
-        ->where('pro_status_show', 2)
+        ->where('products.pro_status_show', 2)
+        ->leftjoin('sub_categories', 'sub_categories.id',  'products.pro_category')
         ->limit(3)
         ->get();
 
 
         $arrivals_t_l = DB::table('products')->select(
-          'products.*'
+          'products.*',
+          'products.id as id_p',
+          'sub_categories.*'
           )
-          ->where('pro_status_show', 6)
+          ->where('products.pro_status_show', 6)
+          ->leftjoin('sub_categories', 'sub_categories.id',  'products.pro_category')
           ->first();
 
+        //  dd($arrivals_t_l);
+
           $arrivals_t_r = DB::table('products')->select(
-            'products.*'
+            'products.*',
+            'products.id as id_p',
+            'sub_categories.*'
             )
-            ->where('pro_status_show', 7)
+            ->where('products.pro_status_show', 7)
+            ->leftjoin('sub_categories', 'sub_categories.id',  'products.pro_category')
             ->first();
 
 
@@ -74,9 +86,12 @@ class HomeController extends Controller
 
 
         $hot = DB::table('products')->select(
-          'products.*'
+          'products.*',
+          'products.id as id_p',
+          'sub_categories.*'
           )
-          ->where('pro_status_show', 3)
+          ->where('products.pro_status_show', 3)
+          ->leftjoin('sub_categories', 'sub_categories.id',  'products.pro_category')
           ->limit(8)
           ->get();
 
@@ -91,9 +106,12 @@ class HomeController extends Controller
 
 
           $hot_new = DB::table('products')->select(
-            'products.*'
+            'products.*',
+            'products.id as id_p',
+            'sub_categories.*'
             )
-            ->where('pro_status_show', 4)
+            ->where('products.pro_status_show', 4)
+            ->leftjoin('sub_categories', 'sub_categories.id',  'products.pro_category')
             ->limit(4)
             ->get();
 
@@ -366,7 +384,7 @@ class HomeController extends Controller
             }
 
 
-
+          //  dd($arrivals_t_l);
 
 
         $data['arrivals'] = $arrivals;
