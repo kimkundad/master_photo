@@ -202,7 +202,7 @@ figure:hover+span {
         </div>
 				<h4>{{$arrivals_t_l->pro_name}}</h4>
 				<p>
-					{{str_limit($arrivals_t_l->pro_title, 38, '..')}}
+					{{$arrivals_t_l->pro_title}}
 				</p>
       </div>
 			@endif
@@ -221,7 +221,7 @@ figure:hover+span {
 	</div>
 	<h4>{{$arrivals_t_r->pro_name}}</h4>
 	<p>
-		{{str_limit($arrivals_t_r->pro_title, 38, '..')}}
+		{{$arrivals_t_r->pro_title}}
 	</p>
 </div>
 @endif
