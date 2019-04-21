@@ -14,6 +14,7 @@ Photo print
 
 <?php
 $resolution = 0;
+$get_name_size = '';
 ?>
 
 <main class="slider-pro" >
