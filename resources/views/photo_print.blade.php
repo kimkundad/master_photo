@@ -508,13 +508,13 @@ if({{$check_option_count}} > 0){
 
 }else{
 
-
+/*
 
   var x = document.getElementById("photo_t");
   x.style.display = "none";
   var y = document.getElementById("photo_f");
   y.style.display = "block";
-
+*/
 }
 
 function getComboA1(selectObject) {
