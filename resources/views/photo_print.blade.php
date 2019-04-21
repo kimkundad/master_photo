@@ -707,7 +707,9 @@ Dropzone.options.myDropzone= {
         }
 
 
-
+        if(set_size == null){
+          set_size[0] = 0;
+        }
 
 
 
