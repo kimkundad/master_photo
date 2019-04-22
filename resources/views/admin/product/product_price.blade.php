@@ -107,14 +107,14 @@
                                   <div class="form-group">
                                     <label class="col-md-3 control-label" for="profileFirstName">ยอดตัดสินค้า จัดส่ง<span class="text-danger"> * </span></label>
                                     <div class="col-md-8">
-                                      <input type="text" class="form-control" name="set_limit" value="{{ old('set_limit')}}">
+                                      <input type="text" class="form-control" name="set_limit" value="{{ $objs->set_limit }}">
                                       </div>
                                   </div>
 
                                   <div class="form-group">
                                     <label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง<span class="text-danger"> * </span></label>
                                     <div class="col-md-8">
-                                      <input type="text" class="form-control" name="a_price_o" value="{{ old('a_price_o')}}">
+                                      <input type="text" class="form-control" name="a_price_o" value="{{ $objs->a_price_o }}">
                                       </div>
                                   </div>
 
@@ -122,7 +122,7 @@
                                   <div class="form-group">
                                     <label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง (ราคาสอง กรณีไม่คิดราคาแรก)<span class="text-danger"> * </span></label>
                                     <div class="col-md-8">
-                                      <input type="text" class="form-control" name="b_price_o" value="{{ old('b_price_o')}}">
+                                      <input type="text" class="form-control" name="b_price_o" value="{{ $objs->b_price_o }}">
                                       </div>
                                   </div>
 
