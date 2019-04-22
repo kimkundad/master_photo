@@ -241,6 +241,24 @@
                                   </div>
 
                                   <div class="form-group">
+                                    <label class="col-md-3 control-label" for="profileFirstName">เลือกการแสดง ราคา*</label>
+                                    <div class="col-md-8">
+                                      <select name="item_show_status" class="form-control populate" required>
+                                        <option value="0"
+                                        @if( $item_2->item_show_status == 0)
+                                         selected='selected'
+                                         @endif
+                                         >ไม่แสดงราคา</option>
+                                        <option value="1"
+                                        @if( $item_2->item_show_status == 1)
+                                         selected='selected'
+                                         @endif
+                                         >แสดงราคา</option>
+                                      </select>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
                                     <label class="col-md-3 control-label" for="profileFirstName">resolution ของรูป (ถ้ามี)</label>
                                     <div class="col-md-8">
                                       <input type="text" class="form-control" name="resolution" value="{{$item_2->resolution}}">
@@ -375,6 +393,21 @@
                                 <label class="col-md-3 control-label" for="profileFirstName">item price*</label>
                                 <div class="col-md-8">
                                   <input type="text" class="form-control" value="0" name="item_price" value="{{ old('item_price')}}">
+                                  </div>
+                              </div>
+
+
+                              <div class="form-group">
+                                <label class="col-md-3 control-label" for="profileFirstName">เลือกการแสดง ราคา*</label>
+                                <div class="col-md-8">
+                                  <select name="item_show_status" class="form-control populate" required>
+                                    <option value="0"
+
+                                     >ไม่แสดงราคา</option>
+                                    <option value="1"
+
+                                     >แสดงราคา</option>
+                                  </select>
                                   </div>
                               </div>
 

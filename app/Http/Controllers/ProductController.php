@@ -165,6 +165,7 @@ class ProductController extends Controller
         $package->item_price = $request['item_price'];
         $package->resolution = $request['resolution'];
         $package->item_option_id = $request['option_id'];
+        $package->item_show_status = $request['item_show_status'];
         $package->save();
       }else{
 
@@ -181,6 +182,7 @@ class ProductController extends Controller
         $package->item_option_id = $request['option_id'];
         $package->resolution = $request['resolution'];
         $package->item_image = $input['imagename'];
+        $package->item_show_status = $request['item_show_status'];
         $package->save();
 
       }
@@ -250,6 +252,7 @@ class ProductController extends Controller
         $package->item_price = $request['item_price'];
         $package->item_option_id = $request['option_id'];
         $package->resolution = $request['resolution'];
+        $package->item_show_status = $request['item_show_status'];
         $package->save();
 
       }else{
@@ -267,6 +270,7 @@ class ProductController extends Controller
         $package->item_option_id = $request['option_id'];
         $package->resolution = $request['resolution'];
         $package->item_image = $input['imagename'];
+        $package->item_show_status = $request['item_show_status'];
         $package->save();
 
       }

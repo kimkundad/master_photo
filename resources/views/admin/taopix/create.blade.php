@@ -124,7 +124,7 @@
                                              <option value="{{$u->id}}">{{$u->pro_name}}</option>
                                           @endforeach
                                       </select>
-                                      </select>
+
                                     </div>
           												</div>
 
