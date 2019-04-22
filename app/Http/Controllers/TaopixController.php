@@ -284,7 +284,7 @@ class TaopixController extends Controller
           }else{
             $data['exp'] = null;
           }
-
+          dd($exp);
           //$data['exp'] = $exp;
           $data['s'] = $s;
 
