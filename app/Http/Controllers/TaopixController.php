@@ -19,6 +19,7 @@ class TaopixController extends Controller
     public function index()
     {
 
+        DB::table('taopixes')->where('arrays_data', null)->delete();
 
         $taopix = DB::table('taopixes')->select(
               'taopixes.*',
@@ -279,11 +280,7 @@ class TaopixController extends Controller
 
           $s = 1;
 
-          if($exp != ''){
-            $data['exp'] = $exp;
-          }else{
-            $data['exp'] = null;
-          }
+        $data['exp'] = $exp;
 
           //$data['exp'] = $exp;
           $data['s'] = $s;
