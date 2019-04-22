@@ -69,7 +69,44 @@ class UserProfileController extends Controller
     public function check_toupic(Request $request){
 
       $set_size_option = $request['set_size_option'];
-      dd($set_size_option);
+      $get_text = "";
+      for ($i = 0; $i < sizeof($set_size_option); $i++) {
+
+        if($i == 0){
+          $get_text.= $set_size_option[$i];
+        }else{
+          $get_text.= ",".$set_size_option[$i];
+        }
+      }
+
+      $get_data = DB::table('taopixes')
+          ->where('arrays_data', $get_text)
+          ->count();
+
+          if($get_data > 0){
+
+            $get_data_2 = DB::table('taopixes')
+                ->where('arrays_data', $get_text)
+                ->first();
+
+            return response()->json([
+      'data' => 'success',
+      'set_data' => $get_text,
+      'set_url' => $get_data_2->url_taopix,
+    ]);
+
+          }else{
+
+            return response()->json([
+      'data' => 'null',
+      'set_data' => $get_text,
+      'set_url' => 'null',
+    ]);
+
+          }
+
+
+
     }
 
 

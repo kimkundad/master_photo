@@ -202,13 +202,19 @@ figure:hover+span {
                           </td>
 
                         </tr>
-                        <!--
-                        <tr class="total">
+
+                        <tr >
 
                           <td >
-                          Total Price  <span>{{	$product->pro_price}}</span>
+                          ข้อมูลที่ได้รับ  <span id="get_data"> </span>
                           </td>
-                        </tr> -->
+                        </tr>
+                        <tr >
+
+                          <td >
+                          url ที่ได้รับ  <span id="get_url"> </span>
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
 
@@ -217,8 +223,8 @@ figure:hover+span {
                      <div class="f1-buttons">
                        <br />
 
-                         <a href="#" id="alert_show" style="display:block" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal_optionx_1">MAKE ORDER</a>
-                         <a href="#" id="submit_form" style="display:none; cursor: pointer;" class="btn btn-submit btn-block">MAKE ORDER</a>
+                         <a id="alert_show" style="display:block" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal_optionx_1">MAKE ORDER</a>
+                         <a id="submit_form" style="display:none; cursor: pointer;" class="btn btn-submit btn-block">MAKE ORDER</a>
 
 
 
@@ -375,14 +381,26 @@ $( "#submit_form" ).click(function() {
           headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
           data: { "set_size_option" : set_size_option },
           success: function(data){
-            if(data.data.success){
+            console.log(data);
+
+            if(data.data == 'success'){
+
+              document.getElementById('get_data').innerHTML = " ";
+              document.getElementById('get_url').innerHTML = " ";
+
+              //get_data
+              document.getElementById('get_data').innerHTML = "มีข้อมูลของ Taopix ค่าที่คุณส่งไปคือ {"+data.set_data+"}";
+
+              document.getElementById('get_url').innerHTML = data.set_url;
+
+            //  alert('มีข้อมูลจ้า')
 
 
-
-
-
-
-
+            }else{
+              document.getElementById('get_data').innerHTML = " ";
+              document.getElementById('get_url').innerHTML = " ";
+              document.getElementById('get_data').innerHTML = "ไม่มีข้อมูลของ Taopix ค่าที่คุณส่งไปคือ {"+data.set_data+"}";
+            //  alert('ไม่มีข้อมูลจ้า')
             }
           }
       });
