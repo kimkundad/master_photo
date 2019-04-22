@@ -278,7 +278,14 @@ class TaopixController extends Controller
           $exp = array_merge($exp, $path1);
 
           $s = 1;
-          $data['exp'] = $exp;
+
+          if($exp != null){
+            $data['exp'] = $exp;
+          }else{
+            $data['exp'] = null;
+          }
+
+          //$data['exp'] = $exp;
           $data['s'] = $s;
 
 

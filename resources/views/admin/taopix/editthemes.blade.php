@@ -115,12 +115,14 @@
                                     <div class="col-md-8">
 
           													  <select name="themes_id" class="form-control populate" required>
-                                        <option value="">-- เลือกสินค้า --</option>
+                                        <option value="">-- เลือก Themes --</option>
+                                        @if(isset($get_theme))
                                           @foreach($get_theme as $u)
                                              <option value="{{$u->id}}" @if( $u->id == $exp[$s])
                                              selected='selected'
                                              @endif>{{$u->themepro_name}}</option>
                                           @endforeach
+                                        @endif  
                                       </select>
                                       </select>
                                     </div>
