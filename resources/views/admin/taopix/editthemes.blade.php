@@ -118,11 +118,16 @@
                                         <option value="">-- เลือก Themes --</option>
                                         @if(isset($get_theme))
                                           @foreach($get_theme as $u)
-                                             <option value="{{$u->id}}" @if( $u->id == $exp[$s])
+
+                                             <option value="{{$u->id}}"
+                                            @if($exp != null)
+                                            @if( $u->id == $exp[$s])
                                              selected='selected'
-                                             @endif>{{$u->themepro_name}}</option>
+                                             @endif
+                                             @endif
+                                             >{{$u->themepro_name}}</option>
                                           @endforeach
-                                        @endif  
+                                        @endif
                                       </select>
                                       </select>
                                     </div>
