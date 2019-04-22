@@ -388,5 +388,8 @@ class TaopixController extends Controller
     public function destroy($id)
     {
         //
+        $obj = taopix::find($id);
+        $obj->delete();
+        return redirect(url('admin/taopix/'))->with('delete','คุณทำการลบอสังหา สำเร็จ');
     }
 }
