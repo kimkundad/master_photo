@@ -279,12 +279,12 @@ class TaopixController extends Controller
 
           $s = 1;
 
-          if(count($exp) > 0){
+          if($exp != ''){
             $data['exp'] = $exp;
           }else{
             $data['exp'] = null;
           }
-          dd(count($exp));
+
           //$data['exp'] = $exp;
           $data['s'] = $s;
 

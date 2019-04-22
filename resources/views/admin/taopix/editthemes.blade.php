@@ -120,7 +120,7 @@
                                           @foreach($get_theme as $u)
 
                                              <option value="{{$u->id}}"
-                                            @if($exp != null)
+                                            @if($exp != '')
                                             @if( $u->id == $exp[$s])
                                              selected='selected'
                                              @endif
