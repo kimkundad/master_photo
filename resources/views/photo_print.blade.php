@@ -121,7 +121,11 @@ Photo print
 
                         <select id="size_photo{{$s}}" style="margin-top:8px;" class="form-control" onchange="getComboA{{$s}}(this)" name="option_number[]" required>
                           @foreach($item->options_detail->opt as $item_2)
-                          <option value="{{$item_2->id}}" data-value="{{$item_2->item_price}}">{{$item_2->item_name}} </option>
+                          <option value="{{$item_2->id}}" data-value="{{$item_2->item_price}}">{{$item_2->item_name}}
+                            @if($item_2->item_show_status == 1)
+                          ( ราคา {{$item_2->item_price}} )
+                            @endif
+                          </option>
                           @endforeach
                         </select>
                       </div>
