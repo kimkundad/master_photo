@@ -76,6 +76,9 @@
                   <tbody>
                     @if(isset($taopix))
                        @foreach($taopix as $u)
+                       <tr>
+
+
                        <td>{{$u->sub_name}}</td>
                        <td>{{$u->pro_name}}</td>
                        <td>{{$u->themepro_name}}</td>
@@ -97,6 +100,7 @@
                          </div>
 
                        </td>
+                       </tr>
                        @endforeach
                     @endif
 
