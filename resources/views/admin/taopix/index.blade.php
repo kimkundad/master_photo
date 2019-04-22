@@ -46,66 +46,59 @@
 
               <div class="panel-body">
                 <div class="row">
-                   <div class="col-md-2" >
-                     <a class="btn btn-primary btn-block" style="float:left" href="{{url('admin/taopix/create')}}" >
+                   <div class="col-md-4" >
+                     <a class="btn btn-primary " style="float:left" href="{{url('admin/taopix/create')}}" >
                          <i class="fa fa-plus"></i> เพิ่มข้อมูลใหม่</a>
 
 
 
                    </div>
-                   <div class="col-md-3" >
-                     <form class="form-horizontal" name="search_type" action="{{url('admin/taopix_search')}}" method="POST" enctype="multipart/form-data">
-                       {{ csrf_field() }}
-                     <select class="form-control ">
 
-                        <option value="0">แสดงทั้งหมด</option>
-                        @if($sub_cat)
-                          @foreach($sub_cat as $u)
-                          <option value="{{$u->id}}">{{$u->sub_name}}</option>
-                          @endforeach
-                       @endif
-
-                      </select>
-                      </form>
-                  </div>
-                   <div class="col-md-7 " style="padding-left: 1px;">
-
-                     <div class="form-group ">
-                      <label class="col-md-4 control-label"></label>
-                      <div class="col-md-8">
-                        <form class="form-horizontal" name="search_name" action="{{url('admin/taopix_search')}}" method="GET" enctype="multipart/form-data">
-                          {{ csrf_field() }}
-                        <div class="input-group input-search">
-                          <input type="text" class="form-control" name="search" placeholder="Search..." required>
-                          <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                          </span>
-                        </div>
-                      </form>
-                      </div>
-                    </div>
-
-                   </div>
 
               </div>
 
-
-                <br><br>
-
+              <br />
 
 
 
-                <table class="table table-responsive-lg table-striped table-sm mb-0">
+
+
+                <table class="table table-responsive-lg table-striped table-sm mb-0" id="datatable-default">
                   <thead>
                     <tr>
-
-                      <th>รูปภาพ</th>
-                      <th>สถานะ</th>
+                      <th>หมวดหมู่</th>
+                      <th>สินค้า</th>
+                      <th>Theme</th>
+                      <th>Taopix</th>
                       <th>จัดการ</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @if(isset($taopix))
+                       @foreach($taopix as $u)
+                       <td>{{$u->sub_name}}</td>
+                       <td>{{$u->pro_name}}</td>
+                       <td>{{$u->themepro_name}}</td>
+                       <td>{{$u->taopix_name}}</td>
+                       <td>
 
+                         <div class="btn-group flex-wrap">
+                           <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
+                           <div class="dropdown-menu" role="menu">
+                           <!--	<a class="dropdown-item text-1" href="#">ดูข้อมูล</a> -->
+                             <a class="dropdown-item text-1" href="{{url('admin/taopix/'.$u->id_q.'/edit')}}">แก้ไข</a>
+                             <form  action="{{url('admin/taopix/'.$u->id_q)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
+                                 <input type="hidden" name="_method" value="DELETE">
+                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                 <button type="submit" title="ลบ taopix" class="dropdown-item text-1 text-danger"><i class="fa fa-times "></i> ลบ</button>
+                             </form>
+
+                           </div>
+                         </div>
+
+                       </td>
+                       @endforeach
+                    @endif
 
                   </tbody>
                 </table>

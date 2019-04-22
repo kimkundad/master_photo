@@ -15,6 +15,13 @@ class CreateTaopixesTable extends Migration
     {
         Schema::create('taopixes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('taopix_name');
+            $table->integer('pro_id')->nullable();
+            $table->text('note')->nullable();
+            $table->string('url_taopix')->nullable();
+            $table->integer('themes_id')->nullable();
+            $table->text('arrays_data')->nullable();
+            $table->integer('taopix_status')->default('0');
             $table->timestamps();
         });
     }

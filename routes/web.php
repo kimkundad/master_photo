@@ -44,6 +44,9 @@ Route::post('api/check_toupic', 'UserProfileController@check_toupic');
 
 
 Route::get('photo_edit/{id}', 'HomeController@photo_edit')->name('photo_edit');
+
+
+
 Route::post('/del_upload_image', 'HomeController@del_upload_image')->name('del_upload_image');
 
 Route::post('/del_cart', 'HomeController@del_cart')->name('del_cart');
@@ -111,7 +114,16 @@ Route::group(['middleware' => 'admin'], function() {
 
 	Route::resource('admin/taopix', 'TaopixController');
 
+	Route::get('admin/taopix_theme/{id}', 'TaopixController@taopix_theme')->name('taopix_theme');
+	Route::post('admin/add_taopix_theme', 'TaopixController@add_taopix_theme')->name('add_taopix_theme');
+	Route::post('admin/add_taopix_option', 'TaopixController@add_taopix_option')->name('add_taopix_option');
+
+	Route::get('admin/taopix_option/{id}', 'TaopixController@taopix_option');
+
+	Route::get('admin/edit_taopix_option/{id}', 'TaopixController@edit_taopix_option');
+  Route::get('admin/edit_taopix_theme/{id}', 'TaopixController@edit_taopix_theme')->name('edit_taopix_theme');
 	Route::get('admin/order_print/{id}', 'OrderController@order_print');
+
 
 	Route::post('admin/del_deli_item/', 'DeliveryController@del_deli_item');
 	Route::post('admin/edit_deli_item/', 'DeliveryController@edit_deli_item');

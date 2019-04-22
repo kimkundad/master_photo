@@ -157,11 +157,14 @@ kerry express | MASTER PHOTO NETWORK
 
           <div class="form_title">
 						<h3><strong>2</strong>เงินสด</h3>
-
+            <p>
+              ลูกค้าสามารถเข้ามาชำระเงินสดที่หน้าร้านได้เอง
+            </p>
 					</div>
           <br />
           <br />
 
+<!--
           <div class="form_title">
 						<h3><strong>3</strong>บัตรเครดิต</h3>
 
@@ -182,7 +185,7 @@ kerry express | MASTER PHOTO NETWORK
                 </div>
                 </div>
                 </div>
-
+ -->
 
 
 				</div>
