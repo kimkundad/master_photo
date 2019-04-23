@@ -943,11 +943,53 @@ class HomeController extends Controller
             ->where('user_id', Auth::user()->id)
             ->count();
 
+        $group_id = DB::table('cart_details')
+            ->selectRaw('*, sum(sum_image) as sum')
+            ->where('user_id', Auth::user()->id)
+            ->groupBy('product_id')
+            ->get();
+
+
+
+          //  dd($group_id);
+
         $get_data = DB::table('cart_details')->select(
             'cart_details.*'
             )
             ->where('user_id', Auth::user()->id)
             ->get();
+
+            $get_id_first = [];
+
+            if($count_data > 0){
+            foreach($get_data as $u){
+
+              $get_id_first[] = $u->product_id;
+
+            }
+          }
+
+
+
+              $get_max_ship = DB::table('products')->select(
+                  'products.*'
+                  )
+                  ->whereIn('id', $get_id_first)
+                  ->orderBy('a_price_o', 'desc')
+                  ->first();
+
+
+
+                  $get_data_max_price = DB::table('cart_details')->select(
+                      'cart_details.*'
+                      )
+                      ->where('user_id', Auth::user()->id)
+                      ->where('product_id', $get_max_ship->id)
+                      ->orderBy('sum_image', 'desc')
+                      ->first();
+
+                    //  dd($get_data_max_price->id);
+
 
             $get_all_price = []; // หาค่าขนส่ง มาเก็บไว้ใน array
           //  $pack_buy = []; // คิดราคาแบบ pack
@@ -955,6 +997,7 @@ class HomeController extends Controller
             $get_test = [];
             $get_test2 = [];
             $get_sum_ship = 0;
+            $get_sum_ship2 = 0;
 
             foreach($get_data as $k){
 
@@ -970,11 +1013,57 @@ class HomeController extends Controller
 
             }
 
+
+
+
+
             $get_pro_max = DB::table('products')->select(
                 'products.*'
                 )
                 ->whereIn('id', $get_id_pro)
                 ->orderBy('a_price_o', 'desc')->value('id');
+
+
+
+                foreach($group_id as $h){
+                  $get_pro = DB::table('products')->select(
+                      'products.*'
+                      )
+                      ->where('id', $h->product_id)
+                      ->first();
+
+                      $pack_buy = floor($h->sum_image / $get_pro->set_limit); //ปัดเศษทิ้ง
+
+                      $piece_buy = $h->sum_image % $get_pro->set_limit;//หารแบบเอาเศษ
+
+
+                      if($get_data_max_price->id == $h->id){
+
+                        $get_sum_ship += $pack_buy*$get_pro->a_price_o;
+                        $get_sum_ship2 += $pack_buy*$get_pro->a2_price_o;
+
+                        if($piece_buy != 0){
+                          $get_sum_ship += $get_pro->a_price_o;
+                          $get_sum_ship2 += $get_pro->a2_price_o;
+                        }
+
+                      }else{
+
+                        $get_sum_ship += $pack_buy*$get_pro->b_price_o;
+                        $get_sum_ship2 += $pack_buy*$get_pro->b2_price_o;
+                        if($piece_buy != 0){
+                          $get_sum_ship += $get_pro->b_price_o;
+                          $get_sum_ship2 += $get_pro->b2_price_o;
+                          $h->shipping_price += $get_pro->b_price_o;
+                        }
+
+                      }
+
+                }
+
+              //  dd($get_sum_ship);
+
+
 
             //dd($get_pro_max); ค่าไอดีที่มากสุดสุด
 
@@ -997,33 +1086,31 @@ class HomeController extends Controller
 
               //    $get_test[] = $h->sum_image % $get_pro->set_limit;//หารแบบเอาเศษ
 
-
                 $h->shipping_price2 += $pack_buy*$get_pro->a_price_o;
 
                 if($piece_buy != 0){
-
                   $h->shipping_price2 += $get_pro->a_price_o;
                 }
 
 
                   //เช็คราคา เอาตัวมากที่สุด คิดราคาแรก
-                  if($get_pro_max == $get_pro->id){
+                  if($get_data_max_price->id == $h->id){
 
-                  $get_sum_ship += $pack_buy*$get_pro->a_price_o;
+                //  $get_sum_ship += $pack_buy*$get_pro->a_price_o;
                   $h->shipping_price += $pack_buy*$get_pro->a_price_o;
                   // คิดว่ามีส่วนที่เหลือไหม ถ้ามีให้ + ราคาเข้าไป 1
                     if($piece_buy != 0){
-                      $get_sum_ship += $get_pro->a_price_o;
+                    //  $get_sum_ship += $get_pro->a_price_o;
                       $h->shipping_price += $get_pro->a_price_o;
                     }
                   // คิดว่ามีส่วนที่เหลือไหม
                   }else{
 
-                    $get_sum_ship += $pack_buy*$get_pro->b_price_o;
+                  //  $get_sum_ship += $pack_buy*$get_pro->b_price_o;
                     $h->shipping_price += $pack_buy*$get_pro->b_price_o;
                     // คิดว่ามีส่วนที่เหลือไหม ถ้ามีให้ + ราคาเข้าไป 1
                       if($piece_buy != 0){
-                        $get_sum_ship += $get_pro->b_price_o;
+                    //    $get_sum_ship += $get_pro->b_price_o;
                         $h->shipping_price += $get_pro->b_price_o;
                       }
 
@@ -1045,6 +1132,7 @@ class HomeController extends Controller
           //  dd(max($get_all_price)); // ค่ามากที่สุดใน array สินค้าทั้งหมด
 
         $data['get_sum_ship'] = $get_sum_ship;
+        $data['get_sum_ship2'] = $get_sum_ship2;
         $data['count_data2'] = $count_data;
         $data['get_data2'] = $get_data;
 
@@ -2115,7 +2203,8 @@ $data['get_my_add'] = $get_my_add;
         if (sizeof($gallary) > 0) {
          for ($i = 0; $i < sizeof($gallary); $i++) {
            $path = 'assets/image/all_image/';
-           $filename = time()."-".$gallary[$i]->getClientOriginalName();
+           $ext = $gallary[$i]->getClientOriginalExtension();
+           $filename = time()."-".$i."-".time().".".$ext;
            $gallary[$i]->move($path, $filename);
            session()->push('cart.'.$ids.'.data.image', ['image' => $filename, 'id' => $set_num_img+$i, 'num' => 1]);
          }
@@ -2161,7 +2250,8 @@ $data['get_my_add'] = $get_my_add;
         if (sizeof($gallary) > 0) {
          for ($i = 0; $i < sizeof($gallary); $i++) {
            $path = 'assets/image/all_image/';
-           $filename = time()."-".$gallary[$i]->getClientOriginalName();
+           $ext = $gallary[$i]->getClientOriginalExtension();
+           $filename = time()."-".$i."-".time().".".$ext;
            $gallary[$i]->move($path, $filename);
 
            $admins[] = [

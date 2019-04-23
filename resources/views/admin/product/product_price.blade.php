@@ -112,7 +112,7 @@
                                   </div>
 
                                   <div class="form-group">
-                                    <label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง<span class="text-danger"> * </span></label>
+                                    <label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง ems<span class="text-danger"> * </span></label>
                                     <div class="col-md-8">
                                       <input type="text" class="form-control" name="a_price_o" value="{{ $objs->a_price_o }}">
                                       </div>
@@ -120,9 +120,26 @@
 
 
                                   <div class="form-group">
-                                    <label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง (ราคาสอง กรณีไม่คิดราคาแรก)<span class="text-danger"> * </span></label>
+                                    <label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง ems (ราคาสอง กรณีไม่คิดราคาแรก)<span class="text-danger"> * </span></label>
                                     <div class="col-md-8">
                                       <input type="text" class="form-control" name="b_price_o" value="{{ $objs->b_price_o }}">
+                                      </div>
+                                  </div>
+
+                                  <hr />
+
+                                  <div class="form-group">
+                                    <label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง KERRY, DHL<span class="text-danger"> * </span></label>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="a2_price_o" value="{{ $objs->a2_price_o }}">
+                                      </div>
+                                  </div>
+
+
+                                  <div class="form-group">
+                                    <label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง KERRY, DHL (ราคาสอง กรณีไม่คิดราคาแรก)<span class="text-danger"> * </span></label>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="b2_price_o" value="{{ $objs->b2_price_o }}">
                                       </div>
                                   </div>
 

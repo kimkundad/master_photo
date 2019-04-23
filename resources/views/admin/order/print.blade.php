@@ -145,7 +145,7 @@ border: 1px solid #ddd;
             @if($obj->shipping_p == 0)
             {{$u->sum_price*$u->sum_image}}
             @else
-            {{($u->sum_price*$u->sum_image)*$u->sum_shipping}}
+            {{($u->sum_price*$u->sum_image)}}
             @endif
             </td>
 					</tr>
@@ -329,7 +329,7 @@ border: 1px solid #ddd;
           @if($obj->shipping_p == 0)
           {{$u->sum_price*$u->sum_image}}
           @else
-          {{($u->sum_price*$u->sum_image)*$u->sum_shipping}}
+          {{($u->sum_price*$u->sum_image)}}
           @endif
           </td>
         </tr>

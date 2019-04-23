@@ -80,6 +80,8 @@ Shipping | MASTER PHOTO NETWORK
       <div class="col-md-8 box_style_1  add_bottom_15">
         <input type="hidden" id="get_sum_ship" name="get_sum_ship" value="0" />
 
+        <input type="hidden" name="main_get_sum_ship" value="{{$get_sum_ship}}" />
+        <input type="hidden" name="main_get_sum_ship2" value="{{$get_sum_ship2}}" />
         <div class="box_style_1 visible-sm visible-xs">
 
           <table class="table table_summary" style="font-size: 14px;">
@@ -760,6 +762,7 @@ var value2 = 0;
 var set_deli = {{$deli_set->de_price}};
 
 var get_sum_ship = {{$get_sum_ship}};
+var get_sum_ship2 = {{$get_sum_ship2}};
 console.log(get_sum_ship)
 
 
@@ -888,9 +891,9 @@ function getComboB(selectObject) {
         document.getElementById("get_sum_ship").value = zero_var;
       }else{
 
-      $('#get_image_price').append((Number(price_image)+Number(get_sum_ship)).toFixed(2));
-      $('#get_ship_price').append( (get_sum_ship) );
-      document.getElementById("get_sum_ship").value = get_sum_ship;
+      $('#get_image_price').append((Number(price_image)+Number(get_sum_ship2)).toFixed(2));
+      $('#get_ship_price').append( (get_sum_ship2) );
+      document.getElementById("get_sum_ship").value = get_sum_ship2;
     }
 
     }

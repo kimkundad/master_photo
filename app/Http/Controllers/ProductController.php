@@ -608,6 +608,8 @@ class ProductController extends Controller
           $package->set_limit = $set_limit;
           $package->a_price_o = $request['a_price_o'];
           $package->b_price_o = $request['b_price_o'];
+          $package->a2_price_o = $request['a2_price_o'];
+          $package->b2_price_o = $request['b2_price_o'];
           $package->pro_price = 0;
           $package->pro_status_show = $request['pro_status_show'];
           $package->save();
@@ -664,6 +666,10 @@ class ProductController extends Controller
           $package->pro_title = $request['pro_title'];
           $package->pro_name_detail = $request['pro_name_detail'];
           $package->pro_category = $request['pro_category'];
+          $package->a_price_o = $request['a_price_o'];
+          $package->b_price_o = $request['b_price_o'];
+          $package->a2_price_o = $request['a2_price_o'];
+          $package->b2_price_o = $request['b2_price_o'];
           $package->pro_price = 0;
           $package->pro_image = $input['imagename'];
           $package->pro_status_show = $request['pro_status_show'];
@@ -708,6 +714,8 @@ class ProductController extends Controller
       $package->set_limit = $set_limit;
       $package->a_price_o = $request['a_price_o'];
       $package->b_price_o = $request['b_price_o'];
+      $package->a2_price_o = $request['a2_price_o'];
+      $package->b2_price_o = $request['b2_price_o'];
       $package->pro_price = 0;
       $package->save();
 

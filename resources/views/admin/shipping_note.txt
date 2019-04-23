@@ -1,0 +1,60 @@
+foreach($get_data as $h){
+
+  $h->shipping_price = 0;
+  $h->shipping_price2 = 0;
+
+  $get_pro = DB::table('products')->select(
+      'products.*'
+      )
+      ->where('id', $h->product_id)
+      ->first();
+
+      $pack_buy = floor($h->sum_image / $get_pro->set_limit); //ปัดเศษทิ้ง
+    //  $total_pack_buy_price = $pack_buy * $get_pro->a_price_o;//คิดราคาแบบ pack
+  //    $get_test2[] = floor($h->sum_image / $get_pro->set_limit); //ปัดเศษทิ้ง
+
+      $piece_buy = $h->sum_image % $get_pro->set_limit;//หารแบบเอาเศษ
+
+  //    $get_test[] = $h->sum_image % $get_pro->set_limit;//หารแบบเอาเศษ
+
+    $h->shipping_price2 += $pack_buy*$get_pro->a_price_o;
+
+    if($piece_buy != 0){
+      $h->shipping_price2 += $get_pro->a_price_o;
+    }
+
+
+      //เช็คราคา เอาตัวมากที่สุด คิดราคาแรก
+      if($get_data_max_price->id == $h->id){
+
+      $get_sum_ship += $pack_buy*$get_pro->a_price_o;
+      $h->shipping_price += $pack_buy*$get_pro->a_price_o;
+      // คิดว่ามีส่วนที่เหลือไหม ถ้ามีให้ + ราคาเข้าไป 1
+        if($piece_buy != 0){
+          $get_sum_ship += $get_pro->a_price_o;
+          $h->shipping_price += $get_pro->a_price_o;
+        }
+      // คิดว่ามีส่วนที่เหลือไหม
+      }else{
+
+        $get_sum_ship += $pack_buy*$get_pro->b_price_o;
+        $h->shipping_price += $pack_buy*$get_pro->b_price_o;
+        // คิดว่ามีส่วนที่เหลือไหม ถ้ามีให้ + ราคาเข้าไป 1
+          if($piece_buy != 0){
+            $get_sum_ship += $get_pro->b_price_o;
+            $h->shipping_price += $get_pro->b_price_o;
+          }
+
+      }
+
+
+      $package = cart_detail::find($h->id);
+      $package->shipping_price = $h->shipping_price;
+      $package->shipping_price_2 = $h->shipping_price2;
+      $package->save();
+
+
+
+
+    //  $piece_price = $piece_buy * $product_xx_price;// ราคาของส่วนที่เหลือจากแพ็ก
+}
