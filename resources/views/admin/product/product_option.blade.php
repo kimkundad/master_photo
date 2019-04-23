@@ -365,8 +365,8 @@
 									</ol>
 
                   <!-- Start ADD Option item -->
-                  <a class="mb-1 mt-1 mr-1 btn-xs btn btn-info" data-toggle="modal" data-target="#myModal_optionx_{{$u->option_set_id}}" style="margin-top:10px;" title="เพิ่มตัวเลือกเข้าไป"><i class="fa fa-plus"></i> </a>
-                  <div class="modal fade" id="myModal_optionx_{{$u->option_set_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <a class="mb-1 mt-1 mr-1 btn-xs btn btn-info" data-toggle="modal" data-target="#myModal_optionx_item_{{$u->option_set_id}}" style="margin-top:10px;" title="เพิ่มตัวเลือกเข้าไป"><i class="fa fa-plus"></i> </a>
+                  <div class="modal fade" id="myModal_optionx_item_{{$u->option_set_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document" >
                       <div class="modal-content ">
 
