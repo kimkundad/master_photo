@@ -498,14 +498,14 @@ class OrderController extends Controller
                                 $order_images = DB::table('order_images')->select(
                                       'order_images.*'
                                       )
-                                      ->where('order_id_detail', $id)
+                                      ->where('order_id_detail', $u->id_de)
                                       ->get();
 
 
                                       $order_images_count = DB::table('order_images')->select(
                                             'order_images.*'
                                             )
-                                            ->where('order_id_detail', $id)
+                                            ->where('order_id_detail', $u->id_de)
                                             ->count();
 
                             @mkdir(public_path('zip/'.$maon_f.'/'.$u->product_name), 0777, true);
