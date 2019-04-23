@@ -1795,19 +1795,19 @@ $data['get_my_add'] = $get_my_add;
        $package->bil_req = $check_order;
        $package->text_re_user = $text_re_user;
        $package->deliver_order = $request['deliver_order'];
-       if($request['deliver_order'] == 'จัดส่งผ่านทางรถ บขส.'){
+       if($request['deliver_order'] == 'บขส.'){
 
          $package->shipping_t2 = $request['bus_shipping'];
 
-       }elseif($request['deliver_order'] == 'ทางร้านจัดส่ง Delivery'){
+       }elseif($request['deliver_order'] == 'Delivery'){
 
          $package->shipping_t2 = $request['area_shipping'];
 
-       }elseif($request['deliver_order'] == 'จัดส่งผ่านทางรถตู้'){
+       }elseif($request['deliver_order'] == 'รถตู้'){
 
        $package->shipping_t2 = $request['van_shipping'];
 
-     }elseif($request['deliver_order'] == 'จัดส่งผ่านทางรถไฟ'){
+     }elseif($request['deliver_order'] == 'รถไฟ'){
 
      $package->shipping_t2 = $request['train_shipping'];
 
