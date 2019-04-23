@@ -529,7 +529,7 @@ class OrderController extends Controller
 
 
 
-            return response()->download(public_path('order_'.$order->code_gen.'.zip'));
+            return response()->download(public_path('zip/order_'.$order->code_gen.'.zip'));
 
 
 
