@@ -519,7 +519,8 @@ class OrderController extends Controller
                               copy(public_path('assets/image/all_image/'.$k->order_image), public_path('zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1.'/'.$k->order_image_sum.'/'.$k->order_image));
                             }
 
-
+                            $name_op = array();
+                            $name_op1 = array();
                   }
 
                   $maon_l = public_path('zip/order_'.$order->code_gen.'/');
