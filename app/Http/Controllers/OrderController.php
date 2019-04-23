@@ -516,7 +516,7 @@ class OrderController extends Controller
 
                             foreach($order_images as $k){
                               @mkdir(public_path('zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1.'/'.$k->order_image_sum), 0777, true);
-                              copy(public_path('assets/image/all_image/'.$u->order_image), public_path('zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1.'/'.$k->order_image_sum.'/'.$k->order_image));
+                              copy(public_path('assets/image/all_image/'.$k->order_image), public_path('zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1.'/'.$k->order_image_sum.'/'.$k->order_image));
                             }
 
 
