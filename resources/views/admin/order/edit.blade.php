@@ -191,11 +191,12 @@
 
                           <div class="panel-footer">
                             <div class="row">
-                              <div class="col-md-9 col-md-offset-3">
+                              <div class="col-md-12 col-md-offset-1">
                                 <button type="submit" class="btn btn-primary">อัพเดทข้อมูล</button>
                                 <a href="{{url('admin/order_print/'.$objs->id_or)}}" target="_blank" class="btn btn-warning">Print ใบปะหน้า</a>
-                                <a href="{{url('admin/order')}}" class="btn btn-default">ยกเลิก</a>
-
+                              
+                                <a class="mb-xs mt-xs mr-xs btn  btn-default " href="{{url('admin/load_img/'.$objs->id_or)}}" >
+                                     Download ทั้งหมด</a>
                               </div>
                             </div>
                           </div>
@@ -453,8 +454,7 @@
                                 @endforeach
                                 @endif -->
 
-                                <a class="mb-xs mt-xs mr-xs btn btn-sm btn-default " href="{{url('admin/load_img/'.$u->id_de)}}" >
-                                     Download ทั้งหมด</a>
+
 
                               </fieldset>
 

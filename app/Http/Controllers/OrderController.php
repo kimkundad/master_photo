@@ -440,8 +440,104 @@ class OrderController extends Controller
 
     }
 
-
     public function load_img($id){
+
+      $zipper = new \Chumper\Zipper\Zipper;
+      setlocale(LC_ALL, 'th_TH');
+
+      $order = DB::table('orders')
+            ->where('id', $id)
+            ->first();
+
+            $order_de = DB::table('order_details')->select(
+                  'order_details.*',
+                  'order_details.id as id_de',
+                  'products.*'
+                  )
+                  ->leftjoin('products', 'products.id',  'order_details.product_id')
+                  ->where('order_details.order_id', $order->id)
+                  ->get();
+
+                //  dd($order_de);
+
+                  $name_op = [];
+                  $name_op1 = [];
+
+
+                  $maon_f = 'order_'.$order->code_gen;
+                  @mkdir(public_path('zip/'.$maon_f), 0777, true);
+
+                  foreach($order_de as $u){
+
+                    $order_option_count = DB::table('order_options')->select(
+                          'order_options.*',
+                          'order_options.id as id_op',
+                          'option_items.*'
+                          )
+                          ->leftjoin('option_items', 'option_items.id',  'order_options.option_id')
+                          ->where('order_options.order_id_detail', $u->id_de)
+                          ->count();
+
+                          $order_option = DB::table('order_options')->select(
+                                'order_options.*',
+                                'order_options.id as id_op',
+                                'option_items.*'
+                                )
+                                ->leftjoin('option_items', 'option_items.id',  'order_options.option_id')
+                                ->where('order_options.order_id_detail', $u->id_de)
+                                ->get();
+
+                                for($i = 0; $i < $order_option_count; $i++){
+                                  $name_op[] = $order_option[$i]->item_name;
+                                  $name_op1=implode(',',$name_op);
+
+                                //  $name_op1.="".serialize($name_op);
+                                }
+
+
+                                $order_images = DB::table('order_images')->select(
+                                      'order_images.*'
+                                      )
+                                      ->where('order_id_detail', $id)
+                                      ->get();
+
+
+                                      $order_images_count = DB::table('order_images')->select(
+                                            'order_images.*'
+                                            )
+                                            ->where('order_id_detail', $id)
+                                            ->count();
+
+                            @mkdir(public_path('zip/'.$maon_f.'/'.$u->product_name), 0777, true);
+
+                            @mkdir(public_path('zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1), 0777, true);
+
+
+
+                            foreach($order_images as $u){
+                              @mkdir(public_path('zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1.'/'.$u->order_image_sum), 0777, true);
+                              copy(public_path('assets/image/all_image/'.$u->order_image), public_path('zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1.'/'.$u->order_image_sum.'/'.$u->order_image));
+                            }
+
+
+                  }
+
+                  $maon_l = public_path('order_'.$order->code_gen.'/');
+                  $zipper->make(public_path('order_'.$order->code_gen.'.zip'))->folder($order->code_gen)->add($maon_l)->close();
+
+
+
+
+
+            return response()->download(public_path('order_'.$order->code_gen.'.zip'));
+
+
+
+
+    }
+
+
+    public function load_img2($id){
 
       $order_code = DB::table('order_details')->select(
             'order_details.*',

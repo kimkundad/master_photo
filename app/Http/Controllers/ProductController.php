@@ -617,22 +617,7 @@ class ProductController extends Controller
         //  DB::table('product_items')->where('product_set_id', $id)->delete();
           //dd($image);
 
-            DB::table('product_items')->where('product_set_id', $id)->delete();
 
-          if($gallary != null){
-
-          //  dd($gallary);
-            if (sizeof($gallary) > 0) {
-               for ($i = 0; $i < sizeof($gallary); $i++) {
-                 $admins[] = [
-                     'option_set_id' => $gallary[$i],
-                     'product_set_id' => $id
-                 ];
-               }
-               product_item::insert($admins);
-             }
-
-          }
 
 
 
@@ -675,22 +660,8 @@ class ProductController extends Controller
           $package->pro_status_show = $request['pro_status_show'];
           $package->save();
 
-          $objs = DB::table('product_items')
-          ->select(
-             'product_items.*'
-             )
-          ->where('product_set_id', $id)
-          ->delete();
 
-          if (sizeof($gallary) > 0) {
-             for ($i = 0; $i < sizeof($gallary); $i++) {
-               $admins[] = [
-                   'option_set_id' => $gallary[$i],
-                   'product_set_id' => $id
-               ];
-             }
-             product_item::insert($admins);
-           }
+        
 
 
         }
