@@ -220,7 +220,7 @@
           												</div>
 
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง*</label>
+          													<label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง ems*</label>
           													<div class="col-md-8">
           														<input type="text" class="form-control" name="a_price_o" value="{{ $objs->a_price_o }}">
           														</div>
@@ -228,7 +228,7 @@
 
 
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง (ราคาสอง กรณีไม่คิดราคาแรก)*</label>
+          													<label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง ems (ราคาสอง กรณีไม่คิดราคาแรก)*</label>
           													<div class="col-md-8">
           														<input type="text" class="form-control" name="b_price_o" value="{{ $objs->b_price_o }}">
           														</div>
