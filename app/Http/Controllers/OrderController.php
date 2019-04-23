@@ -522,8 +522,8 @@ class OrderController extends Controller
 
                   }
 
-                  $maon_l = public_path('order_'.$order->code_gen.'/');
-                  $zipper->make(public_path('order_'.$order->code_gen.'.zip'))->folder($order->code_gen)->add($maon_l)->close();
+                  $maon_l = public_path('zip/order_'.$order->code_gen.'/');
+                  $zipper->make(public_path('zip/order_'.$order->code_gen.'.zip'))->folder($order->code_gen)->add($maon_l)->close();
 
 
 
