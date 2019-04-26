@@ -463,31 +463,50 @@ figure:hover+span {
     border-radius: 0%;
 }
 </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.js"></script>
 <script>
-setTimeout(function() {
-$.notify({
- // options
- icon: '{{url('master/assets/image/TOP657971755logo-website.png')}}',
- title: "<h4>ยินดีต้อนรับสู่เว็บไซต์ใหม่ของ</h4> ",
- message: "www.masterphotonetwork.com "
-},{
- // settings
- type: 'info',
- icon_type: 'image',
- delay: 5000,
- timer: 3000,
- z_index: 9999,
- showProgressbar: false,
- placement: {
-   from: "bottom",
-   align: "right"
- },
- animate: {
-   enter: 'animated bounceInUp',
-   exit: 'animated bounceOutDown'
- },
-});
-}, 1000);
+
+var visited = jQuery.cookie('visited');
+if (visited == 'yes') {
+         // second page load, cookie active
+    } else {
+        //openFancybox(); // first page load, launch fancybox
+
+				setTimeout(function() {
+				$.notify({
+				 // options
+				 icon: '{{url('master/assets/image/TOP657971755logo-website.png')}}',
+				 title: "<h4>ยินดีต้อนรับสู่เว็บไซต์ใหม่ของ</h4> ",
+				 message: "www.masterphotonetwork.com "
+				},{
+				 // settings
+				 type: 'info',
+				 icon_type: 'image',
+				 delay: 5000,
+				 timer: 3000,
+				 z_index: 9999,
+				 showProgressbar: false,
+				 placement: {
+				   from: "bottom",
+				   align: "right"
+				 },
+				 animate: {
+				   enter: 'animated bounceInUp',
+				   exit: 'animated bounceOutDown'
+				 },
+				});
+				}, 1000);
+
+    }
+
+		jQuery.cookie('visited', 'yes', {
+        expires: 365 // the number of days cookie  will be effective
+    });
+
+
+
+
 </script>
 
 @stop('scripts')
