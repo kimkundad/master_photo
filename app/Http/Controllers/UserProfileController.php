@@ -143,13 +143,13 @@ class UserProfileController extends Controller
 
                             $order_option_count = DB::table('order_options')
                               ->where('order_id_detail', $h->id_de)
+                              ->where('option_id', '!=', 0)
                               ->count();
 
                             foreach($order_option as $j){
 
                               $name_option = DB::table('option_items')
                                     ->where('id', $j->option_id)
-                                    ->where('option_id', '!=', 0)
                                     ->first();
                                 $j->get_option = $name_option;
                             }
