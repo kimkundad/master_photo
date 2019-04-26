@@ -55,8 +55,8 @@ class ApiController extends Controller
 
       // group id product $group_id Auth::user()->id
       $group_id = DB::table('cart_details')
-          ->selectRaw('cart_details.product_id')
-          ->where('user_id', Auth::user()->id)
+          ->selectRaw('cart_details.*')
+          ->where('user_id', 1)
           ->groupBy('product_id')
           ->get();
 
@@ -71,39 +71,59 @@ class ApiController extends Controller
         }
 
 
-      $inventory = delirank::where('deli_main_id', $id)
-      ->whereIn('product_id', $get_id_first)
-      ->where('start_rank', '<=', $price_pro)
-      ->where('end_rank', '>=', $price_pro)
-      ->get();
 
-      $inventory_count = delirank::where('deli_main_id', $id)
-      ->whereIn('product_id', $get_id_first)
-      ->where('start_rank', '<=', $price_pro)
-      ->where('end_rank', '>=', $price_pro)
-      ->count();
+        $shipping_total = 0;
 
-      $max_price = delirank::where('deli_main_id', $id)
-      ->whereIn('product_id', $get_id_first)
-      ->where('start_rank', '<=', $price_pro)
-      ->where('end_rank', '>=', $price_pro)
-      ->max('total_price');
+        $inventory = delirank::where('deli_main_id', $id)
+            ->whereIn('product_id', $get_id_first)
+            ->get();
 
-      $shipping_total = 0;
 
-      if($inventory_count > 0){
 
-        foreach ($inventory as $u) {
-          // code...
-          if($max_price == $u->total_price){
-            $shipping_total+= $u->total_price;
-          }else{
-            $shipping_total+= $u->total_price2;
-          }
+      //  return $get_id_first;  12:52 1:150
+        // 30
+
+        $id_rank = [];
+
+        foreach ($group_id as $u) {
+
+          $inventory = delirank::where('deli_main_id', $id)
+              ->where('product_id', $u->product_id)
+              ->where('start_rank', '<=', $u->sum_image)
+              ->where('end_rank', '>=', $u->sum_image)
+              ->first();
+
+              $id_rank[] = $inventory->id;
+              //
+        }
+
+        $max_price = delirank::whereIn('id', $id_rank)
+        ->max('total_price');
+
+        $max_price_id = delirank::whereIn('id', $id_rank)
+        ->where('total_price', $max_price)
+        ->first();
+
+        foreach ($group_id as $u) {
+
+          $inventory = delirank::where('deli_main_id', $id)
+              ->where('product_id', $u->product_id)
+              ->where('start_rank', '<=', $u->sum_image)
+              ->where('end_rank', '>=', $u->sum_image)
+              ->first();
+
+              if($max_price_id->id == $inventory->id){
+                $shipping_total+= $inventory->total_price;
+              }else{
+                $shipping_total+= $inventory->total_price2;
+              }
 
         }
 
-      }
+
+    //   return $shipping_total;
+
+
 
 
 

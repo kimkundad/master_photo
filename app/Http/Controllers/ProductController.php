@@ -612,6 +612,8 @@ class ProductController extends Controller
       ->where('de_type', 3)
       ->get();
 
+
+
       $get_item = [];
 
       foreach ($deli as $key) {

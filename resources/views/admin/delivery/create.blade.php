@@ -78,7 +78,7 @@
                                         <option> -- เลือกกำหนดราคา -- </option>
                                         <option value="1">กำหนดราคาตายตัว</option>
                                         <option value="2">แบ่งย่อยสถานี</option>
-                                        <option value="3">กำหนด Rank ราคา</option>
+                                        <option value="3">กำหนด Rank สินค้า</option>
 
   								                    </select>
           								            </select>

@@ -105,7 +105,7 @@ table.table {
                       </div>
 
                       <div class="col-md-12">
-                      
+
                         <hr />
                         @if(isset($deli))
                           @foreach($deli as $de)
@@ -126,22 +126,20 @@ table.table {
                               <div class="modal-content">
                                 <div class="modal-header">
                                   <h5 class="modal-title">เพิ่มช่องทางการส่งสินค้า {{$de->name}}?</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
+
                                 </div>
                                 <form  method="POST" action="{{url('admin/add_deli_item_com/')}}" name="modalBootstrap_main{{$de->id_q}}" enctype="multipart/form-data">
                                 <div class="modal-body">
                                   {{ csrf_field() }}
                                     <fieldset>
                                       <div class="form-group">
-                                        <label class="col-md-3 control-label" for="profileFirstName">ราคาตั้งแต่*</label>
+                                        <label class="col-md-3 control-label" for="profileFirstName">ตั้งแต่*</label>
                                         <div class="col-md-8">
                                           <input type="text" class="form-control" name="start_rank" value="0">
                                           </div>
                                       </div>
                                       <div class="form-group">
-                                        <label class="col-md-3 control-label" for="profileFirstName">ถึงราคา*</label>
+                                        <label class="col-md-3 control-label" for="profileFirstName">ถึง*</label>
                                         <div class="col-md-8">
                                           <input type="text" class="form-control" name="end_rank" value="0">
                                           </div>
@@ -203,8 +201,7 @@ table.table {
                                         <div class="modal-content">
                                           <div class="modal-header">
                                             <h5 class="modal-title">เพิ่มช่องทางการส่งสินค้า {{$de->name}}?</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
+                                            
                                             </button>
                                           </div>
                                           <form  method="POST" action="{{url('admin/edit_deli_item_com/')}}" name="modalBootstrap_edit_item{{$u->id_item}}" enctype="multipart/form-data">
@@ -212,13 +209,13 @@ table.table {
                                             {{ csrf_field() }}
                                               <fieldset>
                                                 <div class="form-group">
-                                                  <label class="col-md-3 control-label" for="profileFirstName">ราคาตั้งแต่*</label>
+                                                  <label class="col-md-3 control-label" for="profileFirstName">ตั้งแต่*</label>
                                                   <div class="col-md-8">
                                                     <input type="text" class="form-control" name="start_rank" value="{{$u->start_rank}}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                  <label class="col-md-3 control-label" for="profileFirstName">ถึงราคา*</label>
+                                                  <label class="col-md-3 control-label" for="profileFirstName">ถึง*</label>
                                                   <div class="col-md-8">
                                                     <input type="text" class="form-control" name="end_rank" value="{{$u->end_rank}}">
                                                     </div>

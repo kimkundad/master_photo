@@ -1855,7 +1855,7 @@ $data['get_my_add'] = $get_my_add;
 
 
                if($type_ship == 3){
-                 $total = $k->sum_image*$k->sum_price;
+                 $total = $k->sum_image;
                  $inventory = delirank::where('deli_main_id', $package->deliver_order)
                  ->where('product_id', $k->product_id)
                  ->where('start_rank', '<=', $total)

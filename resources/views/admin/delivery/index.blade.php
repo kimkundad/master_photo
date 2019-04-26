@@ -80,7 +80,7 @@
                         @elseif($u->de_type == 2)
                         ราคาตามสถานี
                         @else
-                        กำหนด Rank ราคา
+                        กำหนด Rank สินค้า
                         @endif
 
                       </td>
