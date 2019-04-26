@@ -108,7 +108,9 @@
   												<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
   												<div class="dropdown-menu" role="menu">
   												<!--	<a class="dropdown-item text-1" href="#">ดูข้อมูล</a> -->
-  													<a class="dropdown-item text-1" href="{{url('admin/product/'.$u->id_p.'/edit')}}">แก้ไข</a>
+  													<a class="dropdown-item text-1" href="{{url('admin/product/'.$u->id_p.'/edit')}}">ข้อมูลสินค้า</a>
+                            <a class="dropdown-item text-1" href="{{url('admin/product_option/'.$u->id_p)}}">ออฟชั่น</a>
+                            <a class="dropdown-item text-1" href="{{url('admin/product_price/'.$u->id_p)}}">การจัดส่ง</a>
                             <form  action="{{url('admin/product/'.$u->id_p)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
                                 <input type="hidden" name="_method" value="DELETE">
                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
