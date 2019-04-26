@@ -34,13 +34,19 @@ figure:hover+span {
   border-radius: 50%;
   width: 90px;
 }
+@media (max-width: 767px){
+	.slide_set_t{
+		margin-top:50px !important;
+	}
+}
+
 </style>
 
 @stop('stylesheet')
 @section('content')
 
 
-<div class="slider-pro" id="my-slider">
+<div class="slider-pro slide_set_t" id="my-slider">
   <div class="sp-slides">
 
 		@if($slide)
@@ -443,11 +449,11 @@ figure:hover+span {
   jQuery(document).ready(function($) {
     $('#my-slider').sliderPro({
       width: '100%',
-      height: '500',
+			autoHeight: true,
       arrows: true,
       visibleSize: '100%',
       responsive:false,
-      imageScaleMode:'cover'
+      imageScaleMode:'contain'
     });
   });
 </script>
