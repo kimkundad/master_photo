@@ -311,7 +311,7 @@ table.table {
                         @endif
                         ">
                           <img src="{{url('assets/image/app_ship/'.$de->de_image)}}" data-toggle="modal" data-target="#modalBootstrap_main{{$de->id_q}}" class="img-rounded img-responsive" style="width:60px; height:60px;">
-
+                          <br />
 
 
                           <div class="modal" id="modalBootstrap_main{{$de->id_q}}" tabindex="-1" role="dialog">
