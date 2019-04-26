@@ -605,6 +605,33 @@ class ProductController extends Controller
 
     public function product_price(Request $request, $id){
 
+
+      $get_item = DB::table('deliranks')
+      ->where('product_id', $id)
+      ->groupBy('product_id')
+      ->get();
+
+      $get_id_first = [];
+
+      if(isset($get_item)){
+      foreach($get_item as $u){
+
+        $get_id_first[] = $u->deli_main_id;
+
+      }
+    }
+
+      dd($get_id_first);
+
+
+
+      $deli_logo = DB::table('deliveries')->select(
+        'deliveries.*',
+        'deliveries.id as id_q'
+        )
+      ->where('de_type', 3)
+      ->get();
+
       $deli = DB::table('deliveries')->select(
         'deliveries.*',
         'deliveries.id as id_q'
@@ -641,6 +668,7 @@ class ProductController extends Controller
     //  dd($deli);
 
       $data['deli'] = $deli;
+      $data['deli_logo'] = $deli_logo;
 
       $cat = DB::table('products')->select(
         'products.*',

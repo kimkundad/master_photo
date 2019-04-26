@@ -201,7 +201,7 @@ table.table {
                                         <div class="modal-content">
                                           <div class="modal-header">
                                             <h5 class="modal-title">เพิ่มช่องทางการส่งสินค้า {{$de->name}}?</h5>
-                                            
+
                                             </button>
                                           </div>
                                           <form  method="POST" action="{{url('admin/edit_deli_item_com/')}}" name="modalBootstrap_edit_item{{$u->id_item}}" enctype="multipart/form-data">

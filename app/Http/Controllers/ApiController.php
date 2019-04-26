@@ -56,7 +56,7 @@ class ApiController extends Controller
       // group id product $group_id Auth::user()->id
       $group_id = DB::table('cart_details')
           ->selectRaw('cart_details.*')
-          ->where('user_id', 1)
+          ->where('user_id', Auth::user()->id)
           ->groupBy('product_id')
           ->get();
 
