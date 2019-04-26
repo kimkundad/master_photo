@@ -24,6 +24,8 @@ Route::get('change/{locale}', function ($locale) {
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::post('/api/shipping_data_2', 'ApiController@shipping_data_2')->name('shipping_data_2');
+Route::post('/api/shipping_data_3', 'ApiController@shipping_data_3')->name('shipping_data_3');
 
 Route::get('about', 'HomeController@about')->name('about');
 Route::get('product_price', 'HomeController@product_price')->name('product_price');
@@ -124,6 +126,11 @@ Route::group(['middleware' => 'admin'], function() {
   Route::get('admin/edit_taopix_theme/{id}', 'TaopixController@edit_taopix_theme')->name('edit_taopix_theme');
 	Route::get('admin/order_print/{id}', 'OrderController@order_print');
 
+	Route::get('admin/edit_deli_2/{id}', 'DeliveryController@edit_deli_2');
+	Route::post('admin/edit_deli_2_update/{id}', 'DeliveryController@edit_deli_2_update');
+	Route::post('admin/edit_deli_3_update/{id}', 'DeliveryController@edit_deli_3_update');
+
+	Route::get('admin/edit_deli_3/{id}', 'DeliveryController@edit_deli_3');
 
 	Route::post('admin/del_deli_item/', 'DeliveryController@del_deli_item');
 	Route::post('admin/edit_deli_item/', 'DeliveryController@edit_deli_item');
@@ -159,6 +166,9 @@ Route::group(['middleware' => 'admin'], function() {
 	Route::post('admin/del_item_on/{id}', 'ProductController@del_item_on');
 	Route::post('admin/add_price_product/{id}', 'ProductController@add_price_product');
 
+	Route::post('admin/add_deli_item_com/', 'ProductController@add_deli_item_com');
+	Route::post('admin/edit_deli_item_com/', 'ProductController@edit_deli_item_com');
+	Route::post('admin/del_item_on_ship/{id}', 'ProductController@del_item_on_ship');
 
 
   Route::post('admin/add_gallery/', 'ProductController@add_gallery');

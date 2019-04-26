@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Response;
 use Session;
 use Auth;
 use App\User;
+use App\delirank;
 use App\order;
 use App\order_detail;
 use App\order_image;
@@ -136,8 +137,13 @@ class UserProfileController extends Controller
 
 
                           $order_option = DB::table('order_options')
-                            ->where('order_id_detail', $h->id)
+                            ->where('order_id_detail', $h->id_de)
+                            ->where('option_id', '!=', 0)
                             ->get();
+
+                            $order_option_count = DB::table('order_options')
+                              ->where('order_id_detail', $h->id_de)
+                              ->count();
 
                             foreach($order_option as $j){
 
@@ -149,8 +155,10 @@ class UserProfileController extends Controller
 
 
                             $h->get_all_option = $order_option;
+                            $h->check = $order_option_count;
 
                     }
+                  //  dd($order_de);
 
                     $get_detail_o[] = $order_de;
 
@@ -175,6 +183,8 @@ class UserProfileController extends Controller
 
           //  dd($order_de);
 
+          $total = $order_de->sum_image*$order_de->sum_price;
+        //  dd($total);
 
             $order_option = DB::table('order_options')->select(
                   'order_options.*',
@@ -199,9 +209,31 @@ class UserProfileController extends Controller
           ->get();
 
     // ข้อมูงของออเดอรืหลัก
-    $order_main = DB::table('orders')
-          ->where('id', $get_main_id)
+
+    $order_main = DB::table('orders')->select(
+          'orders.*',
+          'orders.id as id_or',
+          'deliveries.name as name_deli'
+          )
+          ->leftjoin('deliveries', 'deliveries.id',  'orders.deliver_order')
+          ->where('orders.id', $get_main_id)
           ->first();
+
+
+
+    /*  if($order_main->bill_address == 3){
+
+
+        $inventory = delirank::where('deli_main_id', $order_main->deliver_order)
+        ->where('product_id', $order_de->product_id)
+        ->where('start_rank', '<=', $total)
+        ->where('end_rank', '>=', $total)
+        ->first();
+
+          dd($inventory->total_price);
+
+
+      } */
 
       $data['order_de'] = $order_de;
       $data['order_main'] = $order_main;

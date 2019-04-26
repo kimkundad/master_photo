@@ -321,14 +321,9 @@
                       <div class="modal fade" id="del_item_{{$item_2->id_item}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document" >
                           <div class="modal-content ">
-
-
-
                           <form  method="POST" action="{{url('admin/del_item_on/'.$item_2->id_item)}}" name="edit_option_product_item_inpro{{$item_2->id_item}}">
                             {{ csrf_field() }}
                             <div class="modal-body">
-
-
                                 <h4 class="mb-xlg text-center">คุณแน่ใจใช่ไหม? ที่จะลบ {{$item_2->item_name}} ( ราคา {{$item_2->item_price}} บาท ) นี้ออกไป</h4>
                                 <fieldset>
                                   <div class="form-group">
@@ -338,12 +333,7 @@
                                       <input type="hidden" class="form-control" name="product_id" value="{{$product_id}}">
                                       </div>
                                   </div>
-
-
-
                                 </fieldset>
-
-
                             </div>
                             <div class="panel-footer">
                               <div class="row">
@@ -354,7 +344,6 @@
                               </div>
                             </div>
                             </form>
-
                           </div>
                         </div>
                       </div>

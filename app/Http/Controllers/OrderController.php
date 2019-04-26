@@ -30,7 +30,8 @@ class OrderController extends Controller
               'users.phone'
               )
               ->leftjoin('users', 'users.id',  'orders.user_id')
-              ->get();
+              ->orderBy('orders.id', 'desc')
+              ->paginate(15);
 
               $data['objs'] = $cat;
               $data['datahead'] = "order สั่งสินค้า";
@@ -88,9 +89,11 @@ class OrderController extends Controller
             'users.id as id_pro',
             'users.name',
             'users.email',
-            'users.phone'
+            'users.phone',
+            'deliveries.name as name_deli'
             )
             ->leftjoin('users', 'users.id',  'orders.user_id')
+            ->leftjoin('deliveries', 'deliveries.id',  'orders.deliver_order')
             ->where('orders.id', $id)
             ->first();
 
@@ -218,9 +221,11 @@ class OrderController extends Controller
               'users.id as id_pro',
               'users.name',
               'users.email',
-              'users.phone'
+              'users.phone',
+              'deliveries.name as name_deli'
               )
               ->leftjoin('users', 'users.id',  'orders.user_id')
+              ->leftjoin('deliveries', 'deliveries.id',  'orders.deliver_order')
               ->where('orders.id', $id)
               ->first();
 

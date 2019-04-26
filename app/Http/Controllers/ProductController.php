@@ -13,6 +13,7 @@ use App\product;
 use App\gallery;
 use App\product_item;
 use App\option_item;
+use App\delirank;
 
 class ProductController extends Controller
 {
@@ -557,7 +558,87 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function edit_deli_item_com(Request $request){
+
+      $product_id = $request['product_id'];
+      $id = $request['id_deli_item'];
+
+      $package = delirank::find($id);
+      $package->start_rank = $request['start_rank'];
+      $package->end_rank = $request['end_rank'];
+      $package->total_price = $request['total_price'];
+      $package->total_price2 = $request['total_price2'];
+      $package->save();
+
+        return redirect(url('admin/product_price/'.$product_id))->with('edit_item_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+    }
+
+    public function del_item_on_ship(Request $request, $id){
+
+      $product_id = $request['product_id'];
+
+      DB::table('deliranks')
+      ->where('id', $id)
+      ->delete();
+
+      return redirect(url('admin/product_price/'.$product_id))->with('del_item_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+    }
+
+    public function add_deli_item_com(Request $request){
+      $id_deli = $request['id_deli'];
+      $product_id = $request['product_id'];
+      $name_ser = $request['name_ser'];
+
+      $package = new delirank();
+      $package->deli_main_id = $request['id_deli'];
+      $package->product_id = $request['product_id'];
+      $package->start_rank = $request['start_rank'];
+      $package->end_rank = $request['end_rank'];
+      $package->total_price = $request['total_price'];
+      $package->total_price2 = $request['total_price2'];
+      $package->save();
+
+      return redirect(url('admin/product_price/'.$product_id))->with('add_item_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+
+    //  dd($name_ser);
+    }
+
     public function product_price(Request $request, $id){
+
+      $deli = DB::table('deliveries')->select(
+        'deliveries.*',
+        'deliveries.id as id_q'
+        )
+      ->where('de_type', 3)
+      ->get();
+
+      $get_item = [];
+
+      foreach ($deli as $key) {
+        // code...
+
+        $deli_count = DB::table('deliranks')
+        ->where('deli_main_id', $key->id)
+        ->where('product_id', $id)
+        ->count();
+
+        $deli_item = DB::table('deliranks')
+        ->select(
+          'deliranks.*',
+          'deliranks.id as id_item'
+          )
+        ->where('deli_main_id', $key->id)
+        ->where('product_id', $id)
+        ->get();
+
+      //  $get_item = $deli_item;
+        $key->option = $deli_count;
+        $key->option_item = $deli_item;
+      }
+
+    //  dd($deli);
+
+      $data['deli'] = $deli;
 
       $cat = DB::table('products')->select(
         'products.*',
@@ -583,19 +664,10 @@ class ProductController extends Controller
         $this->validate($request, [
              'pro_name' => 'required',
              'pro_category' => 'required',
-             'pro_status_show' => 'required',
-             'pro_title' => 'required',
-             'set_limit' => 'required',
-             'a_price_o' => 'required',
-             'b_price_o' => 'required',
-             'pro_name_detail' => 'required'
+             'pro_status_show' => 'required'
          ]);
 
-         if($request['set_limit'] == 0){
-           $set_limit = 1;
-         }else{
-           $set_limit = $request['set_limit'];
-         }
+
 
         if($image == null){
           //dd($image);
@@ -605,11 +677,7 @@ class ProductController extends Controller
           $package->pro_title = $request['pro_title'];
           $package->pro_name_detail = $request['pro_name_detail'];
           $package->pro_category = $request['pro_category'];
-          $package->set_limit = $set_limit;
-          $package->a_price_o = $request['a_price_o'];
-          $package->b_price_o = $request['b_price_o'];
-          $package->a2_price_o = $request['a2_price_o'];
-          $package->b2_price_o = $request['b2_price_o'];
+
           $package->pro_price = 0;
           $package->pro_status_show = $request['pro_status_show'];
           $package->save();
@@ -651,17 +719,13 @@ class ProductController extends Controller
           $package->pro_title = $request['pro_title'];
           $package->pro_name_detail = $request['pro_name_detail'];
           $package->pro_category = $request['pro_category'];
-          $package->a_price_o = $request['a_price_o'];
-          $package->b_price_o = $request['b_price_o'];
-          $package->a2_price_o = $request['a2_price_o'];
-          $package->b2_price_o = $request['b2_price_o'];
           $package->pro_price = 0;
           $package->pro_image = $input['imagename'];
           $package->pro_status_show = $request['pro_status_show'];
           $package->save();
 
 
-        
+
 
 
         }

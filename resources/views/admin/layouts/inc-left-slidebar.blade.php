@@ -72,7 +72,7 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
  										</a>
  									</li>
 
-                
+
 
                   <li {{ (Request::is('admin/order*') ? 'class=nav-expanded' : '') }} >
 										<a href="{{url('admin/order/')}}"  >
@@ -81,12 +81,12 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										</a>
 									</li>
 
-                  <li {{ (Request::is('admin/get_pay_info*') ? 'class=nav-expanded' : '') }}  {{ (Request::is('admin/edit_pay_info*') ? 'class=nav-expanded' : '') }}>
+                <!--  <li {{ (Request::is('admin/get_pay_info*') ? 'class=nav-expanded' : '') }}  {{ (Request::is('admin/edit_pay_info*') ? 'class=nav-expanded' : '') }}>
 										<a href="{{url('admin/get_pay_info/')}}" >
 											<i class="fa fa-coffee" aria-hidden="true"></i>
 											<span>แจ้งการชำระเงิน</span>
 										</a>
-									</li>
+									</li> -->
 
 
                   <li {{ (Request::is('admin/slide*') ? 'class=nav-expanded' : '') }} >
@@ -96,7 +96,7 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										</a>
 									</li>
 
-                  <li {{ (Request::is('admin/delivery*') ? 'class=nav-expanded' : '') }} >
+                  <li {{ (Request::is('admin/delivery*') ? 'class=nav-expanded' : '') }}  {{ (Request::is('admin/edit_deli_*') ? 'class=nav-expanded' : '') }}>
 										<a href="{{url('admin/delivery/')}}"  >
 											<i class="fa fa-car" aria-hidden="true"></i>
 											<span>ช่องทางการส่งสินค้า</span>

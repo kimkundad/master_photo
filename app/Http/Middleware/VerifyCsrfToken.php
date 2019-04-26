@@ -15,6 +15,7 @@ class VerifyCsrfToken extends Middleware
         //
         'upload_image',
         'images_delete',
+        'api/shipping_data_3',
         'update_photo_print'
     ];
 }

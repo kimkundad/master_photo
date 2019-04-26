@@ -79,9 +79,8 @@ Shipping | MASTER PHOTO NETWORK
         {{ csrf_field() }}
       <div class="col-md-8 box_style_1  add_bottom_15">
         <input type="hidden" id="get_sum_ship" name="get_sum_ship" value="0" />
+        <input type="hidden" id="type_ship" name="type_ship" value="0" />
 
-        <input type="hidden" name="main_get_sum_ship" value="{{$get_sum_ship}}" />
-        <input type="hidden" name="main_get_sum_ship2" value="{{$get_sum_ship2}}" />
         <div class="box_style_1 visible-sm visible-xs">
 
           <table class="table table_summary" style="font-size: 14px;">
@@ -154,6 +153,14 @@ Shipping | MASTER PHOTO NETWORK
           </p>
           <hr />
           @endif
+
+          @if ($errors->has('van_shipping'))
+          <p class="text-danger" style="margin-top:10px;">
+          <b><i style="font-size:16px;" class="im im-icon-Information"></i></b>  กรุณาเลือกรูปแบบการจัดส่งให้สำเร็จ
+          </p>
+          <hr />
+          @endif
+
           </div>
         </div>
 
@@ -411,10 +418,10 @@ Shipping | MASTER PHOTO NETWORK
 
                        <label>เลือกรูปแบบการจัดส่ง</label>
                         <select class="form-control" onchange="getComboB(this)" id="shipping_optional" name="deliver_order" required="">
-                              <option value="0" data-value="0">-- กรุณาเลือกวิธีรับสินค้า --</option>
+                              <option value="" data-value="">-- กรุณาเลือกวิธีรับสินค้า --</option>
                               @if($deli)
                               @foreach($deli as $delis)
-                              <option value="{{$delis->name}}" data-value="{{$delis->id}}" data-price="{{$delis->de_price}}" data-set="{{$delis->de_status}}">{{$delis->name}}</option>
+                              <option value="{{$delis->id}}" data-value="{{$delis->name}}" data-price="{{$delis->de_price}}" data-id="{{$delis->id}}" data-set="{{$delis->de_type}}">{{$delis->name}}</option>
                               @endforeach
                               @endif
 
@@ -432,161 +439,19 @@ Shipping | MASTER PHOTO NETWORK
                       <br>
                    </div>
 
-                   <div class="col-md-12 col-sm-12 " id="option_select_op2" style="display:none">
-                     <p>
-                        ทางร้านจะคิดค่าจัดส่ง Kerry Express ตามปริมาตรที่ทาง Kerry Express คิดบวกค่าวัสดุห่อตามขนาดและน้ำหนักของรูปที่สั่งอัด
-                     </p>
-                   </div>
-
-                   <div class="col-md-12 col-sm-12 " id="option_select_op3" style="display:none">
-                     <p>
-                        ทางร้านจะคิดค่าจัดส่งEMSตามน้ำหนักที่ทางไปรษณีย์คิดบวกค่าวัสดุห่อตามขนาดและน้ำหนักของรูปที่สั่งอัด
-                     </p>
-                   </div>
-
-                   <div class="col-md-12 col-sm-12 " id="option_select_op4" style="display:none">
-                     <p>
-                       อีกทางเลือกสำหรับลูกค้าที่อยู่ต่างจังหวัด ทางร้านสามารถจัดส่งผ่านทางรถ บ.ข.ส. ที่วิ่งระหว่างจังหวัดได้ค่ะ ซึ่งทั้งสะดวก รวดเร็ว และประหยัดมากๆค่ะ
-สนใจติดต่อได้ที่เบอร์โทร 02-513-0105 ทุกวัน เวลา 8.00-22.00น.
-                     </p>
-
-                     <div class="form-group ">
-
-                       <label>กรุณาเลือกรถ บขส.</label>
 
 
-                      <select class="form-control" name="bus_shipping" id="get_bsk" onchange="getComboA11(this)">
-                        <option value="0" data-value="0">-- กรุณาเลือกช่องทางรับสินค้า --</option>
-                        @if(isset($bsk))
-                          @foreach($bsk as $u)
-                          <option value="{{$u->deli_name}}" data-value="{{$u->deli_price}}">{{$u->deli_name}} ราคา {{$u->deli_price}}</option>
-                          @endforeach
-                        @endif
+                   <div class="col-md-12 col-sm-12 " id="targeted" >
 
-                    </select>
-                      </div>
-                   </div>
 
-                   <div class="col-md-12 col-sm-12 " id="option_select_op5" style="display:none">
-                     <p>
-                       อีกทางเลือกสำหรับลูกค้าที่อยู่ต่างจังหวัด ทางร้านสามารถจัดส่งผ่านทางรถตู้ ที่วิ่งระหว่างจังหวัดได้ค่ะ ซึ่งทั้งสะดวก รวดเร็ว และประหยัดมากๆค่ะ
- สนใจติดต่อได้ที่เบอร์โทร 02-513-0105 ทุกวัน เวลา 8.00-22.00น.
-                     </p>
 
-                     <div class="form-group ">
-
-                       <label>เลือกรูปแบบการจัดส่ง รถตู้</label>
-                        <select class="form-control" name="van_shipping" id="get_van" onchange="getComboA8(this)">
-                          <option value="0" data-value="0">-- กรุณาเลือกช่องทางรับสินค้า --</option>
-                            @if(isset($van))
-                              @foreach($van as $u)
-                              <option value="{{$u->deli_name}}" data-value="{{$u->deli_price}}">{{$u->deli_name}} ราคา {{$u->deli_price}}</option>
-                              @endforeach
-                            @endif
-                        </select>
-                      </div>
 
                    </div>
 
-                   <div class="col-md-12 col-sm-12 " id="option_select_op6"  style="display:none">
-                     <p>
-                       อีกทางเลือกสำหรับลูกค้าที่อยู่ต่างจังหวัด ทางร้านสามารถจัดส่งผ่านทางรถไฟ ที่วิ่งระหว่างจังหวัดได้ค่ะ ซึ่งทั้งสะดวก รวดเร็ว และประหยัดมากๆค่ะ
-สนใจติดต่อได้ที่เบอร์โทร 02-513-0105 ทุกวัน เวลา 8.00-22.00น.
-                     </p>
-                     <div class="form-group ">
-
-                       <label>เลือกรูปแบบการจัดส่ง รถไฟ</label>
-                        <select class="form-control" name="train_shipping" id="get_train" onchange="getComboA9(this)">
-                          <option value="0" data-value="0">-- กรุณาเลือกช่องทางรับสินค้า --</option>
-                            @if(isset($train))
-                              @foreach($train as $u)
-                              <option value="{{$u->deli_name}}" data-value="{{$u->deli_price}}">{{$u->deli_name}} ราคา {{$u->deli_price}}</option>
-                              @endforeach
-                            @endif
-                        </select>
-                      </div>
-                   </div>
 
 
-                   <div class="col-md-12 col-sm-12 " id="option_select_op7" style="display:none">
-                     <p>
-                        กรุณาตรวจสอบพื้นที่จัดส่งก่อนค่ะ พื้นที่จัดส่ง (ตรวจสอบพื้นที่บริการ) จัดส่งฟรี เมื่อยอดสั่งงานถึง {{$deli_set->de_price}} บาท ในกรณีไม่ถึง {{$deli_set->de_price}} บาท คิดค่าบริการ 50 บาท ค่ะ เวลาในการจัดส่งจะมีพนักงานแจ้งให้ทราบอีกครั้งเมื่องานเสร็จแล้วค่ะ
-                     </p>
-                     <p class="text-danger">
-                       **พื้นที่บางส่วนอาจยังไม่ครอบคลุมครบทั้งพื้นที่ สามารถสอบถามได้ที่เบอร์โทรศัพท์ 02-513-0105 ค่ะ
-                     </p>
-                     <div class="form-group ">
 
-                       <label>เขตพื้นที่จัดส่งสินค้า</label>
 
-                        <select class="form-control" name="area_shipping">
-                            <option value="เลือกเขตพื้นที่" selected="selected">เลือกเขตพื้นที่</option>
-                      			<option value="คลองเตย">คลองเตย</option>
-                      			<option value="จตุจักร">จตุจักร</option>
-                      			<option value="ดอนเมือง**">ดอนเมือง**</option>
-                      			<option value="ดินแดง">ดินแดง</option>
-                      			<option value="ดุสิต">ดุสิต</option>
-                      			<option value="บางกะปิ**">บางกะปิ**</option>
-                      			<option value="บางเขน ( ภายในเขต กทม. )">บางเขน ( ภายในเขต กทม. )</option>
-                      			<option value="บางคอแหลม">บางคอแหลม</option>
-                      			<option value="บางจาก**">บางจาก**</option>
-                      			<option value="บางซื่อ">บางซื่อ</option>
-                      			<option value="บางพลัด**">บางพลัด**</option>
-                      			<option value="บางพูด**">บางพูด**</option>
-                      			<option value="บางยี่ขัน**">บางยี่ขัน**</option>
-                      			<option value="บางอ้อ**">บางอ้อ**</option>
-                      			<option value="บ้านใหม่**">บ้านใหม่**</option>
-                      			<option value="บึงกุ่ม**">บึงกุ่ม**</option>
-                      			<option value="ปทุมวัน">ปทุมวัน</option>
-                      			<option value="ป้อมปราบ">ป้อมปราบ</option>
-                      			<option value="ปากเกร็ด( สิ้นสุดเขตแม่น้ำเจ้าพระยา ) ">ปากเกร็ด( สิ้นสุดเขตแม่น้ำเจ้าพระยา ) </option>
-                      			<option value="พญาไท">พญาไท</option>
-                      			<option value="พระนคร">พระนคร</option>
-                      			<option value="ยานนาวา">ยานนาวา</option>
-                      			<option value="ราชเทวี">ราชเทวี</option>
-                      			<option value="ลาดพร้าว">ลาดพร้าว</option>
-                      			<option value="วังทองหลาง">วังทองหลาง</option>
-                      			<option value="วัฒนา ( ถึงสุขุมวิท 81 )">วัฒนา ( ถึงสุขุมวิท 81 )</option>
-                      			<option value="สัมพันธวงศ์">สัมพันธวงศ์</option>
-                      			<option value="สาธร">สาธร</option>
-                      			<option value="สายไหม**">สายไหม**</option>
-                      			<option value="สีลม">สีลม</option>
-                      			<option value="หลักสี่">หลักสี่</option>
-                      			<option value="ห้วยขวาง">ห้วยขวาง</option>
-                          </select>
-
-                      </div>
-                   </div>
-
-                   <div class="col-md-12 col-sm-12 " id="option_select_op8" style="display:none">
-
-                     <div class="form-group ">
-
-                       <label>เลือกรูปแบบการจัดส่ง</label>
-                        <select class="form-control" name="man_shipping">
-                              <option value="เลือกสาขาที่ต้องการมารับสินค้า" selected="selected">เลือกสาขาที่ต้องการมารับสินค้า</option>
-                              <option value="สาขาตรงข้ามเซ็นทรัลลาดพร้าว ">สาขาตรงข้ามเซ็นทรัลลาดพร้าว </option>
-                              <option value="สาขารามอินทรา กม.4 ">สาขารามอินทรา กม.4 </option>
-                              <option value="สาขาบางแค ">สาขาบางแค </option>
-                              <option value="สาขาปากซอยหมู่บ้านเศรษฐกิจ ">สาขาปากซอยหมู่บ้านเศรษฐกิจ </option>
-                              <option value="สาขาสาทร ">สาขาสาทร </option>
-                              <option value="สาขาสุขาภิบาล 3 (รามคำแหง) ">สาขาสุขาภิบาล 3 (รามคำแหง) </option>
-                              <option value="สาขาลาดพร้าว 99 ">สาขาลาดพร้าว 99 </option>
-                              <option value="สาขาเสรีไทย ">สาขาเสรีไทย </option>
-                              <option value="สาขาเกษตร ">สาขาเกษตร </option>
-                              <option value="สาขารามคำแหง 100">สาขารามคำแหง 100</option>
-                              <option value="สาขารามคำแหง 150">สาขารามคำแหง 150</option>
-                              <option value="สาขาพัฒนาการ">สาขาพัฒนาการ</option>
-                              <option value="สาขาราชพฤกษ์">สาขาราชพฤกษ์</option>
-                              <option value="สาขาคู้บอน">สาขาคู้บอน</option>
-                              <option value="สาขาวัชรพล">สาขาวัชรพล</option>
-                              <option value="สาขาสวนพลู">สาขาสวนพลู</option>
-                              <option value="สาขาพระประแดง">สาขาพระประแดง</option>
-
-                        </select>
-                      </div>
-
-                   </div>
 
 
 
@@ -600,7 +465,7 @@ Shipping | MASTER PHOTO NETWORK
 
                                <input type="hidden" name="order_price" value="{{$total_pay}}" />
                                <input type="hidden" name="discount" value="0" />
-                               <input type="hidden" name="total" value="{{sizeof(Session::get('cart'))}}" />
+                               <input type="hidden" name="total" value="{{$count_data2}}" />
                              </div>
                              <br>
                           </div>
@@ -716,7 +581,7 @@ Shipping | MASTER PHOTO NETWORK
 
               <tr class="total" style="font-size: 18px;">
                 <td>
-                  Summary
+                  ยอดชำระ
                 </td>
                 <td class="text-right" id="sum_image_price" style="display:none">{{number_format((float)$total_pay, 2, '.', '')}}</td>
                 <td class="text-right" id="get_image_price">
@@ -759,14 +624,16 @@ var get_bsk = 0;
 var get_train = 0;
 var zero_var = 0;
 var value2 = 0;
-var set_deli = {{$deli_set->de_price}};
 
+var price_product = {{number_format((float)$total_pay, 2, '.', '')}};
 var get_sum_ship = {{$get_sum_ship}};
 var get_sum_ship2 = {{$get_sum_ship2}};
-console.log(get_sum_ship)
+
 
 
 var price_image = document.getElementById('sum_image_price').innerText;
+
+
 $('#get_ship_price').append( (0).toFixed(2) );
 function myFunction() {
     var x = document.getElementById("dvPassport");
@@ -847,245 +714,93 @@ function getComboA11(selectObject) {
     $('#get_image_price').append((Number(price_image)+Number(get_bsk)).toFixed(2));
     $('#get_ship_price').append( Number(get_bsk) );
     document.getElementById("get_sum_ship").value = Number(get_bsk);
-
 }
 
 
 function getComboB(selectObject) {
     var e = document.getElementById("shipping_optional");
     value2 = e.options[e.selectedIndex].getAttribute('data-value');
+    value_id = e.options[e.selectedIndex].getAttribute('data-id');
+    value_type = e.options[e.selectedIndex].getAttribute('data-set');
     value_price = e.options[e.selectedIndex].getAttribute('data-price');
-    value_set = e.options[e.selectedIndex].getAttribute('data-set');
 
+    console.log(value_type);
 
-    if(value2 == 0){
-      $("#option_select_op2").hide()
-      $("#option_select_op3").hide()
-      $("#option_select_op4").hide()
-      $("#option_select_op5").hide()
-      $("#option_select_op6").hide()
-      $("#option_select_op7").hide()
-      $("#option_select_op8").hide()
+    if(value_type == 1){
+
       $('#get_image_price').html("");
       $('#get_ship_price').html("");
-      $('#get_image_price').append(price_image);
-      $('#get_ship_price').append( (0) );
-      document.getElementById("get_sum_ship").value = 0;
-    }
+      $('#targeted').html("");
 
-    if(value2 == 4){
-      $("#option_select_op2").show()
-      $("#option_select_op3").hide()
-      $("#option_select_op4").hide()
-      $("#option_select_op5").hide()
-      $("#option_select_op6").hide()
-      $("#option_select_op7").hide()
-      $("#option_select_op8").hide()
+
+      document.getElementById("type_ship").value = Number(value_type);
+      $('#get_image_price').append((Number(price_image)+Number(value_price)).toFixed(2));
+      $('#get_ship_price').append( Number(value_price) );
+      document.getElementById("get_sum_ship").value = Number(value_price);
+
+    }else if(value_type == 2){
+
       $('#get_image_price').html("");
       $('#get_ship_price').html("");
 
+      document.getElementById("type_ship").value = Number(value_type);
+      var get_option = 0;
+      $.ajax({
+      type: "POST",
+      headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+      data: { "ship_id" : value_id },
+      url: "{{url('/api/shipping_data_2')}}",
+      success: function(data) {
+          $('#targeted').html(data.data.html);
+          get_option = 1;
+      }
+      });
 
-      if(Number(price_image) >= Number(set_deli)){
-        $('#get_image_price').append(price_image);
-        $('#get_ship_price').append( (0) );
-        document.getElementById("get_sum_ship").value = zero_var;
-      }else{
 
-      $('#get_image_price').append((Number(price_image)+Number(get_sum_ship2)).toFixed(2));
-      $('#get_ship_price').append( (get_sum_ship2) );
-      document.getElementById("get_sum_ship").value = get_sum_ship2;
-    }
+    }else{
 
-    }
-
-    if(value2 == 10){
-      $("#option_select_op2").show()
-      $("#option_select_op3").hide()
-      $("#option_select_op4").hide()
-      $("#option_select_op5").hide()
-      $("#option_select_op6").hide()
-      $("#option_select_op7").hide()
-      $("#option_select_op8").hide()
+      $('#targeted').html("");
       $('#get_image_price').html("");
       $('#get_ship_price').html("");
-      if(Number(price_image) >= Number(set_deli)){
-        $('#get_image_price').append(price_image);
-        $('#get_ship_price').append( (0) );
-        document.getElementById("get_sum_ship").value = zero_var;
-      }else{
+      document.getElementById("type_ship").value = Number(value_type);
 
-      $('#get_image_price').append((Number(price_image)+Number(get_sum_ship)).toFixed(2));
-      $('#get_ship_price').append( (get_sum_ship) );
-      document.getElementById("get_sum_ship").value = get_sum_ship;
-    }
-    }
+      $.ajax({
+      type: "POST",
+      headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+      data: { "ship_id" : value_id, "price_pro" : price_product },
+      url: "{{url('/api/shipping_data_3')}}",
+      success: function(data) {
+        console.log(data.data);
 
-    if(value2 == 3){
-      $("#option_select_op3").show()
-      $("#option_select_op2").hide()
-      $("#option_select_op4").hide()
-      $("#option_select_op5").hide()
-      $("#option_select_op6").hide()
-      $("#option_select_op7").hide()
-      $("#option_select_op8").hide()
-      $('#get_image_price').html("");
-      $('#get_ship_price').html("");
-      if(Number(price_image) >= Number(set_deli)){
-        $('#get_image_price').append(price_image);
-        $('#get_ship_price').append( (0) );
-        document.getElementById("get_sum_ship").value = zero_var;
-      }else{
+        //  $('#targeted').html(data.data.html);
 
-      $('#get_image_price').append((Number(price_image)+Number(get_sum_ship)).toFixed(2));
-      $('#get_ship_price').append( (get_sum_ship) );
-      document.getElementById("get_sum_ship").value = get_sum_ship;
-    }
-    }
+        $('#get_image_price').append((Number(price_image)+Number(data.data.price)).toFixed(2));
+        $('#get_ship_price').append( Number(data.data.price) );
+        document.getElementById("get_sum_ship").value = Number(data.data.price);
 
-    if(value2 == 7){
-      $("#option_select_op4").hide()
-      $("#option_select_op2").hide()
-      $("#option_select_op3").hide()
-      $("#option_select_op5").hide()
-      $("#option_select_op6").hide()
-      $("#option_select_op7").hide()
-      $("#option_select_op8").hide()
-      $('#get_image_price').html("");
-      $('#get_ship_price').html("");
-      $('#get_image_price').append(price_image);
-      $('#get_ship_price').append( 'เก็บเงินปลายทาง' );
-      document.getElementById("get_sum_ship").value = zero_var;
-
-    }
-
-    if(value2 == 8){
-      $("#option_select_op5").show()
-      $("#option_select_op2").hide()
-      $("#option_select_op3").hide()
-      $("#option_select_op4").hide()
-      $("#option_select_op6").hide()
-      $("#option_select_op7").hide()
-      $("#option_select_op8").hide()
-      $('#get_image_price').html("");
-      $('#get_ship_price').html("");
-      if(Number(price_image) >= Number(set_deli)){
-        $('#get_image_price').append(price_image);
-        $('#get_ship_price').append( (0) );
-        document.getElementById("get_sum_ship").value = zero_var;
-      }else{
-
-    }
-
-
-    }
-
-    if(value2 == 9){
-      $("#option_select_op6").show()
-      $("#option_select_op2").hide()
-      $("#option_select_op3").hide()
-      $("#option_select_op4").hide()
-      $("#option_select_op5").hide()
-      $("#option_select_op7").hide()
-      $("#option_select_op8").hide()
-      $('#get_image_price').html("");
-      $('#get_ship_price').html("");
-
-      if(Number(price_image) >= Number(set_deli)){
-        $('#get_image_price').append(price_image);
-        $('#get_ship_price').append( (0) );
-        document.getElementById("get_sum_ship").value = zero_var;
-      }else{
-
-
-
-    }
-    }
-
-    if(value2 == 6){
-      $("#option_select_op7").show()
-      $("#option_select_op2").hide()
-      $("#option_select_op3").hide()
-      $("#option_select_op4").hide()
-      $("#option_select_op5").hide()
-      $("#option_select_op6").hide()
-      $("#option_select_op8").hide()
-      $('#get_image_price').html("");
-      $('#get_ship_price').html("");
-
-      if(Number(price_image) >= Number(value_set)){
-        $('#get_image_price').append(price_image);
-        $('#get_ship_price').append( (0) );
-        document.getElementById("get_sum_ship").value = zero_var;
-      }else{
-      //  console.log(value_set);
-      //    console.log(price_image);
-        $('#get_image_price').append((Number(price_image)+Number(value_price)).toFixed(2));
-        $('#get_ship_price').append( (Number(value_price)).toFixed(2) );
-        document.getElementById("get_sum_ship").value = value_price;
 
       }
-
-
-    }
-
-    if(value2 == 5){
-      $("#option_select_op8").show()
-      $("#option_select_op7").hide()
-      $("#option_select_op2").hide()
-      $("#option_select_op3").hide()
-      $("#option_select_op4").hide()
-      $("#option_select_op5").hide()
-      $("#option_select_op6").hide()
-      $('#get_image_price').html("");
-      $('#get_ship_price').html("");
-      $('#get_image_price').append(price_image);
-      $('#get_ship_price').append( (0) );
-      document.getElementById("get_sum_ship").value = zero_var;
-    }
-
-
-    if(value2 == 11){
-      $("#option_select_op8").hide()
-      $("#option_select_op7").hide()
-      $("#option_select_op2").hide()
-      $("#option_select_op3").hide()
-      $("#option_select_op4").hide()
-      $("#option_select_op5").hide()
-      $("#option_select_op6").hide()
-      $('#get_image_price').html("");
-      $('#get_ship_price').html("");
-      $('#get_image_price').append(price_image);
-      $('#get_ship_price').append( 'ค่าจัดส่งฟรี' );
-      document.getElementById("get_sum_ship").value = zero_var;
-    }
-
-
-    if(value2 == 13){
-      $("#option_select_op8").hide()
-      $("#option_select_op7").hide()
-      $("#option_select_op2").hide()
-      $("#option_select_op3").hide()
-      $("#option_select_op4").show()
-      $("#option_select_op5").hide()
-      $("#option_select_op6").hide()
-      $('#get_image_price').html("");
-      $('#get_ship_price').html("");
-
-      if(Number(price_image) >= Number(set_deli)){
-        $('#get_image_price').append(price_image);
-        $('#get_ship_price').append( (0) );
-        document.getElementById("get_sum_ship").value = zero_var;
-      }else{
-
-
+      });
 
     }
 
-
-
-    }
 
   //  console.log(value2)
+}
+
+function run() {
+
+  $('#get_image_price').html("");
+  $('#get_ship_price').html("");
+  
+    var selector = document.getElementById("get_option12");
+    var value9 = selector.options[selector.selectedIndex].getAttribute('data-value');
+
+
+    $('#get_image_price').append((Number(price_image)+Number(value9)).toFixed(2));
+    $('#get_ship_price').append( Number(value9) );
+    document.getElementById("get_sum_ship").value = Number(value9);
+
 }
 
 

@@ -92,10 +92,13 @@ border: 1px solid #ddd;
             <div class="bill-to" style="width:100%">
 							<p class="h5 mb-1 text-dark font-weight-semibold">สถานที่จัดส่ง</p>
 							<address>
-								<b>วิธีการรับสินค้า </b> {{$obj->deliver_order}}
+								<b>วิธีการรับสินค้า </b> {{$obj->name_deli}}
 								<br/>
 								<b>สถานที่ </b>
-								{{$obj->shipping_t1}} {{$obj->shipping_t2}} {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+								 @if($obj->bill_address == 2)
+								 {{$obj->shipping_t2}}
+								 @endif
+								 {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
 							</address>
 						</div>
 					</div>
@@ -275,12 +278,15 @@ border: 1px solid #ddd;
         <div class="col-md-6" style="width:100%">
           <div class="bill-to" style="width:100%">
             <p class="h5 mb-1 text-dark font-weight-semibold">สถานที่จัดส่ง</p>
-            <address>
-              <b>วิธีการรับสินค้า </b> {{$obj->deliver_order}}
-              <br/>
-              <b>สถานที่ </b>
-              {{$obj->shipping_t1}} {{$obj->shipping_t2}} {{$obj->shipping_t1}} {{$obj->shipping_t2}} {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
-            </address>
+						<address>
+							<b>วิธีการรับสินค้า </b> {{$obj->name_deli}}
+							<br/>
+							<b>สถานที่ </b>
+							 @if($obj->bill_address == 2)
+							 {{$obj->shipping_t2}}
+							 @endif
+							 {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+						</address>
           </div>
         </div>
         </td>
@@ -429,7 +435,10 @@ border: 1px solid #ddd;
         <b>ที่อยู่จัดส่ง : </b>
       </td>
       <td>
-        {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+
+        {{$obj->name_deli}} @if($obj->bill_address == 2)
+				{{$obj->shipping_t2}}
+				@endif {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
       </td>
     </tr>
     <tr>

@@ -90,6 +90,13 @@
           														<input type="text" class="form-control" name="de_status" value="{{$objs->de_status}}">
           														</div>
           												</div>
+
+                                  <div class="form-group">
+          													<label class="col-md-3 control-label" for="profileFirstName">รายละเอียด</label>
+          													<div class="col-md-8">
+          														<textarea class="form-control" name="de_detail" rows="6">{{ $objs->de_detail }}</textarea>
+          														</div>
+          												</div>
                                   <br>
 
 

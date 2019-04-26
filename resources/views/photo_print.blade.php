@@ -146,7 +146,11 @@ Photo print
 
                        @foreach($item->options_detail->opt as $item_2)
                         <label class="item text-center image-radio" id="radio_get">
+                          @if($item_2->item_image == null)
+                          <img src="{{url('assets/image/Photo1.jpg')}}" width="95" style="box-shadow: 0 0 5px 0 rgba(0,0,0,.8);" />
+                          @else
                           <img src="{{url('assets/image/option/'.$item_2->item_image)}}" width="95" style="box-shadow: 0 0 5px 0 rgba(0,0,0,.8);" />
+                          @endif
                           <input type="radio"  name="option_number{{$s}}" value="{{$item_2->id}}" required/>
                           <i class="icon-check-1 hidden"></i>
                           <br />
@@ -319,7 +323,7 @@ Photo print
                   {{$objs->pro_name_detail}}
                 </ul>
 
-              <a type="button" id="photo_f"  class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal_optionx_1"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
+        <!--      <a type="button" id="photo_f"  class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal_optionx_1"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
 
               <div class="modal fade" id="myModal_optionx_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document" >
@@ -344,7 +348,7 @@ Photo print
 
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <a type="button" id="photo_t" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
 
@@ -503,47 +507,9 @@ if(strUser == 0){
 } */
 //console.log(strUser);
 
-if({{$check_option_count}} > 0){
 
-  var x = document.getElementById("photo_f");
-  x.style.display = "none";
-  var y = document.getElementById("photo_t");
-  y.style.display = "block";
 
-}else{
 
-  var x = document.getElementById("photo_f");
-  x.style.display = "none";
-  var y = document.getElementById("photo_t");
-  y.style.display = "block";
-
-/*
-
-  var x = document.getElementById("photo_t");
-  x.style.display = "none";
-  var y = document.getElementById("photo_f");
-  y.style.display = "block";
-*/
-}
-
-function getComboA1(selectObject) {
-    var e = document.getElementById("size_photo1");
-    var strUser = e.options[e.selectedIndex].getAttribute('data-value');
-
-    if(strUser == 0){
-      var x = document.getElementById("photo_t");
-      x.style.display = "none";
-      var y = document.getElementById("photo_f");
-      y.style.display = "block";
-    }else{
-      var x = document.getElementById("photo_f");
-      x.style.display = "none";
-      var y = document.getElementById("photo_t");
-      y.style.display = "block";
-    }
-  //  console.log(jQuery("#size_photo1").val());
-
-}
 
 
 

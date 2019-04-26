@@ -49,7 +49,8 @@
 
                 <div class="col-md-12 " style="padding-left: 1px;">
 
-
+                  <a class="btn btn-primary " href="{{url('admin/delivery/create')}}" >
+                      <i class="fa fa-plus"></i> เพิ่มบริการขนส่งใหม่</a>
                 </div>
                 <br><br>
 
@@ -58,33 +59,52 @@
 
 
 
-                <table class="table table-responsive-lg table-striped table-sm mb-0" id="datatable-default">
+                <table class="table table-responsive-lg table-striped table-sm mb-0" >
                   <thead>
                     <tr>
                       <th>ช่องทางการส่งสินค้า</th>
-                      <th>ราคาค่าขนส่ง</th>
-                      <th class="text-center">จัดการ</th>
+                      <th>รูปแบบราคา</th>
+                      <th>แก้ไขล่าสุด</th>
+                      <th >จัดการ</th>
                     </tr>
                   </thead>
                   <tbody>
-             @if($objs)
+             @if(isset($objs))
                 @foreach($objs as $u)
                     <tr>
-                      <td>{{$u->name}}</td>
-                      <td>{{number_format((float)$u->de_price, 2, '.', '')}}</td>
-                      <td></td>
+                      <td><img src="{{url('assets/image/app_ship/'.$u->de_image)}}" alt="{{$u->name}}" style="height:32px; margin-right:10px;" class="img-response"> {{$u->name}}</td>
+                      <td>
+
+                        @if($u->de_type == 1)
+                        กำหนดราคาตายตัว
+                        @elseif($u->de_type == 2)
+                        ราคาตามสถานี
+                        @else
+                        กำหนด Rank ราคา
+                        @endif
+
+                      </td>
+                      <td>{{date('d-M-Y', strtotime($u->updated_at))}}</td>
                       <td>
                         <div class="btn-group flex-wrap">
   												<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
   												<div class="dropdown-menu" role="menu">
 
-  													<a class="dropdown-item text-1" href="{{url('admin/delivery/'.$u->id.'/edit')}}">แก้ไข</a>
+                            @if($u->de_type == 1)
+                            <a class="dropdown-item text-1" href="{{url('admin/delivery/'.$u->id.'/edit')}}">แก้ไข</a>
+                            @elseif($u->de_type == 2)
+                            <a class="dropdown-item text-1" href="{{url('admin/edit_deli_2/'.$u->id)}}">แก้ไข</a>
+                            @else
+                            <a class="dropdown-item text-1" href="{{url('admin/edit_deli_3/'.$u->id)}}">แก้ไข</a>
+                            @endif
 
-                      <!--    <form  action="{{url('admin/delivery/'.$u->id)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
+
+
+                       <form  action="{{url('admin/delivery/'.$u->id)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
                               <input type="hidden" name="_method" value="DELETE">
                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                               <button type="submit" title="ลบบทความ" class="dropdown-item text-1 text-danger"><i class="fa fa-times "></i> ลบ</button>
-                          </form> -->
+                          </form>
 
   												</div>
   											</div>

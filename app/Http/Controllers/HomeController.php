@@ -8,6 +8,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Response;
 use Session;
 use Auth;
+use App\delirank;
 use App\User;
 use App\user_address;
 use App\order;
@@ -1723,45 +1724,69 @@ $data['get_my_add'] = $get_my_add;
     public function add_order(Request $request){
     //    dd(Session::get('cart'));
         $c1 =$request['c1'];
-      //   dd($c1);
+        // ยอมรับเงื่อนไข
 
-        $this->validate($request, [
-             'address_shipping_order' => 'required',
-             'address_type_order' => 'required',
-             'deliver_order' => 'required',
-             'total' => 'required',
-             'get_sum_ship' => 'required',
-             'order_price' => 'required',
-             'c1' => 'required'
-         ]);
+        $type_ship = $request['type_ship'];
+
+        if($type_ship == 1 || $type_ship == 3){
+
+          $this->validate($request, [
+               'address_shipping_order' => 'required',
+               'address_type_order' => 'required',
+               'deliver_order' => 'required',
+               'total' => 'required',
+               'get_sum_ship' => 'required',
+               'order_price' => 'required',
+               'deliver_order' => 'required',
+               'c1' => 'required'
+           ]);
+
+        }else{
+
+          $this->validate($request, [
+               'address_shipping_order' => 'required',
+               'address_type_order' => 'required',
+               'deliver_order' => 'required',
+               'total' => 'required',
+               'get_sum_ship' => 'required',
+               'order_price' => 'required',
+               'deliver_order' => 'required',
+               'van_shipping' => 'required',
+               'c1' => 'required'
+           ]);
+
+        }
+
+
+      //   return $request->all();
 
 //dd($c1);
 
-
+         $id_address_u = $request['address_shipping_order'];
          $text_re_user = $request['text_re_user'];
+         //เลือกที่จัดส่งใบกำกับภาษี
          $id_card_no = $request['id_card_no'];
          $branch_code = $request['branch_code'];
 
          $check_order = $request['check_order'];
+         //ขอใบกำกับภาษี
+
+
          if($request['check_order'] == null){
            $check_order = 0;
          }
+         if($check_order == 1 && $request['id_card_no'] != null){
 
-         if($check_order == 1){
-
-           $id = Auth::user()->id;
-
-           $user = User::find($id);
+           $user = user_address::find($id_address_u);
            $user->id_card_no = $request['id_card_no'];
            $user->branch_code = $request['branch_code'];
            $user->save();
 
-
-         }
+         } // ถ้าขอใบกำกับภาษี จะเพิ่มไปยังที่อยู่ของ user
 
 
          if($text_re_user == 3){
-
+           //เลือกที่จัดส่งใบกำกับภาษี แบบกำหนดเอง
            $user_id = Auth::user()->id;
 
            $package = new user_address();
@@ -1790,34 +1815,12 @@ $data['get_my_add'] = $get_my_add;
        $package->user_id = Auth::user()->id;
        $package->code_gen = $randomSixDigitInt;
        $package->shipping_address = $request['address_shipping_order'];
-       $package->bill_address = $request['address_bill_order'];
+       $package->bill_address = $type_ship;
        $package->type_order_check = $request['address_type_order'];
        $package->bil_req = $check_order;
        $package->text_re_user = $text_re_user;
        $package->deliver_order = $request['deliver_order'];
-       if($request['deliver_order'] == 'บขส.'){
-
-         $package->shipping_t2 = $request['bus_shipping'];
-
-       }elseif($request['deliver_order'] == 'Delivery'){
-
-         $package->shipping_t2 = $request['area_shipping'];
-
-       }elseif($request['deliver_order'] == 'รถตู้'){
-
        $package->shipping_t2 = $request['van_shipping'];
-
-     }elseif($request['deliver_order'] == 'รถไฟ'){
-
-     $package->shipping_t2 = $request['train_shipping'];
-
-   }elseif($request['deliver_order'] == 'รับสินค้าด้วยตัวเองที่สาขา'){
-
-         $package->shipping_t2 = $request['man_shipping'];
-
-       }else{
-         $package->shipping_t2 = null;
-       }
        $package->note = $request['message_order'];
        $package->order_price = $request['order_price'];
        $package->shipping_p = $request['get_sum_ship'];
@@ -1834,6 +1837,8 @@ $data['get_my_add'] = $get_my_add;
 
        }else{
 
+
+
          $count_data = DB::table('cart_details')->select(
              'cart_details.*'
              )
@@ -1847,6 +1852,27 @@ $data['get_my_add'] = $get_my_add;
              ->get();
 
              foreach($get_data as $k){
+
+
+               if($type_ship == 3){
+                 $total = $k->sum_image*$k->sum_price;
+                 $inventory = delirank::where('deli_main_id', $package->deliver_order)
+                 ->where('product_id', $k->product_id)
+                 ->where('start_rank', '<=', $total)
+                 ->where('end_rank', '>=', $total)
+                 ->first();
+
+                 if($inventory == null){
+                   $sumary = 0;
+                 }else{
+                   $sumary = $inventory->total_price;
+                 }
+
+
+
+               }else{
+                   $sumary = $request['get_sum_ship'];
+               }
 
                $cat = DB::table('products')->select(
                  'products.*'
@@ -1878,7 +1904,7 @@ $data['get_my_add'] = $get_my_add;
                  $obj->sum_image = $k->sum_image;
                  $obj->sum_price = $k->sum_price;
                  $obj->list_link = $k->list_link;
-                 $obj->sum_shipping = $k->shipping_price_2;
+                 $obj->sum_shipping = $sumary;
                  $obj->save();
 
                  $obj_id = $obj->id;

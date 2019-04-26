@@ -126,9 +126,9 @@
     												</tr>
                             <tr>
     													<td>วิธีการจัดส่ง</td>
-    													<td>{{$objs->deliver_order}}</td>
+    													<td>{{$objs->name_deli}}</td>
     												</tr>
-                            @if($objs->deliver_order != null)
+                            @if($objs->bill_address == 2)
                             <tr>
     													<td>เลือกเขตพื้นที่</td>
     													<td>{{$objs->shipping_t2}}</td>
@@ -194,7 +194,7 @@
                               <div class="col-md-12 col-md-offset-1">
                                 <button type="submit" class="btn btn-primary">อัพเดทข้อมูล</button>
                                 <a href="{{url('admin/order_print/'.$objs->id_or)}}" target="_blank" class="btn btn-warning">Print ใบปะหน้า</a>
-                              
+
                                 <a class="mb-xs mt-xs mr-xs btn  btn-default " href="{{url('admin/load_img/'.$objs->id_or)}}" >
                                      Download ทั้งหมด</a>
                               </div>

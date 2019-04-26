@@ -109,7 +109,7 @@ ul#profile_summary li span {
                       </li>
                       @endforeach
                       @endif
-                      <li>{{ trans('message.delivery') }}  <span>{{$order_main->deliver_order}} </span>
+                      <li>{{ trans('message.delivery') }}  <span>{{$order_main->name_deli}} </span>
                       </li>
                       <li>{{ trans('message.Paid_amount') }}  <span class="text-danger" style="font-size:15px;"><b>{{number_format($order_main->order_price+$order_main->shipping_p,2)}} {{ trans('message.baht') }}</b></span>
                       </li>
@@ -147,7 +147,7 @@ ul#profile_summary li span {
 
                       @endforeach
                       @endif
-                    
+
                       @if($order_main->shipping_p == 0)
                       <li>{{ trans('message.Paid_amount') }}  <span class="text-danger" style="font-size:15px;"><b>{{number_format(($order_de->sum_price*$order_de->sum_image),2)}} {{ trans('message.baht') }}</b></span>
                       </li>

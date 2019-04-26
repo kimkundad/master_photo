@@ -209,48 +209,6 @@
                                   <br />
  -->
 
-                                  <hr />
-                                  <h4 class="mb-xlg">กำหนดราคา ค่าจัดส่ง</h4>
-
-                                  <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">ยอดตัดสินค้า จัดส่ง*</label>
-          													<div class="col-md-8">
-          														<input type="text" class="form-control" name="set_limit" value="{{ $objs->set_limit }}">
-          														</div>
-          												</div>
-
-                                  <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง ems*</label>
-          													<div class="col-md-8">
-          														<input type="text" class="form-control" name="a_price_o" value="{{ $objs->a_price_o }}">
-          														</div>
-          												</div>
-
-
-                                  <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง ems (ราคาสอง กรณีไม่คิดราคาแรก)*</label>
-          													<div class="col-md-8">
-          														<input type="text" class="form-control" name="b_price_o" value="{{ $objs->b_price_o }}">
-          														</div>
-          												</div>
-
-                                  <hr />
-
-                                  <div class="form-group">
-                                    <label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง KERRY, DHL<span class="text-danger"> * </span></label>
-                                    <div class="col-md-8">
-                                      <input type="text" class="form-control" name="a2_price_o" value="{{ $objs->a2_price_o }}">
-                                      </div>
-                                  </div>
-
-
-                                  <div class="form-group">
-                                    <label class="col-md-3 control-label" for="profileFirstName">ราคาค่าจัดส่ง KERRY, DHL (ราคาสอง กรณีไม่คิดราคาแรก)<span class="text-danger"> * </span></label>
-                                    <div class="col-md-8">
-                                      <input type="text" class="form-control" name="b2_price_o" value="{{ $objs->b2_price_o }}">
-                                      </div>
-                                  </div>
-
 
 
           											</fieldset>
@@ -263,9 +221,10 @@
 
           											<div class="panel-footer">
           												<div class="row">
-          													<div class="col-md-9 col-md-offset-3">
+          													<div class="col-md-9 col-md-offset-2">
           														<button type="submit" class="btn btn-primary">อัพเดทข้อมูล</button>
                                       <a href="{{url('admin/product_option/'.$objs->id_q)}}" class="mb-1 mt-1 mr-1 btn btn-warning">แก้ไข Option สินค้า</a>
+                                      <a href="{{url('admin/product_price/'.$objs->id_q)}}" class="mb-1 mt-1 mr-1 btn btn-success">แก้ไข ค่าจัดส่ง</a>
           														<a href="{{url('admin/product')}}" class="btn btn-default">ยกเลิก</a>
           													</div>
           												</div>

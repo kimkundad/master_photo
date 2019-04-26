@@ -93,9 +93,18 @@ Payment | MASTER PHOTO NETWORK
                 </td>
               </tr>
 
+              <tr>
+                <td>
+                  ราคาสินค้า x {{$order->total}}
+                </td>
+                <td class="text-right" >
+                  {{$order->order_price+$order->shipping_p}}
+                </td>
+              </tr>
+
               <tr class="total">
                 <td>
-                  Summary
+                  ยอดชำระ
                 </td>
                 <td class="text-right">
                   ฿{{$order->order_price}}
@@ -308,9 +317,18 @@ Payment | MASTER PHOTO NETWORK
                 </td>
               </tr>
 
+              <tr>
+                <td>
+                  ราคาสินค้า x {{$order->total}}
+                </td>
+                <td class="text-right" >
+                  {{$order->order_price}}
+                </td>
+              </tr>
+
               <tr class="total">
                 <td>
-                  Summary
+                  ยอดชำระ
                 </td>
                 <td class="text-right">
                   ฿{{$order->order_price+$order->shipping_p}}
