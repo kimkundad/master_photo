@@ -608,7 +608,7 @@ class ProductController extends Controller
 
       $get_item = DB::table('deliranks')
       ->where('product_id', $id)
-      ->groupBy('product_id')
+      ->groupBy('deli_main_id')
       ->get();
 
       $get_id_first = [];
@@ -621,7 +621,7 @@ class ProductController extends Controller
       }
     }
 
-      dd($get_id_first);
+
 
 
 
@@ -629,13 +629,17 @@ class ProductController extends Controller
         'deliveries.*',
         'deliveries.id as id_q'
         )
+      ->whereNotIn('id', $get_id_first)
       ->where('de_type', 3)
       ->get();
+
+    //  dd($get_id_first);
 
       $deli = DB::table('deliveries')->select(
         'deliveries.*',
         'deliveries.id as id_q'
         )
+      ->whereIn('id', $get_id_first)
       ->where('de_type', 3)
       ->get();
 
@@ -643,7 +647,31 @@ class ProductController extends Controller
 
       $get_item = [];
 
+
       foreach ($deli as $key) {
+        // code...
+
+        $deli_count = DB::table('deliranks')
+        ->where('deli_main_id', $key->id)
+        ->where('product_id', $id)
+        ->count();
+
+        $deli_item = DB::table('deliranks')
+        ->select(
+          'deliranks.*',
+          'deliranks.id as id_item'
+          )
+        ->where('deli_main_id', $key->id)
+        ->where('product_id', $id)
+        ->get();
+
+      //  $get_item = $deli_item;
+        $key->option = $deli_count;
+        $key->option_item = $deli_item;
+      }
+
+
+      foreach ($deli_logo as $key) {
         // code...
 
         $deli_count = DB::table('deliranks')
