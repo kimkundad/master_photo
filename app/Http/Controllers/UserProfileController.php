@@ -149,6 +149,7 @@ class UserProfileController extends Controller
 
                               $name_option = DB::table('option_items')
                                     ->where('id', $j->option_id)
+                                    ->where('option_id', '!=', 0)
                                     ->first();
                                 $j->get_option = $name_option;
                             }
