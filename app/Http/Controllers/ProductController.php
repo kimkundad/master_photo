@@ -679,18 +679,8 @@ class ProductController extends Controller
         ->where('product_id', $id)
         ->count();
 
-        $deli_item = DB::table('deliranks')
-        ->select(
-          'deliranks.*',
-          'deliranks.id as id_item'
-          )
-        ->where('deli_main_id', $key->id)
-        ->where('product_id', $id)
-        ->get();
-
       //  $get_item = $deli_item;
         $key->option = $deli_count;
-        $key->option_item = $deli_item;
       }
 
     //  dd($deli);
