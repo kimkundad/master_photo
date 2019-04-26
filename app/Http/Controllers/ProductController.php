@@ -290,6 +290,14 @@ class ProductController extends Controller
       ->where('id', $id)
       ->delete();
 
+      DB::table('cart_options')
+      ->where('option_id', $id)
+      ->delete();
+
+      DB::table('order_options')
+      ->where('option_id', $id)
+      ->delete();
+
       return redirect(url('admin/product_option/'.$product_id))->with('add_success','คุณทำการเพิ่มอสังหา สำเร็จ');
     }
 
