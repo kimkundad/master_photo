@@ -446,7 +446,7 @@ figure:hover+span {
       height: '500',
       arrows: true,
       visibleSize: '100%',
-      responsive:true,
+      responsive:false,
       imageScaleMode:'cover'
     });
   });
