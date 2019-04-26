@@ -3151,7 +3151,9 @@ $data['get_my_add'] = $get_my_add;
 
                  $obj = new cart_option();
                  $obj->cart_id_detail = $the_id;
-                 $obj->option_id = $k;
+                 if($k != 0){
+                   $obj->option_id = $k;
+                 }
                  $obj->save();
 
                }
