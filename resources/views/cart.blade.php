@@ -250,7 +250,7 @@ height: 60px;
               $total_img = 0;
               $s = 0;
              ?>
-             {{dd($get_data)}}
+          
              @if(isset($get_data))
              @foreach($get_data as $k)
              <tr>
