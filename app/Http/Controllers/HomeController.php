@@ -671,6 +671,8 @@ class HomeController extends Controller
 
       public function shipping(){
 
+
+
       $delivery = delivery::all();
       $data['delivery'] = $delivery;
 
@@ -679,6 +681,8 @@ class HomeController extends Controller
       //dd();
 
       $set_num_date = count(Session::get('cart'));
+
+
 
       if(Auth::guest()){
 
@@ -694,8 +698,14 @@ class HomeController extends Controller
       //  dd($set_num_date);
 
 
-
-
+      $check_count_cart_f = DB::table('cart_details')->select(
+            'cart_details.*'
+            )
+            ->where('user_id', Auth::user()->id)
+            ->count();
+      if($check_count_cart_f == 0){
+        return redirect('/');
+      }
 
 
       if($set_num_date > 0){
@@ -2408,12 +2418,18 @@ $data['get_my_add'] = $get_my_add;
 
 
 
+
+
     //  dd(Session::get('cart'));
 
       if(Auth::guest()){
 
+
         $set_num_date = count(Session::get('cart'));
 
+        if($set_num_date == 0){
+          return redirect(url('/'));
+        }
 
 
         $set_img = array();
@@ -2474,6 +2490,11 @@ $data['get_my_add'] = $get_my_add;
             )
             ->where('user_id', Auth::user()->id)
             ->count();
+
+
+            if($count_data == 0){
+              return redirect(url('/'));
+            }
 
         $get_data = DB::table('cart_details')->select(
             'cart_details.*'
