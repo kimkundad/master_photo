@@ -150,7 +150,7 @@ height: 60px;
 
 
              <tr>
-               <td style="min-width: 200px;">
+               <td style="min-width: 200px; max-width: 100%;">
                  <a href="{{url('photo_edit/'.$u['data']['list_link'])}}" >
                  <div class="thumb_cart1">
                    <img src="{{url('assets/image/all_image/'.$u['data']['image'][0]['image'])}}" alt="image">
@@ -250,16 +250,17 @@ height: 60px;
               $total_img = 0;
               $s = 0;
              ?>
-          
+
              @if(isset($get_data))
              @foreach($get_data as $k)
              <tr>
-               <td style="min-width: 200px;">
+               <td style="min-width: 280px; max-width: 100%;">
                  <a href="{{url('photo_edit/'.$k->id)}}" >
+
                  <div class="thumb_cart1">
                    <img src="{{url('assets/image/all_image/'.$k->image)}}" alt="image">
                  </div>
-                 <span class="item_cart" style="color:#333; margin-top: 5px; font-size:13px;">{{$k->product_name}}
+                 <span class="item_cart" style="color:#333; margin-top: 5px; font-size:13px; display: block;">{{$k->product_name}}
                    <br />
 
 

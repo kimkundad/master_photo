@@ -2550,7 +2550,9 @@ $data['get_my_add'] = $get_my_add;
               $check_option_count = DB::table('product_items')->select(
                   'product_items.*'
                   )
-                  ->where('product_set_id', $id)
+                  ->leftjoin('option_products', 'product_items.option_set_id',  'option_products.id')
+                  ->where('product_items.product_set_id', $id)
+                  ->where('option_products.option_type', 1)
                   ->count();
 
                 //  dd($check_option_count);

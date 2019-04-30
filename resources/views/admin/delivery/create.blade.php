@@ -85,6 +85,14 @@
           													</div>
           												</div>
 
+
+                                  <div class="form-group">
+                                    <label class="col-md-3 control-label" for="profileFirstName">ราคาที่ส่งฟรี</label>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="de_status" value="0">
+                                      </div>
+                                  </div>
+
                                   <div class="" id="option_select_op2" style="Display:none">
                                     <div class="form-group">
             													<label class="col-md-3 control-label" for="profileFirstName">ราคาค่าขนส่ง </label>
@@ -93,12 +101,7 @@
             														</div>
             												</div>
 
-                                    <div class="form-group">
-            													<label class="col-md-3 control-label" for="profileFirstName">ราคาที่ส่งฟรี</label>
-            													<div class="col-md-8">
-            														<input type="text" class="form-control" name="de_status" value="0">
-            														</div>
-            												</div>
+
                                   </div>
 
 

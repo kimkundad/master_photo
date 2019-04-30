@@ -397,9 +397,9 @@ $get_name_size = '';
                   {{$k->item_name}}
                 </td>
               <td class="text-right">
-                @if($k->item_status == 1)
+                <!-- @if($k->item_status == 1)
                 ฿{{number_format((float)$k->item_price, 2, '.', '')}}
-                @endif
+                @endif -->
               </td>
 
               </tr>
@@ -469,11 +469,11 @@ $get_name_size = '';
                   @endforeach
                 </td>
               <td class="text-right">
-                @foreach($j->option as $k)
+              <!--  @foreach($j->option as $k)
                 @if($k->item_status == 1)
                 ฿{{number_format((float)$k->item_price, 2, '.', '')}}
                 @endif
-                @endforeach
+                @endforeach -->
               </td>
 
               </tr>
@@ -641,9 +641,9 @@ $get_name_size = '';
 
                           </div>
                           <div id="mar-top-15">
-                            <button class='add-image up_btn_kim btn btn-next'><i class='sl sl-icon-plus'></i> Add Photos </button>
-                            <button type="submit" id="submit-all" class="up_btn_kim btn btn-next" name="submit_photo"> Confirm </button>
-                            <button class="up_btn_kim btn btn-next" id="clear-dropzone">Clear All</button>
+                            <button class='add-image up_btn_kim btn btn-next' id="add-photo-set"><i class='sl sl-icon-plus'></i> Add Photos </button>
+                            <button type="submit" id="submit-all" class="hidden up_btn_kim btn btn-next" name="submit_photo"> Confirm </button>
+                            <button class="hidden up_btn_kim btn btn-next" id="clear-dropzone">Clear All</button>
 
 
                             <div class="hidden" id="next_to_cart2">

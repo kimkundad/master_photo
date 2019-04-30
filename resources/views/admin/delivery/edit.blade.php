@@ -85,11 +85,11 @@
           												</div>
 
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">Delivery ราคาที่ส่งฟร (Delivery เท่านั้น)</label>
-          													<div class="col-md-8">
-          														<input type="text" class="form-control" name="de_status" value="{{$objs->de_status}}">
-          														</div>
-          												</div>
+                                    <label class="col-md-3 control-label" for="profileFirstName">ราคาที่ส่งฟรี</label>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="de_status" value="{{$objs->de_status}}">
+                                      </div>
+                                  </div>
 
                                   <div class="form-group">
           													<label class="col-md-3 control-label" for="profileFirstName">รายละเอียด</label>

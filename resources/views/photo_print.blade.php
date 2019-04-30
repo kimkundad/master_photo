@@ -120,6 +120,7 @@ Photo print
 
 
                         <select id="size_photo{{$s}}" style="margin-top:8px;" class="form-control" onchange="getComboA{{$s}}(this)" name="option_number[]" required>
+
                           @foreach($item->options_detail->opt as $item_2)
                           <option value="{{$item_2->id}}" data-value="{{$item_2->item_price}}">{{$item_2->item_name}}
                             @if($item_2->item_show_status == 1)
@@ -128,6 +129,7 @@ Photo print
                           </option>
                           @endforeach
                         </select>
+
                       </div>
                       <br />
                    </div>
@@ -186,7 +188,7 @@ Photo print
 
 
                <!-- Modal style="color: #666;" -->
-               <div class="modal fade" id="myModal_option" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+               <div class="modal fade" id="myModal_option" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 100000;">
                  <div class="modal-dialog" role="document">
                    <div class="modal-content text-right">
                      <a type="button" class="btn btn-secondary text-right" style=" color: #666;" data-dismiss="modal"><i class="fa fa-remove"></i> Close</a>
@@ -317,13 +319,13 @@ Photo print
 
 
 
-             <h4>Product Details</h4>
+             <h4>Product Details </h4>
 
              <ul class="list_ok" style="padding-left:10px;">
                   {{$objs->pro_name_detail}}
                 </ul>
 
-        <!--      <a type="button" id="photo_f"  class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal_optionx_1"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
+            <!--  <a type="button" id="photo_f"  class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal_optionx_1"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
 
               <div class="modal fade" id="myModal_optionx_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document" >
@@ -337,9 +339,9 @@ Photo print
                       <div class="row text-center ">
 
                         <div class="col-md-12">
-                          <h4>กรุณาเลือกชนิดกระดาษ</h4>
+                          <h4>กรุณาเลือก ตัวเลือกของคุณ</h4>
                           <p>
-                            ท่านต้องเลือกกระดาษ เพื่อไปยังขั้นตอนต่อไป
+                            ท่านต้องตัวเลือกของคุณ เพื่อไปยังขั้นตอนต่อไป
                           </p>
                         </div>
 
@@ -350,13 +352,15 @@ Photo print
                 </div>
               </div> -->
 
+
+
               <a type="button" id="photo_t" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
 
 
 
 
               <!-- Modal -->
-              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -495,13 +499,44 @@ Photo print
 <script>
 
 const data_get = {{$s}};
+var fix_data = {{$check_option_count}};
 
-console.log({{$s}})
+
+
+/*if(fix_data > 0){
+  var x = document.getElementById("photo_t");
+  x.style.display = "none";
+}else{
+  var x = document.getElementById("photo_f");
+  x.style.display = "none";
+}
+
+function getComboA0(selectObject) {
+    var a0 = document.getElementById("size_photo0");
+    var strUsera0 = a0.options[a0.selectedIndex].getAttribute('data-value');
+
+    console.log(strUsera0)
+
+    if(strUsera0 == 9999){
+      var x = document.getElementById("photo_t");
+      x.style.display = "none";
+      var y = document.getElementById("photo_f");
+      y.style.display = "block";
+    }else{
+      var x = document.getElementById("photo_f");
+      x.style.display = "none";
+      var y = document.getElementById("photo_t");
+      y.style.display = "block";
+    }
+
+} */
+
+
 
 /*
 var e = document.getElementById("size_photo1");
 var strUser = e.options[e.selectedIndex].getAttribute('data-value');
-if(strUser == 0){
+if($s > 0){
   var x = document.getElementById("photo_t");
   x.style.display = "none";
 } */
@@ -582,7 +617,7 @@ $(document).ready(function(){
       }
   });
 
-  console.log(get_value_radio);
+
 
   // sync the input state
   $(".image-radio").on("click", function(e){
