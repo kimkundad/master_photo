@@ -20,6 +20,7 @@ function get_menu(){
 
                   $product = DB::table('products')
                     ->where('pro_category', $j->id)
+                    ->where('pro_status', 1)
                     ->get();
 
                     $j->product = $product;
