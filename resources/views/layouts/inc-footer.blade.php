@@ -32,7 +32,7 @@
             <li><img src="{{url('master/assets/img/footer/logo-paypal.png')}}"></li>
             <li><img src="{{url('master/assets/img/footer/logo-Delivery.png')}}"></li>
             <li><img src="{{url('master/assets/img/footer/logo-kerry.png')}}"></li>
-            <li><img src="{{url('master/assets/img/footer/logo-ScgExpress.png')}}"></li>
+            <li><img src="{{url('master/assets/img/footer/Logo-DHL_Express.png')}}"></li>
             <li><img src="{{url('master/assets/img/footer/logo-thaipost.png')}}"></li>
           </ul>
 <!-- /โลโก้ การเงิน / ขนส่ง-->
