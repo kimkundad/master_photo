@@ -2565,6 +2565,7 @@ $data['get_my_add'] = $get_my_add;
               'product_items.*'
               )
               ->where('product_set_id', $id)
+              ->orderBy('sort_no')
               ->get();
 
 
