@@ -170,8 +170,8 @@ Payment | MASTER PHOTO NETWORK
 
 
           <br />
-          <a href="#" style="padding: 6px 12px; font-size:15px;" class="btn btn-next">ขั้นตอนต่อไป</a>
-          <a href="#" style="padding: 6px 12px; font-size:15px;" class="btn btn-next">แจ้งชำระเงิน</a>
+          <a href="{{url('/')}}" style="padding: 6px 12px; font-size:15px;" class="btn btn-next">กลับสู่หน้าแรก</a>
+          <a href="{{url('pay_order_detail/'.$order->code_gen)}}" style="padding: 6px 12px; font-size:15px;" class="btn btn-next">แจ้งชำระเงิน</a>
         </div>
 
         <div class="form_title">
@@ -258,7 +258,7 @@ Payment | MASTER PHOTO NETWORK
         </div>
 
 
-        <div id="policy">
+    <!--    <div id="policy">
           <h4>Cancellation policy</h4>
           <div class="form-group">
             <label>
@@ -268,6 +268,8 @@ Payment | MASTER PHOTO NETWORK
 
           <button type="submit" class="btn btn-next">SUBMIT NOW</button>
         </div>
+ -->
+
       </div>
 
 
