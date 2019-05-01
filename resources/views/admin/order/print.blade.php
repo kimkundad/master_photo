@@ -43,6 +43,9 @@ border: 1px solid #ddd;
     font-size: 13px;
     border-top: 1px solid #ddd;
 }
+.text18{
+	font-size: 18px important;
+}
     </style>
 	</head>
 	<body>
@@ -423,18 +426,18 @@ border: 1px solid #ddd;
 <table class="table table-bordered " style="margin-bottom: 0px; margin-left:25px; width:700px;">
   <tbody>
     <tr>
-      <td>
+      <td style="font-size: 18px">
         <b>ชื่อ : </b>
       </td>
-      <td>
+      <td style="font-size: 18px">
         {{$get_address->name_ad}}
       </td>
     </tr>
     <tr>
-      <td style="width:130px;">
+      <td style="width:130px; font-size: 18px" >
         <b>ที่อยู่จัดส่ง : </b>
       </td>
-      <td>
+      <td style="font-size: 18px">
 
         {{$obj->name_deli}} @if($obj->bill_address == 2)
 				{{$obj->shipping_t2}}
@@ -442,10 +445,10 @@ border: 1px solid #ddd;
       </td>
     </tr>
     <tr>
-      <td>
+      <td style="font-size: 18px">
         <b>เบอร์ติดต่อ : </b>
       </td>
-      <td>
+      <td style="font-size: 18px">
         {{$get_address->phone_ad}}
       </td>
     </tr>

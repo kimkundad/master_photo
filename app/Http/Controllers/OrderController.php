@@ -438,6 +438,7 @@ class OrderController extends Controller
 
        $package = order::find($id);
         $package->status = $request['option_type'];
+        $package->note_admin = $request['note_admin'];
         $package->save();
 
       return redirect(url('admin/order/'.$id.'/edit'))->with('edit_success','แก้ไขหมวดหมู่ ');

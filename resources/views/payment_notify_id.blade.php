@@ -89,18 +89,9 @@ user profile
                         </div>
                       </div>
 
-                      <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.email_pro') }}*</label>
-                        <div class="col-md-8">
-                          <input type="text" class="form-control" name="email" value="{{ old('email')}}" >
-                          @if ($errors->has('email'))
-                          <p class="text-danger" style="margin-top:10px;">
-                            คุณต้องกรอก อีเมล์ ด้วยค่ะ
-                          </p>
-                          @endif
-                            <br />
-                        </div>
-                      </div>
+
+
+
                       <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Which_bank') }}*</label>
 
                       <label class="col-md-9 control-label" for="profileFirstName">
@@ -147,13 +138,19 @@ user profile
 
                                                     <div class="form-group">
                                                       <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Time_to_transfer_money') }}*</label>
-                                                      <div class="col-md-8">
+                                                      <div class="col-md-4">
                                                         <input type="text" class="form-control date-pick" name="filter_date" id="filter-date" value="<?php echo date('d/m/Y H:i')?>"/>
                                                         @if ($errors->has('filter_date'))
                                                         <p class="text-danger" style="margin-top:10px;">
                                                           คุณต้องกรอก วันที่-เวลาโอนเงิน ด้วยค่ะ
                                                         </p>
                                                         @endif
+                                                          <br />
+                                                      </div>
+                                                      <div class="col-md-4">
+                                                        <input type="text" class="form-control date" name="time2_tran" id='datetimepicker2' value="<?php echo date('H:i')?>"/>
+
+
                                                           <br />
                                                       </div>
                                                     </div>
@@ -222,7 +219,22 @@ user profile
     jQuery(document).ready(function () {
         'use strict';
 
-        jQuery('#filter-date, #search-from-date, #search-to-date').datetimepicker();
+        jQuery('#filter-date, #search-from-date, #search-to-date').datetimepicker({
+          timepicker:false,
+ format:'d/m/Y'
+        });
+
+        jQuery('#datetimepicker2').datetimepicker({
+          allowTimes:[
+          '22:00', '22:30', '23:00', '23:30', '24:00', '24:30',
+          '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30', '05:00', '05:30', '06:00', '06:30',
+          '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30',
+          '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30',
+          '19:00', '19:30', '20:00', '20:30', '21:00'
+        ],
+  datepicker:false,
+  format:'H:i'
+});
 
 
 

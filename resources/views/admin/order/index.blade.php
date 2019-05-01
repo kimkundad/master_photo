@@ -76,13 +76,19 @@
                       <th>
 
                         @if($u->status == 0)
-                        รอการตรวจสอบ
+                        <span class="text-danger">รอการชำระเงิน</span>
                         @elseif($u->status == 1)
-                        ชำระเงินแล้ว
+                        <span class="text-success">ชำระเงินแล้ว</span>
+
                         @elseif($u->status == 2)
-                        อยู่ระหว่างการจัดส่ง
+                        <span class="text-warning">อยู่ระหว่างดำเนินการผลิต</span>
+
+                        @elseif($u->status == 3)
+                        <span class="text-primary">จัดส่งเรียบร้อย</span>
+
                         @else
-                        จัดส่งเรียบร้อย
+                        <span class="text-muted">ยกเลิก </span>
+
                         @endif
                       </th>
 

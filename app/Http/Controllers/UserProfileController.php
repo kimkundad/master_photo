@@ -117,6 +117,7 @@ class UserProfileController extends Controller
 
       $order = DB::table('orders')
             ->where('user_id', Auth::user()->id)
+            ->where('status', 1)
             ->get();
 
             foreach($order as $u){
@@ -409,9 +410,45 @@ class UserProfileController extends Controller
 
     public function payment_notify(){
 
+      $get_order_count = DB::table('orders')
+        ->where('status', 0)
+        ->count();
+
+      $get_order = DB::table('orders')
+        ->where('status', 0)
+        ->get();
+        $name = '';
+        if($get_order_count > 0){
+
+          foreach($get_order as $u){
+
+            $order_de = DB::table('order_details')->select(
+                  'order_details.*',
+                  'order_details.id as id_de',
+                  'order_details.created_at as created_ats',
+                  'products.*'
+                  )
+                  ->leftjoin('products', 'products.id',  'order_details.product_id')
+                  ->where('order_details.order_id', $u->id)
+                  ->get();
+
+
+                  foreach($order_de as $h){
+
+                    $name .= $h->pro_name.' ';
+
+          }
+
+          $u->name_pro = $name;
+        }
+      }
+
       $objs = DB::table('payment_options')
         ->get();
 
+      //dd($get_order);
+    $data['get_order_count'] = $get_order_count;
+    $data['get_order'] = $get_order;
     $data['bank'] = $objs;
 
 
@@ -458,7 +495,6 @@ class UserProfileController extends Controller
             'image' => 'required|max:8048',
             'name' => 'required',
             'order_id' => 'required',
-            'email' => 'required',
             'bank' => 'required',
             'money' => 'required',
             'filter_date' => 'required',
@@ -477,10 +513,10 @@ class UserProfileController extends Controller
       $package = new user_payment();
       $package->order_id = $request['order_id'];
       $package->name = $request['name'];
-      $package->email = $request['email'];
       $package->bank = $request['bank'];
       $package->money = $request['money'];
       $package->time_tran = $request['filter_date'];
+      $package->time2_tran = $request['time2_tran'];
       $package->image_tran = $input['imagename'];
       $package->save();
 

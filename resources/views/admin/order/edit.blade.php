@@ -124,6 +124,12 @@
 
                             </td>
     												</tr>
+
+                            <tr>
+
+    													<td colspan="2">หมายเหตุ(ลูกค้า) : {{$objs->note}}</td>
+    												</tr>
+
                             <tr>
     													<td>วิธีการจัดส่ง</td>
     													<td>{{$objs->name_deli}}</td>
@@ -151,6 +157,12 @@
 
                           <fieldset>
                             <div class="form-group">
+                              <label class="col-md-3 control-label" for="profileFirstName">หมายเหตุ (พนักงาน)</label>
+                              <div class="col-md-8">
+                                <textarea class="form-control" name="note_admin" rows="8">{{ $objs->note_admin }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
                               <label class="col-md-3 control-label" for="profileFirstName">สถานะออเดอร์</label>
                               <div class="col-md-8">
                                 <select name="option_type" class="form-control mb-md" required>
@@ -159,7 +171,7 @@
                                  @if($objs->status == 0)
                                  selected='selected'
                                  @endif
-                                 > รอการตรวจสอบ </option>
+                                 > รอการชำระเงิน </option>
 
                                  <option value="1"
                                  @if($objs->status == 1)
@@ -171,13 +183,22 @@
                                  @if($objs->status == 2)
                                  selected='selected'
                                  @endif
-                                 > อยู่ระหว่างการจัดส่ง </option>
+                                 > อยู่ระหว่างดำเนินการผลิต </option>
 
                                  <option value="3"
                                  @if($objs->status == 3)
                                  selected='selected'
                                  @endif
                                  > จัดส่งเรียบร้อย </option>
+
+                                 <option value="4"
+                                 @if($objs->status == 4)
+                                 selected='selected'
+                                 @endif
+                                 > ยกเลิก </option>
+
+
+
 
 
                                 </select>
