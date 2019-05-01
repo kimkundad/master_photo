@@ -1461,7 +1461,6 @@ $data['get_my_add'] = $get_my_add;
       $data['get_my_add_count'] = $user_addresses;
 
       $deliveries = DB::table('deliveries')
-            ->where('id', '!=', 12)
             ->get();
 
             $deli_set = DB::table('deliveries')
