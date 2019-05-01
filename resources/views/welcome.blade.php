@@ -89,7 +89,7 @@ figure:hover+span {
             </li>
             <li>
               <div class="tooltip_styled tooltip-effect-4">
-                <a href="https://www.instagram.com/explore/locations/1502637236731741/master-photo-network/" target="_blank">
+                <a href="https://www.instagram.com/masterphotonetworkprint/?hl=th" target="_blank">
                 <img src="{{url('master/assets/images/social/ig.png')}}" class="tooltip-item" alt="ig masterphotonetwork"/>
                 </a>
                 <div class="tooltip-content">
@@ -103,7 +103,7 @@ figure:hover+span {
               <div class="tooltip_styled tooltip-effect-4">
                 <img src="{{url('master/assets/images/social/icono-de.png')}}" class="tooltip-item" alt="gmail masterphotonetwork"/>
                 <div class="tooltip-content">
-									<h4>Gmail</h4> Masterphotonetwork@gmail.com
+									<h4>Email</h4> master-print@hotmail.com
 									<br>
 								</div>
               </div>
@@ -111,11 +111,11 @@ figure:hover+span {
 
             <li>
               <div class="tooltip_styled tooltip-effect-4">
-                <a href="http://line.me/ti/p/kL8POWgHU9" target="_blank">
+                <a href="http://line.me/ti/p/~@masterphotonetwork" target="_blank">
                 <img src="{{url('master/assets/images/social/mobile-icon.png')}}" class="tooltip-item" alt="line masterphotonetwork"/>
                 </a>
                 <div class="tooltip-content">
-									<h4>Line ID</h4> Masterphotonetwork
+									<h4>Line ID : @masterphotonetwork</h4> Masterphotonetwork
 									<br>
 								</div>
               </div>
@@ -124,8 +124,10 @@ figure:hover+span {
             <li>
               <div class="tooltip_styled tooltip-effect-4">
                 <img src="{{url('master/assets/images/social/phone_circle-512.png')}}" class="tooltip-item" alt="Phone number masterphotonetwork"/>
-                <div class="tooltip-content" style="width: 200px;">
-									02-513-0105, 086-600-5055
+                <div class="tooltip-content text-center" style=" text-align: center;">
+									02-513-0105, 086-600-5055 <br />
+									085-321-0190, 086-351-5826<br />
+									097-135-7005, 097-135-8087
 									<br>
 								</div>
               </div>
