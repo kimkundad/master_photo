@@ -128,7 +128,7 @@ $get_name_size = '';
         {{$resolution = 0}}
         @endif
 </div>
-
+    <div class="table-responsive">
       <table class="table table-striped  add_bottom_30">
           <thead>
             <tr>
@@ -228,7 +228,7 @@ $get_name_size = '';
 
           </tbody>
         </table>
-
+        </div>
 
       </div>
 
@@ -259,7 +259,7 @@ $get_name_size = '';
 
 
       <div class="col-md-8 " {{$set_size = 0}} >
-
+        <div class="table-responsive">
         <table class="table table-striped  add_bottom_30">
             <thead>
               <tr>
@@ -353,7 +353,7 @@ $get_name_size = '';
 
               </tbody>
             </table>
-
+            </div>
       </div>
 
       @endif
@@ -385,7 +385,7 @@ $get_name_size = '';
         <div class="box_style_1">
 
           @if (Auth::guest())
-
+          <div class="table-responsive">
           <table class="table table_summary" style="font-size: 14px;">
             <tbody>
 
@@ -397,9 +397,9 @@ $get_name_size = '';
                   {{$k->item_name}}
                 </td>
               <td class="text-right">
-                <!-- @if($k->item_status == 1)
+                 @if($k->item_status == 1)
                 ฿{{number_format((float)$k->item_price, 2, '.', '')}}
-                @endif -->
+                @endif
               </td>
 
               </tr>
@@ -449,11 +449,11 @@ $get_name_size = '';
 
             </tbody>
           </table>
-
+          </div>
 
           @else
 
-
+          <div class="table-responsive">
           <table class="table table_summary" style="font-size: 14px;">
             <tbody>
 
@@ -469,11 +469,11 @@ $get_name_size = '';
                   @endforeach
                 </td>
               <td class="text-right">
-              <!--  @foreach($j->option as $k)
+                @foreach($j->option as $k)
                 @if($k->item_status == 1)
                 ฿{{number_format((float)$k->item_price, 2, '.', '')}}
                 @endif
-                @endforeach -->
+                @endforeach
               </td>
 
               </tr>
@@ -522,7 +522,7 @@ $get_name_size = '';
 
             </tbody>
           </table>
-
+          </div>
 
 
           @endif
@@ -647,7 +647,7 @@ $get_name_size = '';
 
 
                             <div class="hidden" id="next_to_cart2">
-                              <h4 class="text-succes">Upload Image Success!</h4>
+                              <h4 class="text-succes">กำลังส่งรูปภาพ!</h4>
 
                             </div>
 

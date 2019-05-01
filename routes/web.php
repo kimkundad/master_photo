@@ -24,8 +24,11 @@ Route::get('change/{locale}', function ($locale) {
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/', 'HomeController@index')->name('home');
+
 Route::post('/api/shipping_data_2', 'ApiController@shipping_data_2')->name('shipping_data_2');
 Route::post('/api/shipping_data_3', 'ApiController@shipping_data_3')->name('shipping_data_3');
+Route::post('/api/result_payment', 'ApiController@result_payment')->name('result_payment');
+
 
 Route::get('about', 'HomeController@about')->name('about');
 Route::get('product_price', 'HomeController@product_price')->name('product_price');

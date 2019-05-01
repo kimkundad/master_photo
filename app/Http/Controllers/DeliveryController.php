@@ -78,6 +78,7 @@ return view('admin.delivery.index', $data);
         $package = delivery::find($id);
         $package->de_detail = $request['de_detail'];
         $package->name = $request['name'];
+        $package->de_status = $request['de_status'];
         $package->save();
       }else{
 
@@ -94,6 +95,7 @@ return view('admin.delivery.index', $data);
 
         $package = delivery::find($id);
         $package->name = $request['name'];
+        $package->de_status = $request['de_status'];
         $package->de_detail = $request['de_detail'];
         $package->de_image = $image;
         $package->save();
@@ -117,6 +119,7 @@ return view('admin.delivery.index', $data);
         $package = delivery::find($id);
         $package->name = $request['name'];
         $package->de_detail = $request['de_detail'];
+        $package->de_status = $request['de_status'];
         $package->save();
       }else{
 
@@ -134,6 +137,7 @@ return view('admin.delivery.index', $data);
         $package = delivery::find($id);
         $package->name = $request['name'];
         $package->de_detail = $request['de_detail'];
+        $package->de_status = $request['de_status'];
         $package->de_image = $image;
         $package->save();
       }

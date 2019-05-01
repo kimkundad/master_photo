@@ -119,14 +119,36 @@ Shipping | MASTER PHOTO NETWORK
                 </td>
               </tr>
 
-              <tr class="total" style="font-size: 18px;">
+              <tr>
                 <td>
-                  Summary
+                  ค่าขนส่ง
                 </td>
-                <td class="text-right" >
-                  ฿ {{number_format((float)$total_pay, 2, '.', '')}}
+                <td class="text-right" id="get_ship_price2">
+
                 </td>
               </tr>
+
+              <tr>
+                <td>
+                  ราคาสินค้า x {{$count_data2}}
+                </td>
+                <td class="text-right" >
+                  {{number_format((float)$total_pay, 2, '.', '')}}
+                </td>
+              </tr>
+
+              <tr class="total" style="font-size: 18px;">
+                <td>
+                  ยอดชำระ
+                </td>
+
+                <td class="text-right" id="get_image_price2">
+                </td>
+              </tr>
+
+
+
+
             </tbody>
           </table>
 
@@ -421,7 +443,7 @@ Shipping | MASTER PHOTO NETWORK
                               <option value="" data-value="">-- กรุณาเลือกวิธีรับสินค้า --</option>
                               @if($deli)
                               @foreach($deli as $delis)
-                              <option value="{{$delis->id}}" data-value="{{$delis->name}}" data-price="{{$delis->de_price}}" data-id="{{$delis->id}}" data-set="{{$delis->de_type}}">{{$delis->name}}</option>
+                              <option value="{{$delis->id}}" data-value="{{$delis->name}}" data-free="{{$delis->de_status}}" data-price="{{$delis->de_price}}" data-id="{{$delis->id}}" data-set="{{$delis->de_type}}">{{$delis->name}}</option>
                               @endforeach
                               @endif
 
@@ -723,25 +745,37 @@ function getComboB(selectObject) {
     value_id = e.options[e.selectedIndex].getAttribute('data-id');
     value_type = e.options[e.selectedIndex].getAttribute('data-set');
     value_price = e.options[e.selectedIndex].getAttribute('data-price');
+    value_free = e.options[e.selectedIndex].getAttribute('data-free');
 
-    console.log(value_type);
+    console.log(value_free);
 
     if(value_type == 1){
 
       $('#get_image_price').html("");
       $('#get_ship_price').html("");
       $('#targeted').html("");
+      $('#get_image_price2').html("");
+      $('#get_ship_price2').html("");
 
+      if(value_free >= price_image){
+        value_price = 0;
+      }
 
       document.getElementById("type_ship").value = Number(value_type);
       $('#get_image_price').append((Number(price_image)+Number(value_price)).toFixed(2));
       $('#get_ship_price').append( Number(value_price) );
+
+      $('#get_image_price2').append((Number(price_image)+Number(value_price)).toFixed(2));
+      $('#get_ship_price2').append( Number(value_price) );
+
       document.getElementById("get_sum_ship").value = Number(value_price);
 
     }else if(value_type == 2){
 
       $('#get_image_price').html("");
       $('#get_ship_price').html("");
+      $('#get_image_price2').html("");
+      $('#get_ship_price2').html("");
 
       document.getElementById("type_ship").value = Number(value_type);
       var get_option = 0;
@@ -762,6 +796,8 @@ function getComboB(selectObject) {
       $('#targeted').html("");
       $('#get_image_price').html("");
       $('#get_ship_price').html("");
+      $('#get_image_price2').html("");
+      $('#get_ship_price2').html("");
       document.getElementById("type_ship").value = Number(value_type);
 
       $.ajax({
@@ -774,8 +810,15 @@ function getComboB(selectObject) {
 
         //  $('#targeted').html(data.data.html);
 
+        if(value_free >= price_image){
+          data.data.price = 0;
+        }
+
         $('#get_image_price').append((Number(price_image)+Number(data.data.price)).toFixed(2));
         $('#get_ship_price').append( Number(data.data.price) );
+
+        $('#get_image_price2').append((Number(price_image)+Number(data.data.price)).toFixed(2));
+        $('#get_ship_price2').append( Number(data.data.price) );
         document.getElementById("get_sum_ship").value = Number(data.data.price);
 
 
@@ -792,14 +835,25 @@ function run() {
 
   $('#get_image_price').html("");
   $('#get_ship_price').html("");
-  
+  $('#get_image_price2').html("");
+  $('#get_ship_price2').html("");
+
     var selector = document.getElementById("get_option12");
     var value9 = selector.options[selector.selectedIndex].getAttribute('data-value');
+    var val_free = selector.options[selector.selectedIndex].getAttribute('data-free');
 
+    console.log(val_free);
+
+    if(val_free >= price_image){
+      value9 = 0;
+    }
 
     $('#get_image_price').append((Number(price_image)+Number(value9)).toFixed(2));
     $('#get_ship_price').append( Number(value9) );
+    $('#get_image_price2').append((Number(price_image)+Number(value9)).toFixed(2));
+    $('#get_ship_price2').append( Number(value9) );
     document.getElementById("get_sum_ship").value = Number(value9);
+
 
 }
 

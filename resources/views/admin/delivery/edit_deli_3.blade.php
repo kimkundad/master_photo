@@ -85,6 +85,13 @@
           												</div>
 
                                   <div class="form-group">
+                                    <label class="col-md-3 control-label" for="profileFirstName">ราคาที่ส่งฟรี</label>
+                                    <div class="col-md-8">
+                                      <input type="text" class="form-control" name="de_status" value="{{$objs->de_status}}">
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
           													<label class="col-md-3 control-label" for="profileFirstName"></label>
           													<div class="col-md-8">
           														<img src="{{url('assets/image/app_ship/'.$objs->de_image)}}" class="img-rounded img-responsive" style="width:120px;" title="">

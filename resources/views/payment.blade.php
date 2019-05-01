@@ -64,9 +64,10 @@ Payment | MASTER PHOTO NETWORK
                   คำสั่งซื้อ
                 </td>
                 <td class="text-right">
-                  #00{{$order->code_gen}}
+                  #{{$order->code_gen}}
                 </td>
               </tr>
+
               <tr>
                 <td>
                   Point Order
@@ -76,14 +77,7 @@ Payment | MASTER PHOTO NETWORK
                 </td>
               </tr>
 
-              <tr>
-                <td>
-                  Total
-                </td>
-                <td class="text-right">
-                  {{$order->total}}
-                </td>
-              </tr>
+
               <tr>
                 <td>
                   Discount
@@ -95,10 +89,19 @@ Payment | MASTER PHOTO NETWORK
 
               <tr>
                 <td>
+                  ค่าจัดส่ง
+                </td>
+                <td class="text-right">
+                  ฿{{$order->shipping_p}}
+                </td>
+              </tr>
+
+              <tr>
+                <td>
                   ราคาสินค้า x {{$order->total}}
                 </td>
                 <td class="text-right" >
-                  {{$order->order_price+$order->shipping_p}}
+                  {{$order->order_price}}
                 </td>
               </tr>
 
@@ -107,9 +110,10 @@ Payment | MASTER PHOTO NETWORK
                   ยอดชำระ
                 </td>
                 <td class="text-right">
-                  ฿{{$order->order_price}}
+                  ฿{{$order->order_price+$order->shipping_p}}
                 </td>
               </tr>
+
             </tbody>
           </table>
 
@@ -179,56 +183,66 @@ Payment | MASTER PHOTO NETWORK
           <p>
             ทุกธุรกรรมผ่านบัตรเครดิตและบัตรเดบิตได้รับการรับรองความปลอดภัย ด้วยเทคโนโลยี 2c2p Payment gateway api, Paypa
           </p>
+
         </div>
 
+
+        <?php
+        	//Merchant's account information
+        	$merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
+        	$secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
+
+        	//Transaction information
+        	$payment_description  = '2 days 1 night hotel room';
+        	$order_id  = $order->code_gen;
+        	$currency = "764";
+        	$amount  = $order->order_price+$order->shipping_p;
+
+        	//Request information
+        	$version = "7.2";
+        	$payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
+        	$result_url_1 = url('/api/result_payment');
+
+        	//Construct signature string
+        	$params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1;
+        	$hash_value = hash_hmac('sha1',$params, $secret_key,false);	//Compute hash value
+
+          ?>
+
         <div class="step">
+          <img src="{{url('master/assets/img/footer/logo-2c2p.png')}}" style="width:80px;" />
+        <form id="myform" class="w3-container w3-display-middle w3-card-4 " method="post" action="{{$payment_url}}">
+      		<input type="hidden" name="version"  value="{{$version}}"/>
+      		<input type="hidden" name="merchant_id" value="{{$merchant_id}}"/>
+      		<input type="hidden" name="currency" value="{{$currency}}"/>
+      		<input type="hidden" name="result_url_1" value="{{$result_url_1}}"/>
+      		<input type="hidden" name="hash_value" value="{{$hash_value}}"/>
+
+          <div class="form-group hidden">
+            <label>PRODUCT INFO</label>
+          <input type="hidden" name="payment_description" class="form-control" value="{{$order_id}}"  readonly/>
+          </div>
+
           <div class="form-group">
-            <label>Name on card</label>
-            <input type="text" class="form-control" id="name_card_bookign" name="name_card_bookign">
+            <label>ORDER NO</label>
+          <input type="text" name="order_id" class="form-control" value="{{$order_id}}"  readonly/>
           </div>
-          <div class="row">
-            <div class="col-md-6 col-sm-6">
-              <div class="form-group">
-                <label>Card number</label>
-                <input type="text" id="card_number" name="card_number" class="form-control">
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-6">
-              <img src="{{url('master/assets/images/cards.png')}}" width="207" height="43" alt="Cards" class="cards">
-            </div>
+
+          <div class="form-group">
+            <label>AMOUNT</label>
+          <input type="text" name="amount" class="form-control" value="{{$amount}}" readonly/>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label>Expiration date</label>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="text" id="expire_month" name="expire_month" class="form-control" placeholder="MM">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input type="text" id="expire_year" name="expire_year" class="form-control" placeholder="Year">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Security code</label>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <input type="text" id="ccv" name="ccv" class="form-control" placeholder="CCV">
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <img src="{{url('master/assets/images/icon_ccv.gif')}}" width="50" height="29" alt="ccv"><small>Last 3 digits</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          <button type="submit" class="btn btn-next">Confirm</button>
+
+
+      	</form>
+
+
+
+
+
+
           <!--End row -->
 
           <hr>
@@ -336,6 +350,7 @@ Payment | MASTER PHOTO NETWORK
                   ฿{{$order->order_price+$order->shipping_p}}
                 </td>
               </tr>
+
             </tbody>
           </table>
 
