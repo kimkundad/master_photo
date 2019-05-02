@@ -77,7 +77,7 @@ address {
 
           <div class="col-md-12">
               <div class="" id="tools">
-                <h4>#Oder ID {{$order_main->code_gen}}</h4>
+                <h4>#Oder_detail ID {{$order_de->code_gen_d}}</h4>
               </div>
 
 
@@ -193,12 +193,13 @@ address {
                       </div>
 
 
-
-
-
-
-
                     </div>
+
+                    <div class="col-md-12 text-center" >
+
+                    <a href="{{url('pay_order_detail/'.$order_de->code_gen_d)}}" class="btn btn-submit">{{ trans('message.Payment_order') }}</a>
+                    </div>
+
 
                     <!--
 

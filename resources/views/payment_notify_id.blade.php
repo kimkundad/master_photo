@@ -55,7 +55,7 @@ user profile
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h3>{{ trans('message.pay_ment') }}s </h3>
+                    <h3>{{ trans('message.pay_ment') }} </h3>
                     <br />
 
 

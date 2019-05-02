@@ -112,7 +112,7 @@ user profile
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
 										<a href="{{url('payment_notify_item/'.$u->id)}}" class="btn_2">{{ trans('message.View') }}</a>
-										<a href="{{url('pay_order_choose/')}}" style="margin-top: 3px;" class="btn_4">{{ trans('message.Payment_order') }}</a>
+										<a href="{{url('pay_order_detail/'.$u->code_gen)}}" style="margin-top: 3px;" class="btn_4">{{ trans('message.Payment_order') }}</a>
 									</div>
 								</div>
 							</div>

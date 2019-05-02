@@ -169,11 +169,15 @@ address {
                   <td class="font-weight-semibold text-dark" style="font-size: 12px;">{{$a->pro_name}}
                   <br />
                     <span style="font-size:11px; margin-left:25px;">
-                    @if(isset($a->order_option))
-                    @foreach($a->order_option as $k1)
-                    {{$k1->item_name}} &nbsp
-                    @endforeach
+
+                      @if(isset($a->get_all_option))
+                      @foreach($a->get_all_option as $k)
+
+                      {{$k->get_option->item_name}} /
+                      @endforeach
                     @endif
+
+
                   </span>
 
                   </td>
@@ -232,6 +236,11 @@ address {
 
             <hr />
 
+            <div class="" id="tools">
+              <h4>แยกชำระเงิน แบบรายการ</h4>
+
+            </div>
+            <br>
 
             @if(isset($order_de))
               @foreach($order_de as $j)
@@ -270,7 +279,7 @@ address {
   								</div>
   								<div class="col-lg-2 col-md-2">
   									<div class="booking_buttons">
-                      <a href="{{url('pay_order_choose/'.$j->id_de)}}" class="btn_4">{{ trans('message.Payment_order') }}</a>
+                      <a href="{{url('pay_order_detail/'.$j->code_gen_d)}}" class="btn_4">{{ trans('message.Payment_order') }}</a>
   										<a href="{{url('my_order_detail/'.$j->id_de)}}" style="margin-top: 3px;" class="btn_2">{{ trans('message.View') }}</a>
 
   									</div>

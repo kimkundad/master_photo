@@ -635,7 +635,7 @@ class UserProfileController extends Controller
             $data['order'] = $order;
             $data['order_de'] = $order_de;
 
-          
+
 
             $data['get_address'] = $get_address;
 
@@ -664,7 +664,13 @@ class UserProfileController extends Controller
               ->where('code_gen_d', $id)
               ->first();
 
-              $get_data_price = $get_data->sum_image*$get_data->sum_price;
+              $get_ship = DB::table('orders')
+                    ->where('user_id', Auth::user()->id)
+                    ->where('id', $get_data->order_id)
+                    ->first();
+
+
+              $get_data_price = ($get_data->sum_image*$get_data->sum_price)+$get_ship->shipping_p;
 
       }
 
