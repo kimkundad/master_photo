@@ -703,6 +703,7 @@ class HomeController extends Controller
             )
             ->where('user_id', Auth::user()->id)
             ->count();
+
       if($check_count_cart_f == 0){
         return redirect('/');
       }
@@ -1902,6 +1903,14 @@ $data['get_my_add'] = $get_my_add;
                    $sumary = $request['get_sum_ship'];
                }
 
+               $count_data_de = DB::table('cart_details')->select(
+                   'cart_details.*'
+                   )
+                   ->where('order_id', $the_id)
+                   ->count();
+
+                   $count_data_de += 1;
+
                $cat = DB::table('products')->select(
                  'products.*'
                  )
@@ -1922,7 +1931,8 @@ $data['get_my_add'] = $get_my_add;
                          ->where('cart_id_detail', $k->id)
                          ->get();
 
-                 $randomSixDigitInt2 = '62-'.($the_id).'-'.(\random_int(100000, 999999));
+                 //$randomSixDigitInt2 = '62-'.($the_id).'-'.(\random_int(100000, 999999));
+                 $randomSixDigitInt2 = date("d").''.date("m").''.date("Y").'-'.Auth::user()->id.'-'.$get_last_number.'-'.$count_data_de;
 
                  $obj = new order_detail();
                  $obj->order_id = $the_id;
@@ -3024,7 +3034,7 @@ $data['get_my_add'] = $get_my_add;
 
 
 
-
+      Session::put('status_user', 1);
 
 
         /*  return Response::json([

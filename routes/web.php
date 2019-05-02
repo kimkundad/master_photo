@@ -93,6 +93,8 @@ Route::get('oauth/{driver}/callback', 'Auth\SocialAuthController@handleProviderC
 Route::group(['middleware' => 'auth'], function () {
 
 
+	Route::get('payment_notify_item/{id}', 'UserProfileController@payment_notify_item')->name('payment_notify_item');
+
   Route::post('/add_address_order', 'HomeController@add_address_order')->name('add_address_order');
   Route::get('/profile', 'HomeController@profile')->name('profile');
   Route::get('/shipping', 'HomeController@shipping')->name('shipping');

@@ -65,6 +65,7 @@ class RegisterController extends Controller
      {
 
        if(Session::has('status_user') == 1){
+         Session::put('status_user', 0);
          $this->redirectTo = '/shipping';
         }else{
           $this->redirectTo = '/';

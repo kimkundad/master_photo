@@ -11,7 +11,7 @@ return [
     'user_pro' => 'Account Setting',
     'logout' => 'Sign out',
     'help' => 'Help',
-
+    'price_payment_notify' => 'Total Price',
     'about' => 'ABOUT US',
     'price' => 'PRODUCT PRICE',
     'delivery2' => 'DELIVERY OPTIONS',

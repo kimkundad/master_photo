@@ -71,7 +71,7 @@
 
                 <div class="form-group">
                   <div class="col-md-12 text-left">
-                    <label for="exampleInputEmail1">Your E-mail</label>
+                    <label for="exampleInputEmail1">Your E-mail </label>
                     <input  type="email" class="form-control" name="email" placeholder="Your Email" value="{{ old('email') }}">
 
                     @if ($errors->has('email'))

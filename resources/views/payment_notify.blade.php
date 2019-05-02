@@ -46,7 +46,35 @@ user profile
       </aside>
 
 
-
+<style>
+.strip_booking h3.hotel_booking:before {
+    content: '\52';
+}
+.btn_4{
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: #fff;
+    background: #a94442;
+    cursor: pointer;
+    padding: 7px 8px;
+    font-size: 11px;
+    line-height: 9px;
+    display: block;
+    outline: none;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+}
+.btn_4:hover{
+	background: #333;
+	color:#fff;
+}
+</style>
 
 
 
@@ -58,6 +86,43 @@ user profile
                     <h3>{{ trans('message.pay_ment') }} </h3>
                     <br />
 
+            @if(isset($get_order))
+              @foreach($get_order as $u)
+            <div class="strip_booking">
+							<div class="row">
+								<div class="col-lg-2 col-md-2">
+									<div class="date">
+										<span class="month">{{date_format(date_create($u->created_at),"M")}}</span>
+										<span class="day"><strong>{{date_format(date_create($u->created_at),"d")}}</strong>{{date_format(date_create($u->created_at),"Y")}}</span>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-5">
+                  <a href="{{url('payment_notify_item/'.$u->id)}}">
+									<h3 class="hotel_booking">{{$u->code_gen}}<span>{{ trans('message.total_sum') }} {{$u->total}} {{ trans('message.item') }}</span></h3>
+                  </a>
+								</div>
+								<div class="col-lg-2 col-md-3">
+									<ul class="info_booking">
+										<li><strong style="font-size: 14px;">{{ trans('message.price_payment_notify') }}</strong><br /> <span class="text-danger" style="font-size: 16px;">{{number_format($u->order_price*$u->shipping_p, 2)}}</span>
+                    <strong style="font-size: 14px;">{{ trans('message.baht') }}</strong>
+                  </li>
+
+									</ul>
+								</div>
+								<div class="col-lg-2 col-md-2">
+									<div class="booking_buttons">
+										<a href="{{url('payment_notify_item/'.$u->id)}}" class="btn_2">{{ trans('message.View') }}</a>
+										<a href="{{url('pay_order_choose/')}}" style="margin-top: 3px;" class="btn_4">{{ trans('message.Payment_order') }}</a>
+									</div>
+								</div>
+							</div>
+							<!-- End row -->
+						</div>
+              @endforeach
+            @endif
+
+
+<!--
 
                     <form class="form-horizontal" action="{{url('post_payment_notify')}}" method="post" enctype="multipart/form-data">
 
@@ -120,18 +185,7 @@ user profile
                         </div>
                       </div>
 
-                    <!--  <div class="form-group">
-                        <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.email_pro') }}*</label>
-                        <div class="col-md-8">
-                          <input type="text" class="form-control" name="email" value="{{ old('email')}}" >
-                          @if ($errors->has('email'))
-                          <p class="text-danger" style="margin-top:10px;">
-                            คุณต้องกรอก อีเมล์ ด้วยค่ะ
-                          </p>
-                          @endif
-                            <br />
-                        </div>
-                      </div> -->
+
 
                       <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Which_bank') }}*</label>
 
@@ -220,6 +274,8 @@ user profile
                       <a href="{{url('profile')}}" class="btn btn-default">{{ trans('message.btn_cancel') }}</a>
                   </div>
                     </form>
+
+                  -->
 
 
                 </div>

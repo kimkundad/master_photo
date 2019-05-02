@@ -11,7 +11,7 @@ return [
   'user_pro' => 'ข้อมูลส่วนตัว',
   'logout' => 'ออกจากระบบ',
   'help' => 'ช่วยเหลือ',
-
+  'price_payment_notify' => 'ยอดชำระ',
   'about' => 'เกี่ยวกับเรา',
   'price' => 'ราคาสินค้า',
   'delivery2' => 'บริการจัดส่ง',
@@ -48,7 +48,7 @@ return [
   'number_jum' => 'จำนวน',
   'Transaction_date' => 'วันที่ทำรายการ',
   'Payment_order' => 'ชำระเงิน',
-  'View' => 'ดูข้อมูล',
+  'View' => 'รายละเอียด',
   'Your_payment_options' => 'ตัวเลือก การชำระเงินของคุณ',
   'Your_payment_options_2' => 'เลือกชำระ ยอดทั้งหมด  ออเดอร์',
   'Your_payment_options_2' => 'ยอดสินค้าที่สั่ง',

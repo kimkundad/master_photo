@@ -36,6 +36,7 @@ class LoginController extends Controller
         }
 
           if(Session::has('status_user') == 1){
+            Session::put('status_user', 0);
             return redirect(url('shipping'));
           }else{
             return $this->authenticated($request, $this->guard()->user())

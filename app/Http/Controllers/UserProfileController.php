@@ -411,10 +411,12 @@ class UserProfileController extends Controller
     public function payment_notify(){
 
       $get_order_count = DB::table('orders')
+        ->where('user_id', Auth::user()->id)
         ->where('status', 0)
         ->count();
 
       $get_order = DB::table('orders')
+        ->where('user_id', Auth::user()->id)
         ->where('status', 0)
         ->get();
         $name = '';
@@ -455,11 +457,74 @@ class UserProfileController extends Controller
       return view('payment_notify', $data);
     }
 
+    public function payment_notify_item($id){
+
+      $get_detail_o = [];
+
+      $order = DB::table('orders')
+            ->where('user_id', Auth::user()->id)
+            ->where('id', $id)
+            ->first();
+
+
+
+              $order_de = DB::table('order_details')->select(
+                    'order_details.*',
+                    'order_details.id as id_de',
+                    'order_details.created_at as created_ats',
+                    'products.*'
+                    )
+                    ->leftjoin('products', 'products.id',  'order_details.product_id')
+                    ->where('order_details.order_id', $id)
+                    ->get();
+
+
+                    foreach($order_de as $h){
+
+
+
+                          $order_option = DB::table('order_options')
+                            ->where('order_id_detail', $h->id_de)
+                            ->where('option_id', '!=', 0)
+                            ->get();
+
+                            $order_option_count = DB::table('order_options')
+                              ->where('order_id_detail', $h->id_de)
+                              ->count();
+
+                            foreach($order_option as $j){
+
+                              $name_option = DB::table('option_items')
+                                    ->where('id', $j->option_id)
+                                    ->first();
+                                $j->get_option = $name_option;
+                            }
+
+
+                            $h->get_all_option = $order_option;
+                            $h->check = $order_option_count;
+
+                    }
+                //    dd($order_de);
+
+
+
+
+
+            //dd($order);
+            $data['order'] = $order;
+            $data['order_de'] = $order_de;
+
+      return view('payment_notify_item', $data);
+
+    }
+
 
     public function payment_notify_id($id){
 
       $get_data_price = 0;
       $check_order = DB::table('orders')
+            ->where('user_id', Auth::user()->id)
             ->where('code_gen', $id)
             ->count();
 
