@@ -2370,49 +2370,7 @@ $data['get_my_add'] = $get_my_add;
           ->orderBy('PROVINCE_ID', 'asc')
           ->get();
 
-      $order = DB::table('orders')
-          ->where('user_id', Auth::user()->id)
-          ->orderBy('id', 'desc')
-          ->get();
 
-          foreach ($order as $u) {
-
-
-
-            $order_detail = DB::table('order_details')->select(
-                'order_details.*'
-                )
-                ->where('order_id', $u->id)
-                ->first();
-
-                $product = DB::table('products')->select(
-                    'products.*'
-                    )
-                    ->where('id', $order_detail->product_id)
-                    ->first();
-            $u->option = $order_detail;
-            $u->product = $product;
-
-
-          }
-
-
-          $option_product = DB::table('option_products')
-              ->orderBy('id', 'desc')
-              ->get();
-
-
-          foreach ($option_product as $obj) {
-
-            $option_data_item = DB::table('option_items')->select(
-                'option_items.*'
-                )
-                ->where('item_option_id', $obj->id)
-                ->get();
-
-            $obj->options_detail = $option_data_item;
-
-          }
 
 
           if(Auth::user()->country !== null){
@@ -2433,9 +2391,9 @@ $data['get_my_add'] = $get_my_add;
 
 
 
-      $data['option_product'] = $option_product;
+
       $data['provinces'] =  $provinces;
-      $data['order'] = $order;
+    
 
     //  dd($order);
 
