@@ -128,9 +128,9 @@ user profile
 								</div>
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
-                    <a href="{{url('pay_order_choose/'.$j->id_de)}}" class="btn_4">{{ trans('message.Payment_order') }}</a>
+
 										<a href="{{url('my_order_detail/'.$j->id_de)}}" style="margin-top: 3px;" class="btn_2">{{ trans('message.View') }}</a>
-										<a href="#0" class="btn_3">{{ trans('message.btn_cancel') }}</a>
+
 									</div>
 								</div>
 							</div>
