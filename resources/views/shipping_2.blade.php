@@ -757,7 +757,7 @@ function getComboB(selectObject) {
       $('#get_image_price2').html("");
       $('#get_ship_price2').html("");
 
-      if(Number(value_free) <= Number(price_image)){
+      if(Number(value_free) <= Number(price_image) && Number(value_free) != 0){
         value_price = 0;
       }
 
@@ -810,7 +810,7 @@ function getComboB(selectObject) {
 
         //  $('#targeted').html(data.data.html);
 
-        if(Number(value_free) <= Number(price_image)){
+        if(Number(value_free) <= Number(price_image) && Number(value_free) != 0){
           data.data.price = 0;
         }
 
@@ -845,7 +845,7 @@ function run() {
 
 
 
-    if(Number(val_free) <= Number(price_image)){
+    if(Number(val_free) <= Number(price_image) && Number(value_free) != 0){
       value9 = 0;
     }
 
