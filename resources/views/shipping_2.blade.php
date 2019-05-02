@@ -843,11 +843,13 @@ function run() {
     var val_free = selector.options[selector.selectedIndex].getAttribute('data-free');
 
 
-    console.log("free " + val_free + " price" + price_image);
+
 
     if(val_free <= price_image){
       value9 = 0;
     }
+
+    console.log("free " + val_free + " price" + price_image + " ship" + value9);
 
     $('#get_image_price').append((Number(price_image)+Number(value9)).toFixed(2));
     $('#get_ship_price').append( Number(value9) );
