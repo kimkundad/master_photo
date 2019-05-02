@@ -143,7 +143,7 @@ height: 60px;
               $h = 1;
              ?>
 
-             {{dd(Session::get('cart'))}}
+          
 
     @foreach(Session::get('cart') as $u)
 
@@ -200,7 +200,7 @@ height: 60px;
              </tr>
 
              <?php
-              $total_pay += ($u['data'][3]['sum_price']*($u['data'][2]['sum_image']-Session::get('img_f')));
+              $total_pay += ($u['data'][3]['sum_price']*($u['data'][2]['sum_image']));
               $total_img += $u['data'][2]['sum_image'];
               $s++;
               $h++;
