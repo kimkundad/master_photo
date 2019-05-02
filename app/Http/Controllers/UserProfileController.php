@@ -261,9 +261,71 @@ class UserProfileController extends Controller
             ->first();
 
 
-            $order_main = DB::table('orders')
-                  ->where('id', $order_de->order_id)
+            $order_main = DB::table('orders')->select(
+                  'orders.*',
+                  'orders.id as id_or',
+                  'users.id as id_pro',
+                  'users.name',
+                  'users.email',
+                  'users.phone',
+                  'deliveries.name as name_deli'
+                  )
+                  ->leftjoin('users', 'users.id',  'orders.user_id')
+                  ->leftjoin('deliveries', 'deliveries.id',  'orders.deliver_order')
+                  ->where('orders.user_id', Auth::user()->id)
+                  ->where('orders.id', $order_de->order_id)
                   ->first();
+
+                //  dd($order_main);
+
+
+                  $check_address = DB::table('user_addresses')->select(
+                        'user_addresses.*'
+                        )
+                        ->where('id', $order_main->shipping_address)
+                        ->count();
+
+
+                  $get_address = DB::table('user_addresses')->select(
+                        'user_addresses.*'
+                        )
+                        ->where('id', $order_main->shipping_address)
+                        ->first();
+
+
+                        if($check_address > 0){
+
+
+                          $province = DB::table('province')
+                               ->select(
+                               'province.*'
+                               )
+                               ->where('PROVINCE_ID', $get_address->province)
+                               ->first();
+                           $data['province'] = $province;
+
+                           $district = DB::table('amphur')
+                                ->select(
+                                'amphur.*'
+                                )
+                                ->where('AMPHUR_ID', $get_address->district)
+                                ->first();
+                            $data['district'] = $district;
+
+
+                            $subdistricts = DB::table('district')
+                                 ->select(
+                                 'district.*'
+                                 )
+                                 ->where('DISTRICT_ID', $get_address->sub_district)
+                                 ->first();
+                             $data['subdistricts'] = $subdistricts;
+
+                        }
+
+
+
+
             $data['order_main'] = $order_main;
 
 
@@ -461,10 +523,68 @@ class UserProfileController extends Controller
 
       $get_detail_o = [];
 
-      $order = DB::table('orders')
-            ->where('user_id', Auth::user()->id)
-            ->where('id', $id)
+
+      $order = DB::table('orders')->select(
+            'orders.*',
+            'orders.id as id_or',
+            'users.id as id_pro',
+            'users.name',
+            'users.email',
+            'users.phone',
+            'deliveries.name as name_deli'
+            )
+            ->leftjoin('users', 'users.id',  'orders.user_id')
+            ->leftjoin('deliveries', 'deliveries.id',  'orders.deliver_order')
+            ->where('orders.user_id', Auth::user()->id)
+            ->where('orders.id', $id)
             ->first();
+
+
+            $check_address = DB::table('user_addresses')->select(
+                  'user_addresses.*'
+                  )
+                  ->where('id', $order->shipping_address)
+                  ->count();
+
+
+            $get_address = DB::table('user_addresses')->select(
+                  'user_addresses.*'
+                  )
+                  ->where('id', $order->shipping_address)
+                  ->first();
+
+
+                  if($check_address > 0){
+
+
+                    $province = DB::table('province')
+                         ->select(
+                         'province.*'
+                         )
+                         ->where('PROVINCE_ID', $get_address->province)
+                         ->first();
+                     $data['province'] = $province;
+
+                     $district = DB::table('amphur')
+                          ->select(
+                          'amphur.*'
+                          )
+                          ->where('AMPHUR_ID', $get_address->district)
+                          ->first();
+                      $data['district'] = $district;
+
+
+                      $subdistricts = DB::table('district')
+                           ->select(
+                           'district.*'
+                           )
+                           ->where('DISTRICT_ID', $get_address->sub_district)
+                           ->first();
+                       $data['subdistricts'] = $subdistricts;
+
+                  }
+
+
 
 
 
@@ -514,6 +634,10 @@ class UserProfileController extends Controller
             //dd($order);
             $data['order'] = $order;
             $data['order_de'] = $order_de;
+
+          
+
+            $data['get_address'] = $get_address;
 
       return view('payment_notify_item', $data);
 

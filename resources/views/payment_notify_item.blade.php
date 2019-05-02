@@ -74,6 +74,14 @@ user profile
 	background: #333;
 	color:#fff;
 }
+address {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    font-size: 11px;
+    border-radius: 0.25rem;
+    margin-bottom: 8px;
+}
 </style>
 
 <?php
@@ -96,9 +104,133 @@ user profile
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h3>{{ trans('message.pay_ment') }} <span>( #{{$order->code_gen}} )</span></h3>
-                    <br />
+            <div class="" id="tools">
+              <h4>{{ trans('message.pay_ment') }} #Oder ID {{$order->code_gen}}</h4>
+            </div>
 
+            <div class="bill-info" >
+              <table class="table " style="margin-bottom: 0px; border-bottom: 1px solid #fff;">
+              <div class="row">
+                <td style="border-top: 1px solid #fff; padding: 0px; padding-right: 8px; width:50%">
+                <div class="col-md-6" style="width:100%">
+                  <div class="bill-to" style="width:100%">
+                    <p class="h5 mb-1 text-dark font-weight-semibold">ผู้สั่งซื้อ</p>
+                    <address>
+                      <b>ชื่อ - นามสกุล </b> {{$order->name}}
+                      <br/>
+                      <b>ที่อยู่ </b> {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+                      <br/>
+                      <b>เบอร์ติดต่อ </b>: {{$get_address->phone_ad}}
+                      <br/>
+                      <b>Email </b> {{$order->email}}
+                    </address>
+                  </div>
+                </div>
+                </td>
+                <td style="border-top: 1px solid #fff; padding: 0px; width:50%">
+                <div class="col-md-6" style="width:100%">
+                  <div class="bill-to" style="width:100%">
+                    <p class="h5 mb-1 text-dark font-weight-semibold">สถานที่จัดส่ง</p>
+                    <address>
+                      <b>วิธีการรับสินค้า </b> {{$order->name_deli}}
+                      <br/>
+                      <b>สถานที่ </b>
+                       @if($order->bill_address == 2)
+                       {{$order->shipping_t2}}
+                       @endif
+                       {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+                    </address>
+                  </div>
+                </div>
+                </td>
+              </div>
+              </table>
+            </div>
+
+
+            <div class="table-responsive" style="padding: 10px;">
+            <table class="table table-bordered">
+              <thead>
+                <tr class="text-dark">
+
+                  <th  class="font-weight-semibold">รายการ</th>
+                  <th  class="font-weight-semibold">จำนวน</th>
+                  <th  class="text-center font-weight-semibold">ราคาต่อใบ</th>
+                  <th  class="text-center font-weight-semibold">รวมเงิน</th>
+
+                </tr>
+              </thead>
+              <tbody>
+
+
+                @if(isset($order_de))
+                  @foreach($order_de as $a)
+                <tr >
+                  <td class="font-weight-semibold text-dark" style="font-size: 12px;">{{$a->pro_name}}
+                  <br />
+                    <span style="font-size:11px; margin-left:25px;">
+                    @if(isset($a->order_option))
+                    @foreach($a->order_option as $k1)
+                    {{$k1->item_name}} &nbsp
+                    @endforeach
+                    @endif
+                  </span>
+
+                  </td>
+                  <td class="text-center">{{$a->sum_image}}</td>
+                  <td class="text-center">{{$a->sum_price}}</td>
+                  <td class="text-center">
+                  @if($order->shipping_p == 0)
+                  {{number_format(($a->sum_price*$a->sum_image),2)}} {{ trans('message.baht') }}
+                  @else
+                  {{number_format((($a->sum_price*$a->sum_image)),2)}} {{ trans('message.baht') }}
+                  @endif
+
+
+                  </td>
+                </tr>
+
+                @endforeach
+              @endif
+
+
+
+                <tr>
+                  <td colspan="3" class="text-right">ค่าจัดส่ง</td>
+                  <td class="text-center">{{number_format($order->shipping_p, 2)}} </td>
+                </tr>
+                <tr class="h4">
+                  <td colspan="3" class="text-right">Total</td>
+
+                  <td class="text-center">
+
+                    {{number_format(($order->order_price)+$order->shipping_p, 2)}}
+
+
+
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+            </div>
+
+                                <div class="bil_detail" style="padding: 10px;">
+
+
+                                  <div class="bill-to" style="width:100%; margin-bottom: 15px; margin-top:10px;">
+                                    <p class="h6  text-dark font-weight-semibold">หมายเหตุ : </p>
+                                    <address>
+                                       {{$order->note}}
+
+
+                                    </address>
+                                  </div>
+
+
+                                </div>
+
+            <hr />
 
 
             @if(isset($order_de))
@@ -119,10 +251,21 @@ user profile
                     @endif
                     </span></h3>
   								</div>
-  								<div class="col-lg-3 col-md-3">
+                  <div class="col-lg-2 col-md-3">
   									<ul class="info_booking">
-  										<li><strong>ORDER_DETAIL id #{{$j->code_gen_d}}</strong> </li>
-  										<li><strong>{{ trans('message.Transaction_date') }}</strong> <?php echo DateThai($j->created_ats); ?></li>
+  										<li><strong style="font-size: 14px;">{{ trans('message.price_payment_notify') }}</strong><br /> <span class="text-danger" style="font-size: 16px;">
+
+                        @if($order->shipping_p == 0)
+                        {{number_format(($j->sum_price*$j->sum_image),2)}} {{ trans('message.baht') }}
+                        @else
+                        {{number_format((($j->sum_price*$j->sum_image)+$j->sum_shipping),2)}} {{ trans('message.baht') }}
+                        @endif
+
+
+                      </span>
+                      <strong style="font-size: 14px;">{{ trans('message.baht') }}</strong>
+                    </li>
+
   									</ul>
   								</div>
   								<div class="col-lg-2 col-md-2">

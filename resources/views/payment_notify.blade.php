@@ -103,7 +103,7 @@ user profile
 								</div>
 								<div class="col-lg-2 col-md-3">
 									<ul class="info_booking">
-										<li><strong style="font-size: 14px;">{{ trans('message.price_payment_notify') }}</strong><br /> <span class="text-danger" style="font-size: 16px;">{{number_format($u->order_price*$u->shipping_p, 2)}}</span>
+										<li><strong style="font-size: 14px;">{{ trans('message.price_payment_notify') }}</strong><br /> <span class="text-danger" style="font-size: 16px;">{{number_format($u->order_price+$u->shipping_p, 2)}}</span>
                     <strong style="font-size: 14px;">{{ trans('message.baht') }}</strong>
                   </li>
 

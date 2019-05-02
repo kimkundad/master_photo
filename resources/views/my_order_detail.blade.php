@@ -48,9 +48,9 @@ user profile
 							</li>
 							<li><a href="#"><i class="im im-icon-Gift-Box" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.credit') }} </a>
 							</li>
-              <li><a href="{{url('my_order')}}" id="active"><i class="icon_set_1_icon-50" ></i> {{ trans('message.user_order') }} </a>
+              <li><a href="{{url('my_order')}}" ><i class="icon_set_1_icon-50" ></i> {{ trans('message.user_order') }} </a>
 							</li>
-              <li><a href="{{url('payment_notify')}}"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.pay_ment') }} </a>
+              <li><a href="{{url('payment_notify')}}" id="active"><i class="im im-icon-Coin" style="margin-right:10px; margin-left:5px;"></i> {{ trans('message.pay_ment') }} </a>
 							</li>
 
 						</ul>
@@ -58,7 +58,16 @@ user profile
       </aside>
 
 
-
+<style>
+address {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    font-size: 11px;
+    border-radius: 0.25rem;
+    margin-bottom: 8px;
+}
+</style>
 
 
 
@@ -67,7 +76,131 @@ user profile
         <div class="row add_bottom_60 ">
 
           <div class="col-md-12">
-                    <h3>#Oder ID {{$order_main->code_gen}}</h3>
+              <div class="" id="tools">
+                <h4>#Oder ID {{$order_main->code_gen}}</h4>
+              </div>
+
+
+                    <div class="bill-info" >
+                      <table class="table " style="margin-bottom: 0px; border-bottom: 1px solid #fff;">
+              				<div class="row">
+                        <td style="border-top: 1px solid #fff; padding: 0px; padding-right: 8px; width:50%">
+              					<div class="col-md-6" style="width:100%">
+              						<div class="bill-to" style="width:100%">
+              							<p class="h5 mb-1 text-dark font-weight-semibold">ผู้สั่งซื้อ</p>
+              							<address>
+                              <b>ชื่อ - นามสกุล </b> {{$order_main->name}}
+              								<br/>
+              								<b>ที่อยู่ </b> {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+              								<br/>
+              								<b>เบอร์ติดต่อ </b>: {{$get_address->phone_ad}}
+              								<br/>
+              								<b>Email </b> {{$order_main->email}}
+              							</address>
+              						</div>
+              					</div>
+                        </td>
+                        <td style="border-top: 1px solid #fff; padding: 0px; width:50%">
+              					<div class="col-md-6" style="width:100%">
+                          <div class="bill-to" style="width:100%">
+              							<p class="h5 mb-1 text-dark font-weight-semibold">สถานที่จัดส่ง</p>
+              							<address>
+              								<b>วิธีการรับสินค้า </b> {{$order_main->name_deli}}
+              								<br/>
+              								<b>สถานที่ </b>
+              								 @if($order_main->bill_address == 2)
+              								 {{$order_main->shipping_t2}}
+              								 @endif
+              								 {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+              							</address>
+              						</div>
+              					</div>
+                        </td>
+              				</div>
+                      </table>
+              			</div>
+
+<div class="table-responsive" style="padding: 10px;">
+<table class="table table-bordered">
+  <thead>
+    <tr class="text-dark">
+
+      <th  class="font-weight-semibold">รายการ</th>
+      <th  class="font-weight-semibold">จำนวน</th>
+      <th  class="text-center font-weight-semibold">ราคาต่อใบ</th>
+      <th  class="text-center font-weight-semibold">รวมเงิน</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+
+
+    <tr >
+      <td class="font-weight-semibold text-dark" style="font-size: 12px;">{{$order_de->pro_name}}
+      <br />
+        <span style="font-size:11px; margin-left:25px;">
+        @if(isset($order_de->order_option))
+        @foreach($order_de->order_option as $k1)
+        {{$k1->item_name}} &nbsp
+        @endforeach
+        @endif
+      </span>
+
+      </td>
+      <td class="text-center">{{$order_de->sum_image}}</td>
+      <td class="text-center">{{$order_de->sum_price}}</td>
+      <td class="text-center">
+      @if($order_main->shipping_p == 0)
+      {{$order_de->sum_price*$order_de->sum_image}}
+      @else
+      {{($order_de->sum_price*$order_de->sum_image)}}
+      @endif
+      </td>
+    </tr>
+
+
+
+    <tr>
+      <td colspan="3" class="text-right">ค่าจัดส่ง</td>
+      <td class="text-center">{{number_format($order_main->shipping_p, 2)}} </td>
+    </tr>
+    <tr class="h4">
+      <td colspan="3" class="text-right">Total</td>
+      <td class="text-center">
+
+        {{number_format(($order_de->sum_price*$order_de->sum_image)+$order_main->shipping_p, 2)}}
+
+
+
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+                    <div class="bil_detail" style="padding: 10px;">
+
+
+                      <div class="bill-to" style="width:100%; margin-bottom: 15px; margin-top:10px;">
+                        <p class="h6  text-dark font-weight-semibold">หมายเหตุ : </p>
+                        <address>
+                           {{$order_main->note}}
+
+
+                        </address>
+                      </div>
+
+
+
+
+
+
+
+                    </div>
+
+                    <!--
 
                     <p>
                     {{ trans('message.pro_name') }} : {{$order_de->product_name}}<br />
@@ -247,17 +380,8 @@ user profile
 
                     </p>
                     <hr />
+                  -->
 
-                    @if($order_de->order_images)
-                    @foreach($order_de->order_images as $h)
-                    <div class="col-lg-4 col-md-6" style=" padding-top: 10px;   padding-bottom: 10px;">
-                      <img src="{{url('assets/image/all_image/'.$h->order_image)}}" class="img-responsive" style="    height: 142px;">
-                      <div class="score">
-												{{ trans('message.total_sum') }} <span>{{$h->order_image_sum}}</span> {{ trans('message.item') }}
-											</div>
-                    </div>
-                    @endforeach
-                    @endif
 
 
 
