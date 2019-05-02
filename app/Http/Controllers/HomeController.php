@@ -1817,9 +1817,10 @@ $data['get_my_add'] = $get_my_add;
          $get_count_or = DB::table('orders')
                  ->count();
 
+    
 
       //  $name_user = $request['firstname_order'];
-       $randomSixDigitInt = '62-'.($get_count_or).'-'.(\random_int(100000, 999999));
+       $randomSixDigitInt = date("d").''.date("m").''.date("Y").'-'.Auth::user()->id.'-'.($get_count_or);
        $package = new order();
        $package->user_id = Auth::user()->id;
        $package->code_gen = $randomSixDigitInt;

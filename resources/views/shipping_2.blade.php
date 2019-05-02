@@ -757,7 +757,7 @@ function getComboB(selectObject) {
       $('#get_image_price2').html("");
       $('#get_ship_price2').html("");
 
-      if(value_free >= price_image){
+      if(value_free <= price_image){
         value_price = 0;
       }
 
@@ -810,7 +810,7 @@ function getComboB(selectObject) {
 
         //  $('#targeted').html(data.data.html);
 
-        if(value_free >= price_image){
+        if(value_free <= price_image){
           data.data.price = 0;
         }
 
@@ -844,7 +844,7 @@ function run() {
 
     console.log(val_free);
 
-    if(val_free >= price_image){
+    if(val_free <= price_image){
       value9 = 0;
     }
 
