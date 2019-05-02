@@ -182,13 +182,13 @@ height: 60px;
                  </a>
                </td>
                <td>
-                 {{$u['data'][2]['sum_image']}} Pcs.
+                 {{number_format($u['data'][2]['sum_image'])}} Pcs.
                </td>
                <td>
                  0%
                </td>
                <td>
-                 <strong>฿ {{number_format((float)$u['data'][3]['sum_price'], 2, '.', '')*($u['data'][2]['sum_image'])}} </strong>
+                 <strong>฿ {{number_format($u['data'][3]['sum_price']*($u['data'][2]['sum_image']), 2)}} </strong>
                </td>
                <td class="options">
                  <form id="myform-{{$u['data']['list_link']}}" name="myform-{{$u['data']['list_link']}}" action="{{ url('del_cart/') }}" method="POST"  style="    margin-bottom: 0em;">
@@ -275,13 +275,14 @@ height: 60px;
                  </a>
                </td>
                <td>
-                 {{$k->sum_image}} Pcs.
+
+                 {{number_format($k->sum_image)}} Pcs.
                </td>
                <td>
                  0%
                </td>
                <td>
-                 <strong>฿ {{number_format((float)$k->sum_image, 2, '.', '')*($k->sum_price)}} </strong>
+                 <strong>฿ {{number_format($k->sum_image*($k->sum_price), 2)}} </strong>
                </td>
                <td class="options">
                  <form id="myform-{{$k->id}}" name="myform-{{$k->id}}" action="{{ url('del_cart/') }}" method="POST"  style="    margin-bottom: 0em;">
@@ -371,7 +372,7 @@ height: 60px;
                   Summary
                 </td>
                 <td class="text-right">
-                  ฿ {{number_format((float)$total_pay, 2, '.', '')}}
+                  ฿ {{number_format($total_pay, 2)}}
                 </td>
               </tr>
 

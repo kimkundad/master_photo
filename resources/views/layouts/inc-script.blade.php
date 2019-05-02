@@ -2,7 +2,7 @@
 <script src="{{url('master/assets/js/common_scripts_min.js')}}"></script>
 <script src="{{url('master/assets/js/functions.js')}}?v2"></script>
 <script src="{{url('master/assets/js/jquery.magnific-popup.js')}}"></script>
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 <!-- Specific scripts -->
 <script src="{{url('master/assets/js/icheck.js')}}"></script>
 <script>

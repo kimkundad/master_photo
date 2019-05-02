@@ -203,7 +203,7 @@ $get_name_size = '';
                   @if($get_resolution >= $resolution)
 
                   @else
-                  <span style="color: #e04f67; font-size:13px;">Resolution ของรูปต่ำกว่า<br /> {{number_format($resolution)}} พิกเซล</span>
+                  <span style="color: #e04f67; font-size:13px;">Resolution ของรูปต่ำกว่า<br /> number_format($resolution, 2) พิกเซล</span>
                   @endif
 
               </td>
@@ -334,7 +334,7 @@ $get_name_size = '';
                     @if($get_resolution >= $resolution)
 
                     @else
-                    <span style="color: #e04f67; font-size:13px;">Resolution ของรูปต่ำกว่า<br /> {{number_format($resolution)}} พิกเซล</span>
+                    <span style="color: #e04f67; font-size:13px;">Resolution ของรูปต่ำกว่า<br /> number_format($resolution, 2) พิกเซล</span>
                     @endif
 
                 </td>
@@ -397,8 +397,8 @@ $get_name_size = '';
                   {{$k->item_name}}
                 </td>
               <td class="text-right">
-                 @if($k->item_status == 1)
-                ฿{{number_format((float)$k->item_price, 2, '.', '')}}
+                 @if($k->item_show_status == 1)
+                ฿{{number_format($k->item_price, 2)}}
                 @endif
               </td>
 
@@ -435,7 +435,7 @@ $get_name_size = '';
                 </td>
               <td class="text-right">
                 <div id="sum_image_price" style="display: none;">
-                  {{number_format((float)Session::get('cart.'.$id.'.data.3.sum_price')*(Session::get('cart.'.$id.'.data.2.sum_image')) , 2, '.', '')}}
+                  {{number_format(Session::get('cart.'.$id.'.data.3.sum_price')*(Session::get('cart.'.$id.'.data.2.sum_image')) , 2)}}
                 </div>
                 <div id="get_image_price">
 
@@ -470,8 +470,8 @@ $get_name_size = '';
                 </td>
               <td class="text-right">
                 @foreach($j->option as $k)
-                @if($k->item_status == 1)
-                ฿{{number_format((float)$k->item_price, 2, '.', '')}}
+                @if($k->item_show_status == 1)
+                ฿{{number_format($k->item_price, 2)}}
                 @endif
                 @endforeach
               </td>
@@ -509,7 +509,7 @@ $get_name_size = '';
                 </td>
               <td class="text-right">
                 <div id="sum_image_price" style="display: none;">
-                  {{number_format((float)$sum_price_value*($sum_image_value) , 2, '.', '')}}
+                  {{number_format($sum_price_value*($sum_image_value) , 2)}}
                 </div>
                 <div id="get_image_price">
 
@@ -778,6 +778,17 @@ $.notify({
 
 
  <script type="text/javascript">
+
+ $(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
+
     @if($all_img > 0)
     $(window).on('load',function(){
         $('#myModal1').modal('show');
@@ -876,11 +887,12 @@ var sum_price_value = {{$sum_price_value}};
 
 var number = parseInt($('#number_image').text());
 //console.log(number+1);
-$('#get_number_image').append(number);
+$('#get_number_image').append(numeral(number).format('0,0'));
+
 var price_image = document.getElementById('sum_image_price').innerText;
 //var price_image = parseInt($('#sum_image_price').text());
 console.log(price_image);
-$('#get_image_price').append(price_image);
+$('#get_image_price').append(numeral(price_image).format('0,0.00'));
 //console.log(sum_price_value);
 
 
@@ -899,19 +911,19 @@ $('#get_image_price').append(price_image);
       if ($button.text() == "+") {
           var newVal = parseFloat(oldValue) + 1;
 
-          $('#get_number_image').append(number+=1);
-          $('#get_image_price').append( (sum_price_value*number).toFixed(2) );
+          $('#get_number_image').append(numeral(number+=1).format('0,0'));
+          $('#get_image_price').append( numeral(sum_price_value*number).format('0,0.00'));
           console.log(number);
       } else {
           // Don't allow decrementing below zero
           if (oldValue > 1) {
               var newVal = parseFloat(oldValue) - 1;
-              $('#get_number_image').append(number-=1);
-              $('#get_image_price').append( (sum_price_value*number).toFixed(2) );
+              $('#get_number_image').append(numeral(number-=1).format('0,0'));
+              $('#get_image_price').append( numeral(sum_price_value*number).format('0,0.00') );
           } else {
               newVal = 1;
-              $('#get_number_image').append(number);
-              $('#get_image_price').append( (sum_price_value*number).toFixed(2) );
+              $('#get_number_image').append(numeral(number).format('0,0'));
+              $('#get_image_price').append( numeral(sum_price_value*number).format('0,0.00') );
           }
       }
        $button.parent().find("input").val(newVal);

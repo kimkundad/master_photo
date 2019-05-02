@@ -83,7 +83,7 @@ Payment | MASTER PHOTO NETWORK
                   Discount
                 </td>
                 <td class="text-right">
-                  ฿{{$order->discount}}
+                  ฿{{number_format($order->discount, 2)}}
                 </td>
               </tr>
 
@@ -92,7 +92,7 @@ Payment | MASTER PHOTO NETWORK
                   ค่าจัดส่ง
                 </td>
                 <td class="text-right">
-                  ฿{{$order->shipping_p}}
+                  ฿{{number_format($order->shipping_p, 2)}}
                 </td>
               </tr>
 
@@ -101,7 +101,8 @@ Payment | MASTER PHOTO NETWORK
                   ราคาสินค้า x {{$order->total}}
                 </td>
                 <td class="text-right" >
-                  {{$order->order_price}}
+                  ฿{{number_format($order->order_price, 2)}}
+
                 </td>
               </tr>
 
@@ -110,7 +111,7 @@ Payment | MASTER PHOTO NETWORK
                   ยอดชำระ
                 </td>
                 <td class="text-right">
-                  ฿{{$order->order_price+$order->shipping_p}}
+                  ฿{{number_format($order->order_price+$order->shipping_p, 2)}}
                 </td>
               </tr>
 
@@ -230,7 +231,7 @@ Payment | MASTER PHOTO NETWORK
 
           <div class="form-group">
             <label>AMOUNT</label>
-          <input type="text" name="amount" class="form-control" value="{{$amount}}" readonly/>
+          <input type="text" name="amount" class="form-control" value="{{number_format($amount, 2)}}" readonly/>
           </div>
 
           <button type="submit" class="btn btn-next">Confirm</button>
@@ -260,7 +261,7 @@ Payment | MASTER PHOTO NETWORK
 
               <div class="col-md-4">
                 <div class="form-group">
-              <input type="text" name="amount" value="{{$order->order_price+$order->shipping_p}}" class="form-control">
+              <input type="text" name="amount" value="{{number_format($order->order_price+$order->shipping_p, 2)}}" class="form-control">
               </div>
             </div>
               <p>
@@ -320,7 +321,7 @@ Payment | MASTER PHOTO NETWORK
                   Discount
                 </td>
                 <td class="text-right">
-                  ฿{{$order->discount}}
+                  ฿{{number_format($order->discount, 2)}}
                 </td>
               </tr>
 
@@ -329,7 +330,7 @@ Payment | MASTER PHOTO NETWORK
                   ค่าจัดส่ง
                 </td>
                 <td class="text-right">
-                  ฿{{$order->shipping_p}}
+                  ฿{{number_format($order->shipping_p, 2)}}
                 </td>
               </tr>
 
@@ -338,7 +339,8 @@ Payment | MASTER PHOTO NETWORK
                   ราคาสินค้า x {{$order->total}}
                 </td>
                 <td class="text-right" >
-                  {{$order->order_price}}
+
+                  ฿{{number_format($order->order_price, 2)}}
                 </td>
               </tr>
 
@@ -347,7 +349,8 @@ Payment | MASTER PHOTO NETWORK
                   ยอดชำระ
                 </td>
                 <td class="text-right">
-                  ฿{{$order->order_price+$order->shipping_p}}
+                  ฿{{number_format($order->order_price+$order->shipping_p, 2)}}
+
                 </td>
               </tr>
 

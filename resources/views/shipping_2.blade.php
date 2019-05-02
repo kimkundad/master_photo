@@ -133,7 +133,7 @@ Shipping | MASTER PHOTO NETWORK
                   ราคาสินค้า x {{$count_data2}}
                 </td>
                 <td class="text-right" >
-                  {{number_format((float)$total_pay, 2, '.', '')}}
+                  {{number_format($total_pay, 2)}}
                 </td>
               </tr>
 
@@ -597,7 +597,7 @@ Shipping | MASTER PHOTO NETWORK
                   ราคาสินค้า x {{$count_data2}}
                 </td>
                 <td class="text-right" >
-                  {{number_format((float)$total_pay, 2, '.', '')}}
+                  {{number_format($total_pay, 2)}}
                 </td>
               </tr>
 

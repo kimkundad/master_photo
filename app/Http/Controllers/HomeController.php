@@ -21,7 +21,7 @@ use Mail;
 use Swift_Transport;
 use Swift_Message;
 use Swift_Mailer;
-
+use Carbon\Carbon;
 use App\cart_detail;
 use App\cart_image;
 use App\cart_option;
@@ -1814,13 +1814,31 @@ $data['get_my_add'] = $get_my_add;
 
          }
 
-         $get_count_or = DB::table('orders')
-                 ->count();
 
-    
 
-      //  $name_user = $request['firstname_order'];
-       $randomSixDigitInt = date("d").''.date("m").''.date("Y").'-'.Auth::user()->id.'-'.($get_count_or);
+
+           $get_order_last = DB::table('orders')
+             ->orderBy('id', 'desc')
+             ->first();
+
+
+
+      //  $name_user = $request['firstname_order']; 2019-04-30 08:38:34
+      // $randomSixDigitInt = date("d").''.date("m").''.date("Y").'-'.Auth::user()->id.'-'.$get_count_or;
+      // $date = date_create($get_order_last->created_at);
+
+       $get_count_or = DB::table('orders')
+         ->whereDate('created_at', Carbon::today())
+         ->count();
+
+        $get_count_or+=1;
+        $get_last_number = str_pad($get_count_or,3,"0",STR_PAD_LEFT);
+       //dd(str_pad($get_count_or,3,"0",STR_PAD_LEFT));
+
+       $randomSixDigitInt = date("d").''.date("m").''.date("Y").'-'.Auth::user()->id.'-'.$get_last_number;
+
+       //dd($randomSixDigitInt);
+
        $package = new order();
        $package->user_id = Auth::user()->id;
        $package->code_gen = $randomSixDigitInt;
