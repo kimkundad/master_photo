@@ -845,7 +845,7 @@ function run() {
 
 
 
-    if(val_free <= price_image){
+    if(Number(val_free) <= Number(price_image)){
       value9 = 0;
     }
 
