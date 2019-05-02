@@ -842,7 +842,8 @@ function run() {
     var value9 = selector.options[selector.selectedIndex].getAttribute('data-value');
     var val_free = selector.options[selector.selectedIndex].getAttribute('data-free');
 
-    console.log(val_free price_image);
+
+    console.log("free " + val_free + " price" + price_image);
 
     if(val_free <= price_image){
       value9 = 0;
