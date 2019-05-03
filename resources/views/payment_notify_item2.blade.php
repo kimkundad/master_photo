@@ -20,7 +20,7 @@ user profile
   <div class="container margin_60">
 
     <div class=" margin_30 text-center">
-      <h2 class="major"><span>{{ trans('message.pay_ment') }} </span></h2>
+      <h2 class="major"><span>{{ trans('message.user_order') }} </span></h2>
 
     </div>
 
@@ -105,7 +105,7 @@ address {
 
           <div class="col-md-12">
             <div class="" id="tools">
-              <h4>{{ trans('message.pay_ment') }} #Oder ID {{$order->code_gen}}</h4>
+              <h4>{{ trans('message.user_order') }} #Oder ID {{$order->code_gen}}</h4>
             </div>
 
             <div class="bill-info" >
