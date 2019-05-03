@@ -1906,7 +1906,7 @@ $data['get_my_add'] = $get_my_add;
                $count_data_de = DB::table('cart_details')->select(
                    'cart_details.*'
                    )
-                   ->where('order_id', $the_id)
+                   ->where('user_id', Auth::user()->id)
                    ->count();
 
                    $count_data_de += 1;
@@ -2393,7 +2393,7 @@ $data['get_my_add'] = $get_my_add;
 
 
       $data['provinces'] =  $provinces;
-    
+
 
     //  dd($order);
 
