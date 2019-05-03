@@ -131,11 +131,11 @@ user profile
                             @elseif($u->status == 2)
                             <button type="button" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block" style="margin-top:3px;">อยู่ระหว่างดำเนินการผลิต</button>
                             @elseif($u->status == 3)
-                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block" style="margin-top:3px;">อยู่ระหว่างดำเนินการผลิต</button>
-                            @elseif($u->status == 4)
                             <button type="button" class="mb-1 mt-1 mr-1 btn btn-xs btn-primary btn-block" style="margin-top:3px;">จัดส่งเรียบร้อย</button>
-                            @else
+                            @elseif($u->status == 4)
                             <button type="button" class="mb-1 mt-1 mr-1 btn btn-xs btn-default btn-block" style="margin-top:3px;">ยกเลิก</button>
+                            @else
+
                             @endif
 
 
