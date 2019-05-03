@@ -195,10 +195,12 @@ address {
 
                     </div>
 
+                    @if(Request::is('my_order_detail/*'))
                     <div class="col-md-12 text-center" >
 
                     <a href="{{url('pay_order_detail/'.$order_de->code_gen_d)}}" class="btn btn-submit">{{ trans('message.Payment_order') }}</a>
                     </div>
+                    @endif
 
 
                     <!--
