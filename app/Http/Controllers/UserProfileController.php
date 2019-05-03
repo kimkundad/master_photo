@@ -117,7 +117,7 @@ class UserProfileController extends Controller
 
       $order = DB::table('orders')
             ->where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('status', '!=', 0)
             ->orderBy('id', 'desc')
             ->get();
 
