@@ -761,12 +761,13 @@ function getComboB(selectObject) {
         value_price = 0;
       }
 
+      //numeral(Number(value_price)).format('0,0.00')
       document.getElementById("type_ship").value = Number(value_type);
-      $('#get_image_price').append((Number(price_image)+Number(value_price)).toFixed(2));
-      $('#get_ship_price').append( Number(value_price) );
+      $('#get_image_price').append(numeral(Number(price_image)+Number(value_price)).format('0,0.00'));
+      $('#get_ship_price').append( numeral(Number(value_price)).format('0,0.00') );
 
-      $('#get_image_price2').append((Number(price_image)+Number(value_price)).toFixed(2));
-      $('#get_ship_price2').append( Number(value_price) );
+      $('#get_image_price2').append(numeral(Number(price_image)+Number(value_price)).format('0,0.00'));
+      $('#get_ship_price2').append( numeral(Number(value_price)).format('0,0.00') );
 
       document.getElementById("get_sum_ship").value = Number(value_price);
 
@@ -809,16 +810,18 @@ function getComboB(selectObject) {
         console.log(data.data);
 
         //  $('#targeted').html(data.data.html);
+        //numeral((Number(price_image)+Number(data.data.price))).format('0,0.00')
+        //numeral(Number(data.data.price))).format('0,0.00')
 
         if(Number(value_free) <= Number(price_image) && Number(value_free) != 0){
           data.data.price = 0;
         }
 
-        $('#get_image_price').append((Number(price_image)+Number(data.data.price)).toFixed(2));
-        $('#get_ship_price').append( Number(data.data.price) );
+        $('#get_image_price').append(numeral((Number(price_image)+Number(data.data.price))).format('0,0.00'));
+        $('#get_ship_price').append( numeral(Number(data.data.price)).format('0,0.00') );
 
-        $('#get_image_price2').append((Number(price_image)+Number(data.data.price)).toFixed(2));
-        $('#get_ship_price2').append( Number(data.data.price) );
+        $('#get_image_price2').append(numeral((Number(price_image)+Number(data.data.price))).format('0,0.00'));
+        $('#get_ship_price2').append( numeral(Number(data.data.price)).format('0,0.00') );
         document.getElementById("get_sum_ship").value = Number(data.data.price);
 
 
@@ -851,18 +854,20 @@ function run() {
 
     console.log("free " + val_free + " price" + price_image + " ship" + value9);
 
-    $('#get_image_price').append((Number(price_image)+Number(value9)).toFixed(2));
-    $('#get_ship_price').append( Number(value9) );
-    $('#get_image_price2').append((Number(price_image)+Number(value9)).toFixed(2));
-    $('#get_ship_price2').append( Number(value9) );
-    document.getElementById("get_sum_ship").value = Number(value9);
+    $('#get_image_price').append(numeral(Number(price_image)+Number(value9)).format('0,0.00'));
+    //numeral(Number(price_image)+Number(value9)).format('0,0.00')
+    $('#get_ship_price').append( numeral(Number(value9)).format('0,0.00') );
+    //numeral(Number(value9)).format('0,0.00')
+    $('#get_image_price2').append(numeral(Number(price_image)+Number(value9)).format('0,0.00'));
+    $('#get_ship_price2').append( numeral(Number(value9)).format('0,0.00') );
+    document.getElementById("get_sum_ship").value = numeral(Number(value9)).format('0,0.00');
 
 
 }
 
 
 //console.log(price_image);
-$('#get_image_price').append(price_image);
+$('#get_image_price').append(numeral(price_image).format('0,0.00'));
 
 
 

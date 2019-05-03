@@ -190,8 +190,8 @@ Payment | MASTER PHOTO NETWORK
 
         <?php
         	//Merchant's account information
-        	$merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
-        	$secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
+        	$merchant_id = "sGqEEDndVZR7";			//Get MerchantID when opening account with 2C2P
+        	$secret_key = "dsbqppYP703G";	//Get SecretKey from 2C2P PGW Dashboard
 
         	//Transaction information
         	$payment_description  = '2 days 1 night hotel room';

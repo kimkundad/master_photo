@@ -109,7 +109,7 @@
                         <li style="padding-left:10px;">
                             <a href="{{url('photo_edit/'.$item['data']['list_link'])}}" style="padding: 3px 5px;"><div class="image"><img src="{{url('assets/image/product/'.$item['data']['image_pro'])}}" alt="image"></div></a>
                             <strong>
-                            <a href="{{url('photo_edit/'.$item['data']['list_link'])}}"><?=$i?>. {{$item['data']['pro_name']}}</a>฿{{number_format($item['data'][3]['sum_price'], 2)}} x {{$item['data'][2]['sum_image']}}</strong>
+                            <a href="{{url('photo_edit/'.$item['data']['list_link'])}}"><?=$i?>. {{$item['data']['pro_name']}}</a>฿{{number_format($item['data'][3]['sum_price'], 2)}} x {{number_format($item['data'][2]['sum_image'], 2)}}</strong>
                         </li>
 
                         <?php
@@ -153,7 +153,7 @@
                           <li style="padding-left:10px;">
                               <a href="{{url('photo_edit/'.$k->id)}}" style="padding: 3px 5px;"><div class="image"><img src="{{url('assets/image/product/'.$k->product_get->pro_image)}}" alt="{{$k->product_get->pro_name}}"></div></a>
                               <strong>
-                              <a href="{{url('photo_edit/'.$k->id)}}"><?=$i?>. {{$k->product_get->pro_name}}</a>฿{{number_format($k->sum_price, 2)}} x {{$k->sum_image}}</strong>
+                              <a href="{{url('photo_edit/'.$k->id)}}"><?=$i?>. {{$k->product_get->pro_name}}</a>฿{{number_format($k->sum_price, 2)}} x {{number_format($k->sum_image, 2)}} </strong>
                           </li>
 
                           <?php
