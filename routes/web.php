@@ -94,6 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 	Route::get('payment_notify_item/{id}', 'UserProfileController@payment_notify_item')->name('payment_notify_item');
+	Route::get('payment_notify_item2/{id}', 'UserProfileController@payment_notify_item2')->name('payment_notify_item2');
 
   Route::post('/add_address_order', 'HomeController@add_address_order')->name('add_address_order');
   Route::get('/profile', 'HomeController@profile')->name('profile');
@@ -111,6 +112,7 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::get('/my_order', 'UserProfileController@my_order')->name('my_order');
   Route::get('my_order_detail/{id}', 'UserProfileController@my_order_detail')->name('my_order_detail');
+	Route::get('my_order_detail2/{id}', 'UserProfileController@my_order_detail2')->name('my_order_detail2');
 	Route::get('pay_order_choose/{id}', 'UserProfileController@pay_order_choose')->name('pay_order_choose');
 	Route::get('pay_order_detail/{id}', 'UserProfileController@payment_notify_id')->name('pay_order_detail');
 

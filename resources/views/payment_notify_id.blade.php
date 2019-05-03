@@ -76,10 +76,10 @@ user profile
                         </div>
                       </div>
 
-                      <div class="form-group">
+                      <div class="form-group hidden">
                         <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.name_pro') }}*</label>
                         <div class="col-md-8">
-                          <input type="text" class="form-control" name="name" value="{{ old('name')}}" >
+                          <input type="text" class="form-control" name="user_id" value="{{ Auth::user()->id }}" >
                           @if ($errors->has('name'))
                           <p class="text-danger" style="margin-top:10px;">
                             คุณต้องกรอก ชื่อ-นามสกุล ด้วยค่ะ
@@ -139,7 +139,7 @@ user profile
                                                     <div class="form-group">
                                                       <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Time_to_transfer_money') }}*</label>
                                                       <div class="col-md-4">
-                                                        <input type="text" class="form-control date-pick" name="filter_date" id="filter-date" value="<?php echo date('d/m/Y H:i')?>"/>
+                                                        <input type="text" class="form-control date-pick" name="filter_date" id="filter-date" value="<?php echo date('d/m/Y')?>"/>
                                                         @if ($errors->has('filter_date'))
                                                         <p class="text-danger" style="margin-top:10px;">
                                                           คุณต้องกรอก วันที่-เวลาโอนเงิน ด้วยค่ะ

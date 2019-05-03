@@ -83,6 +83,9 @@ user profile
 	background: #333;
 	color:#fff;
 }
+.strip_booking h3.hotel_booking:before {
+    content: '\52';
+}
 </style>
 
 
@@ -96,55 +99,60 @@ user profile
                     <br />
 
 
-            @if(isset($order))
-              @foreach($order as $u)
+                    @if(isset($order))
+                      @foreach($order as $u)
+                    <div class="strip_booking">
+        							<div class="row">
+        								<div class="col-lg-2 col-md-2">
+        									<div class="date">
+        										<span class="month">{{date_format(date_create($u->created_at),"M")}}</span>
+        										<span class="day"><strong>{{date_format(date_create($u->created_at),"d")}}</strong>{{date_format(date_create($u->created_at),"Y")}}</span>
+        									</div>
+        								</div>
+        								<div class="col-lg-6 col-md-5">
+                          <a href="{{url('payment_notify_item2/'.$u->id)}}">
+        									<h3 class="hotel_booking">{{$u->code_gen}}<span>{{ trans('message.total_sum') }} {{$u->total}} {{ trans('message.item') }}</span></h3>
+                          </a>
+        								</div>
+        								<div class="col-lg-2 col-md-3">
+        									<ul class="info_booking">
+        										<li><strong style="font-size: 14px;">{{ trans('message.price_payment_notify') }}</strong><br /> <span class="text-danger" style="font-size: 16px;">{{number_format($u->order_price+$u->shipping_p, 2)}}</span>
+                            <strong style="font-size: 14px;">{{ trans('message.baht') }}</strong>
+                          </li>
+
+        									</ul>
+        								</div>
+        								<div class="col-lg-2 col-md-2">
+        									<div class="booking_buttons">
+        										<a href="{{url('payment_notify_item2/'.$u->id)}}" class="btn_2">{{ trans('message.View') }}</a>
+
+                            @if($u->status == 1)
+                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-xs btn-success btn-block" style="margin-top:3px;">ชำระเงินแล้ว</button>
+                            @elseif($u->status == 2)
+                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block" style="margin-top:3px;">อยู่ระหว่างดำเนินการผลิต</button>
+                            @elseif($u->status == 3)
+                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block" style="margin-top:3px;">อยู่ระหว่างดำเนินการผลิต</button>
+                            @elseif($u->status == 4)
+                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-xs btn-primary btn-block" style="margin-top:3px;">จัดส่งเรียบร้อย</button>
+                            @else
+                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-xs btn-default btn-block" style="margin-top:3px;">ยกเลิก</button>
+                            @endif
+
+
+        									</div>
+        								</div>
+        							</div>
+        							<!-- End row -->
+        						</div>
+                      @endforeach
+                    @endif
 
 
 
-              @if(isset($u->option))
-                @foreach($u->option as $j)
-
-            <div class="strip_booking">
-							<div class="row">
-								<div class="col-lg-2 col-md-2">
-									<img src="{{url('assets/image/product/'.$j->pro_image)}}" class="img-fluid styled" style="width:94px; box-shadow: 0 0 5px 0 rgba(0,0,0,.1);" />
-								</div>
-								<div class="col-lg-5 col-md-5">
-									<h3 style="padding-left: 5px;">{{$j->product_name}} <span style="line-height: 16px;">
-                    {{ trans('message.number_jum') }} {{$j->sum_image}} {{ trans('message.Piece') }} <br />
-                    @if(isset($j->get_all_option))
-                    @foreach($j->get_all_option as $k)
-
-                    {{$k->get_option->item_name}} /
-                    @endforeach
-                  @endif
-                  </span></h3>
-								</div>
-								<div class="col-lg-3 col-md-3">
-									<ul class="info_booking">
-										<li><strong>ORDER id #{{$u->code_gen}}</strong> </li>
-										<li><strong>{{ trans('message.Transaction_date') }}</strong> <?php echo DateThai($j->created_ats); ?></li>
-									</ul>
-								</div>
-								<div class="col-lg-2 col-md-2">
-									<div class="booking_buttons">
-
-										<a href="{{url('my_order_detail/'.$j->id_de)}}" style="margin-top: 3px;" class="btn_2">{{ trans('message.View') }}</a>
-
-									</div>
-								</div>
-							</div>
-							<!-- End row -->
-						</div>
-
-            @endforeach
-          @endif
 
 
 
 
-              @endforeach
-            @endif
 
 
                 </div>
