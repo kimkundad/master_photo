@@ -296,7 +296,7 @@ Photo print
                 <tbody>
                   <tr>
                     <td>
-                      Promotion xxxxx
+                      Promotion {{$objs->pro_promotion}}
                     </td>
 
                   </tr>

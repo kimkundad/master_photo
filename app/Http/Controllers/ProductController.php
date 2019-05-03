@@ -392,6 +392,7 @@ class ProductController extends Controller
 
        $package = new product();
        $package->pro_name = $request['pro_name'];
+       $package->pro_promotion = $request['pro_promotion'];
        $package->pro_title = $request['pro_title'];
        $package->pro_name_detail = $request['pro_name_detail'];
        $package->pro_category = $request['pro_category'];
@@ -733,7 +734,7 @@ class ProductController extends Controller
           $package->pro_title = $request['pro_title'];
           $package->pro_name_detail = $request['pro_name_detail'];
           $package->pro_category = $request['pro_category'];
-
+          $package->pro_promotion = $request['pro_promotion'];
           $package->pro_price = 0;
           $package->pro_status_show = $request['pro_status_show'];
           $package->save();
@@ -772,6 +773,7 @@ class ProductController extends Controller
 
           $package = product::find($id);
           $package->pro_name = $request['pro_name'];
+          $package->pro_promotion = $request['pro_promotion'];
           $package->pro_title = $request['pro_title'];
           $package->pro_name_detail = $request['pro_name_detail'];
           $package->pro_category = $request['pro_category'];

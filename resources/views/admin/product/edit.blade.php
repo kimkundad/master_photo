@@ -68,10 +68,18 @@
           											<h4 class="mb-xlg">แก้ไข {{ $objs->pro_name }}</h4>
 
           											<fieldset>
+
                                   <div class="form-group">
           													<label class="col-md-3 control-label" for="profileFirstName">ชื่อสินค้า*</label>
           													<div class="col-md-8">
           														<input type="text" class="form-control" name="pro_name" value="{{ $objs->pro_name }}">
+          														</div>
+          												</div>
+
+                                  <div class="form-group">
+          													<label class="col-md-3 control-label" for="profileFirstName">โปรโมชั่น ( promotion )</label>
+          													<div class="col-md-8">
+          														<textarea class="form-control" name="pro_promotion" rows="6">{{ $objs->pro_promotion }}</textarea>
           														</div>
           												</div>
 

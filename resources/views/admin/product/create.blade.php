@@ -111,6 +111,13 @@
           														</div>
           												</div>
 
+                                  <div class="form-group">
+          													<label class="col-md-3 control-label" for="profileFirstName">โปรโมชั่น ( promotion )</label>
+          													<div class="col-md-8">
+          														<textarea class="form-control" name="pro_promotion" rows="6">{{ old('pro_promotion') }}</textarea>
+          														</div>
+          												</div>
+
 
                                   <div class="form-group">
           													<label class="col-md-3 control-label" for="profileAddress">หมวดหมู่<span class="text-danger">*</span></label>
