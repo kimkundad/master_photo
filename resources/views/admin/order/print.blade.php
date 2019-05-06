@@ -439,9 +439,7 @@ border: 1px solid #ddd;
       </td>
       <td style="font-size: 18px">
 
-        {{$obj->name_deli}} @if($obj->bill_address == 2)
-				{{$obj->shipping_t2}}
-				@endif {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+        {{$obj->name_deli}}  {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
       </td>
     </tr>
     <tr>
