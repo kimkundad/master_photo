@@ -46,6 +46,20 @@
     padding: 18px;
     position: relative;
 }
+
+.card-footer {
+    padding: 0.75rem 1.25rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+.card-footer {
+    border-radius: 0 0 5px 5px;
+    margin-top: -5px;
+    background: #FFF;
+}
+.card-footer:last-child {
+    border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+}
 </style>
 
 
