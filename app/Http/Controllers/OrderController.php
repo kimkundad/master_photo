@@ -81,7 +81,7 @@ class OrderController extends Controller
        $dateS = $start;
        $dateE = $end;
 
-       dd($dateS.''.$dateE);
+       //dd($dateS.''.$dateE);
 
        if($status != 100){
 
