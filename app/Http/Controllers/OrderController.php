@@ -160,9 +160,13 @@ class OrderController extends Controller
              $data['end'] = $end;
              $data['status'] = $status;
 
-             $data['objs'] = $cat;
-             $data['datahead'] = "order สั่งสินค้า";
-             return view('admin.order.search', $data);
+             $objs = $cat;
+             $datahead = "order สั่งสินค้า";
+             return view('admin.order.search', compact(['objs']))
+             ->with('start', $start)
+             ->with('end', $end)
+             ->with('status', $status)
+             ->with('datahead', $datahead);
 
      }
 
