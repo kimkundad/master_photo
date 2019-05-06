@@ -232,7 +232,7 @@ Payment | MASTER PHOTO NETWORK
 
           <div class="form-group">
             <label>AMOUNT</label>
-          <input type="text" name="amount" class="form-control" value="{{number_format($amount, 2)}}" readonly/>
+          <input type="text" name="amount" class="form-control" value="{{$amount}}" readonly/>
           </div>
 
           <button type="submit" class="btn btn-next">Confirm</button>
