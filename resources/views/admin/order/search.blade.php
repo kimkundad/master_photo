@@ -7,7 +7,47 @@
 @section('admin.content')
 
 
-
+<style>
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+.card {
+    background: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+}
+.card-body {
+    background: #fdfdfd;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+}
+.card-header + .card-body {
+    border-radius: 0 0 5px 5px;
+}
+.modal-wrapper {
+    position: relative;
+    padding: 25px 0;
+}
+.card-header {
+    background: #f6f6f6;
+    border-radius: 5px 5px 0 0 !important;
+    border-bottom: 1px solid #DADADA;
+    padding: 18px;
+    position: relative;
+}
+</style>
 
 
 
@@ -153,7 +193,9 @@
                       <td><a class="mb-1 mt-1 mr-1 modal-basic btn btn-xs btn-default" href="#modalBasic{{$u->code_gen}}">หมายเหตุ</a>
                         <div id="modalBasic{{$u->code_gen}}" class="modal-block mfp-hide">
                             <section class="card">
+                              <header class="card-header">
 
+                    </header>
                               <div class="card-body">
                                 <div class="modal-wrapper">
                                   <div class="modal-text">
