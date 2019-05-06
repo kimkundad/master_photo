@@ -177,6 +177,7 @@ Route::group(['middleware' => 'admin'], function() {
 	Route::post('admin/edit_deli_item_com/', 'ProductController@edit_deli_item_com');
 	Route::post('admin/del_item_on_ship/{id}', 'ProductController@del_item_on_ship');
 
+	Route::post('admin/search_order/', 'OrderController@search_order');
 
   Route::post('admin/add_gallery/', 'ProductController@add_gallery');
 	Route::post('admin/add_gallery2/', 'ProductController@add_gallery2');

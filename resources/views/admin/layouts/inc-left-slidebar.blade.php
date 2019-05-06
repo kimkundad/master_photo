@@ -74,7 +74,7 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 
 
 
-                  <li {{ (Request::is('admin/order*') ? 'class=nav-expanded' : '') }} >
+                  <li {{ (Request::is('admin/order*') ? 'class=nav-expanded' : '') }} {{ (Request::is('admin/search_order') ? 'class=nav-expanded' : '') }}>
 										<a href="{{url('admin/order/')}}"  >
 											<i class="fa fa-copy" aria-hidden="true"></i>
 											<span>Order สินค้า</span>

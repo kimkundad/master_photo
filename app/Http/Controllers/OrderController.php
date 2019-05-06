@@ -10,6 +10,7 @@ use Mail;
 use Swift_Transport;
 use Swift_Message;
 use Swift_Mailer;
+use Carbon\Carbon;
 use Illuminate\Http\Response;
 use File;
 
@@ -60,6 +61,62 @@ class OrderController extends Controller
          'success' => $user->save(),
        ]
      ]);
+
+     }
+
+
+     public function search_order(Request $request){
+
+       $start = $request['start'];
+       $end = $request['end'];
+       if($end != null){
+         $end = $start;
+       }
+       $status = $request['status'];
+
+       $dateS = new Carbon($start);
+       $dateE = new Carbon($end);
+
+       //dd($dateS);
+
+       if($status != 100){
+
+         $cat = DB::table('orders')->select(
+               'orders.*',
+               'users.id as id_pro',
+               'users.name',
+               'users.phone'
+               )
+               ->leftjoin('users', 'users.id',  'orders.user_id')
+               ->whereBetween('orders.created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])
+               ->where('orders.status', $status)
+               ->orderBy('orders.id', 'desc')
+               ->paginate(15);
+
+       }else{
+
+         $cat = DB::table('orders')->select(
+               'orders.*',
+               'users.id as id_pro',
+               'users.name',
+               'users.phone'
+               )
+               ->leftjoin('users', 'users.id',  'orders.user_id')
+               ->whereBetween('orders.created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])
+               ->orderBy('orders.id', 'desc')
+               ->paginate(15);
+
+       }
+
+
+
+             $data['start'] = $start;
+             $data['end'] = $end;
+             $data['status'] = $status;
+
+             $data['objs'] = $cat;
+             $data['datahead'] = "order สั่งสินค้า";
+             return view('admin.order.search', $data);
 
      }
 
