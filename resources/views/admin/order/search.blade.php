@@ -105,7 +105,7 @@
 
 
 
-              <form class="form-horizontal form-bordered" method="POST" action="{{url('admin/search_order')}}">
+              <form class="form-horizontal form-bordered" method="GET" action="{{url('admin/search_order')}}">
                 {{ csrf_field() }}
 
 											<div class="form-group row">
