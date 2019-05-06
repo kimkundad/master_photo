@@ -133,24 +133,26 @@
                         <td><a href="{{url('admin/load_img/'.$u->id_or)}}" class="mb-1 mt-1 mr-1 btn btn-xs btn-primary">Download</a></td>
                         <td><a class="mb-1 mt-1 mr-1 modal-basic btn btn-xs btn-default" href="#modalBasic{{$u->code_gen}}">หมายเหตุ</a>
                           <div id="modalBasic{{$u->code_gen}}" class="modal-block mfp-hide">
-          										<section class="card">
-
-          											<div class="card-body">
-          												<div class="modal-wrapper">
-          													<div class="modal-text">
-          														<p class="mb-0">{{$u->note}}</p>
-          													</div>
-          												</div>
-          											</div>
-          											<footer class="card-footer">
-          												<div class="row">
-          													<div class="col-md-12 text-right">
-
-          														<button class="btn btn-default modal-dismiss">ปิด</button>
-          													</div>
-          												</div>
-          											</footer>
-          										</section>
+                            <section class="card">
+                                  <header class="card-header">
+                                    <h2 class="card-title">Are you sure?</h2>
+                                  </header>
+                                  <div class="card-body">
+                                    <div class="modal-wrapper">
+                                      <div class="modal-text">
+                                        <p class="mb-0">Are you sure that you want to delete this image?</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <footer class="card-footer">
+                                    <div class="row">
+                                      <div class="col-md-12 text-right">
+                                        <button class="btn btn-primary modal-confirm">Confirm</button>
+                                        <button class="btn btn-default modal-dismiss">Cancel</button>
+                                      </div>
+                                    </div>
+                                  </footer>
+                                </section>
           									</div>
                         </td>
                         <td>
