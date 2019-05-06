@@ -199,26 +199,14 @@ Payment | MASTER PHOTO NETWORK
         	$currency = "764";
         	$amount  = $order->order_price+$order->shipping_p;
 
-          //Payment Options
-	         $payment_option = "A";	//Customer Payment Options
-
         	//Request information
         	$version = "8.5";
         	$payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
         	$result_url_1 = url('/api/result_payment');
 
-          //Construct signature string
-        	$params = $version . $merchant_id . $payment_description . $order_id . $invoice_no .
-        	$currency . $amount . $customer_email . $pay_category_id . $promotion . $user_defined_1 .
-        	$user_defined_2 . $user_defined_3 . $user_defined_4 . $user_defined_5 . $result_url_1 .
-        	$result_url_2 . $enable_store_card . $stored_card_unique_id . $request_3ds . $recurring .
-        	$order_prefix . $recurring_amount . $allow_accumulate . $max_accumulate_amount .
-        	$recurring_interval . $recurring_count . $charge_next_date. $charge_on_date . $payment_option .
-        	$ipp_interest_type . $payment_expiry . $default_lang . $statement_descriptor . $use_storedcard_only .
-        	$tokenize_without_authorization . $product . $ipp_period_filter . $sub_merchant_list . $qr_type .
-        	$custom_route_id . $airline_transaction . $airline_passenger_list . $address_list;
-
-        	$hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
+        	//Construct signature string
+          $params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1;
+	        $hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
 
           ?>
 
@@ -230,11 +218,6 @@ Payment | MASTER PHOTO NETWORK
       		<input type="hidden" name="currency" value="{{$currency}}"/>
       		<input type="hidden" name="result_url_1" value="{{$result_url_1}}"/>
       		<input type="hidden" name="hash_value" value="{{$hash_value}}"/>
-
-          <input type="hidden" name="enable_store_card" value="{{$enable_store_card}}"/>
-      		<input type="hidden" name="request_3ds" value="{{$request_3ds}}"/>
-      		<input type="hidden" name="payment_option" value="{{$payment_option}}"/>
-
 
           <div class="form-group hidden">
             <label>PRODUCT INFO</label>
@@ -248,7 +231,7 @@ Payment | MASTER PHOTO NETWORK
 
           <div class="form-group">
             <label>AMOUNT</label>
-          <input type="text" name="amount" class="form-control" value="{{$amount}}" readonly/>
+          <input type="text" name="amount" class="form-control" value="{{number_format($amount, 2)}}" readonly/>
           </div>
 
           <button type="submit" class="btn btn-next">Confirm</button>
