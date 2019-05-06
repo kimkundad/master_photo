@@ -69,7 +69,7 @@ class OrderController extends Controller
 
        $start = $request['start'];
        $end = $request['end'];
-       if($end != null){
+       if($end == null){
          $end = $start;
        }
        $status = $request['status'];
