@@ -109,13 +109,13 @@
                   <thead>
                     <tr>
                       <th>เลขสั่งซื้อ</th>
-                      <th>ชื่อผู้สั่ง</th>
-                      <th>เบอร์โทร</th>
+                      <th>เวลา</th>
+                      <th>ชื่อลูกค้า</th>
                       <th>ยอดเงิน</th>
-
                       <th>สถานะ</th>
+                      <th>พนักงาน</th>
+                      <th>Download</th>
 
-                      <th>วันที่สั่ง</th>
                       <th>จัดการ</th>
                     </tr>
                   </thead>
@@ -124,8 +124,9 @@
                 @foreach($objs as $u)
                     <tr id="{{$u->id}}">
                       <td ><a href="{{url('admin/order/'.$u->id.'/edit')}}">#{{$u->code_gen}}</a></td>
+                      <td >{{$u->created_ats}}</td>
                       <td>{{$u->name}}</td>
-                      <td >{{$u->phone}}</td>
+
                       <td>{{$u->order_price+$u->shipping_p}} บาท</td>
                       <th>
 
@@ -145,8 +146,8 @@
 
                         @endif
                       </th>
-
-                      <td>{{$u->created_at}}</td>
+                      <td>Admin</td>
+                      <td><a href="{{url('admin/load_img/'.$u->id_or)}}" class="mb-1 mt-1 mr-1 btn btn-xs btn-primary">Download</a></td>
                       <td>
 
                         <div class="btn-group flex-wrap">

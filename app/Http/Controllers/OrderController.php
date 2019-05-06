@@ -26,6 +26,8 @@ class OrderController extends Controller
         //
         $cat = DB::table('orders')->select(
               'orders.*',
+              'orders.created_at as created_ats',
+              'orders.id as id_or',
               'users.id as id_pro',
               'users.name',
               'users.phone'

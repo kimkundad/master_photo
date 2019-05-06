@@ -103,50 +103,51 @@
                   <tbody>
              @if($objs)
                 @foreach($objs as $u)
-                    <tr id="{{$u->id}}">
-                      <td ><a href="{{url('admin/order/'.$u->id.'/edit')}}">#{{$u->code_gen}}</a></td>
-                      <td>{{$u->name}}</td>
-                      <td >{{$u->phone}}</td>
-                      <td>{{$u->order_price+$u->shipping_p}} บาท</td>
-                      <th>
+                <tr id="{{$u->id}}">
+                  <td ><a href="{{url('admin/order/'.$u->id.'/edit')}}">#{{$u->code_gen}}</a></td>
+                  <td >{{$u->created_ats}}</td>
+                  <td>{{$u->name}}</td>
 
-                        @if($u->status == 0)
-                        <span class="text-danger">รอการชำระเงิน</span>
-                        @elseif($u->status == 1)
-                        <span class="text-success">ชำระเงินแล้ว</span>
+                  <td>{{$u->order_price+$u->shipping_p}} บาท</td>
+                  <th>
 
-                        @elseif($u->status == 2)
-                        <span class="text-warning">อยู่ระหว่างดำเนินการผลิต</span>
+                    @if($u->status == 0)
+                    <span class="text-danger">รอการชำระเงิน</span>
+                    @elseif($u->status == 1)
+                    <span class="text-success">ชำระเงินแล้ว</span>
 
-                        @elseif($u->status == 3)
-                        <span class="text-primary">จัดส่งเรียบร้อย</span>
+                    @elseif($u->status == 2)
+                    <span class="text-warning">อยู่ระหว่างดำเนินการผลิต</span>
 
-                        @else
-                        <span class="text-muted">ยกเลิก </span>
+                    @elseif($u->status == 3)
+                    <span class="text-primary">จัดส่งเรียบร้อย</span>
 
-                        @endif
-                      </th>
+                    @else
+                    <span class="text-muted">ยกเลิก </span>
 
-                      <td>{{$u->created_at}}</td>
-                      <td>
+                    @endif
+                  </th>
+                  <td>Admin</td>
+                  <td><a href="{{url('admin/load_img/'.$u->id_or)}}" class="mb-1 mt-1 mr-1 btn btn-xs btn-primary">Download</a></td>
+                  <td>
 
-                        <div class="btn-group flex-wrap">
-  												<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
-  												<div class="dropdown-menu" role="menu">
+                    <div class="btn-group flex-wrap">
+                      <button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
+                      <div class="dropdown-menu" role="menu">
 
-  													<a class="dropdown-item text-1 text-primary" href="{{url('admin/order/'.$u->id.'/edit')}}"><i class="fa fa-gear"></i> แก้ไขข้อมูล</a>
-  												<!--	<a class="dropdown-item text-1 text-danger" href="">ลบ</a> -->
-                          <form  action="{{url('admin/order/'.$u->id)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
-                              <input type="hidden" name="_method" value="DELETE">
-                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                              <button type="submit" title="ลบบทความ" class="dropdown-item text-1 text-danger"><i class="fa fa-times "></i> ลบ</button>
-                          </form>
+                        <a class="dropdown-item text-1 text-primary" href="{{url('admin/order/'.$u->id.'/edit')}}"><i class="fa fa-gear"></i> แก้ไขข้อมูล</a>
+                      <!--	<a class="dropdown-item text-1 text-danger" href="">ลบ</a> -->
+                      <form  action="{{url('admin/order/'.$u->id)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
+                          <input type="hidden" name="_method" value="DELETE">
+                           <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                          <button type="submit" title="ลบบทความ" class="dropdown-item text-1 text-danger"><i class="fa fa-times "></i> ลบ</button>
+                      </form>
 
-  												</div>
-  											</div>
+                      </div>
+                    </div>
 
-                      </td>
-                    </tr>
+                  </td>
+                </tr>
                  @endforeach
               @endif
 
