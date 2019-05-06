@@ -98,7 +98,8 @@ class OrderController extends Controller
                  ->leftjoin('users', 'users.id',  'orders.user_id')
                  ->where('orders.status', $status)
                  ->orderBy('orders.id', 'desc')
-                 ->paginate(15);
+                 ->paginate(15)
+                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status);
 
          }else{
 
@@ -114,7 +115,8 @@ class OrderController extends Controller
                  ->whereBetween('orders.created_at', [$dateS." 00:00:00", $dateE." 23:59:59"])
                  ->where('orders.status', $status)
                  ->orderBy('orders.id', 'desc')
-                 ->paginate(15);
+                 ->paginate(15)
+                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status);
 
          }
 
@@ -133,7 +135,8 @@ class OrderController extends Controller
              )
                  ->leftjoin('users', 'users.id',  'orders.user_id')
                  ->orderBy('orders.id', 'desc')
-                 ->paginate(15);
+                 ->paginate(15)
+                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status);
 
          }else{
            $cat = DB::table('orders')->select(
@@ -147,7 +150,8 @@ class OrderController extends Controller
                  ->leftjoin('users', 'users.id',  'orders.user_id')
                  ->whereBetween('orders.created_at', [$dateS." 00:00:00", $dateE." 23:59:59"])
                  ->orderBy('orders.id', 'desc')
-                 ->paginate(15);
+                 ->paginate(15)
+                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status);
          }
 
 
