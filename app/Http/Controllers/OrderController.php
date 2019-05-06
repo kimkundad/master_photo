@@ -76,8 +76,10 @@ class OrderController extends Controller
        }
        $status = $request['status'];
 
-       $dateS = new Carbon($start);
-       $dateE = new Carbon($end);
+       //$dateS = new Carbon($start);
+       //$dateE = new Carbon($end);
+       $dateS = $start;
+       $dateE = $end;
 
        dd($dateS.''.$dateE);
 
