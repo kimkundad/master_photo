@@ -111,7 +111,7 @@ class OrderController extends Controller
              'users.phone'
              )
                  ->leftjoin('users', 'users.id',  'orders.user_id')
-                 ->whereBetween('orders.created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])
+                 ->whereBetween('orders.created_at', [$dateS." 00:00:00", $dateE." 23:59:59"])
                  ->where('orders.status', $status)
                  ->orderBy('orders.id', 'desc')
                  ->paginate(15);
@@ -145,7 +145,7 @@ class OrderController extends Controller
              'users.phone'
              )
                  ->leftjoin('users', 'users.id',  'orders.user_id')
-                 ->whereBetween('orders.created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])
+                 ->whereBetween('orders.created_at', [$dateS." 00:00:00", $dateE." 23:59:59"])
                  ->orderBy('orders.id', 'desc')
                  ->paginate(15);
          }
