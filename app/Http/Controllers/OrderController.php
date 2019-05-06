@@ -84,11 +84,13 @@ class OrderController extends Controller
        if($status != 100){
 
          $cat = DB::table('orders')->select(
-               'orders.*',
-               'users.id as id_pro',
-               'users.name',
-               'users.phone'
-               )
+           'orders.*',
+           'orders.created_at as created_ats',
+           'orders.id as id_or',
+           'users.id as id_pro',
+           'users.name',
+           'users.phone'
+           )
                ->leftjoin('users', 'users.id',  'orders.user_id')
                ->whereBetween('orders.created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])
                ->where('orders.status', $status)
@@ -98,11 +100,13 @@ class OrderController extends Controller
        }else{
 
          $cat = DB::table('orders')->select(
-               'orders.*',
-               'users.id as id_pro',
-               'users.name',
-               'users.phone'
-               )
+           'orders.*',
+           'orders.created_at as created_ats',
+           'orders.id as id_or',
+           'users.id as id_pro',
+           'users.name',
+           'users.phone'
+           )
                ->leftjoin('users', 'users.id',  'orders.user_id')
                ->whereBetween('orders.created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])
                ->orderBy('orders.id', 'desc')
