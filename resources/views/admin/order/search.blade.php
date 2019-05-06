@@ -62,20 +62,39 @@
 														<span class="input-group-addon">
 															<i class="fa fa-calendar"></i>
 														</span>
-														<input type="text" class="form-control" name="start">
+														<input type="text" class="form-control" name="start" value="{{$start}}">
 														<span class="input-group-addon">to</span>
-														<input type="text" class="form-control" name="end">
+														<input type="text" class="form-control" name="end" value="{{$end}}">
 													</div>
 												</div>
                         <label class="col-lg-1 control-label text-lg-right pt-1">สถานะ </label>
                         <div class="col-lg-2">
                           <select class="form-control mb-3" name="status">
-                            <option value="100">ทั้งหมด</option>
-                            <option value="0">รอการชำระเงิน</option>
-														<option value="1">ชำระเงินแล้ว</option>
-														<option value="2">อยู่ระหว่างดำเนินการผลิต</option>
-														<option value="3">จัดส่งเรียบร้อย</option>
-                            <option value="4">ยกเลิก</option>
+
+                            <option value="100"
+                            @if($status == 100)
+                            selected='selected'
+                            @endif>ทั้งหมด</option>
+                            <option value="0"
+                            @if($status == 0)
+                            selected='selected'
+                            @endif>รอการชำระเงิน</option>
+														<option value="1"
+                            @if($status == 1)
+                            selected='selected'
+                            @endif>ชำระเงินแล้ว</option>
+														<option value="2"
+                            @if($status == 2)
+                            selected='selected'
+                            @endif>อยู่ระหว่างดำเนินการผลิต</option>
+														<option value="3"
+                            @if($status == 3)
+                            selected='selected'
+                            @endif>จัดส่งเรียบร้อย</option>
+                            <option value="4"
+                            @if($status == 4)
+                            selected='selected'
+                            @endif>ยกเลิก</option>
 
 													</select>
                         </div>
