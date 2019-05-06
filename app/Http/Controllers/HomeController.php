@@ -1737,6 +1737,7 @@ $data['get_my_add'] = $get_my_add;
         // ยอมรับเงื่อนไข
 
         $type_ship = $request['type_ship'];
+        $text_re_user = $request['text_re_user'];
 
         if($type_ship == 1 || $type_ship == 3){
 
@@ -1767,13 +1768,21 @@ $data['get_my_add'] = $get_my_add;
 
         }
 
+        if($text_re_user == 3){
+
+          if($request['name'] == null || $request['phone'] == null || $request['address'] == null || $request['province'] == null){
+            return redirect(url('shipping'))->with('null_data_bill','เพิ่ม เสร็จเรียบร้อยแล้ว');
+          }
+
+        }
+
 
       //   return $request->all();
 
 //dd($c1);
 
          $id_address_u = $request['address_shipping_order'];
-         $text_re_user = $request['text_re_user'];
+
          //เลือกที่จัดส่งใบกำกับภาษี
          $id_card_no = $request['id_card_no'];
          $branch_code = $request['branch_code'];
@@ -1812,8 +1821,12 @@ $data['get_my_add'] = $get_my_add;
            $package->zip_code = $request['postcode'];
            $package->type_address = 1;
            $package->save();
-
+           $address_shipping_bill = $package->id;
+         }else{
+           $address_shipping_bill = 0;
          }
+
+
 
 
 
@@ -1844,6 +1857,7 @@ $data['get_my_add'] = $get_my_add;
        $package->user_id = Auth::user()->id;
        $package->code_gen = $randomSixDigitInt;
        $package->shipping_address = $request['address_shipping_order'];
+       $package->address_shipping_bill =$address_shipping_bill;
        $package->bill_address = $type_ship;
        $package->type_order_check = $request['address_type_order'];
        $package->bil_req = $check_order;
@@ -2863,7 +2877,7 @@ $data['get_my_add'] = $get_my_add;
         $path1 = explode(",", $size_photo);
     //    dd($get_count_cart);
 
-
+        Session::put('status_user', 1);
 
 
         $exp = array_merge($exp, $path1);
@@ -2992,7 +3006,7 @@ $data['get_my_add'] = $get_my_add;
 
 
 
-      Session::put('status_user', 1);
+
 
 
         /*  return Response::json([

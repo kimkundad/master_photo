@@ -183,6 +183,14 @@ Shipping | MASTER PHOTO NETWORK
           <hr />
           @endif
 
+          @if ($message = Session::get('null_data_bill'))
+
+          <p class="text-danger" style="margin-top:10px;">
+          <b><i style="font-size:16px;" class="im im-icon-Information"></i></b>  กรณีที่ขอใบกำกับภาษี ต้องกรอกข้อมูล ชื่อ - ที่อยู่ ที่มีเครื่องหมาย (*) ให้ครบถ้วน
+          </p>
+          <hr />
+          @endif
+
           </div>
         </div>
 

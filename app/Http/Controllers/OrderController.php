@@ -293,6 +293,62 @@ class OrderController extends Controller
               ->first();
 
 
+              //ถ้ามีการขอใบกำกับภาษี
+              if($obj->bil_req == 1){
+
+                if($obj->address_shipping_bill != 0){
+
+                  $get_address_bill = DB::table('user_addresses')->select(
+                        'user_addresses.*'
+                        )
+                        ->where('user_id', $obj->user_id)
+                        ->where('id', $obj->address_shipping_bill)
+                        ->first();
+
+                }else{
+                  
+
+                  $get_address_bill = DB::table('user_addresses')->select(
+                        'user_addresses.*'
+                        )
+                        ->where('user_id', $obj->user_id)
+                        ->where('type_address', 1)
+                        ->first();
+
+                }
+
+
+
+
+                      $province_bill = DB::table('province')
+                           ->select(
+                           'province.*'
+                           )
+                           ->where('PROVINCE_ID', $get_address_bill->province)
+                           ->first();
+                       $data['province_bill'] = $province_bill;
+
+                       $district_bill = DB::table('amphur')
+                            ->select(
+                            'amphur.*'
+                            )
+                            ->where('AMPHUR_ID', $get_address_bill->district)
+                            ->first();
+                        $data['district_bill'] = $district_bill;
+
+
+                        $subdistricts_bill = DB::table('district')
+                             ->select(
+                             'district.*'
+                             )
+                             ->where('DISTRICT_ID', $get_address_bill->sub_district)
+                             ->first();
+                         $data['subdistricts_bill'] = $subdistricts_bill;
+
+
+              }else{
+                $get_address_bill = null;
+              }
 //check_bill
 
               $check_bill = DB::table('user_addresses')->select(
@@ -303,46 +359,7 @@ class OrderController extends Controller
                     ->count();
 
 
-                    if($check_bill > 0){
 
-                      $get_address_bill = DB::table('user_addresses')->select(
-                            'user_addresses.*'
-                            )
-                            ->where('user_id', $obj->user_id)
-                            ->where('type_address', 1)
-                            ->first();
-
-
-                            $province_bill = DB::table('province')
-                                 ->select(
-                                 'province.*'
-                                 )
-                                 ->where('PROVINCE_ID', $get_address_bill->province)
-                                 ->first();
-                             $data['province_bill'] = $province_bill;
-
-                             $district_bill = DB::table('amphur')
-                                  ->select(
-                                  'amphur.*'
-                                  )
-                                  ->where('AMPHUR_ID', $get_address_bill->district)
-                                  ->first();
-                              $data['district_bill'] = $district_bill;
-
-
-                              $subdistricts_bill = DB::table('district')
-                                   ->select(
-                                   'district.*'
-                                   )
-                                   ->where('DISTRICT_ID', $get_address_bill->sub_district)
-                                   ->first();
-                               $data['subdistricts_bill'] = $subdistricts_bill;
-
-
-
-                    }else{
-                      $get_address_bill = null;
-                    }
 
                     $data['get_address_bill'] = $get_address_bill;
 // end check_bill
@@ -518,6 +535,8 @@ class OrderController extends Controller
             ->where('id', $id)
             ->first();
 
+            DB::table('order_options')->where('option_id', 0)->delete();
+
             $order_de = DB::table('order_details')->select(
                   'order_details.*',
                   'order_details.id as id_de',
@@ -557,6 +576,7 @@ class OrderController extends Controller
                                 ->get();
 
                                 for($i = 0; $i < $order_option_count; $i++){
+
                                   $name_op[] = $order_option[$i]->item_name;
                                   $name_op1=implode(',',$name_op);
 
