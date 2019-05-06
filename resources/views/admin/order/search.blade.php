@@ -252,7 +252,9 @@
 
                   </tbody>
                 </table>
-                <div class="pagination"> {{ $objs->links() }} </div>
+                <div class="pagination">
+                  {{ $objs->appends()->links() }}
+                </div>
               </div>
             </section>
 
