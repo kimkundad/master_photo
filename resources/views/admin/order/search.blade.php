@@ -150,8 +150,8 @@
                       </th>
                       <td>Admin</td>
                       <td><a href="{{url('admin/load_img/'.$u->id_or)}}" class="mb-1 mt-1 mr-1 btn btn-xs btn-primary">Download</a></td>
-                      <td><a class="mb-1 mt-1 mr-1 btn btn-xs btn-default">หมายเหตุ</a>
-                        <div id="modalBasic" class="modal-block mfp-hide">
+                      <td><a class="mb-1 mt-1 mr-1 modal-basic btn btn-xs btn-default" href="#modalBasic{{$u->code_gen}}">หมายเหตุ</a>
+                        <div id="modalBasic{{$u->code_gen}}" class="modal-block mfp-hide">
                             <section class="card">
 
                               <div class="card-body">
