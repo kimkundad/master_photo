@@ -200,13 +200,13 @@ Payment | MASTER PHOTO NETWORK
         	$amount  = $order->order_price+$order->shipping_p;
 
         	//Request information
-        	$version = "7.2";
+        	$version = "8.5";
         	$payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
         	$result_url_1 = url('/api/result_payment');
 
         	//Construct signature string
-        	$params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1;
-        	$hash_value = hash_hmac('sha1',$params, $secret_key,false);	//Compute hash value
+          $params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1;
+	        $hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
 
           ?>
 
