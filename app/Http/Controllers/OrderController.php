@@ -83,34 +83,72 @@ class OrderController extends Controller
 
        if($status != 100){
 
-         $cat = DB::table('orders')->select(
-           'orders.*',
-           'orders.created_at as created_ats',
-           'orders.id as id_or',
-           'users.id as id_pro',
-           'users.name',
-           'users.phone'
-           )
-               ->leftjoin('users', 'users.id',  'orders.user_id')
-               ->whereBetween('orders.created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])
-               ->where('orders.status', $status)
-               ->orderBy('orders.id', 'desc')
-               ->paginate(15);
+         if($dateS == null && $dateE == null){
+
+           $cat = DB::table('orders')->select(
+             'orders.*',
+             'orders.created_at as created_ats',
+             'orders.id as id_or',
+             'users.id as id_pro',
+             'users.name',
+             'users.phone'
+             )
+                 ->leftjoin('users', 'users.id',  'orders.user_id')
+                 ->where('orders.status', $status)
+                 ->orderBy('orders.id', 'desc')
+                 ->paginate(15);
+
+         }else{
+
+           $cat = DB::table('orders')->select(
+             'orders.*',
+             'orders.created_at as created_ats',
+             'orders.id as id_or',
+             'users.id as id_pro',
+             'users.name',
+             'users.phone'
+             )
+                 ->leftjoin('users', 'users.id',  'orders.user_id')
+                 ->whereBetween('orders.created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])
+                 ->where('orders.status', $status)
+                 ->orderBy('orders.id', 'desc')
+                 ->paginate(15);
+
+         }
+
+
 
        }else{
 
-         $cat = DB::table('orders')->select(
-           'orders.*',
-           'orders.created_at as created_ats',
-           'orders.id as id_or',
-           'users.id as id_pro',
-           'users.name',
-           'users.phone'
-           )
-               ->leftjoin('users', 'users.id',  'orders.user_id')
-               ->whereBetween('orders.created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])
-               ->orderBy('orders.id', 'desc')
-               ->paginate(15);
+         if($dateS == null && $dateE == null){
+           $cat = DB::table('orders')->select(
+             'orders.*',
+             'orders.created_at as created_ats',
+             'orders.id as id_or',
+             'users.id as id_pro',
+             'users.name',
+             'users.phone'
+             )
+                 ->leftjoin('users', 'users.id',  'orders.user_id')
+                 ->orderBy('orders.id', 'desc')
+                 ->paginate(15);
+
+         }else{
+           $cat = DB::table('orders')->select(
+             'orders.*',
+             'orders.created_at as created_ats',
+             'orders.id as id_or',
+             'users.id as id_pro',
+             'users.name',
+             'users.phone'
+             )
+                 ->leftjoin('users', 'users.id',  'orders.user_id')
+                 ->whereBetween('orders.created_at', [$dateS->format('Y-m-d')." 00:00:00", $dateE->format('Y-m-d')." 23:59:59"])
+                 ->orderBy('orders.id', 'desc')
+                 ->paginate(15);
+         }
+
+
 
        }
 
@@ -306,7 +344,7 @@ class OrderController extends Controller
                         ->first();
 
                 }else{
-                  
+
 
                   $get_address_bill = DB::table('user_addresses')->select(
                         'user_addresses.*'
