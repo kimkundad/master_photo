@@ -192,7 +192,7 @@ Payment | MASTER PHOTO NETWORK
 
         function twelvedigits($a){
             $a = number_format($a, 2, '', '');
-            printf("%012s\n", $a);
+            return $s;
         }
 
 
