@@ -187,13 +187,20 @@ Payment | MASTER PHOTO NETWORK
 
         </div>
 
+        <div class="hidden">
+          <?php
+          function twelvedigits($a){
+              $a = number_format($a, 2, '', '');
+              return printf("%012s\n", $a);
+          }
+          $amount  = twelvedigits($order->order_price+$order->shipping_p);
+           ?>
+        </div>
 
         <?php
 
-        function twelvedigits($a){
-            $a = number_format($a, 2, '', '');
-            return $a;
-        }
+
+
 
 
         //Merchant's account information
@@ -204,7 +211,7 @@ Payment | MASTER PHOTO NETWORK
         $payment_description  = '2 days 1 night hotel room';
         $order_id  = $order->code_gen;
         $currency = "764";
-        $amount  = twelvedigits($order->order_price+$order->shipping_p);
+
 
         //Request information
         $version = "8.5";
@@ -236,9 +243,14 @@ Payment | MASTER PHOTO NETWORK
           <input type="text" name="order_id" class="form-control" value="{{$order_id}}"  readonly/>
           </div>
 
+          <div class="form-group hidden">
+            <label>AMOUNT</label>
+          <input type="text" name="amount" class="form-control" value="{{twelvedigits($order->order_price+$order->shipping_p)}}" readonly/>
+          </div>
+
           <div class="form-group">
             <label>AMOUNT</label>
-          <input type="text" name="amount" class="form-control" value="{{$amount}}" readonly/>
+          <input type="text" name="" class="form-control" value="{{number_format($order->order_price+$order->shipping_p, 2)}}" readonly/>
           </div>
 
           <button type="submit" class="btn btn-next">Confirm</button>
