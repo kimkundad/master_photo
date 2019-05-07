@@ -240,7 +240,7 @@ Payment | MASTER PHOTO NETWORK
 
           <div class="form-group hidden">
             <label>PRODUCT INFO</label>
-          <input type="hidden" name="payment_description" class="form-control" value="{{$payment_description}}"  readonly/>
+          <input type="hidden" name="payment_description" class="form-control" value="{{$order_id}}"  readonly/>
           </div>
 
           <div class="form-group">
