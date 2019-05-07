@@ -189,24 +189,24 @@ Payment | MASTER PHOTO NETWORK
 
 
         <?php
-        	//Merchant's account information
-        	$merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
-        	$secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
+        //Merchant's account information
+        $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
+        $secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
 
-        	//Transaction information
-        	$payment_description  = '2 days 1 night hotel room';
-        	$order_id  = $order->code_gen;
-        	$currency = "764";
-        	$amount  = $order->order_price+$order->shipping_p;
+        //Transaction information
+        $payment_description  = '2 days 1 night hotel room';
+        $order_id  = time();
+        $currency = "702";
+        $amount  = '000000002500';
 
-        	//Request information
-        	$version = "8.5";
-        	$payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
-        	$result_url_1 = url('/api/result_payment');
+        //Request information
+        $version = "8.5";
+        $payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
+        $result_url_1 = url('/api/result_payment');
 
-        	//Construct signature string
-          $params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1;
-	        $hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
+        //Construct signature string
+      	$params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1;
+      	$hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
 
           ?>
 
@@ -231,7 +231,7 @@ Payment | MASTER PHOTO NETWORK
 
           <div class="form-group">
             <label>AMOUNT</label>
-          <input type="text" name="amount" class="form-control" value="{{number_format($amount, 2)}}" readonly/>
+          <input type="text" name="amount" class="form-control" value="{{$amount}}" readonly/>
           </div>
 
           <button type="submit" class="btn btn-next">Confirm</button>
