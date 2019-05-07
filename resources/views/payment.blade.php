@@ -189,6 +189,13 @@ Payment | MASTER PHOTO NETWORK
 
 
         <?php
+
+        function twelvedigits($a){
+            $a = number_format($a, 2, '', '');
+            printf("%012s\n", $a);
+        }
+
+
         //Merchant's account information
         $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
         $secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
@@ -197,7 +204,7 @@ Payment | MASTER PHOTO NETWORK
         $payment_description  = '2 days 1 night hotel room';
         $order_id  = $order->code_gen;
         $currency = "764";
-        $amount  = str_pad((int) (($order->order_price+$order->shipping_p) * 100), '0', 12, \STR_PAD_LEFT);
+        $amount  = twelvedigits($order->order_price+$order->shipping_p);
 
         //Request information
         $version = "8.5";
