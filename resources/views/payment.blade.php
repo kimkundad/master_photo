@@ -193,7 +193,8 @@ Payment | MASTER PHOTO NETWORK
               $a = number_format($a, 2, '', '');
               return printf("%012s\n", $a);
           }
-          $amount  = twelvedigits($order->order_price+$order->shipping_p);
+          $money_var = $order->order_price+$order->shipping_p;
+          $amount  = twelvedigits($money_var);
            ?>
         </div>
 
@@ -245,7 +246,7 @@ Payment | MASTER PHOTO NETWORK
 
           <div class="form-group hidden">
             <label>AMOUNT</label>
-          <input type="text" name="amount" class="form-control" value="{{$amount)}}" readonly/>
+          <input type="text" name="amount" class="form-control" value="{{$amount}}" readonly/>
           </div>
 
           <div class="form-group">
