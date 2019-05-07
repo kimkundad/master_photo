@@ -220,7 +220,7 @@ Payment | MASTER PHOTO NETWORK
         $result_url_1 = url('/api/result_payment');
 
         //Construct signature string
-      	$params = $version.$merchant_id.$payment_description.$order_id.$currency.$amount.$result_url_1;
+      	$params = $version.$merchant_id.$payment_description.$order_id.$currency.twelvedigits($money_var).$result_url_1;
       	$hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
 
           ?>
@@ -258,7 +258,7 @@ Payment | MASTER PHOTO NETWORK
       	</form>
 
 
-      
+
 
 
 
