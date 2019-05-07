@@ -194,7 +194,11 @@ Payment | MASTER PHOTO NETWORK
                printf("%012s\n", $a);
           }
           $money_var = $order->order_price+$order->shipping_p;
-          $amount  = twelvedigits($money_var);
+          $amount = twelvedigits($money_var);
+          $s_number = '';
+
+          $s_number = sprintf('%012s',number_format($money_var, 2, '', ''));
+
            ?>
         </div>
 
@@ -220,7 +224,7 @@ Payment | MASTER PHOTO NETWORK
         $result_url_1 = url('/api/result_payment');
 
         //Construct signature string
-      	$params = $version.$merchant_id.$payment_description.$order_id.$currency.twelvedigits($money_var).$result_url_1;
+      	$params = $version.$merchant_id.$payment_description.$order_id.$currency.$s_number.$result_url_1;
       	$hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
 
           ?>
@@ -256,7 +260,6 @@ Payment | MASTER PHOTO NETWORK
 
           <button type="submit" class="btn btn-next">Confirm</button>
       	</form>
-
 
 
 
