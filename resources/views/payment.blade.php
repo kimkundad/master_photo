@@ -197,7 +197,7 @@ Payment | MASTER PHOTO NETWORK
         $payment_description  = '2 days 1 night hotel room';
         $order_id  = $order->code_gen;
         $currency = "764";
-        $amount  = $order->order_price+$order->shipping_p;
+        $amount  = '2500';
 
         //Request information
         $version = "8.5";
