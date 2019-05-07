@@ -245,7 +245,7 @@ Payment | MASTER PHOTO NETWORK
 
           <div class="form-group hidden">
             <label>AMOUNT</label>
-          <input type="text" name="amount" class="form-control" value="{{twelvedigits($order->order_price+$order->shipping_p)}}" readonly/>
+          <input type="text" name="amount" class="form-control" value="{{$amount)}}" readonly/>
           </div>
 
           <div class="form-group">
