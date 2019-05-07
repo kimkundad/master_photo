@@ -191,7 +191,7 @@ Payment | MASTER PHOTO NETWORK
           <?php
           function twelvedigits($a){
               $a = number_format($a, 2, '', '');
-              return printf("%012s\n", $a);
+               printf("%012s\n", $a);
           }
           $money_var = $order->order_price+$order->shipping_p;
           $amount  = twelvedigits($money_var);
@@ -258,7 +258,7 @@ Payment | MASTER PHOTO NETWORK
       	</form>
 
 
-
+      
 
 
 
