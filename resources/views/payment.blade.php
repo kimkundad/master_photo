@@ -190,8 +190,8 @@ Payment | MASTER PHOTO NETWORK
 
         <?php
         	//Merchant's account information
-        	$merchant_id = "764764000000892";			//Get MerchantID when opening account with 2C2P
-        	$secret_key = "dsbqppYP703G";	//Get SecretKey from 2C2P PGW Dashboard
+        	$merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
+        	$secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
 
         	//Transaction information
         	$payment_description  = '2 days 1 night hotel room';
@@ -201,7 +201,7 @@ Payment | MASTER PHOTO NETWORK
 
         	//Request information
         	$version = "8.5";
-        	$payment_url = "https://t.2c2p.com/RedirectV3/payment";
+        	$payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
         	$result_url_1 = url('/api/result_payment');
 
         	//Construct signature string
@@ -221,7 +221,7 @@ Payment | MASTER PHOTO NETWORK
 
           <div class="form-group hidden">
             <label>PRODUCT INFO</label>
-          <input type="hidden" name="payment_description" class="form-control" value="{{$order_id}}"  readonly/>
+          <input type="hidden" name="payment_description" class="form-control" value="{{$payment_description}}"  readonly/>
           </div>
 
           <div class="form-group">
