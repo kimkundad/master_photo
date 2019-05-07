@@ -143,7 +143,7 @@ class ApiController extends Controller
   	$ippInterestType . $ippInterestRate . $ippMerchantAbsorbRate . $payment_scheme .
   	$process_by . $sub_merchant_list;
 
-  	$SECRETKEY = "7jYcp4FxFdf0";
+  	$SECRETKEY = "dsbqppYP703G";
       $checkHash = hash_hmac('sha256',$checkHashStr, $SECRETKEY,false);
   	echo "checkHash: ".$checkHash."<br/><br/>";
 
