@@ -246,7 +246,7 @@ Payment | MASTER PHOTO NETWORK
 
           <div class="form-group hidden">
             <label>AMOUNT</label>
-          <input type="text" name="amount" class="form-control" value="{{$amount}}" readonly/>
+          <input type="text" name="amount" class="form-control" value="{{twelvedigits($money_var)}}" readonly/>
           </div>
 
           <div class="form-group">
