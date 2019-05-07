@@ -213,7 +213,7 @@ Payment | MASTER PHOTO NETWORK
         $secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
 
         //Transaction information
-        $payment_description  = '2 days 1 night hotel room';
+        $payment_description  = 'รูปสีขนาด 3.5"x5" - 6"x8"';
         $order_id  = $order->code_gen;
         $currency = "764";
 
@@ -240,7 +240,7 @@ Payment | MASTER PHOTO NETWORK
 
           <div class="form-group hidden">
             <label>PRODUCT INFO</label>
-          <input type="hidden" name="payment_description" class="form-control" value="{{$order_id}}"  readonly/>
+          <input type="hidden" name="payment_description" class="form-control" value="{{$payment_description}}"  readonly/>
           </div>
 
           <div class="form-group">
