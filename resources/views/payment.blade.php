@@ -231,7 +231,7 @@ Payment | MASTER PHOTO NETWORK
 
           <div class="form-group">
             <label>AMOUNT</label>
-          <input type="text" name="amount" class="form-control" value="{{$amount}}" readonly/>
+          <input type="text" name="amount" class="form-control" value="{{$order->order_price+$order->shipping_p}}" readonly/>
           </div>
 
           <button type="submit" class="btn btn-next">Confirm</button>
