@@ -231,6 +231,15 @@ address {
                                     </address>
                                   </div>
 
+                                  <div class="bill-to" style="width:100%; margin-bottom: 15px; margin-top:10px;">
+                                    <p class="h6  text-dark font-weight-semibold" style="font-size:18px;">หมายเหตุ พนง.: </p>
+                                    <address>
+                                       {{$order->note_admin_user}}
+
+
+                                    </address>
+                                  </div>
+
 
                                 </div>
 
