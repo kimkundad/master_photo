@@ -127,7 +127,7 @@
 
                             <tr>
 
-    													<td colspan="2"><h1 class="text-danger">หมายเหตุ(ลูกค้า) : {{$objs->note}}</h1></td>
+    													<td colspan="2"><p class="text-danger">หมายเหตุ(ลูกค้า) : {{$objs->note}}</h1></p>
     												</tr>
 
                             <tr>
