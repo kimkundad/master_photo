@@ -109,7 +109,9 @@
                 {{ csrf_field() }}
 
 											<div class="form-group row">
-                        <h5 class="font-weight-semibold text-dark text-uppercase col-lg-2">order สั่งสินค้า</h5>
+                        <div class="col-lg-2">
+                          <input type="text" class="form-control" name="q" id="q" placeholder="Search...">
+                        </div>
 												<label class="col-lg-1 control-label text-lg-right pt-1">วันที่ </label>
 												<div class="col-lg-5">
 													<div class="input-daterange input-group" data-plugin-datepicker="">

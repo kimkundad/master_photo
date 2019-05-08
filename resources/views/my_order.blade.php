@@ -99,6 +99,13 @@ user profile
                     <br />
 
 
+                    <?php
+
+
+
+
+                     ?>
+
                     @if(isset($order))
                       @foreach($order as $u)
                     <div class="strip_booking">

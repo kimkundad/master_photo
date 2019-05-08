@@ -1847,9 +1847,25 @@ $data['get_my_add'] = $get_my_add;
 
         $get_count_or+=1;
         $get_last_number = str_pad($get_count_or,3,"0",STR_PAD_LEFT);
+
+
+
+
+
+
+          $rs = explode('-',$get_order_last->code_gen);
+          $var_sum = str_pad($rs[2]+1,4,"0",STR_PAD_LEFT);
+
+          if($var_sum < 10000){
+            $test = 'ไม่เกิน';
+          }else{
+            $var_sum = str_pad(1,4,"0",STR_PAD_LEFT);
+            $test = 'เกินเกิน';
+          }
+        //  dd($var_sum);
        //dd(str_pad($get_count_or,3,"0",STR_PAD_LEFT));
 
-       $randomSixDigitInt = date("d").''.date("m").''.date("Y").'-'.Auth::user()->id.'-'.$get_last_number;
+       $randomSixDigitInt = date("d").''.date("m").''.date("Y").'-'.Auth::user()->id.'-'.$var_sum;
 
        //dd($randomSixDigitInt);
 

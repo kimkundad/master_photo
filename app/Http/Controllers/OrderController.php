@@ -75,6 +75,7 @@ class OrderController extends Controller
          $end = $start;
        }
        $status = $request['status'];
+       $search_text = $request['q'];
 
        //$dateS = new Carbon($start);
        //$dateE = new Carbon($end);
@@ -97,9 +98,11 @@ class OrderController extends Controller
              )
                  ->leftjoin('users', 'users.id',  'orders.user_id')
                  ->where('orders.status', $status)
+                 ->Where('users.name','LIKE','%'.$search_text.'%')
+                 ->orWhere('orders.code_gen','LIKE','%'.$search_text.'%')
                  ->orderBy('orders.id', 'desc')
                  ->paginate(15)
-                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status);
+                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status . '&q=' . $search_text);
 
          }else{
 
@@ -114,9 +117,11 @@ class OrderController extends Controller
                  ->leftjoin('users', 'users.id',  'orders.user_id')
                  ->whereBetween('orders.created_at', [$dateS." 00:00:00", $dateE." 23:59:59"])
                  ->where('orders.status', $status)
+                 ->Where('users.name','LIKE','%'.$search_text.'%')
+                 ->orWhere('orders.code_gen','LIKE','%'.$search_text.'%')
                  ->orderBy('orders.id', 'desc')
                  ->paginate(15)
-                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status);
+                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status . '&q=' . $search_text);
 
          }
 
@@ -134,9 +139,11 @@ class OrderController extends Controller
              'users.phone'
              )
                  ->leftjoin('users', 'users.id',  'orders.user_id')
+                 ->Where('users.name','LIKE','%'.$search_text.'%')
+                 ->orWhere('orders.code_gen','LIKE','%'.$search_text.'%')
                  ->orderBy('orders.id', 'desc')
                  ->paginate(15)
-                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status);
+                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status . '&q=' . $search_text);
 
          }else{
            $cat = DB::table('orders')->select(
@@ -149,9 +156,11 @@ class OrderController extends Controller
              )
                  ->leftjoin('users', 'users.id',  'orders.user_id')
                  ->whereBetween('orders.created_at', [$dateS." 00:00:00", $dateE." 23:59:59"])
+                 ->Where('users.name','LIKE','%'.$search_text.'%')
+                 ->orWhere('orders.code_gen','LIKE','%'.$search_text.'%')
                  ->orderBy('orders.id', 'desc')
                  ->paginate(15)
-                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status);
+                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status . '&q=' . $search_text);
          }
 
 
@@ -159,7 +168,7 @@ class OrderController extends Controller
        }
 
 
-
+             $data['search_text'] = $search_text;
              $data['start'] = $start;
              $data['end'] = $end;
              $data['status'] = $status;
@@ -170,6 +179,7 @@ class OrderController extends Controller
              ->with('start', $start)
              ->with('end', $end)
              ->with('status', $status)
+             ->with('search_text', $search_text)
              ->with('datahead', $datahead);
 
      }
