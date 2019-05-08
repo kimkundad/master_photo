@@ -143,7 +143,7 @@ height: 60px;
               $h = 1;
              ?>
 
-          
+
 
     @foreach(Session::get('cart') as $u)
 

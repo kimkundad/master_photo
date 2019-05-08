@@ -166,7 +166,7 @@
                         <td >{{$u->created_ats}}</td>
                         <td>{{$u->name}}</td>
 
-                        <td>{{$u->order_price+$u->shipping_p}} บาท</td>
+                        <td>{{number_format($u->order_price+$u->shipping_p, 2)}} บาท</td>
                         <th>
 
                           @if($u->status == 0)

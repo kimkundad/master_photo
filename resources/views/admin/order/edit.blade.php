@@ -78,19 +78,19 @@
     												</tr>
                             <tr>
     													<td>ราคาสินค้า</td>
-    													<td>{{$objs->order_price}} บาท</td>
+    													<td>{{number_format($objs->order_price, 2)}} บาท</td>
     												</tr>
                             <tr>
     													<td>ค่าขนส่ง</td>
-    													<td>{{$objs->shipping_p}} บาท</td>
+    													<td>{{number_format($objs->shipping_p, 2)}} บาท</td>
     												</tr>
                             <tr>
     													<td>ยอดชำระ</td>
-    													<td>{{$objs->order_price+$objs->shipping_p}} บาท</td>
+    													<td>{{number_format($objs->order_price+$objs->shipping_p, 2)}} บาท</td>
     												</tr>
                             <tr>
     													<td><b>ส่วนลด</b></td>
-    													<td><b>{{$objs->discount}} บาท</b></td>
+    													<td><b>{{number_format($objs->discount, 2)}} บาท</b></td>
     												</tr>
 
                             <tr>
@@ -433,7 +433,7 @@
 
                                   <tr>
                                     <td>ราคาสินค้า </td>
-                                    <td>{{$u->sum_price*$u->sum_image}} บาท</td>
+                                    <td>{{number_format($u->sum_price*$u->sum_image, 2)}}  บาท</td>
                                   </tr>
 
                                   <tr>
@@ -442,7 +442,7 @@
 
           													<td>0 บาท</td>
                                     @else
-                                    <td>{{$u->sum_shipping}} บาท</td>
+                                    <td>{{number_format($u->sum_shipping, 2)}} บาท</td>
                                     @endif
                                   </tr>
 
@@ -451,9 +451,9 @@
                                     <td>ราคารวม </td>
                                     @if($objs->shipping_p == 0)
 
-          													<td>{{$u->sum_price*$u->sum_image}} บาท</td>
+          													<td>{{number_format($u->sum_price*$u->sum_image, 2)}} บาท</td>
                                     @else
-                                    <td>{{($u->sum_price*$u->sum_image)+$u->sum_shipping}} บาท</td>
+                                    <td>{{number_format(($u->sum_price*$u->sum_image)+$u->sum_shipping, 2)}}  บาท</td>
                                     @endif
                                   </tr>
 
