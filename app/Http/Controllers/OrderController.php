@@ -566,6 +566,7 @@ class OrderController extends Controller
 
        $package = order::find($id);
         $package->status = $request['option_type'];
+        $package->note_admin_user = $request['note_admin_user'];
         $package->note_admin = $request['note_admin'];
         $package->save();
 
@@ -578,6 +579,10 @@ class OrderController extends Controller
 
       $zipper = new \Chumper\Zipper\Zipper;
       setlocale(LC_ALL, 'th_TH');
+
+       $package = order::find($id);
+       $package->download_status = 1;
+       $package->save();
 
       $order = DB::table('orders')
             ->where('id', $id)

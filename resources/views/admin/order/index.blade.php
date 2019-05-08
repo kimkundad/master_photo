@@ -153,7 +153,7 @@
                         <th>
                           หมายเหตุ
                         </th>
-                        <th>จัดการ</th>
+                      <!--  <th>จัดการ</th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -184,18 +184,24 @@
                           @endif
                         </th>
                         <td>Admin</td>
-                        <td><a href="{{url('admin/load_img/'.$u->id_or)}}" class="mb-1 mt-1 mr-1 btn btn-xs btn-primary">Download</a></td>
+                        <td>
+                          @if($u->download_status == 0)
+                          <a href="{{url('admin/load_img/'.$u->id_or)}}" class="mb-1 mt-1 mr-1 btn btn-xs btn-primary">Download</a>
+                          @else
+                          <a href="{{url('admin/load_img/'.$u->id_or)}}" class="mb-1 mt-1 mr-1 btn btn-xs btn-success">Download</a>
+                          @endif
+                        </td>
                         <td>
                           <p>{{$u->note_admin}}</p>
                         </td>
-                        <td>
+                    <!--    <td>
 
                           <div class="btn-group flex-wrap">
     												<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
     												<div class="dropdown-menu" role="menu">
 
     													<a class="dropdown-item text-1 text-primary" href="{{url('admin/order/'.$u->id.'/edit')}}"><i class="fa fa-gear"></i> แก้ไขข้อมูล</a>
-    												<!--	<a class="dropdown-item text-1 text-danger" href="">ลบ</a> -->
+
                             <form  action="{{url('admin/order/'.$u->id)}}" method="post" onsubmit="return(confirm('Do you want Delete'))">
                                 <input type="hidden" name="_method" value="DELETE">
                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -205,7 +211,7 @@
     												</div>
     											</div>
 
-                        </td>
+                        </td> -->
                       </tr>
                    @endforeach
                 @endif

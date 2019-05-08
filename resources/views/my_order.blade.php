@@ -112,6 +112,9 @@ user profile
         								<div class="col-lg-6 col-md-5">
                           <a href="{{url('payment_notify_item2/'.$u->id)}}">
         									<h3 class="hotel_booking">{{$u->code_gen}}<span>{{ trans('message.total_sum') }} {{$u->total}} {{ trans('message.item') }}</span></h3>
+                          <p style="padding-left: 65px;">
+                            หมายเหตุ พนง. : {{ $u->note_admin_user }}
+                          </p>
                           </a>
         								</div>
         								<div class="col-lg-2 col-md-3">

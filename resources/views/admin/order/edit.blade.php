@@ -157,11 +157,19 @@
 
                           <fieldset>
                             <div class="form-group">
+                              <label class="col-md-3 control-label" for="profileFirstName">หมายเหตุ (พนักงาน ถึง ลูกค้า)</label>
+                              <div class="col-md-8">
+                                <textarea class="form-control" name="note_admin_user" rows="8">{{ $objs->note_admin_user }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                               <label class="col-md-3 control-label" for="profileFirstName">หมายเหตุ (พนักงาน)</label>
                               <div class="col-md-8">
                                 <textarea class="form-control" name="note_admin" rows="8">{{ $objs->note_admin }}</textarea>
                                 </div>
                             </div>
+
                             <div class="form-group">
                               <label class="col-md-3 control-label" for="profileFirstName">สถานะออเดอร์</label>
                               <div class="col-md-8">
