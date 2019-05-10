@@ -31,9 +31,6 @@ class ApiController extends Controller
 
  //de_status
 
-
-
-
           $tag_html = "<p>".$get_data->de_detail."</p>
             <div class='form-group '>
               <label>เลือกรูปแบบการจัดส่ง ".$get_data->name."</label>
@@ -47,6 +44,31 @@ class ApiController extends Controller
         'html' => $tag_html,
       ]
     ]);
+
+    }
+
+    public function api_address(Request $request){
+      $id = $request['add_id'];
+
+      $get_data = DB::table('user_addresses')
+            ->where('id', $id)
+            ->first();
+
+          //  dd($get_data->phone_ad);
+
+            $tag_html = "<div class='col-md-6 col-sm-6'>
+              <div class='form-group'>
+                <label>เบอร์โทร</label>
+                <input type='text' class='form-control' name='phone_ad' value='$get_data->phone_ad'>
+              </div>
+            </div>";
+
+            return response()->json([
+            'data' => [
+              'html' => $tag_html,
+            ]
+          ]);
+
 
     }
 

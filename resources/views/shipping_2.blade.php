@@ -214,10 +214,18 @@ Shipping | MASTER PHOTO NETWORK
                 <input type="hidden" name="address_type_order" value="{{$check_address}}" />
                 <div class="form-group ">
                   <label>เลือกที่อยู่ในการจัดส่ง <span class="text-danger">*</span></label>
-                  <select name="address_shipping_order" class="form-control " >
+                  <?php
+                  $set_1 = 0;
+                  ?>
+                  <select name="address_shipping_order" onchange="getComboZ(this)" id="get_id_adddress" class="form-control " >
                     @if($get_my_add_3)
                     @foreach($get_my_add_3 as $add)
-                    <option value="{{$add->id}}">{{$add->name_ad}}, {{$add->address_ad}} {{$add->subdistrictsz}} {{$add->districtz}} {{$add->provincez}} {{$add->zip_code}}</option>
+                    <option value="{{$add->id}}" data-value="{{$add->id}}"
+                      @if($set_1 == 0)
+                      selected
+                      @endif
+                      >{{$add->name_ad}}, {{$add->address_ad}} {{$add->subdistrictsz}} {{$add->districtz}} {{$add->provincez}} {{$add->zip_code}}</option>
+                    <?php $set_1++; ?>
                     @endforeach
                     @endif
 
@@ -225,11 +233,18 @@ Shipping | MASTER PHOTO NETWORK
 
                 </div>
 
-                <hr />
-                <br />
+
+
 
             </div>
 
+            <div id="show_address">
+
+            </div>
+            <br />
+            <div class="col-md-12">
+            <hr />
+            </div>
 
 
             <div class="col-md-12 col-sm-12">
@@ -706,6 +721,8 @@ function getComboA(selectObject) {
 
 }
 
+
+
 function getComboA8(selectObject) {
     var a3 = document.getElementById("get_van");
     get_van = a3.options[a3.selectedIndex].getAttribute('data-value');
@@ -719,17 +736,35 @@ function getComboA8(selectObject) {
 
 }
 
+  var get_first_var = $("#get_id_adddress option[selected]").val();
 
-function getComboA9(selectObject) {
-    var a2 = document.getElementById("get_train");
-    get_train = a2.options[a2.selectedIndex].getAttribute('data-value');
+  console.log(get_first_var);
 
-    $('#get_image_price').html("");
-    $('#get_ship_price').html("");
+  $.ajax({
+  type: "POST",
+  headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+  data: { "add_id" : get_first_var },
+  url: "{{url('/api/api_address')}}",
+  success: function(data) {
+      $('#show_address').html(data.data.html);
+  }
+  });
 
-    $('#get_image_price').append((Number(price_image)+Number(get_train)).toFixed(2));
-    $('#get_ship_price').append( Number(get_train) );
-    document.getElementById("get_sum_ship").value = Number(get_train);
+function getComboZ(selectObject) {
+  var get_var_add = document.getElementById("get_id_adddress");
+  var value_add = get_var_add.options[get_var_add.selectedIndex].getAttribute('data-value');
+
+  $('#show_address').html("");
+
+  $.ajax({
+  type: "POST",
+  headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+  data: { "add_id" : value_add },
+  url: "{{url('/api/api_address')}}",
+  success: function(data) {
+      $('#show_address').html(data.data.html);
+  }
+  });
 
 }
 
@@ -745,6 +780,10 @@ function getComboA11(selectObject) {
     $('#get_ship_price').append( Number(get_bsk) );
     document.getElementById("get_sum_ship").value = Number(get_bsk);
 }
+
+
+
+
 
 
 function getComboB(selectObject) {

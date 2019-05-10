@@ -98,10 +98,8 @@ border: 1px solid #ddd;
 								<b>วิธีการรับสินค้า </b> {{$obj->name_deli}}
 								<br/>
 								<b>สถานที่ </b>
-								 @if($obj->bill_address == 2)
-								 {{$obj->shipping_t2}}
-								 @endif
-								 {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+
+								 เบอร์โทร : {{$get_address->phone_ad}}, {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
 							</address>
 						</div>
 					</div>
@@ -145,13 +143,15 @@ border: 1px solid #ddd;
             </span>
 
             </td>
-						<td class="text-center">{{$u->sum_image}}</td>
-						<td class="text-center">{{$u->sum_price}}</td>
+						<td class="text-center">{{number_format($u->sum_image, 2)}} </td>
+	          <td class="text-center">{{number_format($u->sum_price, 2)}} </td>
 						<td class="text-center">
             @if($obj->shipping_p == 0)
-            {{$u->sum_price*$u->sum_image}}
+						{{number_format($u->sum_price*$u->sum_image, 2)}}
+
             @else
-            {{($u->sum_price*$u->sum_image)}}
+						{{number_format($u->sum_price*$u->sum_image, 2)}}
+
             @endif
             </td>
 					</tr>
@@ -161,13 +161,13 @@ border: 1px solid #ddd;
 
           <tr>
             <td colspan="3" class="text-right">ค่าจัดส่ง</td>
-            <td class="text-center">{{$obj->shipping_p}}</td>
+            <td class="text-center">{{number_format($obj->shipping_p, 2)}}</td>
           </tr>
           <tr class="h4">
             <td colspan="3" class="text-right">Total</td>
             <td class="text-center">
+							{{number_format($obj->order_price+$obj->shipping_p, 2)}}
 
-              {{$obj->order_price+$obj->shipping_p}}
 
 
             </td>
@@ -285,10 +285,8 @@ border: 1px solid #ddd;
 							<b>วิธีการรับสินค้า </b> {{$obj->name_deli}}
 							<br/>
 							<b>สถานที่ </b>
-							 @if($obj->bill_address == 2)
-							 {{$obj->shipping_t2}}
-							 @endif
-							 {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+
+							 เบอร์โทร : {{$get_address->phone_ad}}, {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
 						</address>
           </div>
         </div>
@@ -332,13 +330,13 @@ border: 1px solid #ddd;
           </span>
 
           </td>
-          <td class="text-center">{{$u->sum_image}}</td>
-          <td class="text-center">{{$u->sum_price}}</td>
+          <td class="text-center">{{number_format($u->sum_image, 2)}} </td>
+          <td class="text-center">{{number_format($u->sum_price, 2)}} </td>
           <td class="text-center">
           @if($obj->shipping_p == 0)
-          {{$u->sum_price*$u->sum_image}}
+          {{number_format($u->sum_price*$u->sum_image, 2)}}
           @else
-          {{($u->sum_price*$u->sum_image)}}
+          {{number_format($u->sum_price*$u->sum_image, 2)}}
           @endif
           </td>
         </tr>
@@ -348,14 +346,16 @@ border: 1px solid #ddd;
 
         <tr>
           <td colspan="3" class="text-right">ค่าจัดส่ง</td>
-          <td class="text-center">{{$obj->shipping_p}}</td>
+          <td class="text-center">
+						{{number_format($obj->shipping_p, 2)}}
+
         </tr>
         <tr class="h4">
           <td colspan="3" class="text-right">Total</td>
           <td class="text-center">
 
-            {{$obj->order_price+$obj->shipping_p}}
 
+						{{number_format($obj->order_price+$obj->shipping_p, 2)}}
 
           </td>
         </tr>

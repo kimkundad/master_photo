@@ -28,6 +28,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::post('/api/shipping_data_2', 'ApiController@shipping_data_2')->name('shipping_data_2');
 Route::post('/api/shipping_data_3', 'ApiController@shipping_data_3')->name('shipping_data_3');
 Route::post('/api/result_payment', 'ApiController@result_payment')->name('result_payment');
+Route::post('/api/api_address', 'ApiController@api_address')->name('api_address');
 
 
 Route::get('about', 'HomeController@about')->name('about');
