@@ -120,6 +120,9 @@ Payment | MASTER PHOTO NETWORK
 
         </div>
 
+
+
+
         <div class="form_title">
           <h3><strong>1</strong>โอนเงินผ่านธนาคาร</h3>
           <p>
@@ -209,12 +212,12 @@ Payment | MASTER PHOTO NETWORK
 
 
         //Merchant's account information
-        $merchant_id = "JT01";			//Get MerchantID when opening account with 2C2P
-        $secret_key = "7jYcp4FxFdf0";	//Get SecretKey from 2C2P PGW Dashboard
+        $merchant_id = "JT04";			//Get MerchantID when opening account with 2C2P
+        $secret_key = "QnmrnH6QE23N";	//Get SecretKey from 2C2P PGW Dashboard
 
         //Transaction information
-        $payment_description  = 'รูปสีขนาด 3.5"x5" - 6"x8"';
-        $order_id  = $order->code_gen;
+        $payment_description  = $order->code_gen;
+        $order_id  = time();
         $currency = "764";
 
 

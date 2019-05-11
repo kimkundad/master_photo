@@ -93,7 +93,7 @@ Route::get('oauth/{driver}/callback', 'Auth\SocialAuthController@handleProviderC
 
 Route::group(['middleware' => 'auth'], function () {
 
-
+	Route::get('payment_choose/{id}', 'UserProfileController@payment_choose')->name('payment_choose');
 	Route::get('payment_notify_item/{id}', 'UserProfileController@payment_notify_item')->name('payment_notify_item');
 	Route::get('payment_notify_item2/{id}', 'UserProfileController@payment_notify_item2')->name('payment_notify_item2');
 

@@ -150,6 +150,20 @@ user profile
 
                             @endif
 
+                            @if($u->pay == 1)
+                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block" style="margin-top:3px;"><i class="icon-renren-1"></i> โอนธนาคาร</button>
+                            @elseif($u->pay == 2)
+                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block" style="margin-top:3px;"><i class="icon-credit-card-1"></i> 2P2C</button>
+                            @elseif($u->pay == 3)
+                            <button type="button" class="mb-1 mt-1 mr-1 btn btn-xs btn-primary btn-block" style="margin-top:3px;"><i class="icon-paypal"></i> Paypal</button>
+                            @else
+
+                            @endif
+
+
+
+
+
 
         									</div>
         								</div>

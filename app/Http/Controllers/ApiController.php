@@ -83,6 +83,8 @@ class ApiController extends Controller
   	//each response params:
   	$version = $_REQUEST["version"];
   	$request_timestamp = $_REQUEST["request_timestamp"];
+
+
   	$merchant_id = $_REQUEST["merchant_id"];
   	$currency = $_REQUEST["currency"];
   	$order_id = $_REQUEST["order_id"];
@@ -118,6 +120,7 @@ class ApiController extends Controller
   	$sub_merchant_list = $_REQUEST["sub_merchant_list"];
     	$hash_value = $_REQUEST["hash_value"];
     	echo "version: ".$version."<br/>";
+    
     	echo "request_timestamp: ".$request_timestamp."<br/>";
     	echo "merchant_id: ".$merchant_id."<br/>";
     	echo "currency: ".$currency."<br/>";
@@ -165,7 +168,7 @@ class ApiController extends Controller
   	$ippInterestType . $ippInterestRate . $ippMerchantAbsorbRate . $payment_scheme .
   	$process_by . $sub_merchant_list;
 
-  	$SECRETKEY = "7jYcp4FxFdf0";
+  	$SECRETKEY = "QnmrnH6QE23N";
       $checkHash = hash_hmac('sha256',$checkHashStr, $SECRETKEY,false);
   	echo "checkHash: ".$checkHash."<br/><br/>";
 

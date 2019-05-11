@@ -373,6 +373,67 @@
 
 
 
+                            @if(isset($get_pay))
+                            <div class="tabs">
+
+              								<div class="tab-content">
+
+              									<div id="edit" class="tab-pane active">
+
+
+              											<h4 class="mb-xlg">การชำระเงิน</h4>
+
+
+                                    <div class="table-responsive">
+                										<table class="table table-striped mb-none">
+
+                                      <tbody>
+
+                												<tr>
+                													<td>ประเภทการชำระ</td>
+                													<td>@if($get_pay->pay_type == 1)
+                                          <b>โอนธนาคาร </b> {{$get_pay->bank}}
+                                          @elseif($get_pay->pay_type == 2)
+                                          <b>2P2C </b>
+                                          @elseif($get_pay->pay_type == 3)
+                                          <b>Paypal </b>
+                                          @else
+                                          @endif</td>
+                												</tr>
+
+                                        <tr>
+                													<td>วันที่</td>
+                													<td>{{$get_pay->time_tran}}</td>
+                												</tr>
+
+                                        <tr>
+                													<td>เวลา</td>
+                													<td>{{$get_pay->time2_tran}}</td>
+                												</tr>
+
+                                        <tr>
+                													<td>ยอดเงิน</td>
+                													<td>{{number_format((($get_pay->money)),2)}}</td>
+                												</tr>
+
+                                        @if($get_pay->image_tran != null)
+                                        <tr>
+                													<td>เอกสารแนบ</td>
+                													<td><img src="{{url('assets/image/slip/'.$get_pay->image_tran)}}" class="img-responsive" style="width:100%"></td>
+                												</tr>
+                                        @else
+                                        @endif
+
+                                       </tbody>
+
+                                    </table>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                              @endif
+
 
 
 

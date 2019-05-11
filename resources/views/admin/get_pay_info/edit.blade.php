@@ -123,13 +123,14 @@
           														</div>
           												</div>
 
-
+                                  @if($objs->image_tran != null)
                                   <div class="form-group">
           													<label class="col-md-3 control-label" for="profileFirstName">หลักฐานการโอนเงิน</label>
           													<div class="col-md-8">
           														<img src="{{url('assets/image/slip/'.$objs->image_tran)}}" class="img-responsive" style="width:70%">
           														</div>
           												</div>
+                                  @endif
 
 
 

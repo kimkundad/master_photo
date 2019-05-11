@@ -114,17 +114,32 @@ class UserProfileController extends Controller
     public function my_order(){
 
 
-      
+
 
       $get_detail_o = [];
 
-      $order = DB::table('orders')
+      $order = DB::table('orders')->select(
+            'orders.*',
+            'orders.id as id_or'
+            )
             ->where('user_id', Auth::user()->id)
             ->where('status', '!=', 0)
             ->orderBy('id', 'desc')
             ->get();
 
             foreach($order as $u){
+
+
+
+              $user_payments = DB::table('user_payments')
+                    ->where('order_id', $u->code_gen)
+                    ->first();
+                    if($user_payments != null){
+                      $u->pay = $user_payments->pay_type;
+                    }else{
+                      $u->pay = null;
+                    }
+
 
               $order_de = DB::table('order_details')->select(
                     'order_details.*',
@@ -895,6 +910,32 @@ class UserProfileController extends Controller
             ->first();
 
 
+            $get_pay = DB::table('user_payments')->select(
+                  'user_payments.*'
+                  )
+                  ->where('order_id', $order->code_gen)
+                  ->first();
+
+                  if($get_pay != null){
+
+                    if($get_pay->pay_type == 1){
+                      $get_bank = DB::table('payment_options')->select(
+                            'payment_options.*'
+                            )
+                            ->where('id', $get_pay->bank)
+                            ->first();
+                          $get_pay->bank = $get_bank->name_bank;
+                    }else{
+                          $get_pay->bank = null;
+                    }
+
+                    $data['get_pay'] = $get_pay;
+
+                  }else{
+                    $data['get_pay'] = null;
+                  }
+
+
             $check_address = DB::table('user_addresses')->select(
                   'user_addresses.*'
                   )
@@ -1039,42 +1080,74 @@ class UserProfileController extends Controller
     }
 
 
+    public function payment_choose($id){
+
+      $get_data = DB::table('orders')
+            ->where('code_gen', $id)
+            ->first();
+
+      $data['order'] = $get_data;
+      $data['id'] = $id;
+      return view('payment_choose', $data);
+    }
+
+
     public function post_payment_notify(Request $request){
       $image = $request->file('image');
       $this->validate($request, [
-            'image' => 'required|max:8048',
             'user_id' => 'required',
             'order_id' => 'required',
             'bank' => 'required',
             'money' => 'required',
-            'filter_date' => 'required',
-            'image' => 'required'
+            'filter_date' => 'required'
       ]);
 
+      $get_data = DB::table('orders')
+            ->where('code_gen', $request['order_id'])
+            ->first();
 
-     $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+      if($image == null){
 
-     $destinationPath = asset('assets/image/slip/');
-     $img = Image::make($image->getRealPath());
-     $img->resize(800, 533, function ($constraint) {
-     $constraint->aspectRatio();
-     })->save('assets/image/slip/'.$input['imagename']);
+        $package = new user_payment();
+        $package->order_id = $request['order_id'];
+        $package->pay_type = 1;
+        $package->user_id = $request['user_id'];
+        $package->bank = $request['bank'];
+        $package->money = $request['money'];
+        $package->time_tran = $request['filter_date'];
+        $package->time2_tran = $request['time2_tran'];
+        $package->save();
 
-      $package = new user_payment();
-      $package->order_id = $request['order_id'];
-      $package->user_id = $request['user_id'];
-      $package->bank = $request['bank'];
-      $package->money = $request['money'];
-      $package->time_tran = $request['filter_date'];
-      $package->time2_tran = $request['time2_tran'];
-      $package->image_tran = $input['imagename'];
-      $package->save();
+      }else{
+
+        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+
+        $destinationPath = asset('assets/image/slip/');
+        $img = Image::make($image->getRealPath());
+        $img->resize(800, 533, function ($constraint) {
+        $constraint->aspectRatio();
+        })->save('assets/image/slip/'.$input['imagename']);
+
+         $package = new user_payment();
+         $package->order_id = $request['order_id'];
+         $package->pay_type = 1;
+         $package->user_id = $request['user_id'];
+         $package->bank = $request['bank'];
+         $package->money = $request['money'];
+         $package->time_tran = $request['filter_date'];
+         $package->time2_tran = $request['time2_tran'];
+         $package->image_tran = $input['imagename'];
+         $package->save();
+
+      }
+
+
 
       DB::table('orders')
             ->where('code_gen', $request['order_id'])
             ->update(['status' => 1]);
 
-      return redirect(url('payment_notify_success/'))->with('add_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
+      return redirect(url('payment_notify_item2/'.$get_data->id))->with('add_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
     }
 
 

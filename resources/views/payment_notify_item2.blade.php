@@ -110,40 +110,77 @@ address {
 
             <div class="bill-info" >
               <table class="table " style="margin-bottom: 0px; border-bottom: 1px solid #fff;">
-              <div class="row">
-                <td style="border-top: 1px solid #fff; padding: 0px; padding-right: 8px; width:50%">
-                <div class="col-md-6" style="width:100%">
-                  <div class="bill-to" style="width:100%">
-                    <p class="h5 mb-1 text-dark font-weight-semibold">ผู้สั่งซื้อ</p>
-                    <address>
-                      <b>ชื่อ - นามสกุล </b> {{$order->name}}
-                      <br/>
-                      <b>ที่อยู่ </b> {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
-                      <br/>
-                      <b>เบอร์ติดต่อ </b>: {{$get_address->phone_ad}}
-                      <br/>
-                      <b>Email </b> {{$order->email}}
-                    </address>
+                <tr>
+                  <div class="row">
+
+                    <td colspan="2" style="border-top: 1px solid #fff; padding: 0px; padding-right: 8px; width:50%">
+                    <div class="col-md-6" style="width:100%">
+                      <div class="bill-to" style="width:100%">
+                        <p class="h5 mb-1 text-dark font-weight-semibold">การชำระเงิน</p>
+                        <address>
+                          @if(isset($get_pay))
+                          @if($get_pay->pay_type == 1)
+                          <b>โอนธนาคาร </b> {{$get_pay->bank}}
+                          @elseif($get_pay->pay_type == 2)
+                          <b>2P2C </b>
+                          @elseif($get_pay->pay_type == 3)
+                          <b>Paypal </b>
+                          @else
+                          @endif
+
+                          <br/>
+                          <b>วันที่ </b> {{$get_pay->time_tran}}
+                          <br/>
+                          <b>เวลา </b>: {{$get_pay->time2_tran}}
+                          <br/>
+                          <b>ยอดเงิน </b> {{number_format((($get_pay->money)),2)}} บาท
+                          @endif
+                        </address>
+                      </div>
+                    </div>
+                    </td>
+
+
                   </div>
-                </div>
-                </td>
-                <td style="border-top: 1px solid #fff; padding: 0px; width:50%">
-                <div class="col-md-6" style="width:100%">
-                  <div class="bill-to" style="width:100%">
-                    <p class="h5 mb-1 text-dark font-weight-semibold">สถานที่จัดส่ง</p>
-                    <address>
-                      <b>วิธีการรับสินค้า </b> {{$order->name_deli}}
-                      <br/>
-                      <b>สถานที่ </b>
-                       @if($order->bill_address == 2)
-                       {{$order->shipping_t2}}
-                       @endif
-                       {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
-                    </address>
+                </tr>
+                <tr>
+                  <div class="row">
+
+                    <td style="border-top: 1px solid #fff; padding: 0px; padding-right: 8px; width:50%">
+                    <div class="col-md-6" style="width:100%">
+                      <div class="bill-to" style="width:100%">
+                        <p class="h5 mb-1 text-dark font-weight-semibold">ผู้สั่งซื้อ</p>
+                        <address>
+                          <b>ชื่อ - นามสกุล </b> {{$order->name}}
+                          <br/>
+                          <b>ที่อยู่ </b> {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+                          <br/>
+                          <b>เบอร์ติดต่อ </b>: {{$get_address->phone_ad}}
+                          <br/>
+                          <b>Email </b> {{$order->email}}
+                        </address>
+                      </div>
+                    </div>
+                    </td>
+                    <td style="border-top: 1px solid #fff; padding: 0px; width:50%">
+                    <div class="col-md-6" style="width:100%">
+                      <div class="bill-to" style="width:100%">
+                        <p class="h5 mb-1 text-dark font-weight-semibold">สถานที่จัดส่ง</p>
+                        <address>
+                          <b>วิธีการรับสินค้า </b> {{$order->name_deli}}
+                          <br/>
+                          <b>สถานที่ </b>
+                           @if($order->bill_address == 2)
+                           {{$order->shipping_t2}}
+                           @endif
+                           {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+                        </address>
+                      </div>
+                    </div>
+                    </td>
                   </div>
-                </div>
-                </td>
-              </div>
+                </tr>
+
               </table>
             </div>
 

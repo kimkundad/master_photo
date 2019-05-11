@@ -351,6 +351,32 @@ class OrderController extends Controller
               ->first();
 
 
+              $get_pay = DB::table('user_payments')->select(
+                    'user_payments.*'
+                    )
+                    ->where('order_id', $obj->code_gen)
+                    ->first();
+
+                    if($get_pay != null){
+
+                      if($get_pay->pay_type == 1){
+                        $get_bank = DB::table('payment_options')->select(
+                              'payment_options.*'
+                              )
+                              ->where('id', $get_pay->bank)
+                              ->first();
+                            $get_pay->bank = $get_bank->name_bank;
+                      }else{
+                            $get_pay->bank = null;
+                      }
+
+                      $data['get_pay'] = $get_pay;
+
+                    }else{
+                      $data['get_pay'] = null;
+                    }
+
+
               //ถ้ามีการขอใบกำกับภาษี
               if($obj->bil_req == 1){
 
