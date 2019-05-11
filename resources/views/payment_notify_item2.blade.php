@@ -135,6 +135,23 @@ address {
                           <br/>
                           <b>ยอดเงิน </b> {{number_format((($get_pay->money)),2)}} บาท
                           @endif
+
+                          @if($get_pay->pay_type == 2)
+                          <br/>
+                          <b>Status </b>
+                          @if($get_pay->payment_status == '000')
+                          <span class="text-success">Payment Successful</span>
+                          @elseif($get_pay->payment_status == '001')
+                          <span class="text-warning">Payment Pending</span>
+                          @elseif($get_pay->payment_status == '002')
+                          <span class="text-danger">Payment Rejected</span>
+                          @elseif($get_pay->payment_status == '003')
+                          <span class="text-danger">Payment was canceled by user</span>
+                          @else
+                          <span class="text-danger">Payment Failed</span>
+                          @endif
+
+                          @endif
                         </address>
                       </div>
                     </div>

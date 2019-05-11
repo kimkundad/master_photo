@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\delirank;
+use App\user_payment;
 use Auth;
 
 class ApiController extends Controller
@@ -119,8 +120,8 @@ class ApiController extends Controller
   	$process_by = $_REQUEST["process_by"];
   	$sub_merchant_list = $_REQUEST["sub_merchant_list"];
     	$hash_value = $_REQUEST["hash_value"];
-    	echo "version: ".$version."<br/>";
-    
+    /*	echo "version: ".$version."<br/>";
+
     	echo "request_timestamp: ".$request_timestamp."<br/>";
     	echo "merchant_id: ".$merchant_id."<br/>";
     	echo "currency: ".$currency."<br/>";
@@ -155,7 +156,7 @@ class ApiController extends Controller
   	echo "payment_scheme: " .$payment_scheme."<br/>";
   	echo "process_by: " .$process_by."<br/>";
   	echo "sub_merchant_list: " .$sub_merchant_list."<br/>";
-    	echo "hash_value: ".$hash_value."<br/>";
+    	echo "hash_value: ".$hash_value."<br/>"; */
 
   	//check response hash value (for security, hash value validation is Mandatory)
   	$checkHashStr = $version . $request_timestamp . $merchant_id . $order_id .
@@ -170,15 +171,81 @@ class ApiController extends Controller
 
   	$SECRETKEY = "QnmrnH6QE23N";
       $checkHash = hash_hmac('sha256',$checkHashStr, $SECRETKEY,false);
-  	echo "checkHash: ".$checkHash."<br/><br/>";
+/*  	echo "checkHash: ".$checkHash."<br/><br/>";
 
   if(strcmp(strtolower($hash_value), strtolower($checkHash))==0){
   	echo "Hash check = success. it is safe to use this response data.";
   }
   else{
   	echo "Hash check = failed. do not use this response data.";
+  } */
+
+  $a = $order_id;
+  $count_a = strlen($a);
+  for($i=1;$i<=$count_a;$i++)
+  {
+      //echo $a[$i];
+      if($a[$i] != '0'){
+        break;
+      }
   }
 
+
+  $b = $amount;
+  $count_b = strlen($b);
+  for($j=1;$j<=$count_b;$j++)
+  {
+      //echo $a[$i];
+      if($b[$j] != '0'){
+        break;
+      }
+  }
+
+  $new_oreder_id = substr($b, $j, 12);
+  $count_var = strlen($new_oreder_id);
+  $test_num2 = substr($new_oreder_id, -2);
+  $test_num1 = substr($new_oreder_id, 0, $count_var-2);
+  $amount2 = $test_num1.'.'.$test_num2;
+
+  //echo $amount2;
+
+
+  $order_id = substr($a, $i, 12);
+
+  //echo $new_oreder_id;
+
+
+      $time_tran = date_format(date_create($transaction_datetime),"d-m-Y");
+      $time2_tran = date_format(date_create($transaction_datetime),"H:i:s");
+
+
+      $order_data = DB::table('orders')
+            ->where('id', $order_id)
+            ->first();
+
+
+
+      $package = new user_payment();
+      $package->order_id = $order_data->code_gen;
+      $package->pay_type = 2;
+      $package->bank = 0;
+      $package->money = $amount2;
+      $package->time_tran = $time_tran;
+      $package->time2_tran = $time2_tran;
+      $package->payment_status = $payment_status;
+      $package->save();
+
+      if($payment_status == '' || $payment_status == ''){
+        $code_status = 1;
+      }else{
+        $code_status = 0;
+      }
+
+      DB::table('orders')
+            ->where('id', $order_id)
+            ->update(['status' => $code_status]);
+
+      return redirect(url('payment_notify_item2/'.$order_id))->with('add_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
     }
 
 

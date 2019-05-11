@@ -103,6 +103,29 @@ user profile
 
 
 
+                    //$test_num = number_format("000000005770",2);
+                /*    $amount = '000000005770';
+
+                    $b = $amount;
+                    $count_b = strlen($b);
+                    for($j=1;$j<=$count_b;$j++)
+                    {
+                        //echo $a[$i];
+                        if($b[$j] != '0'){
+                          break;
+                        }
+                    }
+
+                    $new_oreder_id = substr($b, $j, 12);
+                    $count_var = strlen($new_oreder_id);
+                    $test_num2 = substr($new_oreder_id, -2);
+                    $test_num1 = substr($new_oreder_id, 0, $count_var-2);
+                    $amount2 = $test_num1.'.'.$test_num2;
+
+                    echo $amount2; */
+
+                    //$new_oreder_id = str_pad($test,5,"0",STR_PAD_LEFT);
+                    //echo $new_oreder_id;
 
                      ?>
 

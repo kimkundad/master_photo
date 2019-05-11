@@ -131,9 +131,17 @@ user profile
                     $merchant_id = "JT04";			//Get MerchantID when opening account with 2C2P
                     $secret_key = "QnmrnH6QE23N";	//Get SecretKey from 2C2P PGW Dashboard
 
+
                     //Transaction information
                     $payment_description  = $order->code_gen;
-                    $order_id  = time();
+
+                    $ram = rand(10,20);
+                    //Transaction information
+
+                    $new_oreder_id = str_pad($order->id,$ram,"0",STR_PAD_LEFT);
+
+
+                    $order_id  = $new_oreder_id;
                     $currency = "764";
 
 

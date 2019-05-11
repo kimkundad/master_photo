@@ -416,6 +416,30 @@
                 													<td>{{number_format((($get_pay->money)),2)}}</td>
                 												</tr>
 
+                                        <tr>
+                                          <td>
+                                            สถานะ การจ่ายเงินของ 2C2P
+                                          </td>
+                                          <td>
+                                            @if($get_pay->pay_type == 2)
+                                            <br/>
+                                            <b>Status </b>
+                                            @if($get_pay->payment_status == '000')
+                                            <span class="text-success">Payment Successful</span>
+                                            @elseif($get_pay->payment_status == '001')
+                                            <span class="text-warning">Payment Pending</span>
+                                            @elseif($get_pay->payment_status == '002')
+                                            <span class="text-danger">Payment Rejected</span>
+                                            @elseif($get_pay->payment_status == '003')
+                                            <span class="text-danger">Payment was canceled by user</span>
+                                            @else
+                                            <span class="text-danger">Payment Failed</span>
+                                            @endif
+
+                                            @endif
+                                          </td>
+                                        </tr>
+
                                         @if($get_pay->image_tran != null)
                                         <tr>
                 													<td>เอกสารแนบ</td>
