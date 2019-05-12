@@ -121,15 +121,42 @@ figure:hover+span {
               </div>
             </li>
 
+						<style>
+
+	.tooltip-content2::after {
+    content: "";
+    top: 100%;
+    left: 72%;
+    height: 0px;
+    width: 0px;
+    position: absolute;
+    pointer-events: none;
+    margin-left: -10px;
+    border-style: solid;
+    border-image: initial;
+    border-color: rgb(51, 51, 51) transparent transparent;
+    border-width: 10px;
+}
+						</style>
+
             <li>
               <div class="tooltip_styled tooltip-effect-4">
                 <img src="{{url('master/assets/images/social/phone_circle-512.png')}}" class="tooltip-item" alt="Phone number masterphotonetwork"/>
-                <div class="tooltip-content text-center" style=" text-align: center;">
+
+								<div class="visible-sm visible-xs tooltip-content tooltip-content2 text-center" style="left: -50px;text-align: center;">
 									02-513-0105, 086-600-5055 <br />
 									085-321-0190, 086-351-5826<br />
 									097-135-7005, 097-135-8087
 									<br>
 								</div>
+
+                <div class="tooltip-content hidden-sm hidden-xs text-center" style="text-align: center;">
+									02-513-0105, 086-600-5055 <br />
+									085-321-0190, 086-351-5826<br />
+									097-135-7005, 097-135-8087
+									<br>
+								</div>
+
               </div>
             </li>
 
