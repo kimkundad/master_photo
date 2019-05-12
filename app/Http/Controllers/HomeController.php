@@ -1791,6 +1791,7 @@ $data['get_my_add'] = $get_my_add;
          //ขอใบกำกับภาษี
 
 
+
          if($request['check_order'] == null){
            $check_order = 0;
          }
@@ -1832,12 +1833,14 @@ $data['get_my_add'] = $get_my_add;
            ->orderBy('id', 'desc')
            ->count();
 
+           $get_order_last = DB::table('orders')
+             ->orderBy('id', 'desc')
+             ->first();
+
            if($get_order_zero == 0){
              $get_order_last->code_gen = '00000000-0-0000';
            }else{
-             $get_order_last = DB::table('orders')
-               ->orderBy('id', 'desc')
-               ->first();
+
            }
 
 
