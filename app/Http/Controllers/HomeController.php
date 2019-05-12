@@ -1838,9 +1838,15 @@ $data['get_my_add'] = $get_my_add;
              ->first();
 
            if($get_order_zero == 0){
-             $get_order_last->code_gen = '00000000-0-0000';
+
+             $new_gen_code = '00000000-0-0000';
+
            }else{
 
+             $get_order_last = DB::table('orders')
+               ->orderBy('id', 'desc')
+               ->first();
+               $new_gen_code = $get_order_last->code_gen;
            }
 
 
@@ -1864,7 +1870,7 @@ $data['get_my_add'] = $get_my_add;
 
 
 
-          $rs = explode('-',$get_order_last->code_gen);
+          $rs = explode('-',$new_gen_code);
           $var_sum = str_pad($rs[2]+1,4,"0",STR_PAD_LEFT);
 
           if($var_sum < 10000){
