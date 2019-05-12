@@ -343,7 +343,7 @@ Shipping | MASTER PHOTO NETWORK
 
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label>ชื่อ-สกุล <span class="text-danger">*</span></label>
+                          <label>ชื่อ <span class="text-danger">*</span></label>
                           <input type="text" class="form-control" name="name" value="{{ old('name') }}" >
 
                         </div>

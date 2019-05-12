@@ -60,7 +60,7 @@ class ApiController extends Controller
             $tag_html = "<div class='col-md-6 col-sm-6'>
               <div class='form-group'>
                 <label>เบอร์โทร</label>
-                <input type='text' class='form-control' name='phone_ad' value='$get_data->phone_ad'>
+                <input type='text' class='form-control' name='phone_ad' value='$get_data->phone_ad' readonly>
               </div>
             </div>";
 

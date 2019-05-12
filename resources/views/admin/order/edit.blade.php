@@ -274,25 +274,9 @@
             												</tr>
                                     <tr>
             													<td>ที่อยู่</td>
-            													<td>{{$get_address->address_ad}}</td>
-            												</tr>
-                                    <tr>
-            													<td>จังหวัด</td>
-            													<td>{{$province->PROVINCE_NAME}}</td>
-            												</tr>
-                                    <tr>
-            													<td>เขต/อำเภอ</td>
-            													<td>{{$district->AMPHUR_NAME}}</td>
-            												</tr>
-                                    <tr>
-            													<td>แขวง/ตำบล</td>
-            													<td>{{$subdistricts->DISTRICT_NAME}}</td>
+            													<td>{{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}</td>
             												</tr>
 
-                                    <tr>
-            													<td>รหัสไปรษณีย์</td>
-            													<td>{{$get_address->zip_code}}</td>
-            												</tr>
 
 
             											</tbody>
@@ -316,17 +300,19 @@
             									<div id="edit" class="tab-pane active">
 
 
-            											<h4 class="mb-xlg">ที่อยู่ในการจัดส่งใบกำกับภาษี</h4>
+            											<h4 class="mb-xlg">ที่อยู่ออกใบกำกับภาษี</h4>
 
 
 
                                   <div class="table-responsive">
               										<table class="table table-striped mb-none">
 
-              											<tbody>
+
+
+                                    <tbody>
 
               												<tr>
-              													<td>ชื่อผู้รับสินค้า</td>
+              													<td>ชื่อผู้รับ</td>
               													<td>{{$get_address_bill->name_ad}}</td>
               												</tr>
                                       <tr>
@@ -335,24 +321,15 @@
               												</tr>
                                       <tr>
               													<td>ที่อยู่</td>
-              													<td>{{$get_address_bill->address_ad}}</td>
+              													<td>{{$get_address_bill->address_ad}} {{$subdistricts_bill->DISTRICT_NAME}} {{$district_bill->AMPHUR_NAME}} {{$province_bill->PROVINCE_NAME}} {{$get_address_bill->zip_code}}</td>
               												</tr>
                                       <tr>
-              													<td>จังหวัด</td>
-              													<td>{{$province_bill->PROVINCE_NAME}}</td>
+              													<td>เลขประจำตัวผู้เสียภาษี</td>
+              													<td>{{$get_address_bill->id_card_no}}</td>
               												</tr>
                                       <tr>
-              													<td>เขต/อำเภอ</td>
-              													<td>{{$district_bill->AMPHUR_NAME}}</td>
-              												</tr>
-                                      <tr>
-              													<td>แขวง/ตำบล</td>
-              													<td>{{$subdistricts_bill->DISTRICT_NAME}}</td>
-              												</tr>
-
-                                      <tr>
-              													<td>รหัสไปรษณีย์</td>
-              													<td>{{$get_address_bill->zip_code}}</td>
+              													<td>รหัสสาขา</td>
+              													<td>{{$get_address_bill->branch_code}}</td>
               												</tr>
 
 
@@ -415,13 +392,13 @@
                 													<td>ยอดเงิน</td>
                 													<td>{{number_format((($get_pay->money)),2)}}</td>
                 												</tr>
-
+                                        @if($get_pay->pay_type == 2)
                                         <tr>
                                           <td>
                                             สถานะ การจ่ายเงินของ 2C2P
                                           </td>
                                           <td>
-                                            @if($get_pay->pay_type == 2)
+
                                             <br/>
                                             <b>Status </b>
                                             @if($get_pay->payment_status == '000')
@@ -436,9 +413,10 @@
                                             <span class="text-danger">Payment Failed</span>
                                             @endif
 
-                                            @endif
+
                                           </td>
                                         </tr>
+                                        @endif
 
                                         @if($get_pay->image_tran != null)
                                         <tr>
