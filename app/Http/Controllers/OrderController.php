@@ -389,15 +389,24 @@ class OrderController extends Controller
                         ->where('id', $obj->address_shipping_bill)
                         ->first();
 
+
+
                 }else{
 
+                  if($obj->text_re_user == 1){
 
-                  $get_address_bill = DB::table('user_addresses')->select(
-                        'user_addresses.*'
-                        )
-                        ->where('user_id', $obj->user_id)
-                        ->where('type_address', 1)
-                        ->first();
+                    $get_address_bill = DB::table('user_addresses')->select(
+                          'user_addresses.*'
+                          )
+                          ->where('user_id', $obj->user_id)
+                          ->where('id', $obj->shipping_address)
+                          ->first();
+
+                  }
+
+
+
+                      //  $get_address_bill = null;
 
                 }
 

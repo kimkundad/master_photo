@@ -150,10 +150,12 @@ class PaymentController extends Controller
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
         $item_1 = new Item();
-        $item_1->setName('Item 1') /** item name **/
+        $item_1->setName($request->get('order_id')) /** item name **/
             ->setCurrency('THB')
             ->setQuantity(1)
             ->setPrice($request->get('amount')); /** unit price **/
+
+        Session::put('paypal_order_id', $request->get('order_id'));
         $item_list = new ItemList();
         $item_list->setItems(array($item_1));
         $amount = new Amount();
@@ -200,8 +202,12 @@ class PaymentController extends Controller
     }
     public function getPaymentStatus()
     {
-        /** Get the payment ID before session clear **/
+        /** Get the payment ID before session clear Session::put('paypal_order_id', $request->get('order_id')); **/
         $payment_id = Session::get('paypal_payment_id');
+
+        $order_id_gen = Session::get('paypal_order_id');
+        Session::forget('paypal_order_id');
+
         /** clear the session payment ID **/
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
@@ -215,7 +221,29 @@ class PaymentController extends Controller
         $result = $payment->execute($execution, $this->_api_context);
         if ($result->getState() == 'approved') {
             \Session::put('success', 'Payment success');
-            return Redirect::to('/');
+
+            $order_data = DB::table('orders')
+                  ->where('code_gen', $order_id_gen)
+                  ->first();
+
+                  $time_tran = date("d-m-Y");
+                  $time2_tran = date("H:i:s");
+
+                  $package = new user_payment();
+                  $package->order_id = $order_id_gen;
+                  $package->pay_type = 3;
+                  $package->bank = 0;
+                  $package->money = $order_data->order_price+$order_data->shipping_p;
+                  $package->time_tran = $time_tran;
+                  $package->time2_tran = $time2_tran;
+                  $package->save();
+
+                  DB::table('orders')
+                        ->where('id', $order_data->id)
+                        ->update(['status' => 1]);
+
+
+            return Redirect::to('payment_notify_item2/'.$order_data->id);
         }
         \Session::put('error', 'Payment failed');
         return Redirect::to('/');

@@ -212,6 +212,7 @@ user profile
 
                       <div class="col-md-4">
                         <div class="form-group">
+                          <input type="hidden" name="order_id" value="{{$order->code_gen}}"/>
                       <input type="text" name="amount" value="{{number_format($order->order_price+$order->shipping_p, 2)}}" class="form-control">
                       </div>
                     </div>
