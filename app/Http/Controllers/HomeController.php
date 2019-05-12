@@ -1828,12 +1828,20 @@ $data['get_my_add'] = $get_my_add;
 
 
 
+         $get_order_zero = DB::table('orders')
+           ->orderBy('id', 'desc')
+           ->count();
+
+           if($get_order_zero == 0){
+             $get_order_last->code_gen = '00000000-0-0000';
+           }else{
+             $get_order_last = DB::table('orders')
+               ->orderBy('id', 'desc')
+               ->first();
+           }
 
 
 
-           $get_order_last = DB::table('orders')
-             ->orderBy('id', 'desc')
-             ->first();
 
 
 
@@ -2118,6 +2126,31 @@ $data['get_my_add'] = $get_my_add;
 
 
 */
+
+$message = Auth::user()->name." มีการสั่งซื้อสินค้าเข้ามาใหม่ Order ID : ".$randomSixDigitInt2;
+$lineapi = "6KLVNCL3HUMvcjMdjGbN4LhUfMLKdMxjQ60LXD2EWMx";
+
+$mms =  trim($message);
+$chOne = curl_init();
+curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
+curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
+curl_setopt($chOne, CURLOPT_POST, 1);
+curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=$mms");
+curl_setopt($chOne, CURLOPT_FOLLOWLOCATION, 1);
+$headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer '.$lineapi.'',);
+curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
+$result = curl_exec($chOne);
+if(curl_error($chOne)){
+echo 'error:' . curl_error($chOne);
+}else{
+$result_ = json_decode($result, true);
+echo "status : ".$result_['status'];
+echo "message : ". $result_['message'];
+}
+curl_close($chOne);
+
 
 
           $id = $the_id;
