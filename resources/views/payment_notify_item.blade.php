@@ -249,7 +249,7 @@ address {
 
             <div class="col-md-12 text-center" >
 
-            <a href="{{url('pay_order_detail/'.$order->code_gen)}}" class="btn btn-submit">{{ trans('message.Payment_order') }}</a>
+            <a href="{{url('payment_choose/'.$order->code_gen)}}" class="btn btn-submit">{{ trans('message.Payment_order') }}</a>
             </div>
 
 
