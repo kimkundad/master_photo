@@ -235,7 +235,7 @@ class ApiController extends Controller
       $package->payment_status = $payment_status;
       $package->save();
 
-      if($payment_status == '' || $payment_status == ''){
+      if($payment_status == '000' || $payment_status == '001'){
         $code_status = 1;
       }else{
         $code_status = 0;

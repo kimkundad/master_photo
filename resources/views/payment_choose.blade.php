@@ -217,7 +217,7 @@ user profile
                     </div>
                       <p>
                         <button type="submit" class="btn " style="border:none; padding:0; margin-top:-5px; background: #fff;">
-                        <img src="{{url('master/assets/images/paypal_bt.png')}}" alt="Image">
+                        <img src="https://www.paypalobjects.com/webstatic/en_AU/i/buttons/btn_paywith_primary_l.png" alt="ชำระด้วย PayPal" />
                         </button>
                       </p>
                     </form>
