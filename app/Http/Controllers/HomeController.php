@@ -2136,7 +2136,7 @@ $data['get_my_add'] = $get_my_add;
 
 */
 
-$message = Auth::user()->name." มีการสั่งซื้อสินค้าเข้ามาใหม่ Order ID : ".$randomSixDigitInt2;
+$message = Auth::user()->name." มีการสั่งซื้อสินค้าเข้ามาใหม่ Order ID : ".$randomSixDigitInt;
 $lineapi = "6KLVNCL3HUMvcjMdjGbN4LhUfMLKdMxjQ60LXD2EWMx";
 
 $mms =  trim($message);

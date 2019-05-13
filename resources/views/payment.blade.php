@@ -251,7 +251,8 @@ Payment | MASTER PHOTO NETWORK
 
           <div class="form-group">
             <label>ORDER NO</label>
-          <input type="text" name="order_id" class="form-control" value="{{$order_id}}"  readonly/>
+          <input type="text"  class="form-control" value="{{$order->code_gen}}"  readonly/>
+          <input type="hidden" name="order_id" class="form-control" value="{{$order_id}}"  readonly/>
           </div>
 
           <div class="form-group hidden">
