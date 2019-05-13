@@ -203,7 +203,7 @@ $get_name_size = '';
                   @if($get_resolution >= $resolution)
 
                   @else
-                  <span style="color: #e04f67; font-size:13px;">Resolution ของรูปต่ำกว่า<br /> number_format($resolution, 2) พิกเซล</span>
+                  <span style="color: #e04f67; font-size:13px;">Resolution ของรูปต่ำกว่า<br /> {{number_format($resolution, 2)}} พิกเซล</span>
                   @endif
 
               </td>
@@ -334,7 +334,7 @@ $get_name_size = '';
                     @if($get_resolution >= $resolution)
 
                     @else
-                    <span style="color: #e04f67; font-size:13px;">Resolution ของรูปต่ำกว่า<br /> number_format($resolution, 2) พิกเซล</span>
+                    <span style="color: #e04f67; font-size:13px;">Resolution ของรูปต่ำกว่า<br /> {{number_format($resolution, 2)}} พิกเซล</span>
                     @endif
 
                 </td>
