@@ -1095,7 +1095,6 @@ class UserProfileController extends Controller
     public function post_payment_notify(Request $request){
       $image = $request->file('image');
       $this->validate($request, [
-            'user_id' => 'required',
             'order_id' => 'required',
             'bank' => 'required',
             'money' => 'required',
@@ -1111,7 +1110,7 @@ class UserProfileController extends Controller
         $package = new user_payment();
         $package->order_id = $request['order_id'];
         $package->pay_type = 1;
-        $package->user_id = $request['user_id'];
+        $package->user_id = Auth::user()->id;
         $package->bank = $request['bank'];
         $package->money = $request['money'];
         $package->time_tran = $request['filter_date'];
@@ -1131,7 +1130,7 @@ class UserProfileController extends Controller
          $package = new user_payment();
          $package->order_id = $request['order_id'];
          $package->pay_type = 1;
-         $package->user_id = $request['user_id'];
+         $package->user_id = Auth::user()->id;
          $package->bank = $request['bank'];
          $package->money = $request['money'];
          $package->time_tran = $request['filter_date'];
