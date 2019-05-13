@@ -150,7 +150,7 @@ date_default_timezone_set("Asia/Bangkok");
                                                           <br />
                                                       </div>
                                                       <div class="col-md-4">
-                                                        <input type="text" class="form-control date" name="time2_tran" id='datetimepicker2' value="<?php echo date('H:i')?>"/>
+                                                        <input type="text" class="form-control date" name="time2_tran"  value="<?php echo date('H:i')?>"/>
 
 
                                                           <br />
