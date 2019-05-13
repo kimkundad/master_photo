@@ -439,7 +439,7 @@ border: 1px solid #ddd;
       </td>
       <td style="font-size: 18px">
 
-        {{$obj->name_deli}}  {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
+          {{$get_address->address_ad}} {{$subdistricts->DISTRICT_NAME}} {{$district->AMPHUR_NAME}} {{$province->PROVINCE_NAME}} {{$get_address->zip_code}}
       </td>
     </tr>
     <tr>
