@@ -127,7 +127,7 @@ date_default_timezone_set("Asia/Bangkok");
                                                     <div class="form-group">
                                                       <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.money_bank') }}*</label>
                                                       <div class="col-md-8">
-                                                        <input type="text" class="form-control" name="money" value="{{number_format($get_data_price, 2)}} " >
+                                                        <input type="text" class="form-control" name="money" value="{{number_format($get_data_price, 2)}} " readonly>
                                                         @if ($errors->has('money'))
                                                         <p class="text-danger" style="margin-top:10px;">
                                                           คุณต้องกรอก จำนวนเงิน ด้วยค่ะ
