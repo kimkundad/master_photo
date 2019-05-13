@@ -47,7 +47,9 @@ user profile
 
 
 
-
+<?php
+date.timezone = "Asia/Bangkok";
+?>
 
 
 
