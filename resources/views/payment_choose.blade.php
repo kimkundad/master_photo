@@ -173,7 +173,9 @@ user profile
 
                       <div class="form-group">
                         <label>ORDER NO</label>
-                      <input type="text" name="order_id" class="form-control" value="{{$order_id}}"  readonly/>
+                        <input type="text"  class="form-control" value="{{$id}}"  readonly/>
+                        <input type="hidden" name="order_id" class="form-control" value="{{$order_id}}"  readonly/>
+
                       </div>
 
                       <div class="form-group hidden">
