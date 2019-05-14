@@ -48,7 +48,16 @@ class ApiController extends Controller
 
     }
 
-    public function line_noti(){
+    public function line_update(Request $request){
+
+      DB::table('settings')
+            ->where('id', 1)
+            ->update(['line_noti' => $request['token_line']]);
+
+      return redirect(url('admin/line_notify/'))->with('edit_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
+    }
+
+    public function line_notify(){
       $objs = DB::table('settings')
           ->where('id', 1)
           ->first();

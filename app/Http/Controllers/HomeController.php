@@ -2133,8 +2133,12 @@ $data['get_my_add'] = $get_my_add;
 
 */
 
+$settings = DB::table('settings')
+    ->where('id', 1)
+    ->first();
+
 $message = Auth::user()->name." มีการสั่งซื้อสินค้าเข้ามาใหม่ Order ID : ".$randomSixDigitInt;
-$lineapi = "6KLVNCL3HUMvcjMdjGbN4LhUfMLKdMxjQ60LXD2EWMx";
+$lineapi = $settings->line_noti;
 
 $mms =  trim($message);
 $chOne = curl_init();
