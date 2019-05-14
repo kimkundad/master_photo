@@ -138,6 +138,22 @@
 												</div>
 
 
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileFirstName">ระดับพนักงาน</label>
+													<div class="col-md-8">
+														<select name="level_employee" class="form-control mb-md" required>
+
+															<option value="2"  @if( $role_user->role_id == 2)
+															 selected='selected'
+															 @endif>Employee</option>
+															<option value="1"  @if( $role_user->role_id == 1)
+															 selected='selected'
+															 @endif>manager</option>
+														</select>
+													</div>
+												</div>
+
+
 
 											</fieldset>
 

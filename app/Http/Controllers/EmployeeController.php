@@ -67,7 +67,7 @@ class EmployeeController extends Controller
 
 
      $ran = array("1483537975.png","1483556517.png","1483556686.png");
-
+        $level_employee = $request['level_employee'];
         $package = new User();
         $package->name = $request['name'];
         $package->email = $request['email'];
@@ -83,8 +83,9 @@ class EmployeeController extends Controller
         $the_id = $package->id;
 
 
+
         DB::table('role_user')->insert(
-            ['role_id' => 2, 'user_id' => $the_id]
+            ['role_id' => $level_employee, 'user_id' => $the_id]
         );
 
 
@@ -120,6 +121,11 @@ class EmployeeController extends Controller
             ->where('id', $id)
             ->first();
 
+            $role_user = DB::table('role_user')
+                ->where('user_id', $id)
+                ->first();
+
+                $data['role_user'] = $role_user;
 
         $data['url'] = url('admin/employee/'.$id);
           $data['header'] = "แก้ไขข้อมูลพนักงาน";

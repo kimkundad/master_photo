@@ -120,6 +120,17 @@
           													</div>
           												</div>
 
+                                  <div class="form-group">
+          													<label class="col-md-3 control-label" for="profileFirstName">ระดับพนักงาน</label>
+          													<div class="col-md-8">
+                                      <select name="level_employee" class="form-control mb-md" required>
+
+                                        <option value="2">Employee</option>
+  								                      <option value="1">manager</option>
+  								                    </select>
+          													</div>
+          												</div>
+
 
                                   <div class="form-group">
           													<label class="col-md-3 control-label" for="profileFirstName">Password</label>
