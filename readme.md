@@ -7,6 +7,12 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+Laravel 5.4 (and 5.5) native User Authentication + Role Authorization
+https://medium.com/@ezp127/laravel-5-4-native-user-authentication-role-authorization-3dbae4049c8a
+https://medium.com/@dev.beansandrice/how-to-use-roles-in-route-group-1-php-artisan-make-middleware-userrolemiddleware-2-3403ebd4fb21
+
+composer dump-autoload
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
