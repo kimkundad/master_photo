@@ -91,7 +91,7 @@ Route::get('auth/social', 'Auth\SocialAuthController@show')->name('social.login'
 Route::get('oauth/{driver}', 'Auth\SocialAuthController@redirectToProvider')->name('social.oauth');
 Route::get('oauth/{driver}/callback', 'Auth\SocialAuthController@handleProviderCallback')->name('social.callback');
 
-
+Route::get('/shipping', 'HomeController@shipping')->name('shipping');
 
 
 Route::group(['middleware' => ['UserRole:manager|employee|customer']], function() {
@@ -102,7 +102,7 @@ Route::group(['middleware' => ['UserRole:manager|employee|customer']], function(
 
   Route::post('/add_address_order', 'HomeController@add_address_order')->name('add_address_order');
   Route::get('/profile', 'HomeController@profile')->name('profile');
-  Route::get('/shipping', 'HomeController@shipping')->name('shipping');
+
   Route::post('/add_order', 'HomeController@add_order')->name('add_order');
   Route::post('/update_profile', 'HomeController@update_profile')->name('update_profile');
   Route::get('profile/{id}/edit', 'HomeController@profile_edit')->name('profile_edit');

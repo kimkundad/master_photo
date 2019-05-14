@@ -686,11 +686,8 @@ class HomeController extends Controller
 
       if(Auth::guest()){
 
-        if($set_num_date == 0){
-          return redirect('/');
-        }else{
-          Session::put('cart_redirect', 1);
-        }
+        Session::put('cart_redirect', 1);
+        return redirect('/login');
 
       }else{
 
