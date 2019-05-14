@@ -289,7 +289,7 @@ Payment | MASTER PHOTO NETWORK
 
               <div class="col-md-4">
                 <div class="form-group">
-              <input type="text" name="amount" value="{{number_format($order->order_price+$order->shipping_p, 2)}}" class="form-control">
+              <input type="text" name="amount" value="{{number_format($order->order_price+$order->shipping_p, 2)}}" class="form-control" readonly>
               </div>
             </div>
               <p>
