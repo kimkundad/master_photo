@@ -122,7 +122,7 @@ address {
                           @if($get_pay->pay_type == 1)
                           <b>โอนธนาคาร </b> {{$get_pay->bank}}
                           @elseif($get_pay->pay_type == 2)
-                          <b>2P2C </b>
+                          <b>2C2P </b>
                           @elseif($get_pay->pay_type == 3)
                           <b>Paypal </b>
                           @else
