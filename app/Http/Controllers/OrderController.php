@@ -88,21 +88,44 @@ class OrderController extends Controller
 
          if($dateS == null && $dateE == null){
 
-           $cat = DB::table('orders')->select(
-             'orders.*',
-             'orders.created_at as created_ats',
-             'orders.id as id_or',
-             'users.id as id_pro',
-             'users.name',
-             'users.phone'
-             )
-                 ->leftjoin('users', 'users.id',  'orders.user_id')
-                 ->where('orders.status', $status)
-                 ->Where('users.name','LIKE','%'.$search_text.'%')
-                 ->orWhere('orders.code_gen','LIKE','%'.$search_text.'%')
-                 ->orderBy('orders.id', 'desc')
-                 ->paginate(15)
-                 ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status . '&q=' . $search_text);
+
+           if($search_text == null){
+
+             $cat = DB::table('orders')->select(
+               'orders.*',
+               'orders.created_at as created_ats',
+               'orders.id as id_or',
+               'users.id as id_pro',
+               'users.name',
+               'users.phone'
+               )
+                   ->leftjoin('users', 'users.id',  'orders.user_id')
+                   ->where('orders.status', $status)
+                   ->orderBy('orders.id', 'desc')
+                   ->paginate(15)
+                   ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status . '&q=' . $search_text);
+
+           }else{
+
+             $cat = DB::table('orders')->select(
+               'orders.*',
+               'orders.created_at as created_ats',
+               'orders.id as id_or',
+               'users.id as id_pro',
+               'users.name',
+               'users.phone'
+               )
+                   ->leftjoin('users', 'users.id',  'orders.user_id')
+                   ->where('orders.status', $status)
+                   ->Where('users.name','LIKE','%'.$search_text.'%')
+                   ->orWhere('orders.code_gen','LIKE','%'.$search_text.'%')
+                   ->orderBy('orders.id', 'desc')
+                   ->paginate(15)
+                   ->withPath('?start=' . $start . '&end=' . $end . '&status=' . $status . '&q=' . $search_text);
+
+           }
+
+
 
          }else{
 
