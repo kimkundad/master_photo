@@ -1115,6 +1115,7 @@ class UserProfileController extends Controller
         $package->money = $request['money'];
         $package->time_tran = $request['filter_date'];
         $package->time2_tran = $request['time2_tran'];
+        $package->time3_tran = $request['time3_tran'];
         $package->save();
 
       }else{
@@ -1135,6 +1136,7 @@ class UserProfileController extends Controller
          $package->money = $request['money'];
          $package->time_tran = $request['filter_date'];
          $package->time2_tran = $request['time2_tran'];
+         $package->time3_tran = $request['time3_tran'];
          $package->image_tran = $input['imagename'];
          $package->save();
 

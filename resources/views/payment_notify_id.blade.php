@@ -149,11 +149,15 @@ date_default_timezone_set("Asia/Bangkok");
                                                         @endif
                                                           <br />
                                                       </div>
-                                                      <div class="col-md-4">
-                                                        <input type="text" class="form-control date" name="time2_tran"  value="<?php echo date('H:i')?>"/>
+                                                      <label class="col-md-1 control-label" for="profileFirstName">ชั่วโมง</label>
+                                                      <div class="col-md-2">
+                                                        <input type="text" class="form-control date" name="time2_tran"  value="<?php echo date('H')?>"/>
 
+                                                      </div>
+                                                      <label class="col-md-1 control-label" for="profileFirstName">นาที</label>
+                                                      <div class="col-md-2">
+                                                        <input type="text" class="form-control date" name="time3_tran"  value="<?php echo date('i')?>"/>
 
-                                                          <br />
                                                       </div>
                                                     </div>
 

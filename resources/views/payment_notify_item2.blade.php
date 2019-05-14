@@ -131,7 +131,7 @@ address {
                           <br/>
                           <b>วันที่ </b> {{$get_pay->time_tran}}
                           <br/>
-                          <b>เวลา </b>: {{$get_pay->time2_tran}}
+                          <b>เวลา </b>: {{$get_pay->time2_tran}}:{{$get_pay->time3_tran}}
                           <br/>
                           <b>ยอดเงิน </b> {{number_format((($get_pay->money)),2)}} บาท
                           @endif

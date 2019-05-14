@@ -389,7 +389,7 @@
 
                                         <tr>
                 													<td>เวลา</td>
-                													<td>{{$get_pay->time2_tran}}</td>
+                													<td>{{$get_pay->time2_tran}} {{$get_pay->time3_tran}}</td>
                 												</tr>
 
                                         <tr>
