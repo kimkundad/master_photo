@@ -140,7 +140,7 @@ date_default_timezone_set("Asia/Bangkok");
 
                                                     <div class="form-group">
                                                       <label class="col-md-3 control-label" for="profileFirstName">{{ trans('message.Time_to_transfer_money') }}*</label>
-                                                      <div class="col-md-4">
+                                                      <div class="col-md-3">
                                                         <input type="text" class="form-control date-pick" name="filter_date" id="filter-date" value="<?php echo date('d/m/Y')?>"/>
                                                         @if ($errors->has('filter_date'))
                                                         <p class="text-danger" style="margin-top:10px;">
