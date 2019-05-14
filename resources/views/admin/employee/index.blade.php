@@ -58,6 +58,7 @@
                 <table class="table table-bordered table-striped mb-none dataTable " id="datatable-default">
                   <thead>
                     <tr>
+                      <th>Level</th>
                       <th>รหัสพนักงาน</th>
                       <th>ชื่อ</th>
                       <th>อีเมล</th>
@@ -70,6 +71,13 @@
              @if($objs)
                 @foreach($objs as $u)
                     <tr>
+                      <td>
+                        @if($u->role_id == 1)
+                        Manager
+                        @else
+                        Employee
+                        @endif
+                      </td>
                       <td><a href="{{url('admin/employee/'.$u->id_user.'/edit')}}">{{$u->id_card_no}}</a></td>
                       <td>
                         @if($u->provider == 'email')
