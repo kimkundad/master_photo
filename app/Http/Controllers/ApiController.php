@@ -48,6 +48,16 @@ class ApiController extends Controller
 
     }
 
+    public function line_noti(){
+      $objs = DB::table('settings')
+          ->where('id', 1)
+          ->first();
+
+          $data['datahead'] = "Line Notify";
+          $data['objs'] = $objs;
+          return view('admin.line_notify.index', $data);
+    }
+
     public function api_address(Request $request){
       $id = $request['add_id'];
 

@@ -164,6 +164,14 @@
                           id="checkboxExample1">
                           <label for="checkboxExample1">รายชื่อพนักงาน</label>
                         </div>
+                        <div class="checkbox-custom checkbox-default">
+                          <input type="checkbox" name="page13"
+                          @if(get_menu_admin()[12]->menu_status == 1)
+                          checked=""
+                          @endif
+                          id="checkboxExample1">
+                          <label for="checkboxExample1">Line Notify</label>
+                        </div>
 
                         <hr />
                         <br />

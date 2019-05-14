@@ -81,6 +81,11 @@ class FizroleController extends Controller
                                                                               ->where('id', 12)
                                                                               ->update(['menu_status' => $page12]);
 
+                                                                              $page13 = isset($_POST['page13']) ? 1 : 0;
+                                                                              DB::table('menu_role')
+                                                                                    ->where('id', 13)
+                                                                                    ->update(['menu_status' => $page13]);
+
 
       return redirect(url('admin/roles/'))->with('edit_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
     }

@@ -126,6 +126,7 @@ Route::group(['middleware' => ['UserRole:manager|employee|customer']], function(
 
 
 Route::group(['middleware' => ['UserRole:manager|employee']], function() {
+	Route::get('admin/line_notify', 'ApiController@line_notify');
 
 	Route::get('admin/roles', 'FizroleController@index');
 	Route::post('admin/post_page_roles', 'FizroleController@post_page_roles');
