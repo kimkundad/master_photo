@@ -655,11 +655,11 @@ Dropzone.options.myDropzone= {
     maxFiles: 1000,
     maxFilesize: 10024,
     dictRemoveFile: 'Remove file',
-    acceptedFiles: 'image/*,application/pdf,.psd',
+    acceptedFiles: 'image/*',
     addRemoveLinks: true,
     clickable: '.add-image, .dropzone',
     init: function() {
-        dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
+        dzClosure = this; // Makes sure that 'this' is understood inside the functions below. image/*,application/pdf,.psd
 
         // for Dropzone to process the queue (instead of default form behavior):
         document.getElementById("submit-all").addEventListener("click", function(e) {

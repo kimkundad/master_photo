@@ -813,7 +813,7 @@ $(document).ready(function(){
       maxFiles: 1000,
       maxFilesize: 4024,
       dictRemoveFile: 'Remove file',
-      acceptedFiles: 'image/*,application/pdf,.psd',
+      acceptedFiles: 'image/*',
       addRemoveLinks: true,
       clickable: '.add-image, .dropzone',
       init: function() {
