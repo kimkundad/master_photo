@@ -26,7 +26,7 @@ class EmployeeController extends Controller
             'users.id as id_user'
             )
             ->leftjoin('users', 'users.id',  'role_user.user_id')
-            ->where('role_user.role_id', 2)
+            ->where('role_user.role_id', '!=', 3)
             ->get();
 
             $data['datahead'] = "รายชื่อพนักงาน";
