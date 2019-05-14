@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Session;
+use App\Role;
 
 class RegisterController extends Controller
 {
@@ -72,7 +73,8 @@ class RegisterController extends Controller
         }
 
          $ran = array("1483537975.png","1483556517.png","1483556686.png");
-         return User::create([
+
+         $user = User::create([
          'name' => $data['name'],
          'email' => $data['email'],
          'password' => bcrypt($data['password']),
@@ -80,5 +82,11 @@ class RegisterController extends Controller
          'provider' => 'email',
          'avatar' => $ran[array_rand($ran, 1)],
        ]);
+
+       $user
+       ->roles()
+       ->attach(Role::where('name', 'customer')->first());
+       return $user;
+
      }
 }

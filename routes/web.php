@@ -91,7 +91,10 @@ Route::get('auth/social', 'Auth\SocialAuthController@show')->name('social.login'
 Route::get('oauth/{driver}', 'Auth\SocialAuthController@redirectToProvider')->name('social.oauth');
 Route::get('oauth/{driver}/callback', 'Auth\SocialAuthController@handleProviderCallback')->name('social.callback');
 
-Route::group(['middleware' => 'auth'], function () {
+
+
+
+Route::group(['middleware' => ['UserRole:manager|employee|customer']], function() {
 
 	Route::get('payment_choose/{id}', 'UserProfileController@payment_choose')->name('payment_choose');
 	Route::get('payment_notify_item/{id}', 'UserProfileController@payment_notify_item')->name('payment_notify_item');
@@ -119,8 +122,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-Route::group(['middleware' => 'admin'], function() {
 
+
+
+Route::group(['middleware' => ['UserRole:manager|employee']], function() {
+
+	Route::get('admin/roles', 'FizroleController@index');
+	Route::post('admin/post_page_roles', 'FizroleController@post_page_roles');
 
 	Route::resource('admin/taopix', 'TaopixController');
 
@@ -189,6 +197,8 @@ Route::group(['middleware' => 'admin'], function() {
   Route::resource('admin/order', 'OrderController');
   Route::post('api/api_order_status', 'OrderController@api_order_status');
   Route::resource('admin/slide', 'SlideController');
+	Route::resource('admin/employee', 'EmployeeController');
+
   Route::post('api/api_slide_status', 'SlideController@api_slide_status');
   Route::get('admin/get_pay_info', 'PaymentController@get_pay_info');
   Route::post('admin/del_pay_info', 'PaymentController@del_pay_info');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\order;
+use Auth;
 use App\order_detail;
 use Mail;
 use Swift_Transport;
@@ -35,6 +36,33 @@ class OrderController extends Controller
               ->leftjoin('users', 'users.id',  'orders.user_id')
               ->orderBy('orders.id', 'desc')
               ->paginate(15);
+
+              foreach($cat as $u){
+
+                $check = DB::table('users')
+                    ->select(
+                    'users.name'
+                    )
+                    ->where('id', $u->employee_no)
+                    ->count();
+
+              if($check > 0){
+
+                $objs = DB::table('users')
+                    ->select(
+                    'users.name'
+                    )
+                    ->where('id', $u->employee_no)
+                    ->first();
+                    $u->name_employee = $objs->name;
+
+              }else{
+                $u->name_employee = null;
+              }
+
+              }
+
+
 
               $data['objs'] = $cat;
               $data['datahead'] = "order สั่งสินค้า";
@@ -398,6 +426,31 @@ class OrderController extends Controller
               ->first();
 
 
+
+              $check = DB::table('users')
+                  ->select(
+                  'users.name'
+                  )
+                  ->where('id', $obj->employee_no)
+                  ->count();
+
+            if($check > 0){
+
+              $user = DB::table('users')
+                  ->select(
+                  'users.name'
+                  )
+                  ->where('id', $obj->employee_no)
+                  ->first();
+                  $obj->name_employee = $user->name;
+
+            }else{
+              $obj->name_employee = null;
+            }
+
+
+
+
               $get_pay = DB::table('user_payments')->select(
                     'user_payments.*'
                     )
@@ -660,6 +713,7 @@ class OrderController extends Controller
         $package->status = $request['option_type'];
         $package->note_admin_user = $request['note_admin_user'];
         $package->note_admin = $request['note_admin'];
+        $package->employee_no = Auth::user()->id;
         $package->save();
 
       return redirect(url('admin/order/'.$id.'/edit'))->with('edit_success','แก้ไขหมวดหมู่ ');

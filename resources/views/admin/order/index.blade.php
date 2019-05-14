@@ -185,7 +185,7 @@
 
                           @endif
                         </th>
-                        <td>Admin</td>
+                        <td>{{$u->name_employee}}</td>
                         <td>
                           @if($u->download_status == 0)
                           <a href="{{url('admin/load_img/'.$u->id_or)}}" class="mb-1 mt-1 mr-1 btn btn-xs btn-primary">Download</a>

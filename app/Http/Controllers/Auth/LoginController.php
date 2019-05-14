@@ -25,30 +25,32 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    protected function sendLoginResponse(Request $request)
-    {
 
-        $request->session()->regenerate();
-        $this->clearLoginAttempts($request);
-      
-        if ($request->user()->is_admin == 1) {
-          return redirect('admin/user');
-            //dd($request->user()->is_admin);
-        }
 
-          if(Session::get('status_user') == 1){
-          // Session::get('status_user');
-           Session::put('status_user', 0);
-            return redirect(url('shipping'));
-          //  return redirect(url('admin/edit_deli_2/'.$request['id_deli']))->with('edit_item_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
-          }else{
-            return $this->authenticated($request, $this->guard()->user())
-                      ?: redirect()->intended($this->redirectPath());
-          }
+    public function authenticated(Request $request)
+     {
+     // Logic that determines where to send the user
+     if($request->user()->hasRole('employee')){
+     return redirect('/admin/user');
+     }
+     if($request->user()->hasRole('manager')){
+     return redirect('/admin/user');
+     }
+     if($request->user()->hasRole('customer')){
 
-      /*  return $this->authenticated($request, $this->guard()->user())
-                ?: redirect()->intended($this->redirectPath()); */
-    }
+       if(Session::get('status_user') == 1){
+       // Session::get('status_user');
+        Session::put('status_user', 0);
+         return redirect(url('shipping'));
+       //  return redirect(url('admin/edit_deli_2/'.$request['id_deli']))->with('edit_item_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
+       }else{
+         return redirect('/');
+       }
+
+
+
+     }
+     }
 
 
 

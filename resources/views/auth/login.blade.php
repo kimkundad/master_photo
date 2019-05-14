@@ -66,13 +66,13 @@
               </div>
 
 
-              <form class="form-horizontal" id="my_form_login" role="form" method="POST" action="{{ url('/login') }}">
+              <form class="form-horizontal "  id="my_form_login" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
 
                 <div class="form-group">
                   <div class="col-md-12 text-left">
                     <label for="exampleInputEmail1">Your E-mail </label>
-                    <input  type="email" class="form-control" name="email" placeholder="Your Email" value="{{ old('email') }}">
+                    <input  type="email" class="form-control submit_on_enter" name="email" placeholder="Your Email" value="{{ old('email') }}">
 
                     @if ($errors->has('email'))
                         <span class="text-danger">
@@ -87,7 +87,7 @@
 
                   <div class="col-md-12 text-left">
                     <label for="exampleInputPassword1">Password</label>
-                    <input  type="password" class="form-control" name="password" placeholder="Password">
+                    <input  type="password" class="form-control submit_on_enter" name="password" placeholder="Password">
                     @if ($errors->has('password'))
                         <span class="help-block">
                            <strong>{{ $errors->first('password') }}</strong>
@@ -167,5 +167,19 @@
 @endsection
 
 @section('scripts')
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+$('.submit_on_enter').keydown(function(event) {
+  // enter has keyCode = 13, change it if you want to use another button
+  if (event.keyCode == 13) {
+    this.form.submit();
+    return false;
+  }
+});
+
+});
+</script>
 
 @stop('scripts')

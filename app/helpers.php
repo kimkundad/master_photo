@@ -3,6 +3,17 @@
 use Illuminate\Support\Facades\DB;
 
 
+function get_menu_admin(){
+
+  $menu_web = DB::table('menu_role')->select(
+          'menu_role.*'
+          )
+          ->get();
+
+  return $menu_web;
+}
+
+
 function get_menu(){
 
   $menu_web = DB::table('categories')->select(

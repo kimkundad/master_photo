@@ -63,7 +63,11 @@
     										<table class="table table-striped mb-none">
 
     											<tbody>
-
+                    
+                            <tr>
+    													<td><b>พนักงาน</b></td>
+    													<td>{{$objs->name_employee}}</td>
+    												</tr>
     												<tr>
     													<td>ชื่อผู้สั่งซื้อ</td>
     													<td>{{$objs->name}}</td>

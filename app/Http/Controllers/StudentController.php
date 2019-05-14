@@ -20,11 +20,15 @@ class StudentController extends Controller
     public function index()
     {
 
-      $objs = DB::table('users')
+
+      $objs = DB::table('role_user')
           ->select(
-          'users.*'
+          'role_user.*',
+          'users.*',
+          'users.id as id_user'
           )
-          ->where('id', '!=', 1)
+          ->leftjoin('users', 'users.id',  'role_user.user_id')
+          ->where('role_user.role_id', 3)
           ->get();
 
         $data['objs'] = $objs;

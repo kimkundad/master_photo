@@ -102,7 +102,7 @@
 
                   <div class="col-md-12 text-left">
                     <label for="exampleInputPassword1">Password</label>
-                    <input  type="password" class="form-control" name="password" placeholder="Password">
+                    <input  type="password" class="form-control submit_on_enter" name="password" placeholder="Password">
                     @if ($errors->has('password'))
                         <span class="text-danger">
                            <strong>{{ $errors->first('password') }}</strong>
@@ -117,7 +117,7 @@
 
                   <div class="col-md-12 text-left">
                     <label for="exampleInputPassword1">Confirm Password</label>
-                    <input  type="password" class="form-control" name="password_confirmation" placeholder="confirm password">
+                    <input  type="password" class="form-control submit_on_enter" name="password_confirmation" placeholder="confirm password">
                     @if ($errors->has('password_confirmation'))
                         <span class="help-block">
                            <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -188,5 +188,19 @@
 @endsection
 
 @section('scripts')
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+$('.submit_on_enter').keydown(function(event) {
+  // enter has keyCode = 13, change it if you want to use another button
+  if (event.keyCode == 13) {
+    this.form.submit();
+    return false;
+  }
+});
+
+});
+</script>
 
 @stop('scripts')
