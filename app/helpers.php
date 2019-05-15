@@ -13,6 +13,26 @@ function get_menu_admin(){
   return $menu_web;
 }
 
+function setting(){
+
+  $menu_web = DB::table('settings')
+          ->where('id', 1)
+          ->first();
+
+  return $menu_web;
+
+}
+
+function web_notify(){
+
+  $menu_web = DB::table('notifies')
+          ->where('status', 1)
+          ->orderBy('num_sort', 'asc')
+          ->get();
+
+  return $menu_web;
+
+}
 
 function get_menu(){
 

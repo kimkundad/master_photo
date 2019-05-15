@@ -132,6 +132,13 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										</a>
 									</li>
 
+                  <li {{ (Request::is('admin/web_notify*') ? 'class=nav-expanded' : '') }} >
+										<a href="{{url('admin/web_notify/')}}" >
+											<i class="fa fa-bell" aria-hidden="true"></i>
+											<span>Web Notify</span>
+										</a>
+									</li>
+
                   @else
 
 
@@ -249,6 +256,15 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										<a href="{{url('admin/line_notify/')}}" >
 											<i class="fa fa-bell" aria-hidden="true"></i>
 											<span>Line Notify</span>
+										</a>
+									</li>
+                  @endif
+
+                  @if(get_menu_admin()[13]->menu_status == 1)
+                  <li {{ (Request::is('admin/web_notify*') ? 'class=nav-expanded' : '') }} >
+										<a href="{{url('admin/web_notify/')}}" >
+											<i class="fa fa-bell" aria-hidden="true"></i>
+											<span>Web Notify</span>
 										</a>
 									</li>
                   @endif

@@ -488,7 +488,7 @@ figure:hover+span {
 </script>
 <style>
 .customized_notify i span img {
-    width: 120px;
+    width: 260px;
     height: auto;
     margin-bottom: 10px;
     border-width: 0px;
@@ -502,24 +502,28 @@ figure:hover+span {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.js"></script>
 <script>
 
+var run_num = 1000;
 var visited = jQuery.cookie('visited');
 if (visited == 'yes') {
          // second page load, cookie active
     } else {
         //openFancybox(); // first page load, launch fancybox
 
+				@if(web_notify() != null)
+				@foreach(web_notify() as $noti)
 				setTimeout(function() {
 				$.notify({
 				 // options
-				 icon: '{{url('master/assets/image/TOP657971755logo-website.png')}}',
-				 title: "<h4>ยินดีต้อนรับสู่เว็บไซต์ใหม่ของ</h4> ",
-				 message: "www.masterphotonetwork.com "
+				 icon: '{{url('assets/image/notify/'.$noti->image)}}',
+				 url: '{{$noti->url}}',
+				 target: '_blank',
+				 message: ""
 				},{
 				 // settings
 				 type: 'info',
 				 icon_type: 'image',
 				 delay: 5000,
-				 timer: 3000,
+				 timer: {{$noti->timer}},
 				 z_index: 9999,
 				 showProgressbar: false,
 				 placement: {
@@ -531,12 +535,16 @@ if (visited == 'yes') {
 				   exit: 'animated bounceOutDown'
 				 },
 				});
-				}, 1000);
+				}, run_num);
+
+				run_num += 1000;
+				@endforeach
+				@endif
 
     }
 
 		jQuery.cookie('visited', 'yes', {
-        expires: 365 // the number of days cookie  will be effective
+        expires: {{setting()->time_sys}}//365 // the number of days cookie  will be effective
     });
 
 

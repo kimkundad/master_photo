@@ -127,7 +127,10 @@ Route::group(['middleware' => ['UserRole:manager|employee|customer']], function(
 
 Route::group(['middleware' => ['UserRole:manager|employee']], function() {
 
-	
+
+	Route::post('admin/time_sys', 'WebnotiController@time_sys');
+	Route::post('api/api_notify_status', 'WebnotiController@api_notify_status');
+	Route::resource('admin/web_notify', 'WebnotiController');
 	Route::post('admin/line_update', 'ApiController@line_update');
 	Route::get('admin/line_notify', 'ApiController@line_notify');
 
