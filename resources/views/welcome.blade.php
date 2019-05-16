@@ -164,7 +164,8 @@ figure:hover+span {
 
           </ul>
         </div>
-        <h3 class="text-center">CONNECT WITH US!</h3>
+        <h3 class="text-center">CONNECT WITH US! </h3>
+				
       </div>
 
 

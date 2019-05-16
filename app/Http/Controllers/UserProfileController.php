@@ -784,6 +784,10 @@ class UserProfileController extends Controller
             ->where('orders.id', $id)
             ->first();
 
+            if($order == null){
+              abort(404);
+            }
+
 
             $check_address = DB::table('user_addresses')->select(
                   'user_addresses.*'
@@ -908,6 +912,10 @@ class UserProfileController extends Controller
             ->where('orders.user_id', Auth::user()->id)
             ->where('orders.id', $id)
             ->first();
+
+            if($order == null){
+              abort(404);
+            }
 
 
             $get_pay = DB::table('user_payments')->select(
@@ -1048,7 +1056,17 @@ class UserProfileController extends Controller
             ->where('code_gen', $id)
             ->count();
 
-      if($check_order > 0){
+            if($check_order == 0){
+              abort(404);
+            }
+
+
+            $get_data = DB::table('orders')
+                  ->where('code_gen', $id)
+                  ->first();
+                  $get_data_price = $get_data->order_price+$get_data->shipping_p;
+
+    /*  if($check_order > 0){
 
         $get_data = DB::table('orders')
               ->where('code_gen', $id)
@@ -1068,7 +1086,7 @@ class UserProfileController extends Controller
 
               $get_data_price = ($get_data->sum_image*$get_data->sum_price)+$get_ship->shipping_p;
 
-      }
+      } */
 
       $objs = DB::table('payment_options')
         ->get();
@@ -1085,6 +1103,10 @@ class UserProfileController extends Controller
       $get_data = DB::table('orders')
             ->where('code_gen', $id)
             ->first();
+
+            if($get_data == null){
+              abort(404);
+            }
 
       $data['order'] = $get_data;
       $data['id'] = $id;
@@ -1307,6 +1329,10 @@ class UserProfileController extends Controller
 
 
       $package = user_address::find($id);
+
+      if($package == null){
+        abort(404);
+      }
 
       $objs = DB::table('users')
           ->select(

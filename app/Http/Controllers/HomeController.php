@@ -147,10 +147,10 @@ class HomeController extends Controller
 
             }else{
 
-              $set_num_date = count(Session::get('cart'));
+            //  $set_num_date = count(Session::get('cart'));
 
 
-              if($set_num_date > 0){
+              if(Session::get('cart') != null){
                 foreach(Session::get('cart') as $u){
 
 
@@ -577,6 +577,10 @@ class HomeController extends Controller
         ->where('id', $id)
         ->first();
 
+        if($get_product == null){
+          abort(404);
+        }
+
         $sub_categories = DB::table('sub_categories')->select(
           'sub_categories.*'
           )
@@ -680,7 +684,7 @@ class HomeController extends Controller
 
       //dd();
 
-      $set_num_date = count(Session::get('cart'));
+    //  $set_num_date = count(Session::get('cart'));
 
 
 
@@ -706,7 +710,7 @@ class HomeController extends Controller
       }
 
 
-      if($set_num_date > 0){
+      if(Session::get('cart') != null){
 
         foreach(Session::get('cart') as $u){
 
@@ -2428,8 +2432,13 @@ curl_close($chOne);
 
       //dd($id);
       $user = DB::table('users')
-          ->where('id', $id)
+          ->where('id', Auth::user()->id)
           ->first();
+
+          //dd($user);
+          if($user == null){
+            abort(404);
+          }
 
       $data['objs'] = $user;
       return view('profile_edit', $data);
@@ -2484,9 +2493,9 @@ curl_close($chOne);
       if(Auth::guest()){
 
 
-        $set_num_date = count(Session::get('cart'));
+      //  $set_num_date = count(Session::get('cart'));
 
-        if($set_num_date == 0){
+        if(Session::get('cart') == null){
           return redirect(url('/'));
         }
 
@@ -2536,7 +2545,7 @@ curl_close($chOne);
 
 
         return view('cart', $data);
-        if($set_num_date == 0){
+        if(Session::get('cart') == null){
           return view('empty_cart', $data);
         }else{
           return view('cart', $data);
@@ -2609,6 +2618,14 @@ curl_close($chOne);
     }
 
     public function photo_print($id){
+
+      $check_zero = DB::table('products')
+        ->where('products.id', $id)
+        ->first();
+
+        if($check_zero == null){
+          abort(404);
+        }
 
 
   //    dd(Session::get('cart'));
@@ -2695,8 +2712,23 @@ curl_close($chOne);
       //dd(Session::get('cart'));
 
 
+
+
       if(Auth::guest()){
 
+
+
+        $check_zero = DB::table('option_items')->select(
+          'option_items.*'
+          )
+          ->where('id', Session::get('cart.'.$id.'.data.0.size_photo'))
+          ->count();
+
+        //  dd($check_zero);
+
+          if($check_zero == 0){
+            abort(404);
+          }
 
 
       $get_price = DB::table('option_items')->select(
@@ -2705,13 +2737,20 @@ curl_close($chOne);
         ->whereIn('id', Session::get('cart.'.$id.'.data.0.size_photo'))
         ->get();
 
+
+
       //dd($get_price);
 
 
-      $set_num_date = count(Session::get('cart'));
-      if($set_num_date == 0){
+    //  $set_num_date = count(Session::get('cart'));
+
+      if(Session::get('cart') == null){
         return redirect('/');
       }
+
+
+
+
       $ids = "data".$id;
 
       $cat = DB::table('products')->select(
@@ -2732,6 +2771,15 @@ curl_close($chOne);
 
     }else{
 
+      $check_zero =DB::table('cart_details')->select(
+        'cart_details.*'
+        )
+        ->where('id', $id)
+        ->first();
+
+        if($check_zero == null){
+          abort(404);
+        }
 
       $get_option = DB::table('cart_options')->select(
         'cart_options.*'
@@ -2924,13 +2972,13 @@ curl_close($chOne);
 
     public function upload_image(Request $request){
 
-      $count_cart = count(Session::get('cart'));
+    //  $count_cart = count(Session::get('cart'));
 
       if(Auth::guest()){
       //  dd($request['size_photo']);
         $gallary = $request->file('file');
 
-        $get_count_cart = count(Session::get('cart'));
+      //  $get_count_cart = count(Session::get('cart'));
         $exp = array();
         $size_photo = $request['size_photo'];
         $path1 = explode(",", $size_photo);
@@ -2965,7 +3013,7 @@ curl_close($chOne);
                 ->where('item_status', 1)
                 ->sum('item_price');
 
-        if($count_cart > 0){
+        if(Session::get('cart') != null){
 
           foreach(Session::get('cart') as $u){
 

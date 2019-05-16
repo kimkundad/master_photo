@@ -99,11 +99,11 @@
                 <div class="form-group">
                   <div class="col-md-12 ">
 
-                    <label style="padding-top:5px;">
-                    <input type="checkbox" name="remember"> Remember Me
+                    <label style="padding-top:5px;  float: left;" >
+                    <input type="checkbox" name="remember"> จดจำในระบบ
                     </label>
 
-                    <a class="btn btn-link pull-right"  href="{{ url('/password/reset') }}">Forgot Password?</a>
+                    <a class="btn btn-link pull-right"  href="{{ url('/password/reset') }}">รีเซ็ตรหัสผ่าน</a>
                   </div>
                 </div>
 
