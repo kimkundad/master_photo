@@ -4,7 +4,7 @@
     </IfModule>
 
     RewriteEngine On
-
+    RewriteRule ^view-(.*).html /htaccess_tester.php?id=$1
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
