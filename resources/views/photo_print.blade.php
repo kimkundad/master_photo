@@ -656,7 +656,7 @@ $(document).ready(function(){
 
 Dropzone.options.myDropzone= {
     url: '{{url('upload_image')}}',
-    autoProcessQueue: false,
+    autoProcessQueue: true,
     createImageThumbnails: false,
     uploadMultiple: true,
     parallelUploads: 3,
