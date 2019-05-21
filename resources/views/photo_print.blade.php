@@ -648,9 +648,6 @@ $(document).ready(function(){
 
 
 
-myDropzone.on("complete", function(file) {
-  myDropzone.removeFile(file);
-});
 
 
 
