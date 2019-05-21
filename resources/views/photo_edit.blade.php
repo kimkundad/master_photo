@@ -116,7 +116,7 @@ $get_name_size = '';
         @if(isset($option_images))
         @foreach($option_images as $k)
 
-          @if($set_size == 0)
+          @if($k->resolution != 0)
             {{ $get_name_size = $k->item_name}}
             {{ $resolution = $k->resolution}}
           @endif
@@ -199,7 +199,7 @@ $get_name_size = '';
               </td>
               <td >
                   {{$get_name_size}}<br />
-
+                
                   @if($get_resolution >= $resolution)
 
                   @else
@@ -240,13 +240,15 @@ $get_name_size = '';
               @if(isset($option_images))
               @foreach($option_images as $j)
 
-                @if($set_size == 0)
+
 
                   @foreach($j->option as $k)
+                  @if($k->resolution != 0)
                   {{ $get_name_size = $k->item_name}}
                   {{ $resolution = $k->resolution}}
+                  @endif
                   @endforeach
-                @endif
+
 
                     {{$set_size++}}
 
@@ -807,13 +809,14 @@ $(document).ready(function(){
 
   Dropzone.options.myDropzone= {
       url: '{{url('update_photo_print')}}',
+      createImageThumbnails: false,
       autoProcessQueue: true,
       uploadMultiple: true,
-      parallelUploads: 100,
+      parallelUploads: 1000,
       maxFiles: 1000,
-      maxFilesize: 4024,
+      maxFilesize: 1002400,
       dictRemoveFile: 'Remove file',
-      acceptedFiles: 'image/*',
+      acceptedFiles: '.jpeg,.jpg,.pdf',
       addRemoveLinks: true,
       clickable: '.add-image, .dropzone',
       init: function() {

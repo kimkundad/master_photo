@@ -212,8 +212,8 @@ Payment | MASTER PHOTO NETWORK
 
 
         //Merchant's account information
-        $merchant_id = "JT04";			//Get MerchantID when opening account with 2C2P
-        $secret_key = "QnmrnH6QE23N";	//Get SecretKey from 2C2P PGW Dashboard
+        $merchant_id = "764764000000892";			//Get MerchantID when opening account with 2C2P
+        $secret_key = "dsbqppYP703G";	//Get SecretKey from 2C2P PGW Dashboard
         $ram = rand(10,20);
         //Transaction information
         $payment_description  = $order->code_gen;
@@ -226,7 +226,7 @@ Payment | MASTER PHOTO NETWORK
 
         //Request information
         $version = "8.5";
-        $payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
+        $payment_url = " https://t.2c2p.com/RedirectV3/payment";
         $result_url_1 = url('/api/result_payment');
 
         //Construct signature string
@@ -289,6 +289,7 @@ Payment | MASTER PHOTO NETWORK
 
               <div class="col-md-4">
                 <div class="form-group">
+                  <input type="hidden" name="order_id" value="{{$order->code_gen}}"/>
               <input type="text" name="amount" value="{{number_format($order->order_price+$order->shipping_p, 2)}}" class="form-control" readonly>
               </div>
             </div>

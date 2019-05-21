@@ -752,7 +752,7 @@ class OrderController extends Controller
 
 
                   $maon_f = 'order_'.$order->code_gen;
-                  @mkdir(public_path('zip/'.$maon_f), 0777, true);
+                  @mkdir(('/home/master/domains/masterphotonetwork.com/public_html/demo/zip/'.$maon_f), 0777, true);
 
                   foreach($order_de as $u){
 
@@ -796,29 +796,29 @@ class OrderController extends Controller
                                             ->where('order_id_detail', $u->id_de)
                                             ->count();
 
-                            @mkdir(public_path('zip/'.$maon_f.'/'.$u->product_name), 0777, true);
+                            @mkdir(('/home/master/domains/masterphotonetwork.com/public_html/demo/zip/'.$maon_f.'/'.$u->product_name), 0777, true);
 
-                            @mkdir(public_path('zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1), 0777, true);
+                            @mkdir(('/home/master/domains/masterphotonetwork.com/public_html/demo/zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1), 0777, true);
 
-
+                            ///home/master/domains/masterphotonetwork.com/public_html/demo/
 
                             foreach($order_images as $k){
-                              @mkdir(public_path('zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1.'/X'.$k->order_image_sum), 0777, true);
-                              copy(public_path('assets/image/all_image/'.$k->order_image), public_path('zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1.'/X'.$k->order_image_sum.'/'.$k->order_image));
+                              @mkdir(('/home/master/domains/masterphotonetwork.com/public_html/demo/zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1.'/X'.$k->order_image_sum), 0777, true);
+                              copy(('/home/master/domains/masterphotonetwork.com/public_html/demo/assets/image/all_image/'.$k->order_image), ('/home/master/domains/masterphotonetwork.com/public_html/demo/zip/'.$maon_f.'/'.$u->product_name.'/'.$name_op1.'/X'.$k->order_image_sum.'/'.$k->order_image));
                             }
 
                             $name_op = array();
                             $name_op1 = array();
                   }
 
-                  $maon_l = public_path('zip/order_'.$order->code_gen.'/');
-                  $zipper->make(public_path('zip/order_'.$order->code_gen.'.zip'))->folder($order->code_gen)->add($maon_l)->close();
+                  $maon_l = ('/home/master/domains/masterphotonetwork.com/public_html/demo/zip/order_'.$order->code_gen.'/');
+                  $zipper->make(('/home/master/domains/masterphotonetwork.com/public_html/demo/zip/order_'.$order->code_gen.'.zip'))->folder($order->code_gen)->add($maon_l)->close();
 
 
 
 
 
-            return response()->download(public_path('zip/order_'.$order->code_gen.'.zip'));
+            return response()->download(('/home/master/domains/masterphotonetwork.com/public_html/demo/zip/order_'.$order->code_gen.'.zip'));
 
 
 

@@ -539,11 +539,11 @@ Shipping | MASTER PHOTO NETWORK
 
               <label class="image-radio"  id="radio_get" style="font-size:15px;">
 
-                <input type="checkbox" name="c1" value="1" checked/>
+                <input type="checkbox" name="c1" value="1" />
 
                 <i class="icon-check-1 hidden"></i>
 
-                ฉันยอมรับข้อกำหนดและเงื่อนไขและนโยบายของเว็บไซต์.
+                <a href="{{url('terms_conditions')}}" target="_blank">ฉันยอมรับข้อกำหนดและเงื่อนไขและนโยบายของเว็บไซต์.</a>
               </label >
 
 

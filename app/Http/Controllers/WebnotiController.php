@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\notify;
+
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Requests;
+use App\notify;
 use Illuminate\Support\Facades\DB;
 
 class WebnotiController extends Controller
@@ -101,7 +102,7 @@ class WebnotiController extends Controller
 
           $destinationPath = asset('assets/image/notify/');
           $img = Image::make($image->getRealPath());
-          $img->resize(300, 300, function ($constraint) {
+          $img->resize(800, 550, function ($constraint) {
           $constraint->aspectRatio();
         })->save('assets/image/notify/'.$input['imagename']);
 
@@ -181,7 +182,7 @@ class WebnotiController extends Controller
 
             $destinationPath = asset('assets/image/notify/');
             $img = Image::make($image->getRealPath());
-            $img->resize(300, 300, function ($constraint) {
+            $img->resize(800, 550, function ($constraint) {
             $constraint->aspectRatio();
           })->save('assets/image/notify/'.$input['imagename']);
 

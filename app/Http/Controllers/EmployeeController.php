@@ -152,7 +152,7 @@ class EmployeeController extends Controller
         ]);
 
         $email = $request['email'];
-
+        $level_employee = $request['level_employee'];
         $check_email = DB::table('users')
             ->select(
             'users.*'
@@ -162,6 +162,12 @@ class EmployeeController extends Controller
             ->count();
 
           //  dd($check_email);
+
+          DB::table('role_user')
+            ->where('user_id', $id)
+            ->update(['role_id' => $level_employee]);
+
+        
 
           if($check_email > 0){
 

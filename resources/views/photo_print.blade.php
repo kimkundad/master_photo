@@ -355,7 +355,12 @@ Photo print
 
 
               <a type="button" id="photo_t" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
+              <br />
+              <p class="text-danger">
 
+                * Upload ครั้งละไม่เกิน 200 รูป และ ขนาดไฟล์รวมกันไม่เกิน 1 Gb. <br />
+                * Upload จากมือถือ ครั้งละไม่เกิน 50 รูป
+              </p>
 
 
 
@@ -430,11 +435,13 @@ Photo print
                       <div class="row text-center p_20">
 
                         <div class="col-md-12">
+
                           <div id="dropzone">
 
                                 <div class="dropzone" id="myDropzone">
 
                                 </div>
+
                                 <div id="mar-top-15">
                                   <button class='add-image up_btn_kim btn btn-next' id="add-photo-set"><i class='sl sl-icon-plus'></i> Add Photos </button>
                                   <button type="submit" id="submit-all" class="hidden up_btn_kim btn btn-next" name="submit_photo"> Confirm </button>
@@ -650,12 +657,14 @@ $(document).ready(function(){
 Dropzone.options.myDropzone= {
     url: '{{url('upload_image')}}',
     autoProcessQueue: true,
+    createImageThumbnails: false,
     uploadMultiple: true,
-    parallelUploads: 1000,
-    maxFiles: 1000,
-    maxFilesize: 10024,
+    parallelUploads: 3,
+    maxFiles: 200,
+    timeout: 180000,
+    maxFilesize: 4000,
     dictRemoveFile: 'Remove file',
-    acceptedFiles: 'image/*',
+    acceptedFiles: '.jpeg,.jpg,.pdf',
     addRemoveLinks: true,
     clickable: '.add-image, .dropzone',
     init: function() {
@@ -720,7 +729,7 @@ Dropzone.options.myDropzone= {
 
       //  var data = $('#contactForm1').serialize() + 'ption_number[]='+get_value_radio;
             formData.append("size_photo", set_size); // value of size_photo input na kub
-            formData.set("product_id", {{$objs->id_q}}); // value of product_id input na kub
+            formData.append("product_id", {{$objs->id_q}}); // value of product_id input na kub
         //    formData.append("size_photo", get_value_radio);
         //    formData.set("image_radio", get_value_radio); // value of type_image input na kub
           //  console.log(xhr);

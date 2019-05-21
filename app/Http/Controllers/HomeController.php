@@ -2709,7 +2709,7 @@ curl_close($chOne);
 
     public function photo_edit($id){
 
-      //dd(Session::get('cart'));
+      //dd(Session::get('cart.'.$id.'.data.image'));
 
 
 
@@ -2728,6 +2728,13 @@ curl_close($chOne);
 
           if($check_zero == 0){
             abort(404);
+          }
+
+
+          if(Session::get('cart.'.$id.'.data.image') == null){
+
+            session()->forget('cart.'.$id);
+            return redirect('/');
           }
 
 
@@ -2779,6 +2786,28 @@ curl_close($chOne);
 
         if($check_zero == null){
           abort(404);
+        }else{
+
+          $get_image_count = DB::table('cart_images')->select(
+            'cart_images.*'
+            )
+            ->where('cart_id_detail', $check_zero->id)
+            ->count();
+
+            if($get_image_count == 0){
+
+              DB::table('cart_options')
+                    ->where('cart_id_detail', $id)
+                    ->delete();
+
+                    DB::table('cart_details')
+                          ->where('id', $id)
+                          ->delete();
+
+                        return redirect('/');
+
+            }
+
         }
 
       $get_option = DB::table('cart_options')->select(
@@ -3132,6 +3161,9 @@ curl_close($chOne);
       //  dd($exp);
 
         $gallary = $request->file('file');
+
+
+
         $sum_img = sizeof($gallary);
 
         $cat = DB::table('products')->select(

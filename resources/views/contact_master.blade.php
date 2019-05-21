@@ -62,7 +62,7 @@ CONTACT US | MASTER PHOTO NETWORK
                     <i class="icon_set_1_icon-90 p_15" ></i> โทรศัพท์มือถือ : 086-600-5055 <br />
                     <i class="icon_set_1_icon-95 p_15" ></i> Fax. 02-939-3080 <br />
 
-                    <i class="icon_set_1_icon-83 p_15" ></i> เปิด 8.00-22.00 น.
+                    <i class="icon_set_1_icon-83 p_15" ></i> เปิด 8.00-21.00 น.
                   </p>
 								</div>
 							</div>
@@ -96,7 +96,7 @@ CONTACT US | MASTER PHOTO NETWORK
                     <i class="icon_set_1_icon-41 p_15" ></i> ตั้งอยู่ ตรงข้ามเซ็นทรัลลาดพร้าว <br />
                     <i class="icon_set_1_icon-90 p_15" ></i> โทร : 0-2930-9388-9 <br />
 
-                    <i class="icon_set_1_icon-83 p_15" ></i> เปิด 8.00-22.00 น.
+                    <i class="icon_set_1_icon-83 p_15" ></i> เปิด 8.00-21.00 น.
                   </p>
 								</div>
 							</div>

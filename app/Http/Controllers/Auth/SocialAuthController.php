@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Exception;
 use Session;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -32,6 +33,8 @@ class SocialAuthController extends Controller
 
     public function redirectToProvider($driver)
     {
+
+      //dd($driver);
         if( ! $this->isProviderAllowed($driver) ) {
             return $this->sendFailedResponse("{$driver} is not currently supported");
         }
@@ -69,7 +72,7 @@ class SocialAuthController extends Controller
     }
     protected function sendFailedResponse($msg = null)
     {
-        return redirect()->route('social.login')
+        return redirect()->route('login')
             ->withErrors(['msg' => $msg ?: 'Unable to login, try with another provider to login.']);
     }
 
@@ -99,7 +102,25 @@ class SocialAuthController extends Controller
                 // user can use reset password to create a password
                 'password' => ''
             ]);
+
+
         }
+
+        $objs = DB::table('role_user')
+            ->where('user_id', $user->id)
+            ->first();
+
+        if($objs != null){
+
+        }else{
+
+          DB::table('role_user')->insert(
+              ['role_id' => 3, 'user_id' => $user->id]
+          );
+
+        }
+
+
 
         // login the user
         Auth::login($user, true);
@@ -117,6 +138,8 @@ class SocialAuthController extends Controller
      */
     private function isProviderAllowed($driver)
     {
+
+      //dd($driver);
         return in_array($driver, $this->providers) && config()->has("services.{$driver}");
     }
 }
