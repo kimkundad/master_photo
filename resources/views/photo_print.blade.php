@@ -648,7 +648,9 @@ $(document).ready(function(){
 
 
 
-
+myDropzone.on("complete", function(file) {
+  myDropzone.removeFile(file);
+});
 
 
 
@@ -656,13 +658,13 @@ $(document).ready(function(){
 
 Dropzone.options.myDropzone= {
     url: '{{url('upload_image')}}',
-    autoProcessQueue: true,
+    autoProcessQueue: false,
     createImageThumbnails: false,
     uploadMultiple: true,
     parallelUploads: 3,
     maxFiles: 200,
     timeout: 18000000,
-    maxFilesize: 4000,
+    maxFilesize: 8000,
     dictRemoveFile: 'Remove file',
     acceptedFiles: '.jpeg,.jpg,.pdf',
     addRemoveLinks: true,
@@ -682,6 +684,8 @@ Dropzone.options.myDropzone= {
 
           //  alert('55555++');
         });
+
+
 
         // Using a closure.
         var _this = this;
