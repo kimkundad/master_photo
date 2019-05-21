@@ -661,7 +661,7 @@ Dropzone.options.myDropzone= {
     uploadMultiple: true,
     parallelUploads: 200,
     maxFiles: 200,
-    timeout: 180000,
+    timeout: 18000000,
     maxFilesize: 4000,
     dictRemoveFile: 'Remove file',
     acceptedFiles: '.jpeg,.jpg,.pdf',
