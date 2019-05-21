@@ -659,7 +659,7 @@ Dropzone.options.myDropzone= {
     autoProcessQueue: true,
     createImageThumbnails: false,
     uploadMultiple: true,
-    parallelUploads: 3,
+    parallelUploads: 200,
     maxFiles: 200,
     timeout: 180000,
     maxFilesize: 4000,
