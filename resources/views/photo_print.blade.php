@@ -6,13 +6,8 @@ Photo print
 
 @section('stylesheet')
 
-<link rel="stylesheet" href="{{url('master/assets/css/dropzone.css')}}">
-
-<style>
-.dropzone.dz-started .dz-message {
-
-}
-</style>
+<link rel="stylesheet" href="{{url('assets/dropzone2/assets/css/dropzone.css')}}">
+<link rel="stylesheet" href="{{url('assets/dropzone2/assets/style.css')}}">
 
 @stop('stylesheet')
 @section('content')
@@ -266,22 +261,7 @@ Photo print
                .iradio_square-grey{
                  display: none;
                }
-               .dropzone {
-                    background: white;
-                    border-radius: 5px;
-                    border: 2px dashed rgb(87, 87, 87);
-                    border-image: none;
-                    max-width: 500px;
-                    min-height: 100px;
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-                .dz-message{
-                  padding-top: 20px;
-                }
-                .dropzone .dz-preview .dz-remove {
-                    color: #333;
-                }
+
 
                </style>
 
@@ -354,12 +334,12 @@ Photo print
 
 
 
-              <a type="button" id="photo_t" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
+              <a type="button" id="photo_f" class="btn btn-submit btn-block" data-toggle="modal" data-target="#myModal"><i class="sl sl-icon-plus"></i> SELECT PHOTO</a>
               <br />
               <p class="text-danger">
 
                 * Upload ครั้งละไม่เกิน 200 รูป และ ขนาดไฟล์รวมกันไม่เกิน 1 Gb. <br />
-                * Upload จากมือถือ ครั้งละไม่เกิน 50 รูป
+                * Upload จากมือถือ ครั้งละไม่เกิน 50 รูป <span class="uploaded-files-count2 hidden" style="color:#565a5c">0</span>
               </p>
 
 
@@ -419,12 +399,41 @@ Photo print
   font-size: 14px;
   padding: 6px 12px;
 }
+.actions{
+  display: none;
+}
+.dropzone {
+     background: white;
+     border-radius: 5px;
+     border: 2px dashed rgb(87, 87, 87);
+     border-image: none;
+     max-width: 500px;
+     min-height: 100px;
+     margin-left: auto;
+     margin-right: auto;
+ }
+ .dz-message{
+   padding-top: 20px;
+ }
+ .dropzone .dz-preview .dz-remove {
+     color: #333;
+ }
+.dropzone {
+background: white;
+border-radius: 5px;
+border: 2px dashed rgb(86, 90, 92);
+border-image: none;
+max-width: 500px;
+min-height: 100px;
+margin-left: auto;
+margin-right: auto;
+}
 </style>
 
               <!-- Modal -->
-              <div class="modal fade" id="myModal-upload-pc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal fade" id="myModal-upload-pc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 100000;">
                 <div class="modal-dialog" role="document">
-                  <div class="modal-content">
+                  <div class="modal-content inner-page">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <h4 class="modal-title" id="myModalLabel">Choose device upload </h4>
@@ -432,30 +441,54 @@ Photo print
 
                     <div class="modal-body">
 
-                      <div class="row text-center p_20">
+                      <div class="row p_20">
 
                         <div class="col-md-12">
 
-                          <div id="dropzone">
+                          <form action="{{url('upload_new_image')}}" class="dropzone files-container" style="margin: 0px 2px 2px 15px;" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+              						<div class="fallback">
+              							<input name="file" type="file" multiple />
 
-                                <div class="dropzone" id="myDropzone">
-
-                                </div>
-
-                                <div id="mar-top-15">
-                                  <button class='add-image up_btn_kim btn btn-next' id="add-photo-set"><i class='sl sl-icon-plus'></i> Add Photos </button>
-                                  <button type="submit" id="submit-all" class="hidden up_btn_kim btn btn-next" name="submit_photo"> Confirm </button>
-                                  <button class="hidden up_btn_kim btn btn-next" id="clear-dropzone">Clear All</button>
+              						</div>
+                          <input type="hidden" name="product_id" value="{{$pro_id}}" />
 
 
-                                  <div class="hidden" id="next_to_cart2">
-                                    <h4 class="text-succes">กำลังส่งรูปภาพ!</h4>
-
-                                  </div>
-
-                                </div>
+                          <input type="hidden" id="size_photo_var" name="size_photo" value="" />
+              					</form>
+                        <div id="mar-top-15" class="text-center">
+                        <button class="add-image up_btn_kim btn btn-next dz-clickable" id="add-photo-set"><i class="sl sl-icon-plus"></i> Add Photos </button>
+                        <div class="hidden" id="next_to_cart2">
+                          <h4 class="text-succes">กำลังส่งรูปภาพ!</h4>
 
                         </div>
+                        </div>
+
+                        <h4 class="section-sub-title " style="color:#565a5c; margin-top: 20px;">Uploaded Files (<span class="uploaded-files-count" style="color:#565a5c">0</span>)</h4>
+					              <span class="no-files-uploaded">No files uploaded yet.</span>
+
+                        <!-- Preview collection of uploaded documents -->
+                    					<div class="preview-container dz-preview uploaded-files">
+                    						<div id="previews">
+                    							<div id="onyx-dropzone-template">
+                    								<div class="onyx-dropzone-info">
+                    									<div class="thumb-container">
+                    										<img data-dz-thumbnail />
+                    									</div>
+                    									<div class="details">
+                    										<div>
+                    											<span data-dz-name></span> <span data-dz-size></span>
+                    										</div>
+                    										<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                    										<div class="dz-error-message"><span data-dz-errormessage></span></div>
+                    										<div class="actions">
+                    											<a href="#!" data-dz-remove><i class="fa fa-times"></i></a>
+                    										</div>
+                    									</div>
+                    								</div>
+                    							</div>
+                    						</div>
+                    					</div>
 
                       </div>
                     </div>
@@ -488,7 +521,8 @@ Photo print
 
 
 <script src="{{url('assets/javascripts/jquery.validate.js')}}"></script>
-
+<script src="{{url('assets/dropzone2/assets/js/dropzone.min.js')}}"></script>
+<script src="{{url('assets/dropzone2/assets/js/scripts.js')}}"></script>
 <script type="text/javascript">
   jQuery(document).ready(function($) {
     $('#my-slider').sliderPro({
@@ -501,7 +535,7 @@ Photo print
   });
 </script>
 
-<script src="{{url('master/assets/js/dropzone.js')}}"></script>
+
 
 <script>
 
@@ -510,87 +544,31 @@ var fix_data = {{$check_option_count}};
 
 
 
-/*if(fix_data > 0){
-  var x = document.getElementById("photo_t");
-  x.style.display = "none";
-}else{
-  var x = document.getElementById("photo_f");
-  x.style.display = "none";
-}
+$('#photo_f').on('click', function () {
 
-function getComboA0(selectObject) {
-    var a0 = document.getElementById("size_photo0");
-    var strUsera0 = a0.options[a0.selectedIndex].getAttribute('data-value');
-
-    console.log(strUsera0)
-
-    if(strUsera0 == 9999){
-      var x = document.getElementById("photo_t");
-      x.style.display = "none";
-      var y = document.getElementById("photo_f");
-      y.style.display = "block";
+  console.log({{$s}});
+    var set_size = [];
+    set_size[0] = 0;
+    if(get_value_radio == 0){
+      for (i = 0; i < {{$s}}; i++) {
+          set_size[i] = jQuery("#size_photo"+i).val();
+      }
     }else{
-      var x = document.getElementById("photo_f");
-      x.style.display = "none";
-      var y = document.getElementById("photo_t");
-      y.style.display = "block";
+      {{$s-1}}
+      for (i = 0; i < {{$s-1}}; i++) {
+          set_size[i] = jQuery("#size_photo"+i).val();
+      }
+      set_size.push(get_value_radio);
     }
 
-} */
+    document.getElementById("size_photo_var").value = (set_size);
+    console.log(set_size);
 
-
-
-/*
-var e = document.getElementById("size_photo1");
-var strUser = e.options[e.selectedIndex].getAttribute('data-value');
-if($s > 0){
-  var x = document.getElementById("photo_t");
-  x.style.display = "none";
-} */
-//console.log(strUser);
-
-
-
-
-
-
-
-$('#photo_f').on('click', function () {
-/*
-  $.notify({
-   // options
-   icon: 'icon_set_1_icon-76',
-   title: "<h4>กรุณาเลือกชนิดกระดาษ</h4> ",
-   message: "ท่านต้องเลือกกระดาษ เพื่อไปยังขั้นตอนต่อไป "
-  },{
-   // settings
-   type: 'info',
-   delay: 5000,
-   timer: 3000,
-   z_index: 9999,
-   showProgressbar: false,
-   placement: {
-     from: "bottom",
-     align: "right"
-   },
-   animate: {
-     enter: 'animated bounceInUp',
-     exit: 'animated bounceOutDown'
-   },
-  });
-*/
   });
 
 
 
 var formData = $('#contactForm1').serialize();
-//var data = JSON.stringify( $('#contactForm1').serializeArray() ); option_number
-
-//var radios = document.getElementsByName('option_number{{$s-1}}');
-
-
-
-
 
 
 
@@ -600,14 +578,6 @@ var get_value_radio = 0;
 $(document).ready(function(){
 
 
-
-//  var $radio = $(this).find('input[type="radio"]'); id="radio_get"
-//  $radio.prop("checked",!$radio.prop("checked"));
-
-//  console.log($radio.val());
-
-//  console.log(selValue);
-  // add/remove checked class
 
   $(".image-radio").each(function(){
       $('.masonry label:first').addClass('image-radio-checked');
@@ -640,7 +610,24 @@ $(document).ready(function(){
 
   });
 
-  //console.log($radio);
+
+console.log({{$s}});
+  var set_size = [];
+  set_size[0] = 0;
+  if(get_value_radio == 0){
+    for (i = 0; i < {{$s}}; i++) {
+        set_size[i] = jQuery("#size_photo"+i).val();
+    }
+  }else{
+    {{$s-1}}
+    for (i = 0; i < {{$s-1}}; i++) {
+        set_size[i] = jQuery("#size_photo"+i).val();
+    }
+    set_size.push(get_value_radio);
+  }
+
+  document.getElementById("size_photo_var").value = (set_size);
+  console.log(set_size);
 
 
 });
@@ -649,119 +636,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-Dropzone.options.myDropzone= {
-    url: '{{url('upload_image')}}',
-    autoProcessQueue: true,
-    createImageThumbnails: false,
-    uploadMultiple: true,
-    parallelUploads: 3,
-    maxFiles: 200,
-    timeout: 1800000000,
-    maxFilesize: 16000,
-    dictRemoveFile: 'Remove file',
-    acceptedFiles: '.jpeg,.jpg,.pdf',
-    addRemoveLinks: true,
-    clickable: '.add-image, .dropzone',
-    init: function() {
-        dzClosure = this; // Makes sure that 'this' is understood inside the functions below. image/*,application/pdf,.psd
-
-        // for Dropzone to process the queue (instead of default form behavior):
-        document.getElementById("submit-all").addEventListener("click", function(e) {
-
-
-
-          e.preventDefault();
-          e.stopPropagation();
-          dzClosure.processQueue();
-            // Make sure that the form isn't actually being sent.
-
-          //  alert('55555++');
-        });
-
-
-
-        // Using a closure.
-        var _this = this;
-
-        document.getElementById("clear-dropzone").addEventListener("click", function(e) {
-        // Using "_this" here, because "this" doesn't point to the dropzone anymore
-        _this.removeAllFiles();
-        $("#next_to_cart").addClass('hidden');
-        $("#next_to_cart2").addClass('hidden');
-        $("a.next_to_cart").attr("href", "");
-        $("a.next_to_cart2").attr("href", "");
-        // If you want to cancel uploads as well, you
-        // could also call _this.removeAllFiles(true);
-      });
-
-        //send all the form data along with the files: id="image_radio"
-
-        this.on("sendingmultiple", function(data, xhr, formData) {
-
-        //  var frm = $('#contactForm1');
-        $("#add-photo-set").addClass('hidden');
-
-        $("#next_to_cart2").removeClass('hidden');
-        //  console.log(frm);
-        var set_size = [];
-        set_size[0] = 0;
-        if(get_value_radio == 0){
-          for (i = 0; i < {{$s}}; i++) {
-              set_size[i] = jQuery("#size_photo"+i).val();
-          }
-        }else{
-          {{$s-1}}
-          for (i = 0; i < {{$s}}; i++) {
-              set_size[i] = jQuery("#size_photo"+i).val();
-          }
-          set_size.push(get_value_radio);
-        }
-
-
-
-
-
-
-      //  console.log(set_size);
-
-      //  var data = $('#contactForm1').serialize() + 'ption_number[]='+get_value_radio;
-            formData.append("size_photo", set_size); // value of size_photo input na kub
-            formData.append("product_id", {{$objs->id_q}}); // value of product_id input na kub
-        //    formData.append("size_photo", get_value_radio);
-        //    formData.set("image_radio", get_value_radio); // value of type_image input na kub
-          //  console.log(xhr);
-
-
-        });
-
-    },
-    success : function(response, xhr){
-
-
-
-        console.log(xhr.date_set);
-        if(response.status == 'success'){
-          $("a.next_to_cart").attr("href", "../photo_edit/"+xhr.date_set)
-          $("a.next_to_cart2").attr("href", "../photo_edit/"+xhr.date_set)
-        //  $('.up_btn_kim').addClass('hidden');
-
-          //add-image
-
-
-          $("#next_to_cart").removeClass('hidden');
-
-
-          setTimeout(function() {
-            window.location.href = "{{url('photo_edit')}}/"+xhr.date_set;
-        }, 1800);
-            //alert('55555++');
-        }
-    },
-}
 
 
 

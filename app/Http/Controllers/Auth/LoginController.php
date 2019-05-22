@@ -71,27 +71,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function logout(Request $request)
-{
-    try {
-        $cart = collect($request->session()->get('cart'));
 
-        $this->guard()->logout();
-        $request->session()->flush();
-        $request->session()->regenerate();
-
-        if (!config('cart.destroy_on_logout')) {
-            $cart->each(function($rows, $identifier) use ($request) {
-                $request->session()->put('cart.' . $identifier, $rows);
-            });
-        }
-
-      return redirect('/login');
-
-    } catch (Exception $e) {
-        return redirect('/login');
-    }
-}
 
 
 

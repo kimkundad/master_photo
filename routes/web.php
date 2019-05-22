@@ -30,6 +30,7 @@ Route::post('/api/shipping_data_3', 'ApiController@shipping_data_3')->name('ship
 Route::post('/api/result_payment', 'ApiController@result_payment')->name('result_payment');
 Route::post('/api/api_address', 'ApiController@api_address')->name('api_address');
 
+Route::post('/upload_new_image', 'ApiController@upload_new_image')->name('upload_new_image');
 
 Route::get('about', 'HomeController@about')->name('about');
 Route::get('product_price', 'HomeController@product_price')->name('product_price');

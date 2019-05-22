@@ -109,116 +109,6 @@ height: 60px;
 
 
 
-        @if (Auth::guest())
-
-
-        <div class="table-responsive">
-        <table class="table table-striped add_bottom_30">
-          <thead style="    font-size: 14px;">
-            <tr>
-              <th>
-                Item
-              </th>
-              <th>
-                Quantity
-              </th>
-              <th>
-                Discount
-              </th>
-              <th>
-                PRICE
-              </th>
-              <th>
-                Delete
-              </th>
-            </tr>
-          </thead>
-          <tbody >
-
-            <?php
-              $p_1 = 0;
-              $total_pay = 0;
-              $total_img = 0;
-              $s = 0;
-              $h = 1;
-             ?>
-
-
-
-    @foreach(Session::get('cart') as $u)
-
-
-
-             <tr>
-               <td style="min-width: 270px; max-width: 100%;">
-                 <a href="{{url('photo_edit/'.$u['data']['list_link'])}}" >
-                 <div class="thumb_cart1">
-                   <img src="{{url('assets/image/all_image/'.$u['data']['image'][0]['image'])}}" alt="image">
-                 </div>
-                 <span class="item_cart" style="color:#333; margin-top: 5px; font-size:12px;">{{$u['data']['pro_name']}}
-                   <br {{$p8 = 0}} />
-
-
-
-
-                    @if(isset($option_set_pro))
-
-                      @for ($p = 1; $p <= $size_count[$h]; $p++)
-
-
-                        {{$option_set_pro[$s][$p8]->item_name}}<br {{$p8++}}/>
-
-
-                      @endfor
-
-                    @endif
-
-
-
-
-
-
-                 </span>
-                 </a>
-               </td>
-               <td>
-                 {{number_format($u['data'][2]['sum_image'])}} Pcs.
-               </td>
-               <td>
-                 0%
-               </td>
-               <td>
-                 <strong>฿ {{number_format($u['data'][3]['sum_price']*($u['data'][2]['sum_image']), 2)}} </strong>
-               </td>
-               <td class="options">
-                 <form id="myform-{{$u['data']['list_link']}}" name="myform-{{$u['data']['list_link']}}" action="{{ url('del_cart/') }}" method="POST"  style="    margin-bottom: 0em;">
-                   {{ csrf_field() }}
-                   <input type="hidden" value="{{$u['data']['list_link']}}" name="ids">
-                 <a href="#" style="color:#333" onclick="document.getElementById('myform-{{$u['data']['list_link']}}').submit(); return(confirm('Do you want Delete'));"><i class=" icon-trash"></i></a>
-                 </form>
-               </td>
-             </tr>
-
-             <?php
-              $total_pay += ($u['data'][3]['sum_price']*($u['data'][2]['sum_image']));
-              $total_img += $u['data'][2]['sum_image'];
-              $s++;
-              $h++;
-              ?>
-
-@endforeach
-
-
-
-          </tbody>
-        </table>
-        </div>
-
-
-
-        @else
-
-
 
 
 
@@ -306,17 +196,6 @@ height: 60px;
 
 
 
-        @endif
-
-
-
-
-
-
-
-
-
-
 
       </div>
 
@@ -348,15 +227,11 @@ height: 60px;
                   Total
                 </td>
 
-                @if (Auth::guest())
-                <td class="text-right">
-                  {{sizeof(Session::get('cart'))}}
-                </td>
-                @else
+            
                 <td class="text-right">
                   {{$count_data}}
                 </td>
-                @endif
+
               </tr>
               <tr>
                 <td>
@@ -390,15 +265,7 @@ height: 60px;
         <a class="btn btn_full_outline_golf btn-block " style="margin-bottom: 30px;" href="{{url('/')}}"> CONTINUE SHOPPING</a>
 
 
-
-
-
         </div>
-
-
-
-
-
 
       </div>
 

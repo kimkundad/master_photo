@@ -83,6 +83,29 @@ function get_count_cart(){
 
 }
 
+function get_cartg(){
+
+  error_reporting(0);
+  $get_data = DB::table('cart_details')->select(
+      'cart_details.*'
+      )
+      ->where('user_id', Session::get('cart'))
+      ->get();
+
+      foreach($get_data as $k){
+        $cat = DB::table('products')->select(
+          'products.*'
+          )
+          ->where('products.id', $k->product_id)
+          ->first();
+
+          $k->product_get = $cat;
+      }
+
+
+      return $get_data;
+
+}
 
 function get_cart(){
 
@@ -101,8 +124,6 @@ function get_cart(){
 
           $k->product_get = $cat;
       }
-
-
 
 
       return $get_data;

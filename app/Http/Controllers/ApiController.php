@@ -6,7 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\delirank;
+use Session;
+use Cookie;
+use App\cart_detail;
+use App\cart_image;
+use App\cart_option;
 use App\user_payment;
+use Illuminate\Support\Facades\Response;
+use Intervention\Image\ImageManagerStatic as Image;
 use Auth;
 
 class ApiController extends Controller
@@ -45,6 +52,297 @@ class ApiController extends Controller
         'html' => $tag_html,
       ]
     ]);
+
+    }
+
+    public function upload_new_image(Request $request){
+
+
+      $gallary = $request->file('file');
+
+      if(Auth::guest()){
+        $user_id = Session::get('cart');
+      }else{
+        $user_id = Auth::user()->id;
+      }
+
+
+
+        //////////////   check_Auth   //////////////////////////////////
+
+        $exp = array();
+        $size_photo = $request['size_photo'];
+        $path1 = explode(",", $size_photo);
+    //    dd($get_count_cart);
+
+        $exp = array_merge($exp, $path1);
+
+
+          $cat = DB::table('products')->select(
+            'products.*'
+            )
+            ->where('products.id', $request['product_id'])
+            ->first();
+
+            $check_old_cart = 0;
+            $set_link = 0;
+
+              $get_price = DB::table('option_items')->select(
+                'option_items.*'
+                )
+                ->whereIn('id', $exp)
+                ->where('item_status', 1)
+                ->sum('item_price');
+
+                $check_first = DB::table('cart_details')
+                  ->where('user_id', $user_id)
+                  ->first();
+
+                if($check_first != null){
+                  //////////////   check_first    //////////////////////////////////
+
+
+                  $check_second = DB::table('cart_details')
+                    ->where('user_id', $user_id)
+                    ->where('product_id', $request['product_id'])
+                    ->where('option_check', $size_photo)
+                    ->first();
+                  //  sleep(5);
+                    //////////////   check_second    ////////////////////////////////// ถ้า user เดียวกับ สินค้าเดียวกัน
+
+                    if($check_second != null){
+                        //////////////   check_second    ////////////////////////////////// ถ้ามีนะ เช็ค option ก่อน
+
+                        $get_option = DB::table('cart_options')
+                          ->where('cart_id_detail', $check_second->id)
+                          ->get();
+
+                          $check_option = [];
+
+                          foreach($get_option as $ch){
+                            $check_option[] = $ch->option_id;
+                          }
+
+                          if($exp == $check_option){
+
+                            //////////////   check_second    ////////////////////////////////// ถ้ามันมีค่าเท่ากัน
+
+                            $path = 'assets/image/all_image/';
+                            $ext = $gallary->getClientOriginalExtension();
+                            $pin = rand(1000000, 9999999);
+                            $filename = time()."-test-".$pin.".".$ext;
+                            $gallary->move(($path), $filename);
+
+                            $obj = new cart_image();
+                            $obj->cart_id_detail = $check_second->id;
+                            $obj->cart_image = $filename;
+                            $obj->cart_image_id = 1;
+                            $obj->cart_image_sum = 1;
+                            $obj->save();
+
+                            $check_image = DB::table('cart_images')
+                                  ->where('cart_id_detail', $check_second->id)
+                                  ->count();
+
+                                  DB::table('cart_details')
+                                  ->where('id', $check_second->id)
+                                  ->update(['sum_image' => $check_image]);
+
+
+                          $response = array (
+                                      'status'    => 'success',
+                                      'file_link' => $check_second->id
+                                    );
+
+                          }else{
+                            //////////////   check_second    ////////////////////////////////// ถ้ามันไม่ค่าเท่ากัน ให้ส่วน cart ใหม่เลย
+
+                            $set_num_date = (\random_int(100, 999));
+
+                            $obj = new cart_detail();
+                            $obj->product_id = $request['product_id'];
+                            $obj->user_id = $user_id;
+                            $obj->product_name = $cat->pro_name;
+                            $obj->option_check = $size_photo;
+                            $obj->sum_image = 0;
+                            $obj->sum_price = $get_price;
+                            $obj->list_link = $set_num_date;
+                            $obj->save();
+
+                            $obj_id = $obj->id;
+
+                            foreach($exp as $k){
+
+                              $obj = new cart_option();
+                              $obj->cart_id_detail = $obj_id;
+                              $obj->option_id = $k;
+                              $obj->save();
+
+                            }
+
+                            $path = 'assets/image/all_image/';
+                            $ext = $gallary->getClientOriginalExtension();
+                            $pin = rand(1000000, 9999999);
+                            $filename = time()."-test-".$pin.".".$ext;
+                            $gallary->move(($path), $filename);
+
+                            $obj = new cart_image();
+                            $obj->cart_id_detail = $obj_id;
+                            $obj->cart_image = $filename;
+                            $obj->cart_image_id = 1;
+                            $obj->cart_image_sum = 1;
+                            $obj->save();
+
+
+                            $check_image = DB::table('cart_images')
+                                  ->where('cart_id_detail', $obj_id)
+                                  ->count();
+
+                                  DB::table('cart_details')
+                                  ->where('id', $obj_id)
+                                  ->update(['sum_image' => $check_image]);
+
+
+                          $response = array (
+                                      'status'    => 'success',
+                                      'file_link' =>  $obj_id
+                                        );
+
+                          }
+
+
+
+                    }else{
+                      //////////////   check_second    ////////////////////////////////// ถ้ามัน user เดียวกัน แต่คนละสินค้า
+
+                      $set_num_date = (\random_int(100, 999));
+
+                      $obj = new cart_detail();
+                      $obj->product_id = $request['product_id'];
+                      $obj->user_id = $user_id;
+                      $obj->product_name = $cat->pro_name;
+                      $obj->option_check = $size_photo;
+                      $obj->sum_image = 0;
+                      $obj->sum_price = $get_price;
+                      $obj->list_link = $set_num_date;
+                      $obj->save();
+
+                      $obj_id = $obj->id;
+
+                      foreach($exp as $k){
+
+                        $obj = new cart_option();
+                        $obj->cart_id_detail = $obj_id;
+                        $obj->option_id = $k;
+                        $obj->save();
+
+                      }
+
+                      $path = 'assets/image/all_image/';
+                      $ext = $gallary->getClientOriginalExtension();
+                      $pin = rand(1000000, 9999999);
+                      $filename = time()."-test-".$pin.".".$ext;
+                      $gallary->move(($path), $filename);
+
+                      $obj = new cart_image();
+                      $obj->cart_id_detail = $obj_id;
+                      $obj->cart_image = $filename;
+                      $obj->cart_image_id = 1;
+                      $obj->cart_image_sum = 1;
+                      $obj->save();
+
+
+                      $check_image = DB::table('cart_images')
+                            ->where('cart_id_detail', $obj_id)
+                            ->count();
+
+                            DB::table('cart_details')
+                            ->where('id', $obj_id)
+                            ->update(['sum_image' => $check_image]);
+
+                    $response = array (
+                                'status'    => 'success',
+                                'file_link' => $obj_id
+                                  );
+
+                    }
+
+
+
+                }else{
+
+                  //////////////   check_first    //////////////////////////////////
+
+                  $set_num_date = (\random_int(100, 999));
+
+                  $obj = new cart_detail();
+                  $obj->product_id = $request['product_id'];
+                  $obj->user_id = $user_id;
+                  $obj->product_name = $cat->pro_name;
+                  $obj->option_check = $size_photo;
+                  $obj->sum_image = 0;
+                  $obj->sum_price = $get_price;
+                  $obj->list_link = $set_num_date;
+                  $obj->save();
+
+                  $obj_id = $obj->id;
+
+                  foreach($exp as $k){
+
+                    $obj = new cart_option();
+                    $obj->cart_id_detail = $obj_id;
+                    $obj->option_id = $k;
+                    $obj->save();
+
+                  }
+
+                  $path = 'assets/image/all_image/';
+                  $ext = $gallary->getClientOriginalExtension();
+                  $pin = rand(1000000, 9999999);
+                  $filename = time()."-test-".$pin.".".$ext;
+                  $gallary->move(($path), $filename);
+
+                  $obj = new cart_image();
+                  $obj->cart_id_detail = $obj_id;
+                  $obj->cart_image = $filename;
+                  $obj->cart_image_id = 1;
+                  $obj->cart_image_sum = 1;
+                  $obj->save();
+
+
+                  $check_image = DB::table('cart_images')
+                        ->where('cart_id_detail', $obj_id)
+                        ->count();
+
+                        DB::table('cart_details')
+                        ->where('id', $obj_id)
+                        ->update(['sum_image' => $check_image]);
+
+                $response = array (
+                            'status'    => 'success',
+                            'file_link' => $obj_id
+                              );
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      echo json_encode($response);
+      exit;
+
+
 
     }
 

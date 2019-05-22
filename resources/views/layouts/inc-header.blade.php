@@ -96,33 +96,35 @@
 
                         <?php
                         }else{
+
                           $total = 0;
-
                           $i = 1 ;
+                          ?>
 
-                          foreach(Session::get('cart') as $item){
 
-                            $total+=( $item['data'][3]['sum_price'] * $item['data'][2]['sum_image']);
-                          //  $total=$item['data'][2]['sum_price'];
-                       ?>
+                          @foreach(get_cartg() as $k)
 
-                        <li style="padding-left:10px;">
-                            <a href="{{url('photo_edit/'.$item['data']['list_link'])}}" style="padding: 3px 5px;"><div class="image"><img src="{{url('assets/image/product/'.$item['data']['image_pro'])}}" alt="image"></div></a>
-                            <strong>
-                            <a href="{{url('photo_edit/'.$item['data']['list_link'])}}"><?=$i?>. {{$item['data']['pro_name']}}</a>฿{{number_format($item['data'][3]['sum_price'], 2)}} x {{number_format($item['data'][2]['sum_image'], 2)}}</strong>
-                        </li>
+                          <?php $total += $k->sum_image*$k->sum_price; ?>
 
-                        <?php
-                        $i++;
-                          }
-                         ?>
+                          <li style="padding-left:10px;">
+                              <a href="{{url('photo_edit/'.$k->id)}}" style="padding: 3px 5px;"><div class="image"><img src="{{url('assets/image/product/'.$k->product_get->pro_image)}}" alt="{{$k->product_get->pro_name}}"></div></a>
+                              <strong>
+                              <a href="{{url('photo_edit/'.$k->id)}}"><?=$i?>. {{$k->product_get->pro_name}}</a>฿{{number_format($k->sum_price, 2)}} x {{number_format($k->sum_image)}} </strong>
+                          </li>
 
-                        <li>
-                            <div>Total: <span>฿{{number_format($total, 2)}}</span></div>
-                            <a href="{{url('cart')}}" style="float: left; margin: 0px 1px 0px 1px;" class="button_drop">Go to cart</a>
-                            <a href="{{url('shipping')}}" style=" margin: 0px 1px 0px 1px;" class="button_drop">Check out</a>
-                        </li>
-                        <?php
+                          <?php
+                          $i++;
+                           ?>
+
+                          @endforeach
+
+                          <li>
+                              <div>Total: <span>฿{{number_format($total, 2)}}</span></div>
+                              <a href="{{url('cart')}}" style="float: left; margin: 0px 1px 0px 1px;" class="button_drop">Go to cart</a>
+                              <a href="{{url('shipping')}}" style=" margin: 0px 1px 0px 1px;" class="button_drop">Check out</a>
+                          </li>
+
+                          <?php
                           }
 
                          ?>
@@ -153,7 +155,7 @@
                           <li style="padding-left:10px;">
                               <a href="{{url('photo_edit/'.$k->id)}}" style="padding: 3px 5px;"><div class="image"><img src="{{url('assets/image/product/'.$k->product_get->pro_image)}}" alt="{{$k->product_get->pro_name}}"></div></a>
                               <strong>
-                              <a href="{{url('photo_edit/'.$k->id)}}"><?=$i?>. {{$k->product_get->pro_name}}</a>฿{{number_format($k->sum_price, 2)}} x {{number_format($k->sum_image, 2)}} </strong>
+                              <a href="{{url('photo_edit/'.$k->id)}}"><?=$i?>. {{$k->product_get->pro_name}}</a>฿{{number_format($k->sum_price, 2)}} x {{number_format($k->sum_image)}} </strong>
                           </li>
 
                           <?php
