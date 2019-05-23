@@ -69,12 +69,13 @@ Version: 1.0
 					url: ($(target).attr("action")) ? $(target).attr("action") : "../../file-upload.php", // Check that our form has an action attr and if not, set one here
 	        maxFiles: 200,
 					maxFilesize: 4000,
+					timeout: 18000000,
 					acceptedFiles: ".jpeg,.jpg,application/pdf",
 					previewTemplate: previewTemplate,
 					previewsContainer: "#previews",
 					parallelUploads: 1,
 					clickable: '.add-image, .dropzone',
-
+					
 					createImageThumbnails: true,
 
 					/**

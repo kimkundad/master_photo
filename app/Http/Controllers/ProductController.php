@@ -761,7 +761,7 @@ class ProductController extends Controller
           unlink($file_path);
 
 
-          $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+         $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
 
          $destinationPath = asset('assets/image/product/');
          $img = Image::make($image->getRealPath());

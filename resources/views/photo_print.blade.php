@@ -472,9 +472,7 @@ margin-right: auto;
                     						<div id="previews">
                     							<div id="onyx-dropzone-template">
                     								<div class="onyx-dropzone-info">
-                    									<div class="thumb-container">
-                    										<img data-dz-thumbnail />
-                    									</div>
+
                     									<div class="details">
                     										<div>
                     											<span data-dz-name></span> <span data-dz-size></span>
